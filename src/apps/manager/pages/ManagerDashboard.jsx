@@ -1,5 +1,5 @@
 import React from "react";
-import "./Dashboard.css";
+import "./ManagerDashboard.css";
 
 import {
   FaUsers,
@@ -732,4 +732,4 @@ const Activity = ({
 };
 
 
-export default Dashboard;
+export default ManagerDashboard;

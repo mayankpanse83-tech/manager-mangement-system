@@ -14,7 +14,7 @@ import Report from "./apps/employee/component/pages/Report";
 import Profile from "./apps/employee/component/pages/Profile";
 import Login from "./apps/employee/component/pages/Login";
 import AccountActivation from "./apps/employee/component/pages/AccountActivation";
-import Dashboard from "./apps/manager/pages/Dashboard";
+import ManagerDashboard from "./apps/manager/pages/ManagerDashboard";
 
 import "./App.css";
 
@@ -124,7 +124,7 @@ function Layout() {
             />
             <Route
   path="/manager/dashboard"
-  element={<Dashboard />}
+  element={<ManagerDashboard />}
 />
 
           </Routes>
