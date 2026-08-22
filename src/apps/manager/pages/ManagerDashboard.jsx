@@ -732,4 +732,4 @@ const Activity = ({
 };
 
 
-export default ManagerDashboard;
+export default MangerDashboard;
