@@ -14,7 +14,6 @@ import {
   FaUmbrellaBeach,
 } from "react-icons/fa";
 
-import "./Dashboard.css";
 
 const Dashboard = () => {
   return (
