@@ -1,0 +1,217 @@
+.header{
+    width:100%;
+    height:80px;
+    background:#fff;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 25px;
+    box-shadow:0 2px 15px rgba(0,0,0,.08);
+}
+
+.header-left h1{
+    font-size:34px;
+    color:#111827;
+}
+
+.header-left span{
+    color:#2563eb;
+}
+
+.header-left p{
+    margin-top:8px;
+    color:#6b7280;
+    font-size:16px;
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:30px;
+}
+
+.date-box{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#374151;
+    font-size:16px;
+}
+
+.notification{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    background:#f5f5f5;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    cursor:pointer;
+}
+
+.notification svg{
+    font-size:20px;
+}
+
+.badge{
+    position:absolute;
+    top:-5px;
+    right:-3px;
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    background:red;
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:12px;
+}
+
+.profile-box{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    cursor:pointer;
+}
+
+.profile-box img{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+}
+
+.arrow{
+    color:#555;
+}
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+
+}
+/* =========================================
+   MOBILE HEADER - FINAL FIX
+========================================= */
+
+@media screen and (max-width: 600px) {
+
+  .header {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 105px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+
+    padding: 10px 12px !important;
+    margin: 0 !important;
+
+    position: relative !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Dashboard Overview */
+  .header-left {
+    flex: 1 !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .header-left h1 {
+    margin: 0 !important;
+    padding: 0 !important;
+
+    font-size: 32px !important;
+    line-height: 1.05 !important;
+    font-weight: 700 !important;
+
+    white-space: normal !important;
+    overflow: visible !important;
+  }
+
+  .header-left h1 span {
+    display: block !important;
+
+    font-size: 32px !important;
+    line-height: 1.05 !important;
+
+    color: #2864df !important;
+  }
+
+  /* Right side */
+  .header-right {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+
+    flex-shrink: 0 !important;
+    margin-left: 8px !important;
+  }
+
+  /* Notification */
+  .notification {
+    width: 40px !important;
+    height: 40px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    position: relative !important;
+    flex-shrink: 0 !important;
+  }
+
+  .notification svg {
+    font-size: 22px !important;
+  }
+
+  .badge {
+    position: absolute !important;
+    top: -3px !important;
+    right: -2px !important;
+
+    width: 20px !important;
+    height: 20px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    font-size: 10px !important;
+    border-radius: 50% !important;
+  }
+
+  /* Profile */
+  .profile-box {
+    display: flex !important;
+    align-items: center !important;
+
+    gap: 7px !important;
+    flex-shrink: 0 !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .profile-box img {
+    width: 42px !important;
+    height: 42px !important;
+
+    border-radius: 50% !important;
+    object-fit: cover !important;
+  }
+
+  /* Mobile me name/designation hide */
+  .profile-box > div {
+    display: none !important;
+  }
+
+  .profile-box .arrow {
+    display: none !important;
+  }
+}

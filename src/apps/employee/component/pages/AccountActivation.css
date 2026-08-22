@@ -1,0 +1,549 @@
+/* ================================
+   ACCOUNT ACTIVATION PAGE
+================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+.activation-page {
+  min-height: 100vh;
+  width: 100%;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(79, 70, 229, 0.08), transparent 28%),
+    radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.06), transparent 30%),
+    #f8f9ff;
+
+  font-family: Arial, Helvetica, sans-serif;
+  color: #111936;
+  padding: 25px 20px 35px;
+}
+
+
+/* ================================
+   LOGO
+================================ */
+
+.activation-logo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.activation-logo-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+
+  color: white;
+  font-size: 22px;
+  font-weight: 800;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.25);
+}
+
+.activation-logo h2 {
+  margin: 0;
+  font-size: 25px;
+  line-height: 25px;
+}
+
+.activation-logo small {
+  display: block;
+  margin-top: 3px;
+  color: #66708f;
+  font-size: 10px;
+}
+
+
+/* ================================
+   MAIN CARD
+================================ */
+
+.activation-card {
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+
+  background: #ffffff;
+
+  border: 1px solid #e6e8f2;
+  border-radius: 14px;
+
+  padding: 28px 32px;
+
+  box-shadow:
+    0 15px 40px rgba(24, 32, 70, 0.08);
+}
+
+
+/* ================================
+   STEPS
+================================ */
+
+.steps {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  margin-bottom: 28px;
+}
+
+.step {
+  width: 130px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+}
+
+.step > div {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f1f2ff;
+  color: #777b98;
+
+  font-size: 15px;
+}
+
+.step.active > div {
+  background: #4f46e5;
+  color: white;
+
+  box-shadow:
+    0 6px 15px rgba(79, 70, 229, 0.25);
+}
+
+.step span {
+  margin-top: 8px;
+
+  font-size: 10px;
+  color: #59617d;
+  white-space: nowrap;
+}
+
+.line {
+  width: 70px;
+  height: 2px;
+
+  margin-top: 20px;
+
+  background: #e4e6ef;
+}
+
+
+/* ================================
+   HEADING
+================================ */
+
+.activation-card h1 {
+  margin: 0;
+
+  font-size: 28px;
+  font-weight: 700;
+  color: #111936;
+}
+
+.subtitle {
+  margin: 7px 0 20px;
+
+  font-size: 13px;
+  color: #68708c;
+}
+
+
+/* ================================
+   INVITATION BOX
+================================ */
+
+.invitation-box {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  padding: 13px 15px;
+
+  background: #eefaf4;
+  border: 1px solid #d2f0df;
+
+  border-radius: 7px;
+
+  margin-bottom: 14px;
+}
+
+.invitation-box > svg {
+  flex-shrink: 0;
+
+  width: 21px;
+  height: 21px;
+
+  color: #16a56a;
+}
+
+.invitation-box strong {
+  display: block;
+
+  font-size: 13px;
+  color: #18734f;
+}
+
+.invitation-box p {
+  margin: 3px 0 0;
+
+  font-size: 11px;
+  color: #547264;
+}
+
+
+/* ================================
+   EMPLOYEE INFORMATION
+================================ */
+
+.employee-info {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 0;
+
+  padding: 14px 15px;
+
+  background: #f8f7ff;
+
+  border: 1px solid #e8e5fb;
+
+  border-radius: 7px;
+
+  margin-bottom: 18px;
+}
+
+.employee-info div {
+  min-height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 5px 8px;
+}
+
+.employee-info span {
+  color: #626a86;
+  font-size: 10px;
+}
+
+.employee-info strong {
+  color: #202744;
+  font-size: 10px;
+  text-align: right;
+}
+
+
+/* ================================
+   FORM
+================================ */
+
+.activation-card form {
+  width: 100%;
+}
+
+.activation-card form > label:not(.check-row) {
+  display: block;
+
+  margin: 10px 0 6px;
+
+  color: #303751;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+
+/* ================================
+   INPUT
+================================ */
+
+.activation-input {
+  width: 100%;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+
+  border: 1px solid #d9dce8;
+
+  border-radius: 6px;
+
+  background: #ffffff;
+
+  transition: 0.2s;
+}
+
+.activation-input:focus-within {
+  border-color: #5546f0;
+
+  box-shadow:
+    0 0 0 3px rgba(79, 70, 229, 0.08);
+}
+
+.activation-input > svg {
+  margin-left: 12px;
+
+  color: #858da8;
+
+  font-size: 12px;
+}
+
+.activation-input input {
+  flex: 1;
+
+  height: 100%;
+
+  border: none;
+  outline: none;
+
+  padding: 0 10px;
+
+  font-size: 11px;
+
+  color: #202744;
+
+  background: transparent;
+}
+
+.activation-input input::placeholder {
+  color: #9ba1b5;
+}
+
+.activation-input button {
+  width: 38px;
+  height: 100%;
+
+  border: none;
+  background: transparent;
+
+  color: #858da8;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.activation-input button:hover {
+  color: #4f46e5;
+}
+
+
+/* ================================
+   MESSAGE
+================================ */
+
+.activation-message {
+  margin-top: 10px;
+
+  padding: 10px 12px;
+
+  border-radius: 6px;
+
+  background: #eefaf4;
+
+  border: 1px solid #ccebdc;
+
+  color: #15845a;
+
+  font-size: 11px;
+}
+
+
+/* ================================
+   CHECKBOX
+================================ */
+
+.check-row {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: 10px;
+
+  color: #555d78;
+
+  font-size: 10px;
+
+  cursor: pointer;
+}
+
+.check-row input {
+  width: 14px;
+  height: 14px;
+
+  accent-color: #4f46e5;
+
+  cursor: pointer;
+}
+
+
+/* ================================
+   ACTIVATE BUTTON
+================================ */
+
+.activate-btn {
+  width: 100%;
+  height: 40px;
+
+  margin-top: 18px;
+
+  border: none;
+  border-radius: 6px;
+
+  background: linear-gradient(
+    90deg,
+    #4f2df4,
+    #5535f6
+  );
+
+  color: white;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 7px 18px rgba(79, 46, 244, 0.2);
+
+  transition: 0.2s;
+}
+
+.activate-btn:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 10px 22px rgba(79, 46, 244, 0.28);
+}
+
+.activate-btn svg:last-child {
+  font-size: 10px;
+}
+
+
+/* ================================
+   ALREADY ACTIVATED
+================================ */
+
+.already {
+  margin-top: 18px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 6px;
+
+  color: #747b94;
+
+  font-size: 10px;
+}
+
+.already button {
+  border: none;
+  background: transparent;
+
+  color: #4f46e5;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.already button:hover {
+  text-decoration: underline;
+}
+
+
+/* ================================
+   FOOTER
+================================ */
+
+.activation-footer {
+  text-align: center;
+
+  margin-top: 22px;
+
+  color: #747b94;
+
+  font-size: 10px;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 700px) {
+
+  .activation-page {
+    padding: 18px 12px 25px;
+  }
+
+  .activation-card {
+    padding: 22px 18px;
+  }
+
+  .steps {
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-bottom: 5px;
+  }
+
+  .step {
+    min-width: 105px;
+  }
+
+  .line {
+    min-width: 35px;
+  }
+
+  .activation-card h1 {
+    font-size: 23px;
+  }
+
+  .employee-info {
+    grid-template-columns: 1fr;
+  }
+
+  .employee-info div {
+    padding: 5px 2px;
+  }
+
+}

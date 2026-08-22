@@ -1,0 +1,32 @@
+.activity{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.activityItem{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#f8fafc;
+    padding:15px;
+    border-radius:12px;
+    border-left:4px solid #2563eb;
+    transition:.3s;
+}
+
+.activityItem:hover{
+    background:#eff6ff;
+    transform:translateX(5px);
+}
+
+.activityItem h4{
+    font-size:16px;
+    color:#111827;
+}
+
+.activityItem p{
+    font-size:14px;
+    color:#6b7280;
+    margin-top:4px;
+}

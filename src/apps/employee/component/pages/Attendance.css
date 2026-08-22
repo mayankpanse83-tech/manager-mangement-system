@@ -1,0 +1,1072 @@
+/* =====================================================
+   ATTENDANCE PAGE
+===================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+.attendance-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 24px;
+  background: #f5f7fb;
+  color: #1e293b;
+  overflow-x: hidden;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.attendance-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.attendance-header h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.attendance-header p {
+  margin: 6px 0 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.date-picker-wrapper {
+  position: relative;
+}
+
+.today-btn {
+  height: 42px;
+  padding: 0 15px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #fff;
+  color: #334155;
+  cursor: pointer;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.hidden-date-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.notification-btn {
+  width: 42px;
+  height: 42px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+
+/* =====================================================
+   TOP CARDS
+===================================================== */
+
+.attendance-cards {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.attendance-card {
+  min-width: 0;
+  background: #fff;
+  border: 1px solid #e8edf4;
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
+}
+
+.card-icon {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.card-icon.blue {
+  background: #e8f1ff;
+}
+
+.card-icon.purple {
+  background: #f0eaff;
+}
+
+.attendance-card span {
+  display: block;
+  color: #64748b;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.attendance-card strong {
+  display: block;
+  font-size: 20px;
+  color: #1e293b;
+}
+
+.attendance-card small {
+  display: block;
+  color: #94a3b8;
+  margin-top: 4px;
+}
+
+
+/* =====================================================
+   CHECK SECTION
+===================================================== */
+
+.check-section {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #e8edf4;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.check-section h2 {
+  margin: 0 0 6px;
+  font-size: 18px;
+}
+
+.check-section p {
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.check-buttons {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.check-buttons button {
+  border: none;
+  border-radius: 9px;
+  padding: 11px 18px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.check-in {
+  background: #16a34a;
+  color: white;
+}
+
+.check-out {
+  background: #ef4444;
+  color: white;
+}
+
+.check-buttons button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+
+/* =====================================================
+   MAIN GRID
+===================================================== */
+
+.attendance-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.85fr);
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+
+/* =====================================================
+   COMMON BOX
+===================================================== */
+
+.weekly-box,
+.calendar-box,
+.history-box,
+.timeline-box {
+  min-width: 0;
+  background: #fff;
+  border: 1px solid #e8edf4;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
+}
+
+
+/* =====================================================
+   BOX HEADER
+===================================================== */
+
+.box-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.box-header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.box-header select {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: #fff;
+  color: #475569;
+}
+
+
+/* =====================================================
+   WEEKLY CHART
+===================================================== */
+
+.chart {
+  width: 100%;
+  height: 240px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  gap: 12px;
+}
+
+.bar-column {
+  height: 100%;
+  flex: 1;
+  min-width: 25px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+}
+
+.bar-background {
+  width: 100%;
+  max-width: 42px;
+  height: 190px;
+  background: #eef2f7;
+  border-radius: 8px;
+
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.bar {
+  width: 100%;
+  background: #6366f1;
+  border-radius: 8px 8px 0 0;
+}
+
+.bar-column span {
+  font-size: 12px;
+  color: #64748b;
+}
+
+
+/* =====================================================
+   CALENDAR
+===================================================== */
+
+.calendar-box {
+  overflow: hidden;
+}
+
+.calendar-box .box-header {
+  justify-content: space-between;
+}
+
+.calendar-box .box-header h2 {
+  text-align: center;
+  flex: 1;
+  font-size: 17px;
+}
+
+.arrow {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  border-radius: 8px;
+
+  font-size: 22px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.week-days {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 5px;
+  margin-bottom: 8px;
+}
+
+.week-days span {
+  min-width: 0;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+.calendar {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 5px;
+}
+
+.calendar-empty {
+  aspect-ratio: 1;
+}
+
+.calendar-day {
+  width: 100%;
+  aspect-ratio: 1;
+
+  min-width: 0;
+  min-height: 0;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #ecfdf5;
+  color: #166534;
+
+  font-size: 12px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar-day.leave {
+  background: #fff7ed;
+  color: #ea580c;
+}
+
+.calendar-day.absent {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.calendar-day.selected {
+  outline: 2px solid #4f46e5;
+  outline-offset: -2px;
+}
+
+.calendar-day.today-date {
+  font-weight: 800;
+}
+
+.selected-date-info {
+  margin-top: 16px;
+  padding: 10px;
+  background: #f8fafc;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.selected-date-info strong {
+  color: #334155;
+  margin-left: 5px;
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 15px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.legend > div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.legend-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.present-dot {
+  background: #22c55e;
+}
+
+.leave-dot {
+  background: #f97316;
+}
+
+.absent-dot {
+  background: #ef4444;
+}
+
+
+/* =====================================================
+   LOWER GRID
+===================================================== */
+
+.lower-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.8fr);
+  gap: 20px;
+}
+
+
+/* =====================================================
+   HISTORY TABLE
+===================================================== */
+
+.history-box {
+  overflow: hidden;
+}
+
+.history-box table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 620px;
+}
+
+.history-box {
+  overflow-x: auto;
+}
+
+.history-box th,
+.history-box td {
+  padding: 13px 10px;
+  text-align: left;
+  border-bottom: 1px solid #eef2f7;
+  white-space: nowrap;
+  font-size: 13px;
+}
+
+.history-box th {
+  color: #64748b;
+  font-weight: 600;
+  background: #f8fafc;
+}
+
+.status {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.status.present {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.status.leave {
+  background: #ffedd5;
+  color: #c2410c;
+}
+
+.view-btn {
+  border: none;
+  background: #eef2ff;
+  color: #4f46e5;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
+/* =====================================================
+   TIMELINE
+===================================================== */
+
+.timeline {
+  position: relative;
+  margin-top: 20px;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding-bottom: 24px;
+  position: relative;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 14px;
+  height: calc(100% - 4px);
+  width: 1px;
+  background: #e2e8f0;
+}
+
+.timeline-dot {
+  width: 11px;
+  height: 11px;
+  min-width: 11px;
+  border-radius: 50%;
+  margin-top: 4px;
+  z-index: 2;
+}
+
+.green-dot {
+  background: #22c55e;
+}
+
+.blue-dot {
+  background: #3b82f6;
+}
+
+.orange-dot {
+  background: #f97316;
+}
+
+.red-dot {
+  background: #ef4444;
+}
+
+.timeline-item strong {
+  font-size: 13px;
+}
+
+.timeline-item p {
+  margin: 4px 0 0;
+  color: #64748b;
+  font-size: 12px;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1000px) {
+
+  .attendance-page {
+    padding: 18px;
+  }
+
+  .attendance-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lower-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+  .attendance-page {
+    padding: 12px;
+  }
+
+
+  /* HEADER */
+
+  .attendance-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .attendance-header h1 {
+    font-size: 24px;
+  }
+
+  .header-actions {
+    width: 100%;
+  }
+
+  .date-picker-wrapper {
+    flex: 1;
+  }
+
+  .today-btn {
+    width: 100%;
+    font-size: 13px;
+  }
+
+  .notification-btn {
+    flex-shrink: 0;
+  }
+
+
+  /* TOP CARDS */
+
+  .attendance-cards {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .attendance-card {
+    padding: 16px;
+  }
+
+
+  /* CHECK SECTION */
+
+  .check-section {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px;
+  }
+
+  .check-buttons {
+    width: 100%;
+  }
+
+  .check-buttons button {
+    flex: 1;
+  }
+
+
+  /* GRID */
+
+  .attendance-grid,
+  .lower-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+
+  /* BOX */
+
+  .weekly-box,
+  .calendar-box,
+  .history-box,
+  .timeline-box {
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+
+  /* BOX HEADER */
+
+  .box-header h2 {
+    font-size: 16px;
+  }
+
+  .box-header select {
+    max-width: 120px;
+    font-size: 12px;
+  }
+
+
+  /* CHART */
+
+  .chart {
+    height: 200px;
+    gap: 5px;
+  }
+
+  .bar-background {
+    height: 160px;
+    max-width: 30px;
+  }
+
+
+  /* CALENDAR */
+
+  .calendar-box {
+    width: 100%;
+  }
+
+  .calendar {
+    gap: 4px;
+  }
+
+  .week-days {
+    gap: 4px;
+  }
+
+  .calendar-day {
+    font-size: 11px;
+    border-radius: 6px;
+  }
+
+  .week-days span {
+    font-size: 10px;
+  }
+
+  .arrow {
+    width: 32px;
+    min-width: 32px;
+    height: 32px;
+  }
+
+
+  /* HISTORY */
+
+  .history-box {
+    overflow-x: auto;
+  }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 400px) {
+
+  .attendance-page {
+    padding: 9px;
+  }
+
+  .attendance-header h1 {
+    font-size: 21px;
+  }
+
+  .attendance-header p {
+    font-size: 12px;
+  }
+
+  .attendance-card strong {
+    font-size: 17px;
+  }
+
+  .check-section h2 {
+    font-size: 16px;
+  }
+
+  .check-section p {
+    font-size: 12px;
+  }
+
+  .check-buttons button {
+    padding: 10px 8px;
+    font-size: 12px;
+  }
+
+  .weekly-box,
+  .calendar-box,
+  .history-box,
+  .timeline-box {
+    padding: 11px;
+  }
+
+  .calendar {
+    gap: 3px;
+  }
+
+  .week-days {
+    gap: 3px;
+  }
+
+  .calendar-day {
+    font-size: 10px;
+  }
+
+  .selected-date-info {
+    font-size: 11px;
+  }
+
+  .legend {
+    gap: 8px;
+    font-size: 10px;
+  }
+
+}
+/* ================= CALENDAR ================= */
+
+.calendar-box {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.calendar-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.calendar-title-row h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.calendar-arrow {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 7px;
+  background: #f1f5f9;
+  cursor: pointer;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar-weekdays,
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  width: 100%;
+}
+
+.calendar-weekdays {
+  margin-bottom: 8px;
+}
+
+.calendar-weekdays span {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+/* Calendar dates */
+
+.calendar-grid {
+  row-gap: 5px;
+  column-gap: 3px;
+}
+
+.calendar-date,
+.calendar-empty {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  min-height: 30px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.calendar-date {
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Present */
+
+.calendar-date.present {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+/* Leave */
+
+.calendar-date.leave {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+/* Absent */
+
+.calendar-date.absent {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* Selected */
+
+.calendar-date.selected {
+  outline: 2px solid #2563eb;
+  outline-offset: 1px;
+}
+
+/* Today */
+
+.calendar-date.today {
+  box-shadow: 0 0 0 2px #2563eb;
+}
+
+/* Selected Date */
+
+.calendar-selected {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.calendar-selected strong {
+  color: #1e293b;
+  margin-left: 4px;
+}
+
+/* Legend */
+
+.calendar-legend {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 14px;
+  font-size: 11px;
+  color: #64748b;
+}
+
+.calendar-legend > div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot.present {
+  background: #22c55e;
+}
+
+.dot.leave {
+  background: #f59e0b;
+}
+
+.dot.absent {
+  background: #ef4444;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 600px) {
+
+  .calendar-box {
+    padding: 14px;
+  }
+
+  .calendar-title-row {
+    margin-bottom: 14px;
+  }
+
+  .calendar-title-row h2 {
+    font-size: 16px;
+  }
+
+  .calendar-arrow {
+    width: 28px;
+    height: 28px;
+    font-size: 19px;
+  }
+
+  .calendar-weekdays span {
+    font-size: 10px;
+  }
+
+  .calendar-grid {
+    row-gap: 4px;
+    column-gap: 0;
+  }
+
+  .calendar-date,
+  .calendar-empty {
+    width: 27px;
+    height: 27px;
+    min-width: 27px;
+    min-height: 27px;
+  }
+
+  .calendar-date {
+    font-size: 11px;
+  }
+
+  .calendar-selected {
+    margin-top: 12px;
+    font-size: 11px;
+  }
+
+  .calendar-legend {
+    gap: 10px;
+    font-size: 10px;
+    margin-top: 10px;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+  }
+}
