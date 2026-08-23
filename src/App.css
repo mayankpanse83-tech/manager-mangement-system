@@ -265,3 +265,215 @@ body {
     padding: 80px 10px 20px;
   }
 }
+.manager-app-layout {
+  min-height: 100vh;
+
+  background: #f5f7fb;
+}
+
+
+.manager-main-area {
+  margin-left: 260px;
+
+  min-height: 100vh;
+
+  width: calc(100% - 260px);
+
+  overflow-x: hidden;
+}
+
+
+.manager-page-content {
+  width: 100%;
+
+  min-height: calc(100vh - 94px);
+
+  background: #f5f7fb;
+}
+
+
+.manager-page-placeholder {
+  padding: 40px;
+}
+
+.manager-page-placeholder h1 {
+  margin: 0 0 10px;
+
+  color: #172033;
+}
+
+.manager-page-placeholder p {
+  color: #7b8799;
+}
+
+
+/* MOBILE BUTTON */
+
+.manager-mobile-menu {
+  display: none;
+
+  position: fixed;
+
+  left: 15px;
+  top: 20px;
+
+  z-index: 2000;
+
+  width: 42px;
+  height: 42px;
+
+  border: 0;
+
+  border-radius: 8px;
+
+  background: #326cf5;
+
+  color: white;
+
+  font-size: 22px;
+}
+
+
+/* OVERLAY */
+
+.manager-sidebar-overlay {
+  display: none;
+}
+
+
+@media (max-width: 900px) {
+
+  .manager-main-area {
+    margin-left: 0;
+
+    width: 100%;
+  }
+
+  .manager-mobile-menu {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+  }
+
+  .manager-sidebar-overlay {
+    display: block;
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.45);
+
+    z-index: 900;
+  }
+
+}
+/* =========================================
+   MANAGER LAYOUT
+========================================= */
+
+.manager-app-layout {
+  min-height: 100vh;
+
+  background: #f5f7fb;
+}
+
+.manager-main-area {
+  margin-left: 250px;
+
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.manager-page-content {
+  flex: 1;
+
+  padding: 22px;
+
+  box-sizing: border-box;
+
+  overflow-x: hidden;
+}
+
+.empty-manager-page {
+  padding: 30px;
+
+  background: white;
+
+  border-radius: 12px;
+
+  min-height: 300px;
+
+  box-sizing: border-box;
+}
+
+.empty-manager-page h1 {
+  margin: 0 0 10px;
+
+  color: #172033;
+}
+
+.empty-manager-page p {
+  color: #7b879b;
+}
+
+
+/* =========================================
+   MANAGER RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+  .manager-sidebar {
+    width: 220px;
+  }
+
+  .manager-main-area {
+    margin-left: 220px;
+  }
+
+  .manager-header {
+    padding: 0 18px;
+  }
+
+  .manager-search {
+    width: 170px;
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .manager-sidebar {
+    width: 250px;
+
+    transform: translateX(-100%);
+
+    transition: 0.3s;
+  }
+
+  .manager-main-area {
+    margin-left: 0;
+  }
+
+  .manager-header {
+    height: 65px;
+  }
+
+  .manager-header-right {
+    gap: 10px;
+  }
+
+  .manager-search {
+    display: none;
+  }
+
+  .manager-page-content {
+    padding: 12px;
+  }
+
+}

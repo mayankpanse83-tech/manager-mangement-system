@@ -14,149 +14,112 @@ import {
   FaUmbrellaBeach,
 } from "react-icons/fa";
 
-
-const Dashboard = () => {
+const ManagerDashboard = () => {
   return (
     <div className="manager-dashboard-content">
 
-      {/* TOP STAT CARDS */}
+      {/* ================= TOP STAT CARDS ================= */}
       <div className="manager-stats">
 
-        <div className="manager-stat-card">
-          <div className="stat-icon purple">
-            <FaUsers />
-          </div>
-          <div>
-            <p>Team Members</p>
-            <h2>12</h2>
-            <span className="green-text">+1 this month</span>
-          </div>
-        </div>
+        <StatCard
+          icon={<FaUsers />}
+          iconClass="purple"
+          title="Team Members"
+          value="12"
+          text="+1 this month"
+          textClass="green-text"
+        />
 
-        <div className="manager-stat-card">
-          <div className="stat-icon green">
-            <FaUserCheck />
-          </div>
-          <div>
-            <p>Present Today</p>
-            <h2>10</h2>
-            <span className="green-text">83% of team</span>
-          </div>
-        </div>
+        <StatCard
+          icon={<FaUserCheck />}
+          iconClass="green"
+          title="Present Today"
+          value="10"
+          text="83% of team"
+          textClass="green-text"
+        />
 
-        <div className="manager-stat-card">
-          <div className="stat-icon red">
-            <FaUserTimes />
-          </div>
-          <div>
-            <p>Absent</p>
-            <h2>1</h2>
-            <span className="red-text">Needs review</span>
-          </div>
-        </div>
+        <StatCard
+          icon={<FaUserTimes />}
+          iconClass="red"
+          title="Absent"
+          value="1"
+          text="Needs review"
+          textClass="red-text"
+        />
 
-        <div className="manager-stat-card">
-          <div className="stat-icon orange">
-            <FaUmbrellaBeach />
-          </div>
-          <div>
-            <p>On Leave</p>
-            <h2>1</h2>
-            <span className="orange-text">Today</span>
-          </div>
-        </div>
+        <StatCard
+          icon={<FaUmbrellaBeach />}
+          iconClass="orange"
+          title="On Leave"
+          value="1"
+          text="Today"
+          textClass="orange-text"
+        />
 
-        <div className="manager-stat-card">
-          <div className="stat-icon blue">
-            <FaClock />
-          </div>
-          <div>
-            <p>Late</p>
-            <h2>2</h2>
-            <span className="blue-text">Today</span>
-          </div>
-        </div>
+        <StatCard
+          icon={<FaClock />}
+          iconClass="blue"
+          title="Late"
+          value="2"
+          text="Today"
+          textClass="blue-text"
+        />
 
       </div>
 
-
-      {/* FIRST ROW */}
+      {/* ================= FIRST ROW ================= */}
       <div className="manager-grid">
 
-        {/* ATTENTION */}
+        {/* NEEDS ATTENTION */}
         <div className="manager-card">
 
-          <div className="manager-card-title">
-            <h3>
-              <FaBell /> Needs Your Attention
-            </h3>
-            <FaArrowRight />
-          </div>
+          <CardTitle
+            icon={<FaBell />}
+            title="Needs Your Attention"
+          />
 
-          <div className="attention-row">
-            <div className="attention-icon orange">
-              <FaCalendarAlt />
-            </div>
+          <AttentionRow
+            icon={<FaCalendarAlt />}
+            iconClass="orange"
+            title="2 Leave Requests"
+            subtitle="Waiting for approval"
+            button="Review"
+          />
 
-            <div>
-              <strong>2 Leave Requests</strong>
-              <small>Waiting for approval</small>
-            </div>
+          <AttentionRow
+            icon={<FaTasks />}
+            iconClass="red"
+            title="1 Overdue Task"
+            subtitle="Rahul - API Integration"
+            button="View Task"
+          />
 
-            <button>Review</button>
-          </div>
+          <AttentionRow
+            icon={<FaFileAlt />}
+            iconClass="blue"
+            title="3 Daily Updates"
+            subtitle="Waiting for review"
+            button="Review"
+          />
 
-          <div className="attention-row">
-            <div className="attention-icon red">
-              <FaTasks />
-            </div>
-
-            <div>
-              <strong>1 Overdue Task</strong>
-              <small>Rahul - API Integration</small>
-            </div>
-
-            <button>View Task</button>
-          </div>
-
-          <div className="attention-row">
-            <div className="attention-icon blue">
-              <FaFileAlt />
-            </div>
-
-            <div>
-              <strong>3 Daily Updates</strong>
-              <small>Waiting for review</small>
-            </div>
-
-            <button>Review</button>
-          </div>
-
-          <div className="attention-row">
-            <div className="attention-icon purple">
-              <FaClock />
-            </div>
-
-            <div>
-              <strong>1 Attendance Issue</strong>
-              <small>Late / missing check-out</small>
-            </div>
-
-            <button>Review</button>
-          </div>
+          <AttentionRow
+            icon={<FaClock />}
+            iconClass="purple"
+            title="1 Attendance Issue"
+            subtitle="Late / missing check-out"
+            button="Review"
+          />
 
         </div>
-
 
         {/* ATTENDANCE */}
         <div className="manager-card">
 
-          <div className="manager-card-title">
-            <h3>
-              <FaCalendarAlt /> Team Attendance (Today)
-            </h3>
-            <FaArrowRight />
-          </div>
+          <CardTitle
+            icon={<FaCalendarAlt />}
+            title="Team Attendance (Today)"
+          />
 
           <div className="attendance-box">
 
@@ -169,29 +132,29 @@ const Dashboard = () => {
 
             <div className="attendance-details">
 
-              <div>
-                <span className="dot green-dot"></span>
-                Present
-                <b>10 (83%)</b>
-              </div>
+              <AttendanceItem
+                dot="green-dot"
+                name="Present"
+                value="10 (83%)"
+              />
 
-              <div>
-                <span className="dot red-dot"></span>
-                Absent
-                <b>1 (8%)</b>
-              </div>
+              <AttendanceItem
+                dot="red-dot"
+                name="Absent"
+                value="1 (8%)"
+              />
 
-              <div>
-                <span className="dot orange-dot"></span>
-                On Leave
-                <b>1 (8%)</b>
-              </div>
+              <AttendanceItem
+                dot="orange-dot"
+                name="On Leave"
+                value="1 (8%)"
+              />
 
-              <div>
-                <span className="dot blue-dot"></span>
-                Late
-                <b>2 (16%)</b>
-              </div>
+              <AttendanceItem
+                dot="blue-dot"
+                name="Late"
+                value="2 (16%)"
+              />
 
             </div>
 
@@ -202,7 +165,6 @@ const Dashboard = () => {
           </div>
 
         </div>
-
 
         {/* TEAM STATUS */}
         <div className="manager-card">
@@ -257,11 +219,10 @@ const Dashboard = () => {
 
       </div>
 
-
-      {/* SECOND ROW */}
+      {/* ================= SECOND ROW ================= */}
       <div className="manager-grid">
 
-        {/* TASKS */}
+        {/* TEAM TASKS */}
         <div className="manager-card">
 
           <div className="manager-card-title">
@@ -319,29 +280,28 @@ const Dashboard = () => {
             High Priority Tasks
           </h4>
 
-          <div className="priority-row">
-            <span>1</span>
-            <b>API Integration</b>
-            <small>Rahul Verma</small>
-            <em>Overdue</em>
-          </div>
+          <PriorityRow
+            number="1"
+            task="API Integration"
+            person="Rahul Verma"
+            status="Overdue"
+          />
 
-          <div className="priority-row">
-            <span>2</span>
-            <b>Dashboard UI</b>
-            <small>Aman Sharma</small>
-            <em>Due Today</em>
-          </div>
+          <PriorityRow
+            number="2"
+            task="Dashboard UI"
+            person="Aman Sharma"
+            status="Due Today"
+          />
 
-          <div className="priority-row">
-            <span>3</span>
-            <b>Testing & QA</b>
-            <small>Neha Patel</small>
-            <em>Due Tomorrow</em>
-          </div>
+          <PriorityRow
+            number="3"
+            task="Testing & QA"
+            person="Neha Patel"
+            status="Due Tomorrow"
+          />
 
         </div>
-
 
         {/* DAILY UPDATES */}
         <div className="manager-card">
@@ -399,8 +359,7 @@ const Dashboard = () => {
 
         </div>
 
-
-        {/* LEAVE */}
+        {/* LEAVE REQUESTS */}
         <div className="manager-card">
 
           <div className="manager-card-title">
@@ -413,14 +372,14 @@ const Dashboard = () => {
             </span>
           </div>
 
-          <Leave
+          <LeaveRequest
             name="Rahul Sharma"
             type="Sick Leave"
             date="18 Aug - 19 Aug"
             days="5 Days"
           />
 
-          <Leave
+          <LeaveRequest
             name="Priya Singh"
             type="Casual Leave"
             date="20 Aug 2026"
@@ -431,8 +390,7 @@ const Dashboard = () => {
 
       </div>
 
-
-      {/* THIRD ROW */}
+      {/* ================= THIRD ROW ================= */}
       <div className="manager-grid">
 
         {/* PERFORMANCE */}
@@ -476,7 +434,6 @@ const Dashboard = () => {
 
         </div>
 
-
         {/* ACTIVITY */}
         <div className="manager-card">
 
@@ -511,8 +468,7 @@ const Dashboard = () => {
 
         </div>
 
-
-        {/* QUICK ACTION */}
+        {/* QUICK ACTIONS */}
         <div className="manager-card">
 
           <div className="manager-card-title">
@@ -556,7 +512,87 @@ const Dashboard = () => {
 };
 
 
-/* COMPONENTS */
+/* =====================================================
+   SMALL COMPONENTS
+===================================================== */
+
+const StatCard = ({
+  icon,
+  iconClass,
+  title,
+  value,
+  text,
+  textClass,
+}) => {
+  return (
+    <div className="manager-stat-card">
+
+      <div className={`stat-icon ${iconClass}`}>
+        {icon}
+      </div>
+
+      <div>
+        <p>{title}</p>
+        <h2>{value}</h2>
+        <span className={textClass}>{text}</span>
+      </div>
+
+    </div>
+  );
+};
+
+
+const CardTitle = ({ icon, title }) => {
+  return (
+    <div className="manager-card-title">
+      <h3>
+        {icon} {title}
+      </h3>
+
+      <FaArrowRight />
+    </div>
+  );
+};
+
+
+const AttentionRow = ({
+  icon,
+  iconClass,
+  title,
+  subtitle,
+  button,
+}) => {
+  return (
+    <div className="attention-row">
+
+      <div className={`attention-icon ${iconClass}`}>
+        {icon}
+      </div>
+
+      <div>
+        <strong>{title}</strong>
+        <small>{subtitle}</small>
+      </div>
+
+      <button>{button}</button>
+
+    </div>
+  );
+};
+
+
+const AttendanceItem = ({ dot, name, value }) => {
+  return (
+    <div>
+      <span className={`dot ${dot}`}></span>
+
+      {name}
+
+      <b>{value}</b>
+    </div>
+  );
+};
+
 
 const TeamMember = ({
   name,
@@ -605,10 +641,32 @@ const Progress = ({
         <div
           className={type}
           style={{ width }}
-        ></div>
+        />
       </div>
 
       <b>{value}</b>
+
+    </div>
+  );
+};
+
+
+const PriorityRow = ({
+  number,
+  task,
+  person,
+  status,
+}) => {
+  return (
+    <div className="priority-row">
+
+      <span>{number}</span>
+
+      <b>{task}</b>
+
+      <small>{person}</small>
+
+      <em>{status}</em>
 
     </div>
   );
@@ -635,7 +693,13 @@ const Update = ({
         <small>{time}</small>
       </div>
 
-      <span className={status === "Pending" ? "pending" : "submitted"}>
+      <span
+        className={
+          status === "Pending"
+            ? "pending"
+            : "submitted"
+        }
+      >
         {status}
       </span>
 
@@ -646,7 +710,7 @@ const Update = ({
 };
 
 
-const Leave = ({
+const LeaveRequest = ({
   name,
   type,
   date,
@@ -676,12 +740,21 @@ const Leave = ({
       </span>
 
       <div className="leave-actions">
-        <small>Available Leave: {days}</small>
+
+        <small>
+          Available Leave: {days}
+        </small>
 
         <div>
-          <button className="reject">Reject</button>
-          <button className="approve">Approve</button>
+          <button className="reject">
+            Reject
+          </button>
+
+          <button className="approve">
+            Approve
+          </button>
         </div>
+
       </div>
 
     </div>
@@ -702,7 +775,9 @@ const Performance = ({
       </div>
 
       <strong>{value}</strong>
+
       <span>{title}</span>
+
       <small>{change}</small>
 
     </div>
@@ -730,5 +805,4 @@ const Activity = ({
   );
 };
 
-
-export default MangerDashboard;
+export default ManagerDashboard;

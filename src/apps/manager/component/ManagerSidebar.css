@@ -1,0 +1,204 @@
+.manager-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 250px;
+  height: 100vh;
+
+  background: #061b3a;
+  color: white;
+
+  padding: 22px 16px;
+
+  display: flex;
+  flex-direction: column;
+
+  z-index: 1000;
+
+  box-sizing: border-box;
+}
+
+/* LOGO */
+
+.manager-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-bottom: 35px;
+}
+
+.manager-logo-icon {
+  width: 40px;
+  height: 40px;
+
+  background: #4f46ff;
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.manager-logo h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.manager-logo span {
+  display: block;
+  margin-top: 3px;
+
+  color: #aebbd0;
+  font-size: 10px;
+}
+
+/* MENU */
+
+.manager-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.manager-menu-item {
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 0 14px;
+
+  border-radius: 8px;
+
+  color: #d7dfed;
+  text-decoration: none;
+
+  font-size: 14px;
+
+  transition: 0.2s;
+}
+
+.manager-menu-item svg {
+  width: 17px;
+}
+
+.manager-menu-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+}
+
+.manager-menu-item.active {
+  background: linear-gradient(90deg, #4438ff, #5b35ed);
+  color: white;
+}
+
+/* BOTTOM */
+
+.manager-bottom-menu {
+  margin-top: auto;
+
+  padding-top: 15px;
+
+  border-top: 1px solid rgba(255,255,255,0.12);
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* HELP */
+
+.manager-help {
+  margin-top: 15px;
+
+  padding: 15px;
+
+  background: linear-gradient(
+    135deg,
+    #172c64,
+    #20216c
+  );
+
+  border-radius: 10px;
+}
+
+.manager-help strong {
+  font-size: 13px;
+}
+
+.manager-help p {
+  margin: 7px 0 10px;
+
+  font-size: 10px;
+  line-height: 1.5;
+
+  color: #bdc8dc;
+}
+
+.manager-help button {
+  border: none;
+
+  background: #4c3cff;
+  color: white;
+
+  padding: 8px 12px;
+
+  border-radius: 6px;
+
+  font-size: 10px;
+
+  cursor: pointer;
+}
+
+/* USER */
+
+.manager-user {
+  margin-top: 12px;
+
+  padding: 10px;
+
+  border-radius: 9px;
+
+  background: rgba(255,255,255,0.06);
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+.manager-user-avatar {
+  width: 34px;
+  height: 34px;
+
+  border-radius: 50%;
+
+  background: #60708a;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.manager-user strong {
+  display: block;
+  font-size: 12px;
+}
+
+.manager-user span {
+  display: block;
+  margin-top: 3px;
+
+  font-size: 9px;
+
+  color: #aebbd0;
+}

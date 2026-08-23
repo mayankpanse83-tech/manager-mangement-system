@@ -822,3 +822,158 @@
     grid-template-columns: repeat(2, 1fr);
   }
 } 
+.manager-dashboard-content {
+  width: 100%;
+  max-width: none;
+
+  padding: 24px 28px 40px;
+
+  margin: 0;
+
+  min-width: 0;
+}
+
+
+/* STAT CARDS */
+
+.manager-stats {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+
+  gap: 16px;
+
+  margin-bottom: 18px;
+}
+
+
+/* MAIN GRID */
+
+.manager-grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 16px;
+
+  margin-bottom: 18px;
+}
+
+
+/* CARD */
+
+.manager-card {
+  min-width: 0;
+
+  width: 100%;
+
+  background: white;
+
+  border: 1px solid #e7ebf2;
+
+  border-radius: 12px;
+
+  padding: 16px;
+
+  box-shadow:
+    0 2px 8px rgba(25, 45, 80, 0.04);
+}
+
+
+/* STAT CARD */
+
+.manager-stat-card {
+  min-width: 0;
+
+  background: white;
+
+  border: 1px solid #e7ebf2;
+
+  border-radius: 12px;
+
+  padding: 16px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  min-height: 105px;
+}
+
+
+/* CARD TITLE */
+
+.manager-card-title {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-bottom: 14px;
+}
+
+.manager-card-title h3 {
+  margin: 0;
+
+  font-size: 14px;
+
+  color: #182238;
+}
+
+
+/* ATTENDANCE */
+
+.attendance-box {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 25px;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 1300px) {
+
+  .manager-stats {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+  .manager-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+@media (max-width: 900px) {
+
+  .manager-dashboard-content {
+    padding: 18px;
+  }
+
+  .manager-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .manager-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
