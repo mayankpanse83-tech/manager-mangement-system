@@ -1,24 +1,18 @@
 import React from "react";
-import { FaSearch, FaBell, FaChevronDown } from "react-icons/fa";
-
+import { FaBell, FaSearch, FaChevronDown } from "react-icons/fa";
 import "./ManagerHeader.css";
 
-function ManagerHeader() {
+const ManagerHeader = () => {
   return (
     <header className="manager-header">
-
-      <div>
+      <div className="manager-header-left">
         <h1>
-          Good Morning, Rajat! 👋
+          Good Morning Mayank! <span>👋</span>
         </h1>
-
-        <p>
-          Here's what's happening with your team today.
-        </p>
+        <p>Here's what's happening with your team today</p>
       </div>
 
       <div className="manager-header-right">
-
         <div className="manager-search">
           <FaSearch />
           <input
@@ -33,24 +27,18 @@ function ManagerHeader() {
         </div>
 
         <div className="manager-profile">
+          <div className="manager-avatar">M</div>
 
-          <div className="manager-profile-avatar">
-            M
-          </div>
-
-          <div>
+          <div className="manager-user-info">
             <strong>Mayank panse</strong>
             <small>Team Manager</small>
           </div>
 
-          <FaChevronDown />
-
+          <FaChevronDown className="manager-chevron" />
         </div>
-
       </div>
-
     </header>
   );
-}
+};
 
 export default ManagerHeader;

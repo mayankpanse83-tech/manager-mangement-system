@@ -27,10 +27,10 @@ import ManagerDashboard
   from "./apps/manager/pages/ManagerDashboard";
 
 import ManagerSidebar
-  from "./apps/manager/components/ManagerSidebar";
+  from "./apps/manager/component/ManagerSidebar";
 
 import ManagerHeader
-  from "./apps/manager/components/ManagerHeader";
+  from "./apps/manager/component/ManagerHeader";
 
 import "./App.css";
 
