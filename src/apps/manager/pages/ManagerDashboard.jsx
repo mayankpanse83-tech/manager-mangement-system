@@ -1,5 +1,5 @@
-import React from "react";
-import "./ManagerDashboard.css";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   FaUsers,
@@ -12,13 +12,87 @@ import {
   FaBell,
   FaFileAlt,
   FaUmbrellaBeach,
+  FaEye,
+  FaCheck,
+  FaTimes,
 } from "react-icons/fa";
 
+import "./ManagerDashboard.css";
+
 const ManagerDashboard = () => {
+  const navigate = useNavigate();
+
+  const [leaveRequests, setLeaveRequests] = useState([
+    {
+      id: 1,
+      name: "Rahul Sharma",
+      type: "Sick Leave",
+      date: "18 Aug - 19 Aug",
+      status: "Pending",
+    },
+    {
+      id: 2,
+      name: "Priya Singh",
+      type: "Casual Leave",
+      date: "20 Aug 2026",
+      status: "Pending",
+    },
+  ]);
+
+  const [message, setMessage] = useState("");
+
+  const showMessage = (text) => {
+    setMessage(text);
+
+    setTimeout(() => {
+      setMessage("");
+    }, 2000);
+  };
+
+  const handleReview = (text, route = null) => {
+    if (route) {
+      navigate(route);
+      return;
+    }
+
+    showMessage(text);
+  };
+
+  const handleLeaveAction = (id, action) => {
+    setLeaveRequests((prev) =>
+      prev.map((item) =>
+        item.id === id
+          ? {
+              ...item,
+              status:
+                action === "approve"
+                  ? "Approved"
+                  : "Rejected",
+            }
+          : item
+      )
+    );
+
+    showMessage(
+      action === "approve"
+        ? "Leave request approved successfully."
+        : "Leave request rejected."
+    );
+  };
+
   return (
     <div className="manager-dashboard-content">
 
+      {/* SUCCESS / ACTION MESSAGE */}
+      {message && (
+        <div className="dashboard-toast">
+          <FaCheck />
+          {message}
+        </div>
+      )}
+
       {/* ================= TOP STAT CARDS ================= */}
+
       <div className="manager-stats">
 
         <StatCard
@@ -37,6 +111,7 @@ const ManagerDashboard = () => {
           value="10"
           text="83% of team"
           textClass="green-text"
+          onClick={() => navigate("/attendance")}
         />
 
         <StatCard
@@ -46,6 +121,7 @@ const ManagerDashboard = () => {
           value="1"
           text="Needs review"
           textClass="red-text"
+          onClick={() => navigate("/attendance")}
         />
 
         <StatCard
@@ -55,6 +131,7 @@ const ManagerDashboard = () => {
           value="1"
           text="Today"
           textClass="orange-text"
+          onClick={() => navigate("/leave")}
         />
 
         <StatCard
@@ -64,20 +141,35 @@ const ManagerDashboard = () => {
           value="2"
           text="Today"
           textClass="blue-text"
+          onClick={() => navigate("/attendance")}
         />
 
       </div>
 
+
       {/* ================= FIRST ROW ================= */}
+
       <div className="manager-grid">
 
         {/* NEEDS ATTENTION */}
+
         <div className="manager-card">
 
-          <CardTitle
-            icon={<FaBell />}
-            title="Needs Your Attention"
-          />
+          <div className="manager-card-title">
+            <h3>
+              <FaBell />
+              Needs Your Attention
+            </h3>
+
+            <button
+              className="icon-link"
+              onClick={() => navigate("/leave")}
+              type="button"
+            >
+              <FaArrowRight />
+            </button>
+          </div>
+
 
           <AttentionRow
             icon={<FaCalendarAlt />}
@@ -85,7 +177,9 @@ const ManagerDashboard = () => {
             title="2 Leave Requests"
             subtitle="Waiting for approval"
             button="Review"
+            onClick={() => navigate("/leave")}
           />
+
 
           <AttentionRow
             icon={<FaTasks />}
@@ -93,7 +187,9 @@ const ManagerDashboard = () => {
             title="1 Overdue Task"
             subtitle="Rahul - API Integration"
             button="View Task"
+            onClick={() => navigate("/tasks")}
           />
+
 
           <AttentionRow
             icon={<FaFileAlt />}
@@ -101,7 +197,9 @@ const ManagerDashboard = () => {
             title="3 Daily Updates"
             subtitle="Waiting for review"
             button="Review"
+            onClick={() => navigate("/daily-updates")}
           />
+
 
           <AttentionRow
             icon={<FaClock />}
@@ -109,26 +207,45 @@ const ManagerDashboard = () => {
             title="1 Attendance Issue"
             subtitle="Late / missing check-out"
             button="Review"
+            onClick={() => navigate("/attendance")}
           />
 
         </div>
 
-        {/* ATTENDANCE */}
+
+        {/* TEAM ATTENDANCE */}
+
         <div className="manager-card">
 
-          <CardTitle
-            icon={<FaCalendarAlt />}
-            title="Team Attendance (Today)"
-          />
+          <div className="manager-card-title">
+
+            <h3>
+              <FaCalendarAlt />
+              Team Attendance (Today)
+            </h3>
+
+            <button
+              className="icon-link"
+              onClick={() => navigate("/attendance")}
+              type="button"
+            >
+              <FaArrowRight />
+            </button>
+
+          </div>
+
 
           <div className="attendance-box">
 
             <div className="attendance-circle">
+
               <div>
                 <strong>83%</strong>
                 <small>Present Rate</small>
               </div>
+
             </div>
+
 
             <div className="attendance-details">
 
@@ -160,24 +277,40 @@ const ManagerDashboard = () => {
 
           </div>
 
-          <div className="bottom-link">
-            View Team Attendance <FaArrowRight />
-          </div>
+
+          <button
+            className="bottom-link button-link"
+            onClick={() => navigate("/attendance")}
+            type="button"
+          >
+            View Team Attendance
+            <FaArrowRight />
+          </button>
 
         </div>
 
+
         {/* TEAM STATUS */}
+
         <div className="manager-card">
 
           <div className="manager-card-title">
+
             <h3>
-              <FaUsers /> Team Status
+              <FaUsers />
+              Team Status
             </h3>
 
-            <span className="view-all">
+            <button
+              className="view-all-button"
+              onClick={() => navigate("/team")}
+              type="button"
+            >
               View All →
-            </span>
+            </button>
+
           </div>
+
 
           <TeamMember
             name="Aman Sharma"
@@ -211,29 +344,46 @@ const ManagerDashboard = () => {
             statusClass="late"
           />
 
-          <div className="bottom-link">
-            View Team Members <FaArrowRight />
-          </div>
+
+          <button
+            className="bottom-link button-link"
+            onClick={() => navigate("/team")}
+            type="button"
+          >
+            View Team Members
+            <FaArrowRight />
+          </button>
 
         </div>
 
       </div>
 
+
       {/* ================= SECOND ROW ================= */}
+
       <div className="manager-grid">
 
         {/* TEAM TASKS */}
+
         <div className="manager-card">
 
           <div className="manager-card-title">
+
             <h3>
-              <FaTasks /> Team Tasks
+              <FaTasks />
+              Team Tasks
             </h3>
 
-            <span className="view-all">
+            <button
+              className="view-all-button"
+              onClick={() => navigate("/tasks")}
+              type="button"
+            >
               View All Tasks →
-            </span>
+            </button>
+
           </div>
+
 
           <div className="task-area">
 
@@ -241,6 +391,7 @@ const ManagerDashboard = () => {
               <strong>42</strong>
               <span>Total Tasks</span>
             </div>
+
 
             <div className="task-bars">
 
@@ -276,9 +427,11 @@ const ManagerDashboard = () => {
 
           </div>
 
+
           <h4 className="priority-title">
             High Priority Tasks
           </h4>
+
 
           <PriorityRow
             number="1"
@@ -301,20 +454,40 @@ const ManagerDashboard = () => {
             status="Due Tomorrow"
           />
 
+
+          <button
+            className="card-action-button"
+            onClick={() => navigate("/tasks")}
+            type="button"
+          >
+            Manage Team Tasks
+            <FaArrowRight />
+          </button>
+
         </div>
 
+
         {/* DAILY UPDATES */}
+
         <div className="manager-card">
 
           <div className="manager-card-title">
+
             <h3>
-              <FaFileAlt /> Daily Updates
+              <FaFileAlt />
+              Daily Updates
             </h3>
 
-            <span className="view-all">
+            <button
+              className="view-all-button"
+              onClick={() => navigate("/daily-updates")}
+              type="button"
+            >
               View All →
-            </span>
+            </button>
+
           </div>
+
 
           <div className="update-summary">
 
@@ -335,74 +508,123 @@ const ManagerDashboard = () => {
 
           </div>
 
+
           <Update
             name="Aman Sharma"
             time="Today, 6:12 PM"
             status="Submitted"
+            onClick={() =>
+              handleReview(
+                "Aman Sharma update opened."
+              )
+            }
           />
 
           <Update
             name="Priya Singh"
             time="Today, 6:05 PM"
             status="Submitted"
+            onClick={() =>
+              handleReview(
+                "Priya Singh update opened."
+              )
+            }
           />
 
           <Update
             name="Rahul Verma"
             time="No update submitted"
             status="Pending"
+            onClick={() =>
+              navigate("/daily-updates")
+            }
           />
 
-          <div className="bottom-link">
-            View All Updates <FaArrowRight />
-          </div>
+
+          <button
+            className="bottom-link button-link"
+            onClick={() => navigate("/daily-updates")}
+            type="button"
+          >
+            View All Updates
+            <FaArrowRight />
+          </button>
 
         </div>
 
+
         {/* LEAVE REQUESTS */}
+
         <div className="manager-card">
 
           <div className="manager-card-title">
+
             <h3>
-              <FaCalendarAlt /> Leave Requests
+              <FaUmbrellaBeach />
+              Leave Requests
             </h3>
 
-            <span className="view-all">
+            <button
+              className="view-all-button"
+              onClick={() => navigate("/leave")}
+              type="button"
+            >
               View All →
-            </span>
+            </button>
+
           </div>
 
-          <LeaveRequest
-            name="Rahul Sharma"
-            type="Sick Leave"
-            date="18 Aug - 19 Aug"
-            days="5 Days"
-          />
 
-          <LeaveRequest
-            name="Priya Singh"
-            type="Casual Leave"
-            date="20 Aug 2026"
-            days="3 Days"
-          />
+          {leaveRequests.map((request) => (
+
+            <LeaveRequest
+              key={request.id}
+              {...request}
+              onApprove={() =>
+                handleLeaveAction(
+                  request.id,
+                  "approve"
+                )
+              }
+              onReject={() =>
+                handleLeaveAction(
+                  request.id,
+                  "reject"
+                )
+              }
+            />
+
+          ))}
 
         </div>
 
       </div>
 
+
       {/* ================= THIRD ROW ================= */}
+
       <div className="manager-grid">
 
         {/* PERFORMANCE */}
+
         <div className="manager-card">
 
           <div className="manager-card-title">
-            <h3>Team Performance (This Month)</h3>
 
-            <span className="view-all">
+            <h3>
+              Team Performance (This Month)
+            </h3>
+
+            <button
+              className="view-all-button"
+              onClick={() => navigate("/reports")}
+              type="button"
+            >
               View Report →
-            </span>
+            </button>
+
           </div>
+
 
           <div className="performance-grid">
 
@@ -434,12 +656,31 @@ const ManagerDashboard = () => {
 
         </div>
 
-        {/* ACTIVITY */}
+
+        {/* RECENT ACTIVITY */}
+
         <div className="manager-card">
 
           <div className="manager-card-title">
-            <h3>Recent Team Activity</h3>
+
+            <h3>
+              Recent Team Activity
+            </h3>
+
+            <button
+              className="view-all-button"
+              onClick={() =>
+                handleReview(
+                  "Recent activity opened."
+                )
+              }
+              type="button"
+            >
+              View All →
+            </button>
+
           </div>
+
 
           <Activity
             text="Aman completed Dashboard UI"
@@ -468,38 +709,68 @@ const ManagerDashboard = () => {
 
         </div>
 
+
         {/* QUICK ACTIONS */}
+
         <div className="manager-card">
 
           <div className="manager-card-title">
             <h3>Quick Actions</h3>
           </div>
 
+
           <div className="quick-actions">
 
-            <div className="quick-action">
+            <button
+              className="quick-action"
+              onClick={() =>
+                navigate("/tasks")
+              }
+              type="button"
+            >
               <FaTasks />
               <strong>Create Task</strong>
               <small>Assign new task</small>
-            </div>
+            </button>
 
-            <div className="quick-action">
+
+            <button
+              className="quick-action"
+              onClick={() =>
+                navigate("/team")
+              }
+              type="button"
+            >
               <FaUsers />
               <strong>View Team</strong>
               <small>See all team members</small>
-            </div>
+            </button>
 
-            <div className="quick-action">
+
+            <button
+              className="quick-action"
+              onClick={() =>
+                navigate("/daily-updates")
+              }
+              type="button"
+            >
               <FaFileAlt />
               <strong>Review Updates</strong>
               <small>Review team updates</small>
-            </div>
+            </button>
 
-            <div className="quick-action">
+
+            <button
+              className="quick-action"
+              onClick={() =>
+                navigate("/leave")
+              }
+              type="button"
+            >
               <FaCalendarAlt />
               <strong>Leave Requests</strong>
               <small>Approve or reject</small>
-            </div>
+            </button>
 
           </div>
 
@@ -513,7 +784,7 @@ const ManagerDashboard = () => {
 
 
 /* =====================================================
-   SMALL COMPONENTS
+   COMPONENTS
 ===================================================== */
 
 const StatCard = ({
@@ -523,10 +794,14 @@ const StatCard = ({
   value,
   text,
   textClass,
+  onClick,
 }) => {
   return (
-    <div className="manager-stat-card">
-
+    <button
+      className="manager-stat-card clickable-card"
+      onClick={onClick}
+      type="button"
+    >
       <div className={`stat-icon ${iconClass}`}>
         {icon}
       </div>
@@ -536,21 +811,7 @@ const StatCard = ({
         <h2>{value}</h2>
         <span className={textClass}>{text}</span>
       </div>
-
-    </div>
-  );
-};
-
-
-const CardTitle = ({ icon, title }) => {
-  return (
-    <div className="manager-card-title">
-      <h3>
-        {icon} {title}
-      </h3>
-
-      <FaArrowRight />
-    </div>
+    </button>
   );
 };
 
@@ -561,6 +822,7 @@ const AttentionRow = ({
   title,
   subtitle,
   button,
+  onClick,
 }) => {
   return (
     <div className="attention-row">
@@ -574,20 +836,27 @@ const AttentionRow = ({
         <small>{subtitle}</small>
       </div>
 
-      <button>{button}</button>
+      <button
+        type="button"
+        onClick={onClick}
+      >
+        {button}
+      </button>
 
     </div>
   );
 };
 
 
-const AttendanceItem = ({ dot, name, value }) => {
+const AttendanceItem = ({
+  dot,
+  name,
+  value,
+}) => {
   return (
     <div>
-      <span className={`dot ${dot}`}></span>
-
+      <span className={`dot ${dot}`} />
       {name}
-
       <b>{value}</b>
     </div>
   );
@@ -616,7 +885,9 @@ const TeamMember = ({
         <small>{role}</small>
       </div>
 
-      <div className={`member-status ${statusClass}`}>
+      <div
+        className={`member-status ${statusClass}`}
+      >
         ● {status}
         <small>{time}</small>
       </div>
@@ -677,6 +948,7 @@ const Update = ({
   name,
   time,
   status,
+  onClick,
 }) => {
   return (
     <div className="update-row">
@@ -703,7 +975,12 @@ const Update = ({
         {status}
       </span>
 
-      <button>Review</button>
+      <button
+        type="button"
+        onClick={onClick}
+      >
+        {status === "Pending" ? "Remind" : "Review"}
+      </button>
 
     </div>
   );
@@ -714,7 +991,9 @@ const LeaveRequest = ({
   name,
   type,
   date,
-  days,
+  status,
+  onApprove,
+  onReject,
 }) => {
   return (
     <div className="leave-row">
@@ -736,24 +1015,42 @@ const LeaveRequest = ({
       </div>
 
       <span className="pending">
-        ● Pending
+        ● {status}
       </span>
 
       <div className="leave-actions">
 
         <small>
-          Available Leave: {days}
+          Available Leave
         </small>
 
-        <div>
-          <button className="reject">
-            Reject
-          </button>
+        {status === "Pending" ? (
+          <div>
 
-          <button className="approve">
-            Approve
-          </button>
-        </div>
+            <button
+              className="reject"
+              type="button"
+              onClick={onReject}
+            >
+              <FaTimes />
+              Reject
+            </button>
+
+            <button
+              className="approve"
+              type="button"
+              onClick={onApprove}
+            >
+              <FaCheck />
+              Approve
+            </button>
+
+          </div>
+        ) : (
+          <span className="request-done">
+            {status}
+          </span>
+        )}
 
       </div>
 
@@ -790,8 +1087,10 @@ const Activity = ({
   time,
 }) => {
   return (
-    <div className="activity-row">
-
+    <button
+      type="button"
+      className="activity-row activity-button"
+    >
       <div className="activity-check">
         ✓
       </div>
@@ -801,8 +1100,9 @@ const Activity = ({
         <small>{time}</small>
       </div>
 
-    </div>
+    </button>
   );
 };
+
 
 export default ManagerDashboard;

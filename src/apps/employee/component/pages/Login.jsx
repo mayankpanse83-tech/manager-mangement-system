@@ -1,9 +1,7 @@
-import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-import "./Login.css";
+import { useNavigate } from "react-router-dom";
 
 import {
-  FaGlobe,
   FaLock,
   FaEnvelope,
   FaEye,
@@ -16,8 +14,13 @@ import {
   FaTimes,
 } from "react-icons/fa";
 
+import "./Login.css";
+
+
 function Login() {
-    const navigate = useNavigate();
+  const [role, setRole] = useState("employee");
+  const navigate = useNavigate();
+
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
@@ -25,12 +28,18 @@ function Login() {
   const [password, setPassword] = useState("");
 
   const [message, setMessage] = useState("");
+
   const [showForgot, setShowForgot] = useState(false);
   const [showHR, setShowHR] = useState(false);
 
   const [language, setLanguage] = useState("English");
 
-const handleLogin = (e) => {
+
+  /* =====================================================
+     LOGIN
+  ===================================================== */
+
+  const handleLogin = (e) => {
   e.preventDefault();
 
   setMessage("");
@@ -45,45 +54,66 @@ const handleLogin = (e) => {
     return;
   }
 
-  setMessage("Login successful! Welcome to WorkForce EMS.");
+  // Selected role save
+  localStorage.setItem("userRole", role);
 
-  console.log("Login Data:", {
-    email,
-    password,
-    rememberMe,
-  });
+  // Login status
+  localStorage.setItem("isLoggedIn", "true");
+  localStorage.setItem("loggedInUser", email.trim());
 
-  // Login ke baad Account Activation page
-  setTimeout(() => {
-    navigate("/account-activation");
-  }, 800);
+  // Success message
+  setMessage(
+    role === "manager"
+      ? "Manager login successful!"
+      : "Employee login successful!"
+  );
+
+  // Direct dashboard redirect
+  navigate("/dashboard", { replace: true });
 };
+
 
   return (
     <div className="login-page">
 
-      {/* ================= LEFT SECTION ================= */}
+      {/* =================================================
+          LEFT SECTION
+      ================================================= */}
+
       <section className="login-left">
 
         <div className="left-content">
 
-          {/* Logo */}
+          {/* LOGO */}
+
           <div className="brand">
-            <div className="brand-logo">W</div>
-            <span>WorkForce</span>
+
+            <div className="brand-logo">
+              W
+            </div>
+
+            <span>
+              WorkForce
+            </span>
+
           </div>
 
-          {/* Small Badge */}
+
+          {/* BADGE */}
+
           <div className="system-badge">
             Employee Management System
           </div>
 
-          {/* Heading */}
+
+          {/* HEADING */}
+
           <h1>
             Manage your people.
             <br />
             Empower your <span>workforce.</span>
           </h1>
+
 
           <p className="description">
             A smarter workspace for attendance, tasks, leave,
@@ -91,7 +121,9 @@ const handleLogin = (e) => {
             payroll and performance management.
           </p>
 
-          {/* Features */}
+
+          {/* FEATURES */}
+
           <div className="features">
 
             <Feature
@@ -114,7 +146,9 @@ const handleLogin = (e) => {
 
           </div>
 
-          {/* Illustration */}
+
+          {/* ILLUSTRATION */}
+
           <div className="illustration">
 
             <div className="chart-card">
@@ -143,32 +177,47 @@ const handleLogin = (e) => {
             </div>
 
             <div className="desk"></div>
+
             <div className="laptop laptop-one"></div>
+
             <div className="laptop laptop-two"></div>
 
           </div>
 
-          {/* Trusted Text */}
+
+          {/* TRUSTED */}
+
           <div className="trusted">
+
             <FaShieldAlt />
+
             <span>
               Trusted by organizations to simplify HR operations
               and empower employees.
             </span>
+
           </div>
 
         </div>
+
       </section>
 
-      {/* ================= RIGHT SECTION ================= */}
+
+      {/* =================================================
+          RIGHT SECTION
+      ================================================= */}
+
       <section className="login-right">
 
-        {/* Language */}
+        {/* LANGUAGE */}
+
         <div className="language-wrapper">
 
           <select
             value={language}
-            onChange={(e) => setLanguage(e.target.value)}
+            onChange={(e) =>
+              setLanguage(e.target.value)
+            }
             className="language-select"
           >
             <option>English</option>
@@ -178,26 +227,53 @@ const handleLogin = (e) => {
 
         </div>
 
-        {/* Login Card */}
+
+        {/* LOGIN CARD */}
+
         <div className="login-card">
 
-          {/* Lock Icon */}
+          {/* LOCK */}
+
           <div className="lock-circle">
             <FaLock />
           </div>
 
-          <h2>Welcome Back! 👋</h2>
+
+          <h2>
+            Welcome Back! 👋
+          </h2>
+
 
           <p className="login-subtitle">
             Sign in to continue to your workspace
           </p>
 
-          <form onSubmit={handleLogin}>
 
-            {/* Email */}
+          <form onSubmit={handleLogin}>
+            <div className="input-group role-group">
+  <label>Select Role</label>
+
+  <div className="input-box role-input-box">
+
+    <select
+      className="role-select"
+      value={role}
+      onChange={(e) => setRole(e.target.value)}
+    >
+      <option value="employee">Employee</option>
+      <option value="manager">Manager</option>
+    </select>
+
+  </div>
+</div>
+
+            {/* EMAIL */}
+
             <div className="input-group">
 
-              <label>Email or Employee ID</label>
+              <label>
+                Email or Employee ID
+              </label>
 
               <div className="input-box">
 
@@ -207,34 +283,51 @@ const handleLogin = (e) => {
                   type="text"
                   placeholder="Enter your email or employee ID"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) =>
+                    setEmail(e.target.value)
+                  }
+                  autoComplete="username"
                 />
 
               </div>
 
             </div>
 
-            {/* Password */}
+
+            {/* PASSWORD */}
+
             <div className="input-group">
 
-              <label>Password</label>
+              <label>
+                Password
+              </label>
 
               <div className="input-box">
 
                 <FaLock />
 
                 <input
-                  type={passwordVisible ? "text" : "password"}
+                  type={
+                    passwordVisible
+                      ? "text"
+                      : "password"
+                  }
                   placeholder="Enter your password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) =>
+                    setPassword(e.target.value)
+                  }
+                  autoComplete="current-password"
                 />
+
 
                 <button
                   type="button"
                   className="eye-button"
                   onClick={() =>
-                    setPasswordVisible(!passwordVisible)
+                    setPasswordVisible(
+                      !passwordVisible
+                    )
                   }
                 >
                   {passwordVisible ? (
@@ -248,7 +341,9 @@ const handleLogin = (e) => {
 
             </div>
 
-            {/* Remember + Forgot */}
+
+            {/* OPTIONS */}
+
             <div className="login-options">
 
               <label className="remember">
@@ -257,50 +352,72 @@ const handleLogin = (e) => {
                   type="checkbox"
                   checked={rememberMe}
                   onChange={(e) =>
-                    setRememberMe(e.target.checked)
+                    setRememberMe(
+                      e.target.checked
+                    )
                   }
                 />
 
-                <span>Remember me</span>
+                <span>
+                  Remember me
+                </span>
 
               </label>
+
 
               <button
                 type="button"
                 className="forgot-btn"
-                onClick={() => setShowForgot(true)}
+                onClick={() =>
+                  setShowForgot(true)
+                }
               >
                 Forgot password?
               </button>
 
             </div>
 
-            {/* Message */}
+
+            {/* MESSAGE */}
+
             {message && (
               <div className="login-message">
                 {message}
               </div>
             )}
 
-            {/* Sign In */}
+
+            {/* SIGN IN */}
+
             <button
               type="submit"
               className="signin-btn"
             >
-              <span>Sign In</span>
+              <span>
+                Sign In
+              </span>
+
               <FaArrowRight />
             </button>
 
           </form>
 
+
           {/* OR */}
+
           <div className="or-divider">
+
             <span></span>
+
             <p>or</p>
+
             <span></span>
+
           </div>
 
-          {/* Secure Access */}
+
+          {/* SECURE */}
+
           <div className="secure-box">
 
             <div className="secure-icon">
@@ -308,19 +425,26 @@ const handleLogin = (e) => {
             </div>
 
             <div>
-              <strong>Secure Access</strong>
+
+              <strong>
+                Secure Access
+              </strong>
 
               <p>
-                Your information is safe with us. We use
-                industry-standard security to protect your data.
+                Your information is safe with us.
+                We use industry-standard security
+                to protect your data.
               </p>
+
             </div>
 
           </div>
 
         </div>
 
-        {/* Contact HR */}
+
+        {/* HR */}
+
         <div className="access-help">
 
           <p>
@@ -328,7 +452,9 @@ const handleLogin = (e) => {
           </p>
 
           <button
-            onClick={() => setShowHR(true)}
+            onClick={() =>
+              setShowHR(true)
+            }
           >
             <FaHeadset />
             Contact HR
@@ -336,55 +462,79 @@ const handleLogin = (e) => {
 
         </div>
 
-        {/* Footer */}
+
+        {/* FOOTER */}
+
         <div className="login-footer">
           © 2026 WorkForce EMS. All rights reserved.
         </div>
 
       </section>
 
-      {/* ================= FORGOT PASSWORD MODAL ================= */}
+
+      {/* =================================================
+          FORGOT PASSWORD MODAL
+      ================================================= */}
+
       {showForgot && (
+
         <div
           className="modal-overlay"
-          onClick={() => setShowForgot(false)}
+          onClick={() =>
+            setShowForgot(false)
+          }
         >
 
           <div
             className="modal-box"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) =>
+              e.stopPropagation()
+            }
           >
 
             <button
               className="modal-close"
-              onClick={() => setShowForgot(false)}
+              onClick={() =>
+                setShowForgot(false)
+              }
             >
               <FaTimes />
             </button>
+
 
             <div className="modal-icon">
               <FaLock />
             </div>
 
-            <h2>Forgot Password?</h2>
+
+            <h2>
+              Forgot Password?
+            </h2>
+
 
             <p>
-              Enter your registered email address or employee ID
-              and HR will help you reset your password.
+              Enter your registered email address
+              or employee ID and HR will help
+              you reset your password.
             </p>
+
 
             <input
               className="modal-input"
               placeholder="Email or Employee ID"
             />
 
+
             <button
               className="modal-submit"
               onClick={() => {
+
                 setShowForgot(false);
+
                 setMessage(
                   "Password reset request submitted successfully."
                 );
+
               }}
             >
               Send Reset Request
@@ -395,56 +545,84 @@ const handleLogin = (e) => {
         </div>
       )}
 
-      {/* ================= HR MODAL ================= */}
+
+      {/* =================================================
+          HR MODAL
+      ================================================= */}
+
       {showHR && (
+
         <div
           className="modal-overlay"
-          onClick={() => setShowHR(false)}
+          onClick={() =>
+            setShowHR(false)
+          }
         >
 
           <div
             className="modal-box hr-modal"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) =>
+              e.stopPropagation()
+            }
           >
 
             <button
               className="modal-close"
-              onClick={() => setShowHR(false)}
+              onClick={() =>
+                setShowHR(false)
+              }
             >
               <FaTimes />
             </button>
+
 
             <div className="modal-icon">
               <FaHeadset />
             </div>
 
-            <h2>Contact HR</h2>
+
+            <h2>
+              Contact HR
+            </h2>
+
 
             <p>
-              Our HR team can help you with account access and
-              password issues.
+              Our HR team can help you with
+              account access and password issues.
             </p>
 
+
             <div className="hr-details">
+
               <div>
                 <strong>Email</strong>
-                <span>hr@company.com</span>
+                <span>
+                  hr@company.com
+                </span>
               </div>
 
               <div>
                 <strong>Phone</strong>
-                <span>+91 98765 00000</span>
+                <span>
+                  +91 98765 00000
+                </span>
               </div>
 
               <div>
                 <strong>Working Hours</strong>
-                <span>10:00 AM - 6:00 PM</span>
+                <span>
+                  10:00 AM - 6:00 PM
+                </span>
               </div>
+
             </div>
+
 
             <button
               className="modal-submit"
-              onClick={() => setShowHR(false)}
+              onClick={() =>
+                setShowHR(false)
+              }
             >
               Close
             </button>
@@ -459,9 +637,15 @@ const handleLogin = (e) => {
 }
 
 
-/* ================= FEATURE COMPONENT ================= */
+/* =====================================================
+   FEATURE COMPONENT
+===================================================== */
 
-function Feature({ icon, title, text }) {
+function Feature({
+  icon,
+  title,
+  text,
+}) {
   return (
     <div className="feature">
 
@@ -470,12 +654,20 @@ function Feature({ icon, title, text }) {
       </div>
 
       <div>
-        <strong>{title}</strong>
-        <p>{text}</p>
+
+        <strong>
+          {title}
+        </strong>
+
+        <p>
+          {text}
+        </p>
+
       </div>
 
     </div>
   );
 }
+
 
 export default Login;

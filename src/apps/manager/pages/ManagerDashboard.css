@@ -960,3 +960,123 @@
     grid-template-columns: 1fr;
   }
 }
+/* =========================
+   CLICKABLE ELEMENTS
+========================= */
+
+.manager-stat-card,
+.quick-action,
+.activity-button,
+.icon-link,
+.view-all-button,
+.button-link,
+.card-action-button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+.manager-stat-card {
+  text-align: left;
+}
+
+.manager-stat-card:hover,
+.quick-action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(20, 30, 60, 0.08);
+}
+
+.icon-link,
+.view-all-button,
+.button-link,
+.card-action-button {
+  background: transparent;
+  color: #5d43e8;
+}
+
+.icon-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.view-all-button {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.button-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.card-action-button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 15px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.quick-action {
+  background: #f8f9fc;
+  text-align: left;
+  border: 1px solid #edf0f5;
+}
+
+.activity-button {
+  width: 100%;
+  background: transparent;
+  text-align: left;
+}
+
+.request-done {
+  color: #08a66a;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.dashboard-toast {
+  position: fixed;
+  top: 100px;
+  right: 25px;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 12px 16px;
+
+  background: #172033;
+  color: white;
+
+  border-radius: 8px;
+
+  font-size: 12px;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.leave-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.leave-actions > div {
+  display: flex;
+  gap: 6px;
+}
+
+.reject,
+.approve {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}

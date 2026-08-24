@@ -1,308 +1,527 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
-  FaListCheck,
-  FaCalendarCheck,
+  FaClock,
+  FaTasks,
+  FaCalendarAlt,
   FaWallet,
   FaChartPie,
-  FaCheck,
-  FaCircleExclamation,
-  FaClipboardCheck,
   FaArrowRight,
-} from "react-icons/fa6";
+  FaCheckCircle,
+  FaExclamationCircle,
+  FaFileAlt,
+} from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 import "./Dashboard.css";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+
+  const [isCheckedIn, setIsCheckedIn] = useState(false);
+  const [checkInTime, setCheckInTime] = useState("");
+
+  useEffect(() => {
+    const savedStatus =
+      localStorage.getItem("employeeCheckedIn") === "true";
+
+    const savedTime =
+      localStorage.getItem("employeeCheckInTime") || "";
+
+    setIsCheckedIn(savedStatus);
+    setCheckInTime(savedTime);
+  }, []);
+
+  const handleAttendance = () => {
+    if (!isCheckedIn) {
+      const now = new Date();
+      const time = now.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
+      localStorage.setItem("employeeCheckedIn", "true");
+      localStorage.setItem("employeeCheckInTime", time);
+
+      setIsCheckedIn(true);
+      setCheckInTime(time);
+    } else {
+      localStorage.removeItem("employeeCheckedIn");
+      localStorage.removeItem("employeeCheckInTime");
+
+      setIsCheckedIn(false);
+      setCheckInTime("");
+    }
+  };
+
   return (
-    <div className="dashboard-page">
+    <div className="employee-dashboard">
 
-      {/* ================= HEADER ================= */}
-      <header className="dashboard-header">
-        <h1>
-          Dashboard <span>Overview</span>
-        </h1>
-      </header>
+  {/* ================= TOP HEADER ================= */}
+
+  <div className="employee-dashboard-header">
+
+    <div className="employee-dashboard-title">
+      <h1>
+        Dashboard <span>Overview</span>
+      </h1>
+    </div>
+
+    <div className="employee-header-actions">
+
+      <div className="employee-header-search">
+        🔍
+        <input
+          type="text"
+          placeholder="Search anything..."
+        />
+      </div>
+
+      <div className="employee-header-notification">
+        🔔
+        <span>3</span>
+      </div>
+
+      <div className="employee-header-user">
+        <div className="employee-user-avatar">
+          M
+        </div>
+
+        <div>
+          <strong>Mayank panse</strong>
+          <small>Employee</small>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
 
 
-      {/* ================= MAIN ================= */}
-      <main className="dashboard-content">
+  {/* ================= WELCOME ================= */}
 
-        {/* ================= WELCOME ================= */}
-        <section className="welcome-section">
+  <section className="dashboard-welcome">
 
-          <div className="welcome-text">
-            <h2>Good Morning, Mayank!!</h2>
-            <p>Have a productive day ahead.</p>
+    <div>
+      <h2>Good Morning, Mayank!! 👋</h2>
+
+      <p>
+        Have a productive day ahead.
+      </p>
+    </div>
+
+    <div className="welcome-actions">
+
+      <div className="today-date">
+        📅
+
+        <span>
+          {new Date().toLocaleDateString("en-IN", {
+            weekday: "long",
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+          })}
+        </span>
+      </div>
+
+      <button
+        className="dashboard-login-btn"
+        onClick={() => {
+          window.location.href = "/login";
+        }}
+      >
+        ↪ Login
+      </button>
+
+    </div>
+
+  </section>
+
+
+      {/* ================= TOP CARDS ================= */}
+
+      <section className="employee-top-grid">
+
+        {/* ATTENDANCE */}
+
+        <div className="attendance-action-card">
+
+          <div className="attendance-card-icon">
+            <FaClock />
           </div>
 
-          <div className="welcome-actions">
+          <div className="attendance-card-content">
+            <span>Today's Attendance</span>
 
-            <div className="date-box">
-              <span>🗓️</span>
-              Saturday, 01 August 2026
-            </div>
+            <h2>
+              {isCheckedIn ? "Working" : "Not Checked In"}
+            </h2>
 
-            <button className="login-btn">
-              ↪ Login
+            {isCheckedIn && (
+              <p>
+                Check-in: {checkInTime}
+              </p>
+            )}
+
+            <button
+              className={
+                isCheckedIn
+                  ? "checkout-btn"
+                  : "checkin-btn"
+              }
+              onClick={handleAttendance}
+            >
+              {isCheckedIn ? "Check Out" : "Check In"}
             </button>
-
           </div>
 
-        </section>
+        </div>
 
 
-        {/* ================= TOP CARDS ================= */}
-        <section className="top-cards">
+        {/* TASKS */}
 
-          {/* ATTENDANCE */}
-          <div className="attendance-card">
+        <DashboardCard
+          icon={<FaTasks />}
+          title="Tasks"
+          value="5"
+          label="Pending"
+          progress="62%"
+          color="blue"
+          button="View Tasks"
+          onClick={() => navigate("/tasks")}
+        />
 
-            <div className="attendance-title">
-              <h3>Today's Attendance</h3>
 
-              <button>
-                Check Out
-              </button>
-            </div>
+        {/* LEAVE */}
 
-            <div className="present-box">
-              ✓ Present
-            </div>
+        <DashboardCard
+          icon={<FaCalendarAlt />}
+          title="Leave"
+          value="12"
+          label="Pending"
+          progress="80%"
+          color="green"
+          button="View Leave"
+          onClick={() => navigate("/leave")}
+        />
 
-            <div className="attendance-details">
 
+        {/* SALARY */}
+
+        <DashboardCard
+          icon={<FaWallet />}
+          title="Salary"
+          value="₹35,000"
+          label="Paid"
+          progress="100%"
+          color="purple"
+          button="View Payslip"
+          onClick={() => navigate("/salary")}
+        />
+
+
+        {/* ATTENDANCE */}
+
+        <DashboardCard
+          icon={<FaChartPie />}
+          title="Attendance"
+          value="96%"
+          label="This Month"
+          progress="96%"
+          color="orange"
+          button="View Reports"
+          onClick={() => navigate("/reports")}
+        />
+
+      </section>
+
+
+      {/* ================= SECOND ROW ================= */}
+
+      <section className="employee-content-grid">
+
+        {/* TASKS */}
+
+        <div className="employee-panel">
+
+          <div className="panel-header">
+            <h2>Today's Tasks</h2>
+
+            <button onClick={() => navigate("/tasks")}>
+              View All <FaArrowRight />
+            </button>
+          </div>
+
+          <TaskItem
+            title="Complete Dashboard"
+            subtitle="Design and develop employee dashboard"
+            status="High"
+            progress="72%"
+          />
+
+          <TaskItem
+            title="API Integration"
+            subtitle="Connect dashboard with backend API"
+            status="Medium"
+            progress="48%"
+          />
+
+          <TaskItem
+            title="Testing & QA"
+            subtitle="Test attendance and leave modules"
+            status="Low"
+            progress="30%"
+          />
+
+        </div>
+
+
+        {/* DAILY UPDATE */}
+
+        <div className="employee-panel">
+
+          <div className="panel-header">
+            <h2>Daily Update</h2>
+
+            <button onClick={() => navigate("/daily-updates")}>
+              Edit
+            </button>
+          </div>
+
+          <UpdateItem
+            icon={<FaCheckCircle />}
+            text="Completed API Integration"
+            type="done"
+          />
+
+          <UpdateItem
+            icon={<FaExclamationCircle />}
+            text="Dashboard Testing"
+            type="warning"
+          />
+
+          <UpdateItem
+            icon={<FaFileAlt />}
+            text="Prepare Daily Report"
+            type="info"
+          />
+
+        </div>
+
+
+        {/* ATTENDANCE SUMMARY */}
+
+        <div className="employee-panel">
+
+          <div className="panel-header">
+            <h2>Attendance Summary</h2>
+
+            <button onClick={() => navigate("/attendance")}>
+              View <FaArrowRight />
+            </button>
+          </div>
+
+          <div className="attendance-summary">
+
+            <div className="attendance-donut">
               <div>
-                <span>Check In</span>
-                <strong>09:15 AM</strong>
-              </div>
-
-              <div>
-                <span>Working For</span>
-                <strong>03h 20m</strong>
-              </div>
-
-              <div>
-                <span>Check Out</span>
-                <strong>-- : --</strong>
-              </div>
-
-            </div>
-
-          </div>
-
-
-          {/* TASK CARD */}
-          <div className="info-card">
-
-            <FaListCheck className="info-icon" />
-
-            <h2>5</h2>
-
-            <p>Pending</p>
-
-            <div className="mini-progress">
-              <div className="blue-progress"></div>
-            </div>
-
-            <a href="#">
-              View Tasks <FaArrowRight />
-            </a>
-
-          </div>
-
-
-          {/* LEAVE CARD */}
-          <div className="info-card">
-
-            <FaCalendarCheck className="info-icon" />
-
-            <h2>12</h2>
-
-            <p>Pending</p>
-
-            <div className="mini-progress">
-              <div className="green-progress"></div>
-            </div>
-
-            <a href="#">
-              View Leave <FaArrowRight />
-            </a>
-
-          </div>
-
-
-          {/* SALARY CARD */}
-          <div className="info-card">
-
-            <FaWallet className="info-icon" />
-
-            <h2>₹35,000</h2>
-
-            <p>Paid</p>
-
-            <a className="salary-link" href="#">
-              View Payslip <FaArrowRight />
-            </a>
-
-          </div>
-
-
-          {/* REPORT CARD */}
-          <div className="info-card">
-
-            <FaChartPie className="info-icon" />
-
-            <h2>96%</h2>
-
-            <p>Attendance</p>
-
-            <a className="report-link" href="#">
-              View Reports <FaArrowRight />
-            </a>
-
-          </div>
-
-        </section>
-
-
-        {/* ================= SECOND ROW ================= */}
-        <section className="second-row">
-
-          {/* TASKS */}
-          <div className="dashboard-card tasks-card">
-
-            <div className="card-heading">
-              <h3>Today's Tasks</h3>
-              <a href="#">View All</a>
-            </div>
-
-
-            <div className="task-item">
-
-              <div className="task-top">
-                <h4>Complete Dashboard UI</h4>
-
-                <span className="priority high">
-                  High
-                </span>
-              </div>
-
-              <p>
-                Design and develop dashboard page
-              </p>
-
-              <div className="task-progress">
-                <div style={{ width: "75%" }}></div>
-              </div>
-
-            </div>
-
-
-            <div className="task-item">
-
-              <div className="task-top">
-                <h4>API Integration</h4>
-
-                <span className="priority medium">
-                  Medium
-                </span>
-              </div>
-
-              <p>
-                Integrate all dashboard APIs
-              </p>
-
-              <div className="task-progress">
-                <div style={{ width: "42%" }}></div>
-              </div>
-
-            </div>
-
-
-            <div className="task-item">
-
-              <div className="task-top">
-                <h4>Team Meeting</h4>
-
-                <span className="priority low">
-                  Low
-                </span>
-              </div>
-
-              <p>
-                Project discussion with team
-              </p>
-
-            </div>
-
-          </div>
-
-
-          {/* DAILY UPDATE */}
-          <div className="dashboard-card">
-
-            <div className="card-heading">
-              <h3>Daily Update</h3>
-              <a href="#">Edit</a>
-            </div>
-
-            <div className="daily-update">
-
-              <p>
-                <FaCheck className="green-icon" />
-                Completed API Integration
-              </p>
-
-              <p>
-                <FaCircleExclamation className="orange-icon" />
-                Dashboard Testing
-              </p>
-
-              <p>
-                <FaClipboardCheck className="blue-icon" />
-                Work on Task Module
-              </p>
-
-            </div>
-
-          </div>
-
-
-          {/* ATTENDANCE SUMMARY */}
-          <div className="dashboard-card summary-card">
-
-            <div className="card-heading">
-              <h3>Attendance Summary</h3>
-            </div>
-
-            <div className="attendance-circle">
-
-              <div className="circle-inner">
                 <strong>96%</strong>
+                <span>Attendance</span>
               </div>
+            </div>
+
+            <div className="attendance-legend">
+
+              <Legend
+                color="green"
+                label="Present"
+                value="24 Days"
+              />
+
+              <Legend
+                color="orange"
+                label="Late"
+                value="1 Day"
+              />
+
+              <Legend
+                color="red"
+                label="Absent"
+                value="0 Days"
+              />
+
+              <Legend
+                color="blue"
+                label="Leave"
+                value="2 Days"
+              />
 
             </div>
 
-            <ul className="attendance-list">
-              <li>
-                <span className="check-text">✓</span>
-                Present : 20
-              </li>
-
-              <li>
-                <span className="cross-text">✕</span>
-                Absent : 1
-              </li>
-            </ul>
-
           </div>
 
-        </section>
+        </div>
 
-      </main>
+      </section>
+
+
+      {/* ================= BOTTOM ROW ================= */}
+
+      <section className="employee-bottom-grid">
+
+        <div className="mini-info-card">
+          <FaTasks />
+          <div>
+            <strong>5</strong>
+            <span>Pending Tasks</span>
+          </div>
+        </div>
+
+        <div className="mini-info-card">
+          <FaCalendarAlt />
+          <div>
+            <strong>12</strong>
+            <span>Leave Balance</span>
+          </div>
+        </div>
+
+        <div className="mini-info-card">
+          <FaClock />
+          <div>
+            <strong>{isCheckedIn ? checkInTime : "--:--"}</strong>
+            <span>Check-in Time</span>
+          </div>
+        </div>
+
+      </section>
 
     </div>
   );
 };
+
+
+/* =====================================================
+   SMALL COMPONENTS
+===================================================== */
+
+const DashboardCard = ({
+  icon,
+  title,
+  value,
+  label,
+  progress,
+  color,
+  button,
+  onClick,
+}) => {
+  return (
+    <div className="dashboard-stat-card">
+
+      <div className={`dashboard-stat-icon ${color}`}>
+        {icon}
+      </div>
+
+      <span className="stat-title">
+        {title}
+      </span>
+
+      <strong className="stat-value">
+        {value}
+      </strong>
+
+      <span className="stat-label">
+        {label}
+      </span>
+
+      <div className="stat-progress">
+        <div
+          className={color}
+          style={{ width: progress }}
+        />
+      </div>
+
+      <button onClick={onClick}>
+        {button}
+        <FaArrowRight />
+      </button>
+
+    </div>
+  );
+};
+
+
+const TaskItem = ({
+  title,
+  subtitle,
+  status,
+  progress,
+}) => {
+  return (
+    <div className="task-item">
+
+      <div className="task-main">
+
+        <div>
+          <strong>{title}</strong>
+
+          <span>{subtitle}</span>
+        </div>
+
+        <span className={`task-priority ${status.toLowerCase()}`}>
+          {status}
+        </span>
+
+      </div>
+
+      <div className="task-progress">
+        <div>
+          <span style={{ width: progress }} />
+        </div>
+
+        <b>{progress}</b>
+      </div>
+
+    </div>
+  );
+};
+
+
+const UpdateItem = ({
+  icon,
+  text,
+  type,
+}) => {
+  return (
+    <div className="update-item">
+
+      <div className={`update-icon ${type}`}>
+        {icon}
+      </div>
+
+      <span>{text}</span>
+
+    </div>
+  );
+};
+
+
+const Legend = ({
+  color,
+  label,
+  value,
+}) => {
+  return (
+    <div className="legend-item">
+
+      <span className={`legend-dot ${color}`} />
+
+      <span>{label}</span>
+
+      <strong>{value}</strong>
+
+    </div>
+  );
+};
+
 
 export default Dashboard;
