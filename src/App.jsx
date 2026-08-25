@@ -13,7 +13,7 @@ import {
 import EmployeeSidebar from "./apps/employee/component/Sidebar";
 import EmployeeHeader from "./apps/employee/component/Header";
 
-import EmployeeDashboard from "./apps/employee/component/pages/EmployeeDashboard";
+import EmployeeDashboard from "./apps/employee/component/pages/Dashboard";
 import EmployeeAttendance from "./apps/employee/component/pages/Attendance";
 import EmployeeTask from "./apps/employee/component/pages/Task";
 import EmployeeDailyUpdates from "./apps/employee/component/pages/DailyUpdates";
