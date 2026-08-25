@@ -54,22 +54,25 @@ function Login() {
     return;
   }
 
-  // Selected role save
-  localStorage.setItem("userRole", role);
+  // Save exactly the role selected in the dropdown.
+  const selectedRole = role === "manager" ? "manager" : "employee";
 
-  // Login status
+  localStorage.setItem("userRole", selectedRole);
   localStorage.setItem("isLoggedIn", "true");
   localStorage.setItem("loggedInUser", email.trim());
 
-  // Success message
+  // Clear stale role keys from older versions.
+  localStorage.removeItem("managerRole");
+  localStorage.removeItem("employeeRole");
+
   setMessage(
-    role === "manager"
+    selectedRole === "manager"
       ? "Manager login successful!"
       : "Employee login successful!"
   );
 
-  // Direct dashboard redirect
-  navigate("/dashboard", { replace: true });
+  // Reload /dashboard so App.jsx reads the newly saved role.
+  window.location.href = "/dashboard";
 };
 
 
