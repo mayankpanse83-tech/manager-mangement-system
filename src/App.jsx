@@ -63,16 +63,235 @@ function RoleBasedLayout() {
     localStorage.getItem("userRole") || "employee"
   );
 
+  const isRootPage = location.pathname === "/";
 
-  /* ROLE UPDATE */
+  const isDashboardPage = location.pathname === "/dashboard";
 
   useEffect(() => {
+    // ROOT URL हमेशा Employee रहेगा
+    if (location.pathname === "/") {
+      setRole("employee");
+      return;
+    }
+
     const savedRole =
       localStorage.getItem("userRole") || "employee";
 
     setRole(savedRole);
   }, [location.pathname]);
 
+
+  /* ==========================================
+     ROOT URL
+     /
+     ALWAYS EMPLOYEE
+  ========================================== */
+
+  if (isRootPage) {
+    return (
+      <div className="app-layout">
+
+        <EmployeeSidebar />
+
+        <div className="main-area">
+
+          <main className="page-content">
+
+            <EmployeeDashboard />
+
+          </main>
+
+        </div>
+
+      </div>
+    );
+  }
+
+
+  /* ==========================================
+     MANAGER
+     /dashboard
+  ========================================== */
+
+  if (role === "manager" && isDashboardPage) {
+    return (
+      <div className="manager-layout">
+
+        <ManagerSidebar />
+
+        <div className="manager-main">
+
+          <ManagerHeader />
+
+          <main className="manager-content">
+
+            <ManagerDashboard />
+
+          </main>
+
+        </div>
+
+      </div>
+    );
+  }
+
+
+  /* ==========================================
+     MANAGER OTHER PAGES
+  ========================================== */
+
+  if (role === "manager") {
+    return (
+      <div className="manager-layout">
+
+        <ManagerSidebar />
+
+        <div className="manager-main">
+
+          <ManagerHeader />
+
+          <main className="manager-content">
+
+            <Routes>
+
+              <Route
+                path="/dashboard"
+                element={<ManagerDashboard />}
+              />
+
+              <Route
+                path="/team"
+                element={
+                  <ManagerPlaceholder title="My Team" />
+                }
+              />
+
+              <Route
+                path="/attendance"
+                element={
+                  <ManagerPlaceholder title="Team Attendance" />
+                }
+              />
+
+              <Route
+                path="/tasks"
+                element={
+                  <ManagerPlaceholder title="Team Tasks" />
+                }
+              />
+
+              <Route
+                path="/daily-updates"
+                element={
+                  <ManagerPlaceholder title="Daily Updates" />
+                }
+              />
+
+              <Route
+                path="/leave"
+                element={
+                  <ManagerPlaceholder title="Leave Requests" />
+                }
+              />
+
+              <Route
+                path="/reports"
+                element={
+                  <ManagerPlaceholder title="Reports" />
+                }
+              />
+
+              <Route
+                path="/profile"
+                element={
+                  <ManagerPlaceholder title="Manager Profile" />
+                }
+              />
+
+              <Route
+                path="/settings"
+                element={
+                  <ManagerPlaceholder title="Manager Settings" />
+                }
+              />
+
+            </Routes>
+
+          </main>
+
+        </div>
+
+      </div>
+    );
+  }
+
+
+  /* ==========================================
+     EMPLOYEE
+  ========================================== */
+
+  return (
+    <div className="app-layout">
+
+      <EmployeeSidebar />
+
+      <div className="main-area">
+
+        <EmployeeHeader />
+
+        <main className="page-content">
+
+          <Routes>
+
+            <Route
+              path="/dashboard"
+              element={<EmployeeDashboard />}
+            />
+
+            <Route
+              path="/attendance"
+              element={<EmployeeAttendance />}
+            />
+
+            <Route
+              path="/tasks"
+              element={<EmployeeTask />}
+            />
+
+            <Route
+              path="/daily-updates"
+              element={<EmployeeDailyUpdates />}
+            />
+
+            <Route
+              path="/leave"
+              element={<EmployeeLeave />}
+            />
+
+            <Route
+              path="/salary"
+              element={<EmployeeSalary />}
+            />
+
+            <Route
+              path="/reports"
+              element={<EmployeeReport />}
+            />
+
+            <Route
+              path="/profile"
+              element={<EmployeeProfile />}
+            />
+
+          </Routes>
+
+        </main>
+
+      </div>
+
+    </div>
+  );
+}
 
   /* ===================================================
      MANAGER
@@ -95,11 +314,6 @@ function RoleBasedLayout() {
 
             <Routes>
 
-              {/* DASHBOARD */}
-              <Route
-                path="/"
-                element={<ManagerDashboard />}
-              />
 
               <Route
                 path="/dashboard"
@@ -267,7 +481,6 @@ function RoleBasedLayout() {
 
     </div>
   );
-}
 
 
 /* =====================================================
