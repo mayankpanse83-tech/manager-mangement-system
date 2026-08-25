@@ -39,7 +39,7 @@ function Login() {
      LOGIN
   ===================================================== */
 
-  const handleLogin = (e) => {
+const handleLogin = (e) => {
   e.preventDefault();
 
   setMessage("");
@@ -54,25 +54,15 @@ function Login() {
     return;
   }
 
-  // Save exactly the role selected in the dropdown.
-  const selectedRole = role === "manager" ? "manager" : "employee";
+  // Selected role save
+  localStorage.setItem("userRole", role);
 
-  localStorage.setItem("userRole", selectedRole);
+  // Login state
   localStorage.setItem("isLoggedIn", "true");
   localStorage.setItem("loggedInUser", email.trim());
 
-  // Clear stale role keys from older versions.
-  localStorage.removeItem("managerRole");
-  localStorage.removeItem("employeeRole");
-
-  setMessage(
-    selectedRole === "manager"
-      ? "Manager login successful!"
-      : "Employee login successful!"
-  );
-
-  // Reload /dashboard so App.jsx reads the newly saved role.
-  window.location.href = "/dashboard";
+  // Go to same dashboard URL
+  navigate("/dashboard", { replace: true });
 };
 
 
