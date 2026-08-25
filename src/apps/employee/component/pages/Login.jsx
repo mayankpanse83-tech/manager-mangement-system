@@ -54,17 +54,28 @@ const handleLogin = (e) => {
     return;
   }
 
-  // Selected role save
-  localStorage.setItem("userRole", role);
+  // Current login ka actual role
+  const selectedRole = role === "manager"
+    ? "manager"
+    : "employee";
 
-  // Login state
+  // Current session ke liye role save
+  sessionStorage.setItem("userRole", selectedRole);
+
+  // Backup
+  localStorage.setItem("userRole", selectedRole);
   localStorage.setItem("isLoggedIn", "true");
   localStorage.setItem("loggedInUser", email.trim());
 
-  // Go to same dashboard URL
+  setMessage(
+    selectedRole === "manager"
+      ? "Manager login successful!"
+      : "Employee login successful!"
+  );
+
+  // Same URL
   navigate("/dashboard", { replace: true });
 };
-
 
   return (
     <div className="login-page">

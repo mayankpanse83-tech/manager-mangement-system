@@ -263,39 +263,23 @@ function ManagerLayout() {
 ===================================================== */
 
 function RoleRouter() {
-
   const location = useLocation();
 
-  /*
-    ROOT URL ALWAYS EMPLOYEE
-    /
-  */
-
+  // Root URL = ALWAYS EMPLOYEE
   if (location.pathname === "/") {
     return <EmployeeLayout />;
   }
 
+  // Current session role first
+  const sessionRole = sessionStorage.getItem("userRole");
 
-  /*
-    CURRENT ROLE DIRECTLY FROM LOCAL STORAGE
-  */
+  const savedRole = localStorage.getItem("userRole");
 
-  const role =
-    localStorage.getItem("userRole") || "employee";
-
-
-  /*
-    MANAGER
-  */
+  const role = sessionRole || savedRole || "employee";
 
   if (role === "manager") {
     return <ManagerLayout />;
   }
-
-
-  /*
-    EMPLOYEE
-  */
 
   return <EmployeeLayout />;
 }
