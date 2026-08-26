@@ -18,35 +18,22 @@ import "./Login.css";
 
 
 function Login() {
-
   const navigate = useNavigate();
-
-  /* =========================
-     FORM STATE
-  ========================= */
 
   const [role, setRole] = useState("employee");
 
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
+
   const [email, setEmail] = useState("");
-
   const [password, setPassword] = useState("");
-
-  const [passwordVisible, setPasswordVisible] =
-    useState(false);
-
-  const [rememberMe, setRememberMe] =
-    useState(false);
 
   const [message, setMessage] = useState("");
 
-  const [showForgot, setShowForgot] =
-    useState(false);
+  const [showForgot, setShowForgot] = useState(false);
+  const [showHR, setShowHR] = useState(false);
 
-  const [showHR, setShowHR] =
-    useState(false);
-
-  const [language, setLanguage] =
-    useState("English");
+  const [language, setLanguage] = useState("English");
 
 
   /* =====================================================
@@ -54,118 +41,37 @@ function Login() {
   ===================================================== */
 
   const handleLogin = (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  setMessage("");
+    setMessage("");
 
-  if (!email.trim()) {
-    setMessage("Please enter your email or employee ID.");
-    return;
-  }
+    if (!email.trim()) {
+      setMessage("Please enter your email or employee ID.");
+      return;
+    }
 
-  if (!password.trim()) {
-    setMessage("Please enter your password.");
-    return;
-  }
+    if (!password.trim()) {
+      setMessage("Please enter your password.");
+      return;
+    }
 
-  /* Clear old role */
-  sessionStorage.removeItem("userRole");
-  localStorage.removeItem("userRole");
-
-  /* Save selected role */
-  const selectedRole =
-    role === "manager"
-      ? "manager"
-      : "employee";
-
-  sessionStorage.setItem(
-    "userRole",
-    selectedRole
-  );
-
-  localStorage.setItem(
-    "userRole",
-    selectedRole
-  );
-
-  sessionStorage.setItem(
-    "isLoggedIn",
-    "true"
-  );
-
-  localStorage.setItem(
-    "isLoggedIn",
-    "true"
-  );
-
-  setMessage(
-    selectedRole === "manager"
-      ? "Manager login successful!"
-      : "Employee login successful!"
-  );
-
-  setTimeout(() => {
-    window.location.replace("/dashboard");
-  }, 300);
-};
-
-
-    /* =================================================
-       IMPORTANT:
-       REMOVE OLD ROLE FIRST
-    ================================================= */
-
+    /* REMOVE OLD ROLE */
     sessionStorage.removeItem("userRole");
-
     localStorage.removeItem("userRole");
 
-
-    /* =================================================
-       SAVE CURRENT SELECTED ROLE
-    ================================================= */
-
+    /* SAVE SELECTED ROLE */
     const selectedRole =
-      role === "manager"
-        ? "manager"
-        : "employee";
+      role === "manager" ? "manager" : "employee";
 
-
-    sessionStorage.setItem(
-      "userRole",
-      selectedRole
-    );
-
-    localStorage.setItem(
-      "userRole",
-      selectedRole
-    );
-
+    sessionStorage.setItem("userRole", selectedRole);
+    localStorage.setItem("userRole", selectedRole);
 
     /* LOGIN STATUS */
+    sessionStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("isLoggedIn", "true");
 
-    sessionStorage.setItem(
-      "isLoggedIn",
-      "true"
-    );
-
-    localStorage.setItem(
-      "isLoggedIn",
-      "true"
-    );
-
-
-    sessionStorage.setItem(
-      "loggedInUser",
-      email.trim()
-    );
-
-    localStorage.setItem(
-      "loggedInUser",
-      email.trim()
-    );
-
-
-    /* MESSAGE */
+    sessionStorage.setItem("loggedInUser", email.trim());
+    localStorage.setItem("loggedInUser", email.trim());
 
     setMessage(
       selectedRole === "manager"
@@ -173,50 +79,34 @@ function Login() {
         : "Employee login successful!"
     );
 
-
-    /* =================================================
-       SAME URL
-    ================================================= */
-
+    /* GO TO SAME DASHBOARD URL */
     setTimeout(() => {
-
-      window.location.replace(
-        "/dashboard"
-      );
-
+      window.location.replace("/dashboard");
     }, 300);
-
   };
 
+
+  /* =====================================================
+     UI
+  ===================================================== */
 
   return (
     <div className="login-page">
 
-      {/* =================================================
-          LEFT
-      ================================================= */}
+      {/* ================= LEFT ================= */}
 
       <section className="login-left">
 
         <div className="left-content">
 
           <div className="brand">
-
-            <div className="brand-logo">
-              W
-            </div>
-
-            <span>
-              WorkForce
-            </span>
-
+            <div className="brand-logo">W</div>
+            <span>WorkForce</span>
           </div>
-
 
           <div className="system-badge">
             Employee Management System
           </div>
-
 
           <h1>
             Manage your people.
@@ -224,13 +114,11 @@ function Login() {
             Empower your <span>workforce.</span>
           </h1>
 
-
           <p className="description">
             A smarter workspace for attendance, tasks, leave,
             <br />
             payroll and performance management.
           </p>
-
 
           <div className="features">
 
@@ -253,7 +141,6 @@ function Login() {
             />
 
           </div>
-
 
           <div className="illustration">
 
@@ -285,21 +172,17 @@ function Login() {
             <div className="desk"></div>
 
             <div className="laptop laptop-one"></div>
-
             <div className="laptop laptop-two"></div>
 
           </div>
 
-
           <div className="trusted">
-
             <FaShieldAlt />
 
             <span>
               Trusted by organizations to simplify HR operations
               and empower employees.
             </span>
-
           </div>
 
         </div>
@@ -307,9 +190,7 @@ function Login() {
       </section>
 
 
-      {/* =================================================
-          RIGHT
-      ================================================= */}
+      {/* ================= RIGHT ================= */}
 
       <section className="login-right">
 
@@ -317,9 +198,7 @@ function Login() {
 
           <select
             value={language}
-            onChange={(e) =>
-              setLanguage(e.target.value)
-            }
+            onChange={(e) => setLanguage(e.target.value)}
             className="language-select"
           >
             <option>English</option>
@@ -336,11 +215,9 @@ function Login() {
             <FaLock />
           </div>
 
-
           <h2>
             Welcome Back! 👋
           </h2>
-
 
           <p className="login-subtitle">
             Sign in to continue to your workspace
@@ -353,9 +230,7 @@ function Login() {
 
             <div className="input-group">
 
-              <label>
-                Select Role
-              </label>
+              <label>Select Role</label>
 
               <div className="input-box role-input-box">
 
@@ -378,7 +253,6 @@ function Login() {
                 </select>
 
               </div>
-
             </div>
 
 
@@ -405,7 +279,6 @@ function Login() {
                 />
 
               </div>
-
             </div>
 
 
@@ -413,9 +286,7 @@ function Login() {
 
             <div className="input-group">
 
-              <label>
-                Password
-              </label>
+              <label>Password</label>
 
               <div className="input-box">
 
@@ -435,7 +306,6 @@ function Login() {
                   autoComplete="current-password"
                 />
 
-
                 <button
                   type="button"
                   className="eye-button"
@@ -453,7 +323,6 @@ function Login() {
                 </button>
 
               </div>
-
             </div>
 
 
@@ -467,15 +336,11 @@ function Login() {
                   type="checkbox"
                   checked={rememberMe}
                   onChange={(e) =>
-                    setRememberMe(
-                      e.target.checked
-                    )
+                    setRememberMe(e.target.checked)
                   }
                 />
 
-                <span>
-                  Remember me
-                </span>
+                <span>Remember me</span>
 
               </label>
 
@@ -483,9 +348,7 @@ function Login() {
               <button
                 type="button"
                 className="forgot-btn"
-                onClick={() =>
-                  setShowForgot(true)
-                }
+                onClick={() => setShowForgot(true)}
               >
                 Forgot password?
               </button>
@@ -508,28 +371,23 @@ function Login() {
               type="submit"
               className="signin-btn"
             >
-
-              <span>
-                Sign In
-              </span>
-
+              <span>Sign In</span>
               <FaArrowRight />
-
             </button>
 
           </form>
 
 
+          {/* OR */}
+
           <div className="or-divider">
-
             <span></span>
-
             <p>or</p>
-
             <span></span>
-
           </div>
 
+
+          {/* SECURE ACCESS */}
 
           <div className="secure-box">
 
@@ -539,9 +397,7 @@ function Login() {
 
             <div>
 
-              <strong>
-                Secure Access
-              </strong>
+              <strong>Secure Access</strong>
 
               <p>
                 Your information is safe with us.
@@ -566,9 +422,7 @@ function Login() {
 
           <button
             type="button"
-            onClick={() =>
-              setShowHR(true)
-            }
+            onClick={() => setShowHR(true)}
           >
             <FaHeadset />
             Contact HR
@@ -577,6 +431,8 @@ function Login() {
         </div>
 
 
+        {/* FOOTER */}
+
         <div className="login-footer">
           © 2026 WorkForce EMS. All rights reserved.
         </div>
@@ -584,46 +440,34 @@ function Login() {
       </section>
 
 
-      {/* =================================================
-          FORGOT PASSWORD
-      ================================================= */}
+      {/* ================= FORGOT PASSWORD ================= */}
 
       {showForgot && (
-
         <div
           className="modal-overlay"
-          onClick={() =>
-            setShowForgot(false)
-          }
+          onClick={() => setShowForgot(false)}
         >
 
           <div
             className="modal-box"
-            onClick={(e) =>
-              e.stopPropagation()
-            }
+            onClick={(e) => e.stopPropagation()}
           >
 
             <button
               type="button"
               className="modal-close"
-              onClick={() =>
-                setShowForgot(false)
-              }
+              onClick={() => setShowForgot(false)}
             >
               <FaTimes />
             </button>
-
 
             <div className="modal-icon">
               <FaLock />
             </div>
 
-
             <h2>
               Forgot Password?
             </h2>
-
 
             <p>
               Enter your registered email address
@@ -631,24 +475,20 @@ function Login() {
               you reset your password.
             </p>
 
-
             <input
               className="modal-input"
               placeholder="Email or Employee ID"
             />
 
-
             <button
               type="button"
               className="modal-submit"
               onClick={() => {
-
                 setShowForgot(false);
 
                 setMessage(
                   "Password reset request submitted successfully."
                 );
-
               }}
             >
               Send Reset Request
@@ -660,85 +500,63 @@ function Login() {
       )}
 
 
-      {/* =================================================
-          HR
-      ================================================= */}
+      {/* ================= HR ================= */}
 
       {showHR && (
-
         <div
           className="modal-overlay"
-          onClick={() =>
-            setShowHR(false)
-          }
+          onClick={() => setShowHR(false)}
         >
 
           <div
             className="modal-box hr-modal"
-            onClick={(e) =>
-              e.stopPropagation()
-            }
+            onClick={(e) => e.stopPropagation()}
           >
 
             <button
               type="button"
               className="modal-close"
-              onClick={() =>
-                setShowHR(false)
-              }
+              onClick={() => setShowHR(false)}
             >
               <FaTimes />
             </button>
-
 
             <div className="modal-icon">
               <FaHeadset />
             </div>
 
-
             <h2>
               Contact HR
             </h2>
-
 
             <p>
               Our HR team can help you with
               account access and password issues.
             </p>
 
-
             <div className="hr-details">
 
               <div>
                 <strong>Email</strong>
-                <span>
-                  hr@company.com
-                </span>
+                <span>hr@company.com</span>
               </div>
 
               <div>
                 <strong>Phone</strong>
-                <span>
-                  +91 98765 00000
-                </span>
+                <span>+91 98765 00000</span>
               </div>
 
               <div>
                 <strong>Working Hours</strong>
-                <span>
-                  10:00 AM - 6:00 PM
-                </span>
+                <span>10:00 AM - 6:00 PM</span>
               </div>
 
             </div>
 
-
             <button
               type="button"
               className="modal-submit"
-              onClick={() =>
-                setShowHR(false)
-              }
+              onClick={() => setShowHR(false)}
             >
               Close
             </button>
@@ -750,17 +568,14 @@ function Login() {
 
     </div>
   );
+}
 
 
 /* =====================================================
    FEATURE
 ===================================================== */
 
-function Feature({
-  icon,
-  title,
-  text,
-}) {
+function Feature({ icon, title, text }) {
   return (
     <div className="feature">
 
@@ -769,15 +584,8 @@ function Feature({
       </div>
 
       <div>
-
-        <strong>
-          {title}
-        </strong>
-
-        <p>
-          {text}
-        </p>
-
+        <strong>{title}</strong>
+        <p>{text}</p>
       </div>
 
     </div>
