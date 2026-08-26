@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 
 /* =====================================================
-   EMPLOYEE
+   EMPLOYEE IMPORTS
 ===================================================== */
 
 import EmployeeSidebar from "./apps/employee/component/Sidebar";
@@ -26,7 +26,7 @@ import Login from "./apps/employee/component/pages/Login";
 import AccountActivation from "./apps/employee/component/pages/AccountActivation";
 
 /* =====================================================
-   MANAGER
+   MANAGER IMPORTS
 ===================================================== */
 
 import ManagerSidebar from "./apps/manager/component/ManagerSidebar";
@@ -58,6 +58,7 @@ function AuthLayout() {
   return (
     <div className="auth-layout">
       <Routes>
+
         <Route
           path="/login"
           element={<Login />}
@@ -67,6 +68,7 @@ function AuthLayout() {
           path="/account-activation"
           element={<AccountActivation />}
         />
+
       </Routes>
     </div>
   );
@@ -91,6 +93,7 @@ function EmployeeLayout() {
 
       <div className="main-area">
 
+        {/* Dashboard has its own header */}
         {!isDashboard && <EmployeeHeader />}
 
         <main className="page-content">
@@ -144,12 +147,18 @@ function EmployeeLayout() {
 
             <Route
               path="*"
-              element={<Navigate to="/dashboard" replace />}
+              element={
+                <Navigate
+                  to="/dashboard"
+                  replace
+                />
+              }
             />
 
           </Routes>
 
         </main>
+
       </div>
 
     </div>
@@ -190,60 +199,80 @@ function ManagerLayout() {
             <Route
               path="/attendance"
               element={
-                <ManagerPlaceholder title="Team Attendance" />
+                <ManagerPlaceholder
+                  title="Team Attendance"
+                />
               }
             />
 
             <Route
               path="/tasks"
               element={
-                <ManagerPlaceholder title="Team Tasks" />
+                <ManagerPlaceholder
+                  title="Team Tasks"
+                />
               }
             />
 
             <Route
               path="/daily-updates"
               element={
-                <ManagerPlaceholder title="Daily Updates" />
+                <ManagerPlaceholder
+                  title="Daily Updates"
+                />
               }
             />
 
             <Route
               path="/leave"
               element={
-                <ManagerPlaceholder title="Leave Requests" />
+                <ManagerPlaceholder
+                  title="Leave Requests"
+                />
               }
             />
 
             <Route
               path="/reports"
               element={
-                <ManagerPlaceholder title="Reports" />
+                <ManagerPlaceholder
+                  title="Manager Reports"
+                />
               }
             />
 
             <Route
               path="/profile"
               element={
-                <ManagerPlaceholder title="Manager Profile" />
+                <ManagerPlaceholder
+                  title="Manager Profile"
+                />
               }
             />
 
             <Route
               path="/settings"
               element={
-                <ManagerPlaceholder title="Manager Settings" />
+                <ManagerPlaceholder
+                  title="Manager Settings"
+                />
               }
             />
 
             <Route
               path="*"
-              element={<Navigate to="/dashboard" replace />}
+              element={
+                <Navigate
+                  to="/dashboard"
+                  replace
+                />
+              }
             />
 
           </Routes>
 
         </main>
+
       </div>
 
     </div>
@@ -266,10 +295,10 @@ function RoleRouter() {
   }
 
   /*
-    IMPORTANT:
-    Current login role is taken from sessionStorage first.
+    CURRENT ROLE
+    Session storage first
+    Local storage second
   */
-
   const role =
     sessionStorage.getItem("userRole") ||
     localStorage.getItem("userRole") ||

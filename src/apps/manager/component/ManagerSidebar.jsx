@@ -15,7 +15,19 @@ import {
 
 import "./ManagerSidebar.css";
 
+
 const ManagerSidebar = () => {
+
+  /*
+    Whenever manager sidebar is clicked,
+    force manager role.
+  */
+  const handleManagerClick = () => {
+    sessionStorage.setItem("userRole", "manager");
+    localStorage.setItem("userRole", "manager");
+  };
+
+
   const menuItems = [
     {
       name: "Dashboard",
@@ -64,10 +76,12 @@ const ManagerSidebar = () => {
     },
   ];
 
+
   return (
     <aside className="manager-sidebar">
 
       {/* LOGO */}
+
       <div className="manager-logo">
 
         <div className="manager-logo-box">
@@ -83,18 +97,21 @@ const ManagerSidebar = () => {
 
 
       {/* MENU */}
+
       <nav className="manager-menu">
 
         {menuItems.map((item) => (
           <NavLink
             key={item.path}
             to={item.path}
+            onClick={handleManagerClick}
             className={({ isActive }) =>
               `manager-menu-item ${
                 isActive ? "active" : ""
               }`
             }
           >
+
             <span className="manager-menu-icon">
               {item.icon}
             </span>
@@ -102,6 +119,7 @@ const ManagerSidebar = () => {
             <span>
               {item.name}
             </span>
+
           </NavLink>
         ))}
 
@@ -109,9 +127,12 @@ const ManagerSidebar = () => {
 
 
       {/* HELP */}
+
       <div className="manager-help">
 
-        <h4>Need Help?</h4>
+        <h4>
+          Need Help?
+        </h4>
 
         <p>
           Contact admin or send a request.
@@ -124,7 +145,8 @@ const ManagerSidebar = () => {
       </div>
 
 
-      {/* USER */}
+      {/* PROFILE */}
+
       <div className="manager-profile">
 
         <div className="manager-profile-avatar">

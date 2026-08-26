@@ -1,146 +1,144 @@
-import { NavLink } from "react-router-dom";
 import React from "react";
-import "./Sidebar.css";
+import { NavLink } from "react-router-dom";
 
 import {
   FaHome,
-  FaUsers,
-  FaBuilding,
-  FaMoneyBillWave,
-  FaClipboardList,
-  FaCalendarAlt,
+  FaCalendarCheck,
+  FaTasks,
+  FaFileAlt,
+  FaUmbrellaBeach,
+  FaWallet,
   FaChartBar,
+  FaUser,
   FaCog,
-  FaQuestionCircle,
 } from "react-icons/fa";
 
-function Sidebar() {
+import "./Sidebar.css";
+
+
+const Sidebar = () => {
+
+  /*
+    Whenever employee sidebar is clicked,
+    force employee role.
+  */
+  const handleEmployeeClick = () => {
+    sessionStorage.setItem("userRole", "employee");
+    localStorage.setItem("userRole", "employee");
+  };
+
+
+  const menuItems = [
+    {
+      name: "Dashboard",
+      path: "/dashboard",
+      icon: <FaHome />,
+    },
+    {
+      name: "Attendance",
+      path: "/attendance",
+      icon: <FaCalendarCheck />,
+    },
+    {
+      name: "Tasks",
+      path: "/tasks",
+      icon: <FaTasks />,
+    },
+    {
+      name: "Daily Updates",
+      path: "/daily-updates",
+      icon: <FaFileAlt />,
+    },
+    {
+      name: "Leave",
+      path: "/leave",
+      icon: <FaUmbrellaBeach />,
+    },
+    {
+      name: "Salary",
+      path: "/salary",
+      icon: <FaWallet />,
+    },
+    {
+      name: "Reports",
+      path: "/reports",
+      icon: <FaChartBar />,
+    },
+    {
+      name: "Profile",
+      path: "/profile",
+      icon: <FaUser />,
+    },
+    {
+      name: "Settings",
+      path: "/settings",
+      icon: <FaCog />,
+    },
+  ];
+
+
   return (
     <aside className="sidebar">
 
-      <div>
+      {/* LOGO */}
 
-        {/* Logo */}
+      <div className="sidebar-logo">
 
-        <div className="logo">
-
-          <div className="logo-icon">
-            E
-          </div>
-
-          <h2>EMS</h2>
-
+        <div className="sidebar-logo-box">
+          W
         </div>
 
-        {/* Menu */}
-
-        <ul className="menu">
-
-          <li>
-            <NavLink to="/" className="menu-link">
-  <FaHome className="icon" />
-  Dashboard
-</NavLink>
-          </li>
-
-          <li>
-            <NavLink to="/department" className="menu-link">
-  <FaClipboardList className="icon" />
-  Department
-</NavLink>
-          </li>
-
-          <li>
-            <NavLink to="/salary" className="menu-link">
-  <FaClipboardList className="icon" />
-  Salary
-</NavLink>
-          </li>
-
-          <li>
-            <NavLink to="/attendance" className="menu-link">
-  <FaClipboardList className="icon" />
-  Attendance
-</NavLink>
-          </li>
-
-          <li>
-  <NavLink to="/daily-updates" className="menu-link">
-    📝
-    Daily Updates
-  </NavLink>
-</li>
-
-          <li>
-            <NavLink to="/leave" className="menu-link">
-  <FaClipboardList className="icon" />
-Leave
-</NavLink>
-          </li>
-
-          <li>
-            <NavLink to="/reports" className="menu-link">
-  <FaClipboardList className="icon" />
-  Reports
-</NavLink>
-          </li>
-
-          <li>
-            <NavLink to="/profile" className="menu-link">
-  <FaClipboardList className="icon" />
-  Profile
-</NavLink>
-          </li>
-
-          <li>
-            <NavLink to="/setting" className="menu-link">
-  <FaClipboardList className="icon" />
-  Setting
-</NavLink>
-          </li>
-
-<li>
-  <NavLink to="/tasks" className="menu-link">
-    📋
-    Tasks
-  </NavLink>
-</li>
-
-        </ul>
+        <div>
+          <h2>WorkForce</h2>
+          <span>Employee Workspace</span>
+        </div>
 
       </div>
 
-      {/* Bottom */}
 
-      <div>
+      {/* MENU */}
 
-        <div className="help-card">
+      <nav className="sidebar-menu">
 
-          <FaQuestionCircle className="help-icon" />
+        {menuItems.map((item) => (
+          <NavLink
+            key={item.path}
+            to={item.path}
+            onClick={handleEmployeeClick}
+            className={({ isActive }) =>
+              `sidebar-menu-item ${
+                isActive ? "active" : ""
+              }`
+            }
+          >
 
-          <h3>Need Help?</h3>
+            <span className="sidebar-icon">
+              {item.icon}
+            </span>
 
-          <p>
-            Contact support for any issue.
-          </p>
+            <span>
+              {item.name}
+            </span>
 
-          <button>Contact Us</button>
+          </NavLink>
+        ))}
 
-        </div>
+      </nav>
 
-        <div className="profile">
 
-          <img
-            src="https://i.pravatar.cc/100?img=12"
-            alt="profile"
-          />
+      {/* PROFILE */}
+
+      <div className="sidebar-bottom">
+
+        <div className="sidebar-user">
+
+          <div className="sidebar-user-avatar">
+            M
+          </div>
 
           <div>
-
-            <h4>Mayank Panse</h4>
-
-            <p>Software Developer</p>
-
+            <strong>Mayank panse</strong>
+            <small>Employee</small>
           </div>
 
         </div>
@@ -148,8 +146,7 @@ Leave
       </div>
 
     </aside>
-    
   );
-}
+};
 
 export default Sidebar;

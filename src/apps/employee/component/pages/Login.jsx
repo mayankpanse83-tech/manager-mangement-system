@@ -54,27 +54,60 @@ function Login() {
   ===================================================== */
 
   const handleLogin = (e) => {
+  e.preventDefault();
 
-    e.preventDefault();
+  setMessage("");
 
-    setMessage("");
+  if (!email.trim()) {
+    setMessage("Please enter your email or employee ID.");
+    return;
+  }
 
+  if (!password.trim()) {
+    setMessage("Please enter your password.");
+    return;
+  }
 
-    /* VALIDATION */
+  /* Clear old role */
+  sessionStorage.removeItem("userRole");
+  localStorage.removeItem("userRole");
 
-    if (!email.trim()) {
-      setMessage(
-        "Please enter your email or employee ID."
-      );
-      return;
-    }
+  /* Save selected role */
+  const selectedRole =
+    role === "manager"
+      ? "manager"
+      : "employee";
 
-    if (!password.trim()) {
-      setMessage(
-        "Please enter your password."
-      );
-      return;
-    }
+  sessionStorage.setItem(
+    "userRole",
+    selectedRole
+  );
+
+  localStorage.setItem(
+    "userRole",
+    selectedRole
+  );
+
+  sessionStorage.setItem(
+    "isLoggedIn",
+    "true"
+  );
+
+  localStorage.setItem(
+    "isLoggedIn",
+    "true"
+  );
+
+  setMessage(
+    selectedRole === "manager"
+      ? "Manager login successful!"
+      : "Employee login successful!"
+  );
+
+  setTimeout(() => {
+    window.location.replace("/dashboard");
+  }, 300);
+};
 
 
     /* =================================================
@@ -717,7 +750,6 @@ function Login() {
 
     </div>
   );
-}
 
 
 /* =====================================================
