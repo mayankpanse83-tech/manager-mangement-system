@@ -18,77 +18,154 @@ import "./Login.css";
 
 
 function Login() {
-  const [role, setRole] = useState("employee");
+
   const navigate = useNavigate();
 
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
+  /* =========================
+     FORM STATE
+  ========================= */
+
+  const [role, setRole] = useState("employee");
 
   const [email, setEmail] = useState("");
+
   const [password, setPassword] = useState("");
+
+  const [passwordVisible, setPasswordVisible] =
+    useState(false);
+
+  const [rememberMe, setRememberMe] =
+    useState(false);
 
   const [message, setMessage] = useState("");
 
-  const [showForgot, setShowForgot] = useState(false);
-  const [showHR, setShowHR] = useState(false);
+  const [showForgot, setShowForgot] =
+    useState(false);
 
-  const [language, setLanguage] = useState("English");
+  const [showHR, setShowHR] =
+    useState(false);
+
+  const [language, setLanguage] =
+    useState("English");
 
 
   /* =====================================================
      LOGIN
   ===================================================== */
 
-const handleLogin = (e) => {
-  e.preventDefault();
+  const handleLogin = (e) => {
 
-  setMessage("");
+    e.preventDefault();
 
-  if (!email.trim()) {
-    setMessage("Please enter your email or employee ID.");
-    return;
-  }
+    setMessage("");
 
-  if (!password.trim()) {
-    setMessage("Please enter your password.");
-    return;
-  }
 
-  // Current login ka actual role
-  const selectedRole = role === "manager"
-    ? "manager"
-    : "employee";
+    /* VALIDATION */
 
-  // Current session ke liye role save
-  sessionStorage.setItem("userRole", selectedRole);
+    if (!email.trim()) {
+      setMessage(
+        "Please enter your email or employee ID."
+      );
+      return;
+    }
 
-  // Backup
-  localStorage.setItem("userRole", selectedRole);
-  localStorage.setItem("isLoggedIn", "true");
-  localStorage.setItem("loggedInUser", email.trim());
+    if (!password.trim()) {
+      setMessage(
+        "Please enter your password."
+      );
+      return;
+    }
 
-  setMessage(
-    selectedRole === "manager"
-      ? "Manager login successful!"
-      : "Employee login successful!"
-  );
 
-  // Same URL
-  navigate("/dashboard", { replace: true });
-};
+    /* =================================================
+       IMPORTANT:
+       REMOVE OLD ROLE FIRST
+    ================================================= */
+
+    sessionStorage.removeItem("userRole");
+
+    localStorage.removeItem("userRole");
+
+
+    /* =================================================
+       SAVE CURRENT SELECTED ROLE
+    ================================================= */
+
+    const selectedRole =
+      role === "manager"
+        ? "manager"
+        : "employee";
+
+
+    sessionStorage.setItem(
+      "userRole",
+      selectedRole
+    );
+
+    localStorage.setItem(
+      "userRole",
+      selectedRole
+    );
+
+
+    /* LOGIN STATUS */
+
+    sessionStorage.setItem(
+      "isLoggedIn",
+      "true"
+    );
+
+    localStorage.setItem(
+      "isLoggedIn",
+      "true"
+    );
+
+
+    sessionStorage.setItem(
+      "loggedInUser",
+      email.trim()
+    );
+
+    localStorage.setItem(
+      "loggedInUser",
+      email.trim()
+    );
+
+
+    /* MESSAGE */
+
+    setMessage(
+      selectedRole === "manager"
+        ? "Manager login successful!"
+        : "Employee login successful!"
+    );
+
+
+    /* =================================================
+       SAME URL
+    ================================================= */
+
+    setTimeout(() => {
+
+      window.location.replace(
+        "/dashboard"
+      );
+
+    }, 300);
+
+  };
+
 
   return (
     <div className="login-page">
 
       {/* =================================================
-          LEFT SECTION
+          LEFT
       ================================================= */}
 
       <section className="login-left">
 
         <div className="left-content">
-
-          {/* LOGO */}
 
           <div className="brand">
 
@@ -103,14 +180,10 @@ const handleLogin = (e) => {
           </div>
 
 
-          {/* BADGE */}
-
           <div className="system-badge">
             Employee Management System
           </div>
 
-
-          {/* HEADING */}
 
           <h1>
             Manage your people.
@@ -125,8 +198,6 @@ const handleLogin = (e) => {
             payroll and performance management.
           </p>
 
-
-          {/* FEATURES */}
 
           <div className="features">
 
@@ -150,8 +221,6 @@ const handleLogin = (e) => {
 
           </div>
 
-
-          {/* ILLUSTRATION */}
 
           <div className="illustration">
 
@@ -189,8 +258,6 @@ const handleLogin = (e) => {
           </div>
 
 
-          {/* TRUSTED */}
-
           <div className="trusted">
 
             <FaShieldAlt />
@@ -208,12 +275,10 @@ const handleLogin = (e) => {
 
 
       {/* =================================================
-          RIGHT SECTION
+          RIGHT
       ================================================= */}
 
       <section className="login-right">
-
-        {/* LANGUAGE */}
 
         <div className="language-wrapper">
 
@@ -232,11 +297,7 @@ const handleLogin = (e) => {
         </div>
 
 
-        {/* LOGIN CARD */}
-
         <div className="login-card">
-
-          {/* LOCK */}
 
           <div className="lock-circle">
             <FaLock />
@@ -254,22 +315,39 @@ const handleLogin = (e) => {
 
 
           <form onSubmit={handleLogin}>
-            <div className="input-group role-group">
-  <label>Select Role</label>
 
-  <div className="input-box role-input-box">
+            {/* ROLE */}
 
-    <select
-      className="role-select"
-      value={role}
-      onChange={(e) => setRole(e.target.value)}
-    >
-      <option value="employee">Employee</option>
-      <option value="manager">Manager</option>
-    </select>
+            <div className="input-group">
 
-  </div>
-</div>
+              <label>
+                Select Role
+              </label>
+
+              <div className="input-box role-input-box">
+
+                <select
+                  className="role-select"
+                  value={role}
+                  onChange={(e) =>
+                    setRole(e.target.value)
+                  }
+                >
+
+                  <option value="employee">
+                    Employee
+                  </option>
+
+                  <option value="manager">
+                    Manager
+                  </option>
+
+                </select>
+
+              </div>
+
+            </div>
+
 
             {/* EMAIL */}
 
@@ -397,17 +475,17 @@ const handleLogin = (e) => {
               type="submit"
               className="signin-btn"
             >
+
               <span>
                 Sign In
               </span>
 
               <FaArrowRight />
+
             </button>
 
           </form>
 
-
-          {/* OR */}
 
           <div className="or-divider">
 
@@ -419,8 +497,6 @@ const handleLogin = (e) => {
 
           </div>
 
-
-          {/* SECURE */}
 
           <div className="secure-box">
 
@@ -447,7 +523,7 @@ const handleLogin = (e) => {
         </div>
 
 
-        {/* HR */}
+        {/* CONTACT HR */}
 
         <div className="access-help">
 
@@ -456,6 +532,7 @@ const handleLogin = (e) => {
           </p>
 
           <button
+            type="button"
             onClick={() =>
               setShowHR(true)
             }
@@ -467,8 +544,6 @@ const handleLogin = (e) => {
         </div>
 
 
-        {/* FOOTER */}
-
         <div className="login-footer">
           © 2026 WorkForce EMS. All rights reserved.
         </div>
@@ -477,7 +552,7 @@ const handleLogin = (e) => {
 
 
       {/* =================================================
-          FORGOT PASSWORD MODAL
+          FORGOT PASSWORD
       ================================================= */}
 
       {showForgot && (
@@ -497,6 +572,7 @@ const handleLogin = (e) => {
           >
 
             <button
+              type="button"
               className="modal-close"
               onClick={() =>
                 setShowForgot(false)
@@ -530,6 +606,7 @@ const handleLogin = (e) => {
 
 
             <button
+              type="button"
               className="modal-submit"
               onClick={() => {
 
@@ -551,7 +628,7 @@ const handleLogin = (e) => {
 
 
       {/* =================================================
-          HR MODAL
+          HR
       ================================================= */}
 
       {showHR && (
@@ -571,6 +648,7 @@ const handleLogin = (e) => {
           >
 
             <button
+              type="button"
               className="modal-close"
               onClick={() =>
                 setShowHR(false)
@@ -623,6 +701,7 @@ const handleLogin = (e) => {
 
 
             <button
+              type="button"
               className="modal-submit"
               onClick={() =>
                 setShowHR(false)
@@ -642,7 +721,7 @@ const handleLogin = (e) => {
 
 
 /* =====================================================
-   FEATURE COMPONENT
+   FEATURE
 ===================================================== */
 
 function Feature({

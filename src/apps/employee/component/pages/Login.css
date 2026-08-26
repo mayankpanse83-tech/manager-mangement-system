@@ -1199,3 +1199,28 @@
   -webkit-text-fill-color: #111827 !important;
   -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
 }
+.role-input-box {
+  padding: 0 !important;
+  background: #ffffff !important;
+  overflow: hidden;
+}
+
+.role-select {
+  width: 100% !important;
+  height: 48px;
+
+  border: none !important;
+  outline: none !important;
+
+  padding: 0 14px !important;
+
+  background: #ffffff !important;
+  color: #111827 !important;
+
+  font-size: 14px;
+}
+
+.role-select option {
+  background: #ffffff;
+  color: #111827;
+}

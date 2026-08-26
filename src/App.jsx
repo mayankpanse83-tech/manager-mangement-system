@@ -6,7 +6,6 @@ import {
   Navigate,
 } from "react-router-dom";
 
-
 /* =====================================================
    EMPLOYEE
 ===================================================== */
@@ -26,7 +25,6 @@ import EmployeeProfile from "./apps/employee/component/pages/Profile";
 import Login from "./apps/employee/component/pages/Login";
 import AccountActivation from "./apps/employee/component/pages/AccountActivation";
 
-
 /* =====================================================
    MANAGER
 ===================================================== */
@@ -35,12 +33,11 @@ import ManagerSidebar from "./apps/manager/component/ManagerSidebar";
 import ManagerHeader from "./apps/manager/component/ManagerHeader";
 import ManagerDashboard from "./apps/manager/pages/ManagerDashboard";
 
-
 import "./App.css";
 
 
 /* =====================================================
-   PLACEHOLDER
+   MANAGER PLACEHOLDER
 ===================================================== */
 
 function ManagerPlaceholder({ title }) {
@@ -61,7 +58,6 @@ function AuthLayout() {
   return (
     <div className="auth-layout">
       <Routes>
-
         <Route
           path="/login"
           element={<Login />}
@@ -71,7 +67,6 @@ function AuthLayout() {
           path="/account-activation"
           element={<AccountActivation />}
         />
-
       </Routes>
     </div>
   );
@@ -79,7 +74,7 @@ function AuthLayout() {
 
 
 /* =====================================================
-   EMPLOYEE
+   EMPLOYEE LAYOUT
 ===================================================== */
 
 function EmployeeLayout() {
@@ -96,9 +91,7 @@ function EmployeeLayout() {
 
       <div className="main-area">
 
-        {!isDashboard && (
-          <EmployeeHeader />
-        )}
+        {!isDashboard && <EmployeeHeader />}
 
         <main className="page-content">
 
@@ -149,10 +142,14 @@ function EmployeeLayout() {
               element={<EmployeeProfile />}
             />
 
+            <Route
+              path="*"
+              element={<Navigate to="/dashboard" replace />}
+            />
+
           </Routes>
 
         </main>
-
       </div>
 
     </div>
@@ -161,7 +158,7 @@ function EmployeeLayout() {
 
 
 /* =====================================================
-   MANAGER
+   MANAGER LAYOUT
 ===================================================== */
 
 function ManagerLayout() {
@@ -239,18 +236,14 @@ function ManagerLayout() {
               }
             />
 
-            {/* Unknown manager page */}
             <Route
               path="*"
-              element={
-                <Navigate to="/dashboard" replace />
-              }
+              element={<Navigate to="/dashboard" replace />}
             />
 
           </Routes>
 
         </main>
-
       </div>
 
     </div>
@@ -259,23 +252,28 @@ function ManagerLayout() {
 
 
 /* =====================================================
-   MAIN ROLE ROUTER
+   ROLE ROUTER
 ===================================================== */
 
 function RoleRouter() {
   const location = useLocation();
 
-  // Root URL = ALWAYS EMPLOYEE
+  /*
+    ROOT URL ALWAYS EMPLOYEE
+  */
   if (location.pathname === "/") {
     return <EmployeeLayout />;
   }
 
-  // Current session role first
-  const sessionRole = sessionStorage.getItem("userRole");
+  /*
+    IMPORTANT:
+    Current login role is taken from sessionStorage first.
+  */
 
-  const savedRole = localStorage.getItem("userRole");
-
-  const role = sessionRole || savedRole || "employee";
+  const role =
+    sessionStorage.getItem("userRole") ||
+    localStorage.getItem("userRole") ||
+    "employee";
 
   if (role === "manager") {
     return <ManagerLayout />;
@@ -290,7 +288,6 @@ function RoleRouter() {
 ===================================================== */
 
 function App() {
-
   const location = useLocation();
 
   const isAuthPage =
@@ -303,6 +300,5 @@ function App() {
 
   return <RoleRouter />;
 }
-
 
 export default App;
