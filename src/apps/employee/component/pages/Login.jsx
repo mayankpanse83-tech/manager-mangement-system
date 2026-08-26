@@ -1,13 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  FaLock,
-  FaEnvelope,
-  FaEye,
-  FaEyeSlash,
-  FaArrowRight,
-} from "react-icons/fa";
-
 import "./Login.css";
 
 function Login() {
@@ -16,24 +8,26 @@ function Login() {
   const [role, setRole] = useState("employee");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
   const [message, setMessage] = useState("");
 
   const handleLogin = (e) => {
     e.preventDefault();
 
-    setMessage("");
-
     if (!email.trim()) {
-      setMessage("Please enter your email or Employee ID.");
+      setMessage("Please enter email or Employee ID");
       return;
     }
 
     if (!password.trim()) {
-      setMessage("Please enter your password.");
+      setMessage("Please enter password");
       return;
     }
 
+    // Purana role hatao
+    sessionStorage.removeItem("userRole");
+    localStorage.removeItem("userRole");
+
+    // Current selected role save karo
     const selectedRole =
       role === "manager" ? "manager" : "employee";
 
@@ -43,15 +37,19 @@ function Login() {
     sessionStorage.setItem("isLoggedIn", "true");
     localStorage.setItem("isLoggedIn", "true");
 
-    sessionStorage.setItem("loggedInUser", email.trim());
-    localStorage.setItem("loggedInUser", email.trim());
+    setMessage(
+      selectedRole === "manager"
+        ? "Manager login successful"
+        : "Employee login successful"
+    );
 
-    navigate("/dashboard", { replace: true });
+    setTimeout(() => {
+      window.location.replace("/dashboard");
+    }, 300);
   };
 
   return (
     <div className="login-page">
-
       <div className="login-card">
 
         <h2>Welcome Back! 👋</h2>
@@ -62,8 +60,6 @@ function Login() {
 
         <form onSubmit={handleLogin}>
 
-          {/* ROLE */}
-
           <div className="input-group">
             <label>Select Role</label>
 
@@ -71,15 +67,6 @@ function Login() {
               <select
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
-                style={{
-                  width: "100%",
-                  height: "44px",
-                  border: "none",
-                  outline: "none",
-                  background: "#fff",
-                  color: "#111827",
-                  fontSize: "14px",
-                }}
               >
                 <option value="employee">
                   Employee
@@ -92,70 +79,31 @@ function Login() {
             </div>
           </div>
 
-
-          {/* EMAIL */}
-
           <div className="input-group">
             <label>Email or Employee ID</label>
 
             <div className="input-box">
-
-              <FaEnvelope />
-
               <input
                 type="text"
                 placeholder="Enter your email or employee ID"
                 value={email}
-                onChange={(e) =>
-                  setEmail(e.target.value)
-                }
+                onChange={(e) => setEmail(e.target.value)}
               />
-
             </div>
           </div>
-
-
-          {/* PASSWORD */}
 
           <div className="input-group">
             <label>Password</label>
 
             <div className="input-box">
-
-              <FaLock />
-
               <input
-                type={
-                  showPassword
-                    ? "text"
-                    : "password"
-                }
+                type="password"
                 placeholder="Enter your password"
                 value={password}
-                onChange={(e) =>
-                  setPassword(e.target.value)
-                }
+                onChange={(e) => setPassword(e.target.value)}
               />
-
-              <button
-                type="button"
-                className="eye-button"
-                onClick={() =>
-                  setShowPassword(!showPassword)
-                }
-              >
-                {showPassword ? (
-                  <FaEyeSlash />
-                ) : (
-                  <FaEye />
-                )}
-              </button>
-
             </div>
           </div>
-
-
-          {/* MESSAGE */}
 
           {message && (
             <div className="login-message">
@@ -163,21 +111,16 @@ function Login() {
             </div>
           )}
 
-
-          {/* LOGIN */}
-
           <button
             type="submit"
             className="signin-btn"
           >
-            <span>Sign In</span>
-            <FaArrowRight />
+            Sign In
           </button>
 
         </form>
 
       </div>
-
     </div>
   );
 }
