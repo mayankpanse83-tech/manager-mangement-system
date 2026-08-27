@@ -24,41 +24,49 @@ const ManagerSidebar = () => {
       path: "/manager/dashboard",
       icon: <FaHome />,
     },
+
     {
       name: "My Team",
       path: "/manager/team",
       icon: <FaUsers />,
     },
+
     {
       name: "Attendance",
       path: "/manager/attendance",
       icon: <FaCalendarCheck />,
     },
+
     {
       name: "Tasks",
       path: "/manager/tasks",
       icon: <FaTasks />,
     },
+
     {
       name: "Daily Updates",
       path: "/manager/daily-updates",
       icon: <FaFileAlt />,
     },
+
     {
       name: "Leave Requests",
       path: "/manager/leave",
       icon: <FaUmbrellaBeach />,
     },
+
     {
       name: "Reports",
       path: "/manager/reports",
       icon: <FaChartBar />,
     },
+
     {
       name: "Profile",
       path: "/manager/profile",
       icon: <FaUser />,
     },
+
     {
       name: "Settings",
       path: "/manager/settings",
@@ -71,6 +79,7 @@ const ManagerSidebar = () => {
     <aside className="manager-sidebar">
 
       {/* LOGO */}
+
       <div className="manager-logo">
 
         <div className="manager-logo-box">
@@ -79,13 +88,17 @@ const ManagerSidebar = () => {
 
         <div>
           <h2>WorkForce</h2>
-          <span>Manager Workspace</span>
+
+          <span>
+            Manager Workspace
+          </span>
         </div>
 
       </div>
 
 
       {/* MENU */}
+
       <nav className="manager-menu">
 
         {menuItems.map((item) => (
@@ -116,9 +129,12 @@ const ManagerSidebar = () => {
 
 
       {/* HELP */}
+
       <div className="manager-help">
 
-        <h4>Need Help?</h4>
+        <h4>
+          Need Help?
+        </h4>
 
         <p>
           Contact admin or send a request.
@@ -132,6 +148,7 @@ const ManagerSidebar = () => {
 
 
       {/* PROFILE */}
+
       <div className="manager-profile">
 
         <div className="manager-profile-avatar">
@@ -139,8 +156,13 @@ const ManagerSidebar = () => {
         </div>
 
         <div>
-          <strong>Mayank panse</strong>
-          <small>Team Manager</small>
+          <strong>
+            Mayank panse
+          </strong>
+
+          <small>
+            Team Manager
+          </small>
         </div>
 
       </div>
