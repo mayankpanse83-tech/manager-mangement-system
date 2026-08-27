@@ -18,60 +18,50 @@ import "./ManagerSidebar.css";
 
 const ManagerSidebar = () => {
 
-  /*
-    Whenever manager sidebar is clicked,
-    force manager role.
-  */
-  const handleManagerClick = () => {
-    sessionStorage.setItem("userRole", "manager");
-    localStorage.setItem("userRole", "manager");
-  };
-
-
   const menuItems = [
     {
       name: "Dashboard",
-      path: "/dashboard",
+      path: "/manager/dashboard",
       icon: <FaHome />,
     },
     {
       name: "My Team",
-      path: "/team",
+      path: "/manager/team",
       icon: <FaUsers />,
     },
     {
       name: "Attendance",
-      path: "/attendance",
+      path: "/manager/attendance",
       icon: <FaCalendarCheck />,
     },
     {
       name: "Tasks",
-      path: "/tasks",
+      path: "/manager/tasks",
       icon: <FaTasks />,
     },
     {
       name: "Daily Updates",
-      path: "/daily-updates",
+      path: "/manager/daily-updates",
       icon: <FaFileAlt />,
     },
     {
       name: "Leave Requests",
-      path: "/leave",
+      path: "/manager/leave",
       icon: <FaUmbrellaBeach />,
     },
     {
       name: "Reports",
-      path: "/reports",
+      path: "/manager/reports",
       icon: <FaChartBar />,
     },
     {
       name: "Profile",
-      path: "/profile",
+      path: "/manager/profile",
       icon: <FaUser />,
     },
     {
       name: "Settings",
-      path: "/settings",
+      path: "/manager/settings",
       icon: <FaCog />,
     },
   ];
@@ -79,8 +69,6 @@ const ManagerSidebar = () => {
 
   return (
     <aside className="manager-sidebar">
-
-      {/* LOGO */}
 
       <div className="manager-logo">
 
@@ -96,15 +84,13 @@ const ManagerSidebar = () => {
       </div>
 
 
-      {/* MENU */}
-
       <nav className="manager-menu">
 
         {menuItems.map((item) => (
+
           <NavLink
             key={item.path}
             to={item.path}
-            onClick={handleManagerClick}
             className={({ isActive }) =>
               `manager-menu-item ${
                 isActive ? "active" : ""
@@ -121,18 +107,15 @@ const ManagerSidebar = () => {
             </span>
 
           </NavLink>
+
         ))}
 
       </nav>
 
 
-      {/* HELP */}
-
       <div className="manager-help">
 
-        <h4>
-          Need Help?
-        </h4>
+        <h4>Need Help?</h4>
 
         <p>
           Contact admin or send a request.
@@ -144,8 +127,6 @@ const ManagerSidebar = () => {
 
       </div>
 
-
-      {/* PROFILE */}
 
       <div className="manager-profile">
 
@@ -163,5 +144,6 @@ const ManagerSidebar = () => {
     </aside>
   );
 };
+
 
 export default ManagerSidebar;
