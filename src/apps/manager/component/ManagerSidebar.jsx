@@ -16,69 +16,59 @@ import {
 import "./ManagerSidebar.css";
 
 
-const ManagerSidebar = () => {
+const menuItems = [
+  {
+    name: "Dashboard",
+    path: "dashboard",
+    icon: <FaHome />,
+  },
+  {
+    name: "My Team",
+    path: "team",
+    icon: <FaUsers />,
+  },
+  {
+    name: "Attendance",
+    path: "attendance",
+    icon: <FaCalendarCheck />,
+  },
+  {
+    name: "Tasks",
+    path: "tasks",
+    icon: <FaTasks />,
+  },
+  {
+    name: "Daily Updates",
+    path: "daily-updates",
+    icon: <FaFileAlt />,
+  },
+  {
+    name: "Leave Requests",
+    path: "leave",
+    icon: <FaUmbrellaBeach />,
+  },
+  {
+    name: "Reports",
+    path: "reports",
+    icon: <FaChartBar />,
+  },
+  {
+    name: "Profile",
+    path: "profile",
+    icon: <FaUser />,
+  },
+  {
+    name: "Settings",
+    path: "settings",
+    icon: <FaCog />,
+  },
+];
 
-  const menuItems = [
-    {
-      name: "Dashboard",
-      path: "/manager/dashboard",
-      icon: <FaHome />,
-    },
 
-    {
-      name: "My Team",
-      path: "/manager/team",
-      icon: <FaUsers />,
-    },
-
-    {
-      name: "Attendance",
-      path: "/manager/attendance",
-      icon: <FaCalendarCheck />,
-    },
-
-    {
-      name: "Tasks",
-      path: "/manager/tasks",
-      icon: <FaTasks />,
-    },
-
-    {
-      name: "Daily Updates",
-      path: "/manager/daily-updates",
-      icon: <FaFileAlt />,
-    },
-
-    {
-      name: "Leave Requests",
-      path: "/manager/leave",
-      icon: <FaUmbrellaBeach />,
-    },
-
-    {
-      name: "Reports",
-      path: "/manager/reports",
-      icon: <FaChartBar />,
-    },
-
-    {
-      name: "Profile",
-      path: "/manager/profile",
-      icon: <FaUser />,
-    },
-
-    {
-      name: "Settings",
-      path: "/manager/settings",
-      icon: <FaCog />,
-    },
-  ];
-
+export default function ManagerSidebar() {
 
   return (
     <aside className="manager-sidebar">
-
-      {/* LOGO */}
 
       <div className="manager-logo">
 
@@ -88,16 +78,11 @@ const ManagerSidebar = () => {
 
         <div>
           <h2>WorkForce</h2>
-
-          <span>
-            Manager Workspace
-          </span>
+          <span>Manager Workspace</span>
         </div>
 
       </div>
 
-
-      {/* MENU */}
 
       <nav className="manager-menu">
 
@@ -106,6 +91,7 @@ const ManagerSidebar = () => {
           <NavLink
             key={item.path}
             to={item.path}
+            end={item.path === "dashboard"}
             className={({ isActive }) =>
               `manager-menu-item ${
                 isActive ? "active" : ""
@@ -128,13 +114,9 @@ const ManagerSidebar = () => {
       </nav>
 
 
-      {/* HELP */}
-
       <div className="manager-help">
 
-        <h4>
-          Need Help?
-        </h4>
+        <h4>Need Help?</h4>
 
         <p>
           Contact admin or send a request.
@@ -147,8 +129,6 @@ const ManagerSidebar = () => {
       </div>
 
 
-      {/* PROFILE */}
-
       <div className="manager-profile">
 
         <div className="manager-profile-avatar">
@@ -156,20 +136,12 @@ const ManagerSidebar = () => {
         </div>
 
         <div>
-          <strong>
-            Mayank panse
-          </strong>
-
-          <small>
-            Team Manager
-          </small>
+          <strong>Mayank panse</strong>
+          <small>Team Manager</small>
         </div>
 
       </div>
 
     </aside>
   );
-};
-
-
-export default ManagerSidebar;
+}
