@@ -70,6 +70,7 @@ const ManagerSidebar = () => {
   return (
     <aside className="manager-sidebar">
 
+      {/* LOGO */}
       <div className="manager-logo">
 
         <div className="manager-logo-box">
@@ -84,6 +85,7 @@ const ManagerSidebar = () => {
       </div>
 
 
+      {/* MENU */}
       <nav className="manager-menu">
 
         {menuItems.map((item) => (
@@ -113,6 +115,7 @@ const ManagerSidebar = () => {
       </nav>
 
 
+      {/* HELP */}
       <div className="manager-help">
 
         <h4>Need Help?</h4>
@@ -128,6 +131,7 @@ const ManagerSidebar = () => {
       </div>
 
 
+      {/* PROFILE */}
       <div className="manager-profile">
 
         <div className="manager-profile-avatar">
