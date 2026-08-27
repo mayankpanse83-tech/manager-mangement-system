@@ -1,242 +1,371 @@
-import { useEffect } from "react";
+import React from "react";
 import {
   Routes,
   Route,
+  Navigate,
   useLocation,
 } from "react-router-dom";
 
-import { socket } from "../shared/api/socket";
-import { useSoundInit } from "../shared/services/sound/useSoundInit";
+/* =====================================================
+   EMPLOYEE
+===================================================== */
 
-import UserAppRoutes from "../apps/user/routes";
-import ExpertAppRoutes from "../apps/expert/routes";
-import AdminAppRoutes from "../apps/admin/routes";
-import ManagerAppRoutes from "../apps/manager/routes";
+import EmployeeSidebar from "./apps/employee/component/Sidebar";
+import EmployeeHeader from "./apps/employee/component/Header";
 
-import { ExpertProvider } from "../shared/context/ExpertContext";
-import BottomNavbar from "../shared/components/BottomNavbar/BottomNavbar";
-import RouteLoader from "../shared/loaders/RouteLoader";
-import RootRedirect from "./RootRedirect";
-
-import NetworkStatus from "../shared/components/NetworkStatus/NetworkStatus";
-
-import ManagerSidebar from "../apps/manager/component/ManagerSidebar";
-import ManagerHeader from "../apps/manager/component/ManagerHeader";
-
-export default function AppRouter() {
-
-  useSoundInit();
-
-  const location = useLocation();
-
-  /* =====================================================
-     BOTTOM NAVBAR
-  ===================================================== */
-
-  const showNavbar =
-    location.pathname.startsWith("/user") ||
-    location.pathname.startsWith("/expert");
+import EmployeeDashboard from "./apps/employee/component/pages/Dashboard";
+import EmployeeAttendance from "./apps/employee/component/pages/Attendance";
+import EmployeeTask from "./apps/employee/component/pages/Task";
+import EmployeeDailyUpdates from "./apps/employee/component/pages/DailyUpdates";
+import EmployeeLeave from "./apps/employee/component/pages/Leave";
+import EmployeeSalary from "./apps/employee/component/pages/Salary";
+import EmployeeReport from "./apps/employee/component/pages/Report";
+import EmployeeProfile from "./apps/employee/component/pages/Profile";
 
 
-  /* =====================================================
-     SOCKET RECONNECT
-  ===================================================== */
+/* =====================================================
+   AUTH
+===================================================== */
 
-  useEffect(() => {
-
-    const handleVisibility = () => {
-
-      if (document.visibilityState === "visible") {
-
-        if (!socket.connected) {
-
-          console.log(
-            "👁️ Reconnecting socket on tab focus..."
-          );
-
-          socket.connect();
-        }
-
-      }
-
-    };
+import Login from "./apps/employee/component/pages/Login";
+import AccountActivation from "./apps/employee/component/pages/AccountActivation";
 
 
-    document.addEventListener(
-      "visibilitychange",
-      handleVisibility
-    );
+/* =====================================================
+   MANAGER
+===================================================== */
+
+import ManagerSidebar from "./apps/manager/component/ManagerSidebar";
+import ManagerHeader from "./apps/manager/component/ManagerHeader";
+import ManagerDashboard from "./apps/manager/pages/ManagerDashboard";
 
 
-    return () => {
-
-      document.removeEventListener(
-        "visibilitychange",
-        handleVisibility
-      );
-
-    };
-
-  }, []);
+import "./App.css";
 
 
-  /* =====================================================
-     SOCKET EVENTS
-  ===================================================== */
+/* =====================================================
+   MANAGER PLACEHOLDER
+===================================================== */
 
-  useEffect(() => {
-
-    const handleConnect = () => {
-
-      console.log(
-        "🟢 Socket connected from AppRouter:",
-        socket.id
-      );
-
-    };
-
-
-    const handleDisconnect = () => {
-
-      console.log(
-        "🔴 Socket disconnected"
-      );
-
-    };
-
-
-    socket.on(
-      "connect",
-      handleConnect
-    );
-
-    socket.on(
-      "disconnect",
-      handleDisconnect
-    );
-
-
-    return () => {
-
-      socket.off(
-        "connect",
-        handleConnect
-      );
-
-      socket.off(
-        "disconnect",
-        handleDisconnect
-      );
-
-    };
-
-  }, []);
-
-
-  /* =====================================================
-     APP ROUTER
-  ===================================================== */
-
+function ManagerPlaceholder({ title }) {
   return (
-    <div
-      className="app-main-layout"
-      style={{
-        width: "100%",
-        overflowX: "hidden",
-        position: "relative",
-      }}
-    >
-
-      {/* GLOBAL NETWORK STATUS */}
-
-      <NetworkStatus />
-
-
-      {/* MAIN CONTENT */}
-
-      <div
-        className="main-content-wrapper"
-        style={{
-          paddingBottom: showNavbar
-            ? "var(--nav-height, 70px)"
-            : "0px",
-
-          width: "100%",
-          overflowX: "hidden",
-        }}
-      >
-
-        <RouteLoader />
-
-
-        <Routes>
-
-          {/* =================================================
-              ROOT
-          ================================================= */}
-
-          <Route
-            path="/"
-            element={<RootRedirect />}
-          />
-
-
-          {/* =================================================
-              USER
-          ================================================= */}
-
-          <Route
-            path="/user/*"
-            element={<UserAppRoutes />}
-          />
-
-
-          {/* =================================================
-              EXPERT
-          ================================================= */}
-
-          <Route
-            path="/expert/*"
-            element={
-              <ExpertProvider>
-                <ExpertAppRoutes />
-              </ExpertProvider>
-            }
-          />
-
-
-          {/* =================================================
-              ADMIN
-          ================================================= */}
-
-          <Route
-            path="/admin/*"
-            element={<AdminAppRoutes />}
-          />
-
-
-          {/* =================================================
-              MANAGER
-          ================================================= */}
-
-          <Route
-            path="/manager/*"
-            element={
-              <ManagerAppRoutes />
-            }
-          />
-
-        </Routes>
-
-      </div>
-
-
-      {/* BOTTOM NAVBAR */}
-
-      {showNavbar && (
-        <BottomNavbar />
-      )}
-
+    <div className="manager-placeholder">
+      <h1>{title}</h1>
+      <p>{title} page coming soon.</p>
     </div>
   );
 }
+
+
+/* =====================================================
+   AUTH LAYOUT
+===================================================== */
+
+function AuthLayout() {
+  return (
+    <div className="auth-layout">
+      <Routes>
+
+        <Route
+          path="/login"
+          element={<Login />}
+        />
+
+        <Route
+          path="/account-activation"
+          element={<AccountActivation />}
+        />
+
+      </Routes>
+    </div>
+  );
+}
+
+
+/* =====================================================
+   EMPLOYEE LAYOUT
+===================================================== */
+
+function EmployeeLayout() {
+
+  const location = useLocation();
+
+  const isDashboard =
+    location.pathname === "/" ||
+    location.pathname === "/dashboard";
+
+  return (
+    <div className="app-layout">
+
+      {/* Employee Sidebar */}
+      <EmployeeSidebar />
+
+      <div className="main-area">
+
+        {/* Dashboard ka custom header Dashboard.jsx
+            ke andar hai */}
+        {!isDashboard && (
+          <EmployeeHeader />
+        )}
+
+        <main className="page-content">
+
+          <Routes>
+
+            {/* Home */}
+            <Route
+              path="/"
+              element={<EmployeeDashboard />}
+            />
+
+            {/* Dashboard */}
+            <Route
+              path="/dashboard"
+              element={<EmployeeDashboard />}
+            />
+
+            {/* Attendance */}
+            <Route
+              path="/attendance"
+              element={<EmployeeAttendance />}
+            />
+
+            {/* Tasks */}
+            <Route
+              path="/tasks"
+              element={<EmployeeTask />}
+            />
+
+            {/* Daily Updates */}
+            <Route
+              path="/daily-updates"
+              element={<EmployeeDailyUpdates />}
+            />
+
+            {/* Leave */}
+            <Route
+              path="/leave"
+              element={<EmployeeLeave />}
+            />
+
+            {/* Salary */}
+            <Route
+              path="/salary"
+              element={<EmployeeSalary />}
+            />
+
+            {/* Reports */}
+            <Route
+              path="/reports"
+              element={<EmployeeReport />}
+            />
+
+            {/* Profile */}
+            <Route
+              path="/profile"
+              element={<EmployeeProfile />}
+            />
+
+            {/* Unknown Employee URL */}
+            <Route
+              path="*"
+              element={
+                <Navigate
+                  to="/dashboard"
+                  replace
+                />
+              }
+            />
+
+          </Routes>
+
+        </main>
+
+      </div>
+    </div>
+  );
+}
+
+
+/* =====================================================
+   MANAGER LAYOUT
+===================================================== */
+
+function ManagerLayout() {
+
+  return (
+    <div className="manager-layout">
+
+      {/* Manager Sidebar */}
+      <ManagerSidebar />
+
+      <div className="manager-main">
+
+        {/* Manager Header */}
+        <ManagerHeader />
+
+        <main className="manager-content">
+
+          <Routes>
+
+            {/* /manager */}
+            <Route
+              path="/manager"
+              element={
+                <Navigate
+                  to="/manager/dashboard"
+                  replace
+                />
+              }
+            />
+
+            {/* /manager/dashboard */}
+            <Route
+              path="/manager/dashboard"
+              element={<ManagerDashboard />}
+            />
+
+            {/* /manager/team */}
+            <Route
+              path="/manager/team"
+              element={
+                <ManagerPlaceholder
+                  title="My Team"
+                />
+              }
+            />
+
+            {/* /manager/attendance */}
+            <Route
+              path="/manager/attendance"
+              element={
+                <ManagerPlaceholder
+                  title="Team Attendance"
+                />
+              }
+            />
+
+            {/* /manager/tasks */}
+            <Route
+              path="/manager/tasks"
+              element={
+                <ManagerPlaceholder
+                  title="Team Tasks"
+                />
+              }
+            />
+
+            {/* /manager/daily-updates */}
+            <Route
+              path="/manager/daily-updates"
+              element={
+                <ManagerPlaceholder
+                  title="Daily Updates"
+                />
+              }
+            />
+
+            {/* /manager/leave */}
+            <Route
+              path="/manager/leave"
+              element={
+                <ManagerPlaceholder
+                  title="Leave Requests"
+                />
+              }
+            />
+
+            {/* /manager/reports */}
+            <Route
+              path="/manager/reports"
+              element={
+                <ManagerPlaceholder
+                  title="Manager Reports"
+                />
+              }
+            />
+
+            {/* /manager/profile */}
+            <Route
+              path="/manager/profile"
+              element={
+                <ManagerPlaceholder
+                  title="Manager Profile"
+                />
+              }
+            />
+
+            {/* /manager/settings */}
+            <Route
+              path="/manager/settings"
+              element={
+                <ManagerPlaceholder
+                  title="Manager Settings"
+                />
+              }
+            />
+
+            {/* Unknown Manager URL */}
+            <Route
+              path="*"
+              element={
+                <Navigate
+                  to="/manager/dashboard"
+                  replace
+                />
+              }
+            />
+
+          </Routes>
+
+        </main>
+
+      </div>
+    </div>
+  );
+}
+
+
+/* =====================================================
+   MAIN APP
+===================================================== */
+
+function App() {
+
+  const location = useLocation();
+
+  const isAuthPage =
+    location.pathname === "/login" ||
+    location.pathname === "/account-activation";
+
+
+  /* Auth Pages */
+  if (isAuthPage) {
+    return <AuthLayout />;
+  }
+
+
+  /* =================================================
+     MANAGER URLS
+     /manager/...
+  ================================================= */
+
+  const isManagerPage =
+    location.pathname === "/manager" ||
+    location.pathname.startsWith("/manager/");
+
+
+  if (isManagerPage) {
+    return <ManagerLayout />;
+  }
+
+
+  /* =================================================
+     ALL OTHER URLS = EMPLOYEE
+  ================================================= */
+
+  return <EmployeeLayout />;
+}
+
+
+export default App;
