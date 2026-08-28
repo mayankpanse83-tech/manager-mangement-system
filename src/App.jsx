@@ -6,9 +6,9 @@ import {
   useLocation,
 } from "react-router-dom";
 
-/* =====================================================
+/* =========================
    EMPLOYEE
-===================================================== */
+========================= */
 
 import EmployeeSidebar from "./apps/employee/component/Sidebar";
 import EmployeeHeader from "./apps/employee/component/Header";
@@ -23,20 +23,21 @@ import EmployeeReport from "./apps/employee/component/pages/Report";
 import EmployeeProfile from "./apps/employee/component/pages/Profile";
 
 
-/* =====================================================
-   AUTH
-===================================================== */
+/* =========================
+   LOGIN
+========================= */
 
 import Login from "./apps/employee/component/pages/Login";
 import AccountActivation from "./apps/employee/component/pages/AccountActivation";
 
 
-/* =====================================================
+/* =========================
    MANAGER
-===================================================== */
+========================= */
 
 import ManagerSidebar from "./apps/manager/component/ManagerSidebar";
 import ManagerHeader from "./apps/manager/component/ManagerHeader";
+
 import ManagerDashboard from "./apps/manager/pages/ManagerDashboard";
 
 
@@ -58,12 +59,13 @@ function ManagerPlaceholder({ title }) {
 
 
 /* =====================================================
-   AUTH LAYOUT
+   AUTH
 ===================================================== */
 
 function AuthLayout() {
   return (
     <div className="auth-layout">
+
       <Routes>
 
         <Route
@@ -77,6 +79,7 @@ function AuthLayout() {
         />
 
       </Routes>
+
     </div>
   );
 }
@@ -97,13 +100,13 @@ function EmployeeLayout() {
   return (
     <div className="app-layout">
 
-      {/* Employee Sidebar */}
+      {/* EMPLOYEE SIDEBAR */}
       <EmployeeSidebar />
 
+      {/* EMPLOYEE MAIN */}
       <div className="main-area">
 
-        {/* Dashboard ka custom header Dashboard.jsx
-            ke andar hai */}
+        {/* Dashboard ka apna header hai */}
         {!isDashboard && (
           <EmployeeHeader />
         )}
@@ -112,61 +115,61 @@ function EmployeeLayout() {
 
           <Routes>
 
-            {/* Home */}
+            {/* HOME */}
             <Route
               path="/"
               element={<EmployeeDashboard />}
             />
 
-            {/* Dashboard */}
+            {/* DASHBOARD */}
             <Route
               path="/dashboard"
               element={<EmployeeDashboard />}
             />
 
-            {/* Attendance */}
+            {/* ATTENDANCE */}
             <Route
               path="/attendance"
               element={<EmployeeAttendance />}
             />
 
-            {/* Tasks */}
+            {/* TASKS */}
             <Route
               path="/tasks"
               element={<EmployeeTask />}
             />
 
-            {/* Daily Updates */}
+            {/* DAILY UPDATES */}
             <Route
               path="/daily-updates"
               element={<EmployeeDailyUpdates />}
             />
 
-            {/* Leave */}
+            {/* LEAVE */}
             <Route
               path="/leave"
               element={<EmployeeLeave />}
             />
 
-            {/* Salary */}
+            {/* SALARY */}
             <Route
               path="/salary"
               element={<EmployeeSalary />}
             />
 
-            {/* Reports */}
+            {/* REPORTS */}
             <Route
               path="/reports"
               element={<EmployeeReport />}
             />
 
-            {/* Profile */}
+            {/* PROFILE */}
             <Route
               path="/profile"
               element={<EmployeeProfile />}
             />
 
-            {/* Unknown Employee URL */}
+            {/* UNKNOWN */}
             <Route
               path="*"
               element={
@@ -182,6 +185,7 @@ function EmployeeLayout() {
         </main>
 
       </div>
+
     </div>
   );
 }
@@ -196,36 +200,29 @@ function ManagerLayout() {
   return (
     <div className="manager-layout">
 
-      {/* Manager Sidebar */}
+      {/* MANAGER SIDEBAR */}
       <ManagerSidebar />
 
+      {/* MANAGER MAIN */}
       <div className="manager-main">
 
-        {/* Manager Header */}
+        {/* MANAGER HEADER */}
         <ManagerHeader />
 
         <main className="manager-content">
 
           <Routes>
 
-            {/* /manager */}
-            <Route
-              path="/manager"
-              element={
-                <Navigate
-                  to="/manager/dashboard"
-                  replace
-                />
-              }
-            />
+            {/* MANAGER DASHBOARD */}
 
-            {/* /manager/dashboard */}
             <Route
               path="/manager/dashboard"
               element={<ManagerDashboard />}
             />
 
-            {/* /manager/team */}
+
+            {/* MANAGER TEAM */}
+
             <Route
               path="/manager/team"
               element={
@@ -235,7 +232,9 @@ function ManagerLayout() {
               }
             />
 
-            {/* /manager/attendance */}
+
+            {/* MANAGER ATTENDANCE */}
+
             <Route
               path="/manager/attendance"
               element={
@@ -245,7 +244,9 @@ function ManagerLayout() {
               }
             />
 
-            {/* /manager/tasks */}
+
+            {/* MANAGER TASKS */}
+
             <Route
               path="/manager/tasks"
               element={
@@ -255,7 +256,9 @@ function ManagerLayout() {
               }
             />
 
-            {/* /manager/daily-updates */}
+
+            {/* MANAGER DAILY UPDATES */}
+
             <Route
               path="/manager/daily-updates"
               element={
@@ -265,7 +268,9 @@ function ManagerLayout() {
               }
             />
 
-            {/* /manager/leave */}
+
+            {/* MANAGER LEAVE */}
+
             <Route
               path="/manager/leave"
               element={
@@ -275,7 +280,9 @@ function ManagerLayout() {
               }
             />
 
-            {/* /manager/reports */}
+
+            {/* MANAGER REPORTS */}
+
             <Route
               path="/manager/reports"
               element={
@@ -285,7 +292,9 @@ function ManagerLayout() {
               }
             />
 
-            {/* /manager/profile */}
+
+            {/* MANAGER PROFILE */}
+
             <Route
               path="/manager/profile"
               element={
@@ -295,7 +304,9 @@ function ManagerLayout() {
               }
             />
 
-            {/* /manager/settings */}
+
+            {/* MANAGER SETTINGS */}
+
             <Route
               path="/manager/settings"
               element={
@@ -305,7 +316,9 @@ function ManagerLayout() {
               }
             />
 
-            {/* Unknown Manager URL */}
+
+            {/* MANAGER UNKNOWN URL */}
+
             <Route
               path="*"
               element={
@@ -321,47 +334,48 @@ function ManagerLayout() {
         </main>
 
       </div>
+
     </div>
   );
 }
 
 
 /* =====================================================
-   MAIN APP
+   APP
 ===================================================== */
 
 function App() {
 
   const location = useLocation();
 
+
+  /* AUTH */
+
   const isAuthPage =
     location.pathname === "/login" ||
     location.pathname === "/account-activation";
 
 
-  /* Auth Pages */
   if (isAuthPage) {
     return <AuthLayout />;
   }
 
 
   /* =================================================
-     MANAGER URLS
+     MANAGER URL
      /manager/...
   ================================================= */
 
-  const isManagerPage =
+  if (
     location.pathname === "/manager" ||
-    location.pathname.startsWith("/manager/");
-
-
-  if (isManagerPage) {
+    location.pathname.startsWith("/manager/")
+  ) {
     return <ManagerLayout />;
   }
 
 
   /* =================================================
-     ALL OTHER URLS = EMPLOYEE
+     EMPLOYEE
   ================================================= */
 
   return <EmployeeLayout />;
