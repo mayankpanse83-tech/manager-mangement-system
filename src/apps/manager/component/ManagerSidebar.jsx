@@ -19,53 +19,53 @@ import "./ManagerSidebar.css";
 const menuItems = [
   {
     name: "Dashboard",
-    path: "dashboard",
+    path: "/manager/dashboard",
     icon: <FaHome />,
   },
   {
     name: "My Team",
-    path: "team",
+    path: "/manager/team",
     icon: <FaUsers />,
   },
   {
     name: "Attendance",
-    path: "attendance",
+    path: "/manager/attendance",
     icon: <FaCalendarCheck />,
   },
   {
     name: "Tasks",
-    path: "tasks",
+    path: "/manager/tasks",
     icon: <FaTasks />,
   },
   {
     name: "Daily Updates",
-    path: "daily-updates",
+    path: "/manager/daily-updates",
     icon: <FaFileAlt />,
   },
   {
     name: "Leave Requests",
-    path: "leave",
+    path: "/manager/leave",
     icon: <FaUmbrellaBeach />,
   },
   {
     name: "Reports",
-    path: "reports",
+    path: "/manager/reports",
     icon: <FaChartBar />,
   },
   {
     name: "Profile",
-    path: "profile",
+    path: "/manager/profile",
     icon: <FaUser />,
   },
   {
     name: "Settings",
-    path: "settings",
+    path: "/manager/settings",
     icon: <FaCog />,
   },
 ];
 
 
-export default function ManagerSidebar() {
+function ManagerSidebar() {
 
   return (
     <aside className="manager-sidebar">
@@ -91,7 +91,6 @@ export default function ManagerSidebar() {
           <NavLink
             key={item.path}
             to={item.path}
-            end={item.path === "dashboard"}
             className={({ isActive }) =>
               `manager-menu-item ${
                 isActive ? "active" : ""
@@ -114,21 +113,6 @@ export default function ManagerSidebar() {
       </nav>
 
 
-      <div className="manager-help">
-
-        <h4>Need Help?</h4>
-
-        <p>
-          Contact admin or send a request.
-        </p>
-
-        <button type="button">
-          Contact Admin
-        </button>
-
-      </div>
-
-
       <div className="manager-profile">
 
         <div className="manager-profile-avatar">
@@ -136,7 +120,7 @@ export default function ManagerSidebar() {
         </div>
 
         <div>
-          <strong>Mayank panse</strong>
+          <strong>Mayank Panse</strong>
           <small>Team Manager</small>
         </div>
 
@@ -145,3 +129,6 @@ export default function ManagerSidebar() {
     </aside>
   );
 }
+
+
+export default ManagerSidebar;
