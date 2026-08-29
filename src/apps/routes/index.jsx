@@ -10,6 +10,7 @@ import ManagerRoutes from "../apps/manager/routes";
 
 import Login from "../apps/employee/component/pages/Login";
 import AccountActivation from "../apps/employee/component/pages/AccountActivation";
+import ManagerTeam from "../pages/ManagerTeam";
 
 
 export default function AppRouter() {
@@ -61,6 +62,10 @@ export default function AppRouter() {
           />
         }
       />
+      <Route
+  path="team"
+  element={<ManagerTeam />}
+/>
 
     </Routes>
   );
