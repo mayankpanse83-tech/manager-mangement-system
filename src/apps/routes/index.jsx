@@ -5,12 +5,11 @@ import {
   Navigate,
 } from "react-router-dom";
 
-import EmployeeRoutes from "../apps/employee/routes";
-import ManagerRoutes from "../apps/manager/routes";
+import EmployeeRoutes from "../apps/employee/routes/index.jsx";
+import ManagerRoutes from "../apps/manager/routes/index.jsx";
 
 import Login from "../apps/employee/component/pages/Login";
 import AccountActivation from "../apps/employee/component/pages/AccountActivation";
-import ManagerTeam from "../pages/ManagerTeam";
 
 
 export default function AppRouter() {
@@ -62,10 +61,6 @@ export default function AppRouter() {
           />
         }
       />
-      <Route
-  path="team"
-  element={<ManagerTeam />}
-/>
 
     </Routes>
   );
