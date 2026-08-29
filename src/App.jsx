@@ -11,7 +11,6 @@ import EmployeeDashboard
 import ManagerDashboard
   from "./apps/manager/pages/ManagerDashboard";
 
-
 function App() {
   return (
     <Routes>
