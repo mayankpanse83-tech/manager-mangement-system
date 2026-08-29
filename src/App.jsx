@@ -36,6 +36,7 @@ import AccountActivation from "./apps/employee/component/pages/AccountActivation
 import ManagerSidebar from "./apps/manager/component/ManagerSidebar";
 import ManagerHeader from "./apps/manager/component/ManagerHeader";
 import ManagerDashboard from "./apps/manager/pages/ManagerDashboard";
+import ManagerTeam from "./apps/manager/pages/ManagerTeam";
 
 import "./App.css";
 
@@ -240,6 +241,10 @@ function ManagerLayout() {
                 />
               }
             />
+            <Route
+  path="/manager/team"
+  element={<ManagerTeam />}
+/>
 
           </Routes>
 
