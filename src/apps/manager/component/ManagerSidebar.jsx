@@ -16,59 +16,12 @@ import {
 import "./ManagerSidebar.css";
 
 
-const menuItems = [
-  {
-    name: "Dashboard",
-    path: "/manager/dashboard",
-    icon: <FaHome />,
-  },
-  {
-    name: "My Team",
-    path: "/manager/team",
-    icon: <FaUsers />,
-  },
-  {
-    name: "Attendance",
-    path: "/manager/attendance",
-    icon: <FaCalendarCheck />,
-  },
-  {
-    name: "Tasks",
-    path: "/manager/tasks",
-    icon: <FaTasks />,
-  },
-  {
-    name: "Daily Updates",
-    path: "/manager/daily-updates",
-    icon: <FaFileAlt />,
-  },
-  {
-    name: "Leave Requests",
-    path: "/manager/leave",
-    icon: <FaUmbrellaBeach />,
-  },
-  {
-    name: "Reports",
-    path: "/manager/reports",
-    icon: <FaChartBar />,
-  },
-  {
-    name: "Profile",
-    path: "/manager/profile",
-    icon: <FaUser />,
-  },
-  {
-    name: "Settings",
-    path: "/manager/settings",
-    icon: <FaCog />,
-  },
-];
-
-
 function ManagerSidebar() {
 
   return (
     <aside className="manager-sidebar">
+
+      {/* LOGO */}
 
       <div className="manager-logo">
 
@@ -78,40 +31,184 @@ function ManagerSidebar() {
 
         <div>
           <h2>WorkForce</h2>
-          <span>Manager Workspace</span>
+
+          <span>
+            Manager Workspace
+          </span>
         </div>
 
       </div>
 
 
+      {/* MENU */}
+
       <nav className="manager-menu">
 
-        {menuItems.map((item) => (
+        <NavLink
+          to="/manager/dashboard"
+          className={({ isActive }) =>
+            `manager-menu-item ${
+              isActive ? "active" : ""
+            }`
+          }
+        >
 
-          <NavLink
-            key={item.path}
-            to={item.path}
-            className={({ isActive }) =>
-              `manager-menu-item ${
-                isActive ? "active" : ""
-              }`
-            }
-          >
+          <FaHome />
 
-            <span className="manager-menu-icon">
-              {item.icon}
-            </span>
+          <span>
+            Dashboard
+          </span>
 
-            <span>
-              {item.name}
-            </span>
+        </NavLink>
 
-          </NavLink>
 
-        ))}
+        <NavLink
+          to="/manager/team"
+          className={({ isActive }) =>
+            `manager-menu-item ${
+              isActive ? "active" : ""
+            }`
+          }
+        >
+
+          <FaUsers />
+
+          <span>
+            My Team
+          </span>
+
+        </NavLink>
+
+
+        <NavLink
+          to="/manager/attendance"
+          className={({ isActive }) =>
+            `manager-menu-item ${
+              isActive ? "active" : ""
+            }`
+          }
+        >
+
+          <FaCalendarCheck />
+
+          <span>
+            Attendance
+          </span>
+
+        </NavLink>
+
+
+        <NavLink
+          to="/manager/tasks"
+          className={({ isActive }) =>
+            `manager-menu-item ${
+              isActive ? "active" : ""
+            }`
+          }
+        >
+
+          <FaTasks />
+
+          <span>
+            Tasks
+          </span>
+
+        </NavLink>
+
+
+        <NavLink
+          to="/manager/daily-updates"
+          className={({ isActive }) =>
+            `manager-menu-item ${
+              isActive ? "active" : ""
+            }`
+          }
+        >
+
+          <FaFileAlt />
+
+          <span>
+            Daily Updates
+          </span>
+
+        </NavLink>
+
+
+        <NavLink
+          to="/manager/leave"
+          className={({ isActive }) =>
+            `manager-menu-item ${
+              isActive ? "active" : ""
+            }`
+          }
+        >
+
+          <FaUmbrellaBeach />
+
+          <span>
+            Leave Requests
+          </span>
+
+        </NavLink>
+
+
+        <NavLink
+          to="/manager/reports"
+          className={({ isActive }) =>
+            `manager-menu-item ${
+              isActive ? "active" : ""
+            }`
+          }
+        >
+
+          <FaChartBar />
+
+          <span>
+            Reports
+          </span>
+
+        </NavLink>
+
+
+        <NavLink
+          to="/manager/profile"
+          className={({ isActive }) =>
+            `manager-menu-item ${
+              isActive ? "active" : ""
+            }`
+          }
+        >
+
+          <FaUser />
+
+          <span>
+            Profile
+          </span>
+
+        </NavLink>
+
+
+        <NavLink
+          to="/manager/settings"
+          className={({ isActive }) =>
+            `manager-menu-item ${
+              isActive ? "active" : ""
+            }`
+          }
+        >
+
+          <FaCog />
+
+          <span>
+            Settings
+          </span>
+
+        </NavLink>
 
       </nav>
 
+
+      {/* PROFILE */}
 
       <div className="manager-profile">
 
@@ -120,8 +217,15 @@ function ManagerSidebar() {
         </div>
 
         <div>
-          <strong>Mayank Panse</strong>
-          <small>Team Manager</small>
+
+          <strong>
+            Mayank Panse
+          </strong>
+
+          <small>
+            Team Manager
+          </small>
+
         </div>
 
       </div>
