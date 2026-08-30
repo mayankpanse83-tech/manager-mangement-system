@@ -1963,3 +1963,140 @@ body {
     grid-column: auto;
   }
 }
+@media (max-width: 700px) {
+
+  .manager-team-page {
+    width: 100%;
+    padding: 14px;
+    overflow-x: hidden;
+  }
+
+  /* SEARCH + FILTER */
+
+  .team-toolbar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 0 0 16px;
+  }
+
+  .team-toolbar-left {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .team-search-box {
+    width: 100%;
+    height: 44px;
+    margin: 0;
+  }
+
+  .team-search-box input {
+    font-size: 12px;
+  }
+
+  /* FILTER BOX */
+
+  .filter-select {
+    width: 100%;
+    height: 56px;
+    padding: 8px 38px 6px 14px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .filter-select label {
+    font-size: 9px;
+    margin-bottom: 5px;
+    line-height: 1;
+  }
+
+  .filter-select select {
+    width: 100%;
+    height: 20px;
+    font-size: 11px;
+    line-height: 20px;
+  }
+
+  .filter-select > svg {
+    right: 14px;
+    bottom: 18px;
+    font-size: 10px;
+  }
+
+  /* ASSIGN TASK */
+
+  .assign-task-btn {
+    width: 100%;
+    height: 44px;
+    margin-top: 2px;
+    justify-content: center;
+    font-size: 12px;
+  }
+
+  /* LIST / GRID */
+
+  .list-toolbar {
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .view-switch {
+    width: 100%;
+    gap: 8px;
+  }
+
+  .view-switch button {
+    flex: 1;
+    height: 38px;
+    justify-content: center;
+    font-size: 11px;
+  }
+
+  .sort-area {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 9px;
+  }
+
+  .sort-area span {
+    display: block;
+    font-size: 11px;
+  }
+
+  .sort-area select {
+    width: 100%;
+    height: 38px;
+    font-size: 11px;
+  }
+
+  .filter-btn {
+    width: 100%;
+    height: 38px;
+    justify-content: center;
+    font-size: 11px;
+  }
+
+  /* TABLE */
+
+  .team-main-section {
+    width: 100%;
+    margin: 0;
+  }
+
+  .employee-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+  }
+}
