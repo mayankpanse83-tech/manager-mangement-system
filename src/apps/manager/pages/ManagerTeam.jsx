@@ -1,24 +1,19 @@
 import React, { useMemo, useState } from "react";
 import {
   FaBars,
-  FaBell,
   FaSearch,
+  FaBell,
+  FaChevronDown,
   FaUsers,
   FaUserCheck,
   FaUmbrellaBeach,
   FaExclamationCircle,
-  FaChevronDown,
-  FaChevronRight,
-  FaTimes,
   FaCalendarAlt,
   FaTasks,
   FaFileAlt,
   FaClock,
-  FaArrowRight,
-  FaCheckCircle,
-  FaUser,
-  FaPhone,
   FaEnvelope,
+  FaPhone,
   FaBriefcase,
   FaFilter,
   FaList,
@@ -26,6 +21,8 @@ import {
   FaEllipsisV,
   FaPlus,
   FaCommentAlt,
+  FaArrowRight,
+  FaTimes,
 } from "react-icons/fa";
 
 import "./ManagerTeam.css";
@@ -37,16 +34,14 @@ const employees = [
     role: "UI Designer",
     department: "Design",
     status: "Working",
-    statusClass: "working",
     checkIn: "09:12 AM",
     tasks: "4 / 5",
     taskPercent: 80,
     attendance: "98%",
     attendanceText: "Present",
     lastActivity: "10 min ago",
-    activityText: "Updated task",
-    avatar:
-      "https://randomuser.me/api/portraits/men/32.jpg",
+    activity: "Updated task",
+    avatar: "https://randomuser.me/api/portraits/men/32.jpg",
     joined: "15 Mar 2025",
     reportingTo: "Rajat Verma",
     email: "aman.sharma@company.com",
@@ -54,7 +49,7 @@ const employees = [
     dailyUpdate: "Submitted",
     currentTask: "Dashboard UI",
     performance: {
-      task: "88%",
+      completion: "88%",
       attendance: "98%",
       updates: "96%",
       onTime: "85%",
@@ -66,16 +61,14 @@ const employees = [
     role: "Developer",
     department: "Development",
     status: "Working",
-    statusClass: "working",
     checkIn: "09:05 AM",
     tasks: "5 / 5",
     taskPercent: 100,
     attendance: "96%",
     attendanceText: "Present",
     lastActivity: "25 min ago",
-    activityText: "Submitted update",
-    avatar:
-      "https://randomuser.me/api/portraits/women/44.jpg",
+    activity: "Submitted update",
+    avatar: "https://randomuser.me/api/portraits/women/44.jpg",
     joined: "20 Feb 2025",
     reportingTo: "Rajat Verma",
     email: "priya.singh@company.com",
@@ -83,7 +76,7 @@ const employees = [
     dailyUpdate: "Submitted",
     currentTask: "API Integration",
     performance: {
-      task: "92%",
+      completion: "92%",
       attendance: "96%",
       updates: "94%",
       onTime: "90%",
@@ -95,16 +88,14 @@ const employees = [
     role: "Developer",
     department: "Development",
     status: "On Leave",
-    statusClass: "leave",
     checkIn: "Today",
     tasks: "2 / 4",
     taskPercent: 50,
     attendance: "89%",
     attendanceText: "On Leave",
     lastActivity: "Today",
-    activityText: "Leave applied",
-    avatar:
-      "https://randomuser.me/api/portraits/men/46.jpg",
+    activity: "Leave applied",
+    avatar: "https://randomuser.me/api/portraits/men/46.jpg",
     joined: "05 Jan 2025",
     reportingTo: "Rajat Verma",
     email: "rahul.verma@company.com",
@@ -112,7 +103,7 @@ const employees = [
     dailyUpdate: "Pending",
     currentTask: "API Integration",
     performance: {
-      task: "74%",
+      completion: "74%",
       attendance: "89%",
       updates: "80%",
       onTime: "72%",
@@ -124,16 +115,14 @@ const employees = [
     role: "QA Engineer",
     department: "QA",
     status: "Late",
-    statusClass: "late",
     checkIn: "10:12 AM",
     tasks: "3 / 4",
     taskPercent: 75,
     attendance: "92%",
     attendanceText: "Present",
     lastActivity: "15 min ago",
-    activityText: "Checked in late",
-    avatar:
-      "https://randomuser.me/api/portraits/women/65.jpg",
+    activity: "Checked in late",
+    avatar: "https://randomuser.me/api/portraits/women/65.jpg",
     joined: "18 Apr 2025",
     reportingTo: "Rajat Verma",
     email: "neha.patel@company.com",
@@ -141,7 +130,7 @@ const employees = [
     dailyUpdate: "Submitted",
     currentTask: "Testing & QA",
     performance: {
-      task: "86%",
+      completion: "86%",
       attendance: "92%",
       updates: "91%",
       onTime: "79%",
@@ -153,16 +142,14 @@ const employees = [
     role: "UI Designer",
     department: "Design",
     status: "Working",
-    statusClass: "working",
     checkIn: "09:18 AM",
     tasks: "4 / 6",
     taskPercent: 67,
     attendance: "95%",
     attendanceText: "Present",
     lastActivity: "30 min ago",
-    activityText: "Updated task",
-    avatar:
-      "https://randomuser.me/api/portraits/men/52.jpg",
+    activity: "Updated task",
+    avatar: "https://randomuser.me/api/portraits/men/52.jpg",
     joined: "02 Mar 2025",
     reportingTo: "Rajat Verma",
     email: "vikram.joshi@company.com",
@@ -170,7 +157,7 @@ const employees = [
     dailyUpdate: "Submitted",
     currentTask: "Landing Page",
     performance: {
-      task: "84%",
+      completion: "84%",
       attendance: "95%",
       updates: "90%",
       onTime: "83%",
@@ -182,16 +169,14 @@ const employees = [
     role: "Developer",
     department: "Development",
     status: "Late",
-    statusClass: "late",
     checkIn: "10:20 AM",
     tasks: "2 / 5",
     taskPercent: 40,
     attendance: "90%",
     attendanceText: "Present",
     lastActivity: "Just now",
-    activityText: "Checked in late",
-    avatar:
-      "https://randomuser.me/api/portraits/women/50.jpg",
+    activity: "Checked in late",
+    avatar: "https://randomuser.me/api/portraits/women/50.jpg",
     joined: "09 Feb 2025",
     reportingTo: "Rajat Verma",
     email: "anjali.mehta@company.com",
@@ -199,7 +184,7 @@ const employees = [
     dailyUpdate: "Pending",
     currentTask: "Backend API",
     performance: {
-      task: "81%",
+      completion: "81%",
       attendance: "90%",
       updates: "88%",
       onTime: "76%",
@@ -207,199 +192,115 @@ const employees = [
   },
 ];
 
-const departments = [
-  "All Departments",
-  "Design",
-  "Development",
-  "QA",
-];
-
-const statuses = [
-  "All Status",
-  "Working",
-  "On Leave",
-  "Late",
-];
-
-const workloads = [
-  "All Workload",
-  "Low",
-  "Medium",
-  "High",
-];
-
 export default function ManagerTeam() {
-  const [selectedEmployee, setSelectedEmployee] = useState(
-    employees[0]
-  );
-
+  const [selectedEmployee, setSelectedEmployee] = useState(employees[0]);
   const [search, setSearch] = useState("");
-  const [department, setDepartment] =
-    useState("All Departments");
-  const [status, setStatus] =
-    useState("All Status");
-  const [workload, setWorkload] =
-    useState("All Workload");
-
-  const [view, setView] = useState("list");
-  const [sort, setSort] = useState("name");
+  const [department, setDepartment] = useState("All Departments");
+  const [status, setStatus] = useState("All Status");
+  const [workload, setWorkload] = useState("All Workload");
+  const [viewMode, setViewMode] = useState("list");
+  const [sortBy, setSortBy] = useState("name");
 
   const filteredEmployees = useMemo(() => {
-    let result = employees.filter((employee) => {
-      const searchMatch =
-        employee.name
-          .toLowerCase()
-          .includes(search.toLowerCase()) ||
-        employee.id
-          .toLowerCase()
-          .includes(search.toLowerCase());
+    let data = employees.filter((employee) => {
+      const text = search.toLowerCase();
 
-      const departmentMatch =
+      const matchesSearch =
+        employee.name.toLowerCase().includes(text) ||
+        employee.id.toLowerCase().includes(text);
+
+      const matchesDepartment =
         department === "All Departments" ||
         employee.department === department;
 
-      const statusMatch =
+      const matchesStatus =
         status === "All Status" ||
         employee.status === status;
 
-      let workloadMatch = true;
+      let matchesWorkload = true;
 
-      if (workload !== "All Workload") {
-        const completed = parseInt(
-          employee.tasks.split(" / ")[0],
-          10
-        );
-        const total = parseInt(
-          employee.tasks.split(" / ")[1],
-          10
-        );
+      const completed = Number(employee.tasks.split("/")[0].trim());
+      const total = Number(employee.tasks.split("/")[1].trim());
+      const percent = total ? (completed / total) * 100 : 0;
 
-        const percent = (completed / total) * 100;
+      if (workload === "Low") {
+        matchesWorkload = percent < 50;
+      }
 
-        if (workload === "Low") {
-          workloadMatch = percent < 50;
-        }
+      if (workload === "Medium") {
+        matchesWorkload = percent >= 50 && percent < 80;
+      }
 
-        if (workload === "Medium") {
-          workloadMatch =
-            percent >= 50 && percent < 80;
-        }
-
-        if (workload === "High") {
-          workloadMatch = percent >= 80;
-        }
+      if (workload === "High") {
+        matchesWorkload = percent >= 80;
       }
 
       return (
-        searchMatch &&
-        departmentMatch &&
-        statusMatch &&
-        workloadMatch
+        matchesSearch &&
+        matchesDepartment &&
+        matchesStatus &&
+        matchesWorkload
       );
     });
 
-    if (sort === "name") {
-      result.sort((a, b) =>
-        a.name.localeCompare(b.name)
-      );
+    if (sortBy === "name") {
+      data.sort((a, b) => a.name.localeCompare(b.name));
     }
 
-    if (sort === "attendance") {
-      result.sort(
+    if (sortBy === "attendance") {
+      data.sort(
         (a, b) =>
-          parseInt(b.attendance) -
-          parseInt(a.attendance)
+          parseInt(b.attendance) - parseInt(a.attendance)
       );
     }
 
-    return result;
-  }, [
-    search,
-    department,
-    status,
-    workload,
-    sort,
-  ]);
-
-  const handleAssignTask = () => {
-    alert(
-      `Assign task to ${selectedEmployee?.name}`
-    );
-  };
-
-  const handleMessage = () => {
-    alert(
-      `Message sent to ${selectedEmployee?.name}`
-    );
-  };
-
-  const handleViewProfile = () => {
-    alert(
-      `Full profile opened for ${selectedEmployee?.name}`
-    );
-  };
+    return data;
+  }, [search, department, status, workload, sortBy]);
 
   return (
     <div className="manager-team-page">
 
       {/* =================================================
-          HEADER
+          TOP HEADER
       ================================================= */}
 
-      <header className="team-header">
+      <div className="my-team-header">
 
-        <div className="team-header-left">
+        <div className="my-team-title">
 
-          <button
-            className="header-menu-btn"
-            type="button"
-          >
+          <button className="my-team-menu-btn" type="button">
             <FaBars />
           </button>
 
           <div>
             <h1>My Team</h1>
-
-            <p>
-              Manage and monitor your team members
-            </p>
+            <p>Manage and monitor your team members</p>
           </div>
 
         </div>
 
 
-        <div className="team-header-right">
+        <div className="my-team-header-right">
 
-          <div className="header-search">
-
+          <div className="my-team-global-search">
             <FaSearch />
 
             <input
               type="text"
               placeholder="Search anything..."
-              value={search}
-              onChange={(e) =>
-                setSearch(e.target.value)
-              }
             />
-
           </div>
 
-
-          <button
-            className="notification-btn"
-            type="button"
-          >
+          <button className="my-team-notification" type="button">
             <FaBell />
             <span>3</span>
           </button>
 
-
-          <div className="header-profile">
+          <div className="my-team-user">
 
             <img
               src="https://randomuser.me/api/portraits/men/75.jpg"
-              alt="Manager"
+              alt="Rajat Verma"
             />
 
             <div>
@@ -413,62 +314,59 @@ export default function ManagerTeam() {
 
         </div>
 
-      </header>
+      </div>
 
 
       {/* =================================================
           STATS
       ================================================= */}
 
-      <section className="team-stats">
+      <div className="my-team-stats">
 
         <StatCard
           icon={<FaUsers />}
-          iconClass="purple"
-          label="Team Size"
+          type="purple"
+          title="Team Size"
           value="12"
-          helper="Total Members"
+          footer="Total Members"
         />
 
         <StatCard
           icon={<FaUserCheck />}
-          iconClass="green"
-          label="Working"
+          type="green"
+          title="Working"
           value="10"
-          helper="83% of team"
-          helperClass="green-text"
+          footer="83% of team"
         />
 
         <StatCard
           icon={<FaUmbrellaBeach />}
-          iconClass="orange"
-          label="On Leave"
+          type="orange"
+          title="On Leave"
           value="1"
-          helper="8% of team"
-          helperClass="orange-text"
+          footer="8% of team"
         />
 
         <StatCard
           icon={<FaExclamationCircle />}
-          iconClass="red"
-          label="Needs Attention"
+          type="red"
+          title="Needs Attention"
           value="2"
-          helper="View details →"
-          helperClass="red-text"
+          footer="View details →"
         />
 
-      </section>
+      </div>
 
 
       {/* =================================================
-          FILTERS
+          SEARCH FILTER BAR
       ================================================= */}
 
-      <section className="team-toolbar">
+      <div className="my-team-filter-row">
 
-        <div className="team-toolbar-left">
+        <div className="my-team-filter-left">
 
-          <div className="team-search-box">
+          <div className="my-team-search-box">
 
             <FaSearch />
 
@@ -476,35 +374,48 @@ export default function ManagerTeam() {
               type="text"
               placeholder="Search by name or employee ID..."
               value={search}
-              onChange={(e) =>
-                setSearch(e.target.value)
-              }
+              onChange={(e) => setSearch(e.target.value)}
             />
 
           </div>
 
 
-          <FilterSelect
+          <FilterBox
             label="Department"
             value={department}
-            options={departments}
             onChange={setDepartment}
+            options={[
+              "All Departments",
+              "Design",
+              "Development",
+              "QA",
+            ]}
           />
 
 
-          <FilterSelect
+          <FilterBox
             label="Status"
             value={status}
-            options={statuses}
             onChange={setStatus}
+            options={[
+              "All Status",
+              "Working",
+              "On Leave",
+              "Late",
+            ]}
           />
 
 
-          <FilterSelect
+          <FilterBox
             label="Workload"
             value={workload}
-            options={workloads}
             onChange={setWorkload}
+            options={[
+              "All Workload",
+              "Low",
+              "Medium",
+              "High",
+            ]}
           />
 
         </div>
@@ -512,42 +423,37 @@ export default function ManagerTeam() {
 
         <button
           className="assign-task-btn"
-          onClick={handleAssignTask}
           type="button"
+          onClick={() => alert("Assign Task")}
         >
           <FaPlus />
           Assign Task
         </button>
 
-      </section>
+      </div>
 
 
       {/* =================================================
-          VIEW / SORT BAR
+          LIST / GRID BAR
       ================================================= */}
 
-      <section className="list-toolbar">
+      <div className="my-team-view-row">
 
         <div className="view-switch">
 
           <button
-            className={
-              view === "list" ? "active" : ""
-            }
-            onClick={() => setView("list")}
             type="button"
+            className={viewMode === "list" ? "active" : ""}
+            onClick={() => setViewMode("list")}
           >
             <FaList />
             List View
           </button>
 
-
           <button
-            className={
-              view === "grid" ? "active" : ""
-            }
-            onClick={() => setView("grid")}
             type="button"
+            className={viewMode === "grid" ? "active" : ""}
+            onClick={() => setViewMode("grid")}
           >
             <FaThLarge />
             Grid View
@@ -556,96 +462,80 @@ export default function ManagerTeam() {
         </div>
 
 
-        <div className="sort-area">
+        <div className="sort-filter">
 
           <span>Sort by:</span>
 
           <select
-            value={sort}
-            onChange={(e) =>
-              setSort(e.target.value)
-            }
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
           >
             <option value="name">Name A-Z</option>
-            <option value="attendance">
-              Attendance
-            </option>
+            <option value="attendance">Attendance</option>
           </select>
 
-
-          <button
-            className="filter-btn"
-            type="button"
-          >
+          <button type="button">
             <FaFilter />
             Filter
           </button>
 
         </div>
 
-      </section>
+      </div>
 
 
       {/* =================================================
-          MAIN CONTENT
+          CONTENT
       ================================================= */}
 
-      <section className="team-main-section">
+      <div className="my-team-content">
 
-        <div
-          className={
-            view === "grid"
-              ? "employee-grid-view"
-              : "employee-table-wrapper"
-          }
-        >
+        {/* TABLE / GRID */}
 
-          {view === "list" ? (
+        <div className="my-team-table-area">
 
-            <table className="employee-table">
+          {viewMode === "list" ? (
 
-              <thead>
+            <div className="my-team-table-scroll">
 
-                <tr>
+              <table className="my-team-table">
 
-                  <th>EMPLOYEE</th>
-                  <th>DEPARTMENT</th>
-                  <th>STATUS</th>
-                  <th>TASKS</th>
-                  <th>ATTENDANCE</th>
-                  <th>LAST ACTIVITY</th>
-                  <th>ACTIONS</th>
+                <thead>
 
-                </tr>
+                  <tr>
+                    <th>EMPLOYEE</th>
+                    <th>DEPARTMENT</th>
+                    <th>STATUS</th>
+                    <th>TASKS</th>
+                    <th>ATTENDANCE</th>
+                    <th>LAST ACTIVITY</th>
+                    <th>ACTIONS</th>
+                  </tr>
 
-              </thead>
+                </thead>
 
 
-              <tbody>
+                <tbody>
 
-                {filteredEmployees.map(
-                  (employee) => (
+                  {filteredEmployees.map((employee) => (
 
                     <tr
                       key={employee.id}
-                      className={
-                        selectedEmployee?.id ===
-                        employee.id
-                          ? "selected-row"
-                          : ""
-                      }
                       onClick={() =>
                         setSelectedEmployee(employee)
                       }
+                      className={
+                        selectedEmployee?.id === employee.id
+                          ? "selected"
+                          : ""
+                      }
                     >
-
-                      {/* EMPLOYEE */}
 
                       <td>
 
                         <div className="employee-info">
 
-                          <div className="avatar-wrap">
+                          <div className="employee-avatar-wrap">
 
                             <img
                               src={employee.avatar}
@@ -653,13 +543,13 @@ export default function ManagerTeam() {
                             />
 
                             <span
-                              className={`avatar-status ${employee.statusClass}`}
+                              className={`employee-online ${employee.status}`}
                             ></span>
 
                           </div>
 
 
-                          <div>
+                          <div className="employee-name-area">
 
                             <strong>
                               {employee.name}
@@ -680,28 +570,21 @@ export default function ManagerTeam() {
                       </td>
 
 
-                      {/* DEPARTMENT */}
-
                       <td>
-                        <span className="department-text">
-                          {employee.department}
-                        </span>
+                        {employee.department}
                       </td>
 
-
-                      {/* STATUS */}
 
                       <td>
 
                         <div
-                          className={`employee-status ${employee.statusClass}`}
+                          className={`employee-status ${employee.status}`}
                         >
                           ● {employee.status}
                         </div>
 
-                        <small className="status-time">
-                          {employee.status ===
-                          "On Leave"
+                        <small className="status-subtext">
+                          {employee.status === "On Leave"
                             ? "Sick Leave"
                             : `Checked in ${employee.checkIn}`}
                         </small>
@@ -709,61 +592,38 @@ export default function ManagerTeam() {
                       </td>
 
 
-                      {/* TASKS */}
-
                       <td>
 
-                        <div className="task-progress-wrap">
+                        <div className="task-number">
+                          <strong>{employee.tasks}</strong>
+                          <span>{employee.taskPercent}%</span>
+                        </div>
 
-                          <div>
-                            <strong>
-                              {employee.tasks}
-                            </strong>
-
-                            <small>
-                              {employee.taskPercent}%
-                            </small>
-                          </div>
-
-                          <div className="mini-progress">
-                            <span
-                              className={
-                                employee.statusClass ===
-                                "leave"
-                                  ? "leave-bar"
-                                  : employee.statusClass ===
-                                    "late"
-                                  ? "late-bar"
-                                  : "green-bar"
-                              }
-                              style={{
-                                width:
-                                  `${employee.taskPercent}%`,
-                              }}
-                            />
-                          </div>
-
+                        <div className="task-progress">
+                          <span
+                            style={{
+                              width:
+                                `${employee.taskPercent}%`,
+                            }}
+                            className={employee.status}
+                          ></span>
                         </div>
 
                       </td>
 
 
-                      {/* ATTENDANCE */}
-
                       <td>
 
-                        <div className="attendance-value">
+                        <strong className="attendance-number">
                           {employee.attendance}
-                        </div>
+                        </strong>
 
-                        <small className="attendance-label">
+                        <small className="attendance-text">
                           {employee.attendanceText}
                         </small>
 
                       </td>
 
-
-                      {/* LAST ACTIVITY */}
 
                       <td>
 
@@ -772,25 +632,21 @@ export default function ManagerTeam() {
                         </strong>
 
                         <small className="activity-text">
-                          {employee.activityText}
+                          {employee.activity}
                         </small>
 
                       </td>
 
 
-                      {/* ACTION */}
-
                       <td>
 
                         <button
-                          className="row-action"
+                          className="table-menu-btn"
+                          type="button"
                           onClick={(e) => {
                             e.stopPropagation();
-                            setSelectedEmployee(
-                              employee
-                            );
+                            setSelectedEmployee(employee);
                           }}
-                          type="button"
                         >
                           <FaEllipsisV />
                         </button>
@@ -799,69 +655,95 @@ export default function ManagerTeam() {
 
                     </tr>
 
-                  )
-                )}
+                  ))}
 
-              </tbody>
+                </tbody>
 
-            </table>
+              </table>
+
+            </div>
 
           ) : (
 
-            <div className="employee-grid">
+            <div className="employee-grid-view">
 
-              {filteredEmployees.map(
-                (employee) => (
+              {filteredEmployees.map((employee) => (
 
-                  <button
-                    key={employee.id}
-                    className="employee-grid-card"
-                    onClick={() =>
-                      setSelectedEmployee(
-                        employee
-                      )
-                    }
-                    type="button"
-                  >
+                <button
+                  key={employee.id}
+                  type="button"
+                  className="employee-grid-card"
+                  onClick={() => setSelectedEmployee(employee)}
+                >
 
-                    <img
-                      src={employee.avatar}
-                      alt={employee.name}
-                    />
+                  <img
+                    src={employee.avatar}
+                    alt={employee.name}
+                  />
 
-                    <strong>
-                      {employee.name}
-                    </strong>
+                  <strong>
+                    {employee.name}
+                  </strong>
 
-                    <span>
-                      {employee.role}
-                    </span>
+                  <span>
+                    {employee.role}
+                  </span>
 
-                    <small>
-                      {employee.status}
-                    </small>
+                  <small>
+                    ● {employee.status}
+                  </small>
 
-                  </button>
+                </button>
 
-                )
-              )}
+              ))}
 
             </div>
 
           )}
 
+
+          {/* PAGINATION */}
+
+          <div className="my-team-pagination">
+
+            <span>
+              Showing 1 to 6 of 12 members
+            </span>
+
+            <div className="pagination-buttons">
+
+              <button type="button">←</button>
+              <button className="active" type="button">1</button>
+              <button type="button">2</button>
+              <button type="button">→</button>
+
+            </div>
+
+            <div className="show-per-page">
+              <span>Show</span>
+
+              <select defaultValue="10">
+                <option value="10">10</option>
+                <option value="20">20</option>
+              </select>
+
+              <span>per page</span>
+            </div>
+
+          </div>
+
         </div>
 
 
         {/* =================================================
-            RIGHT DETAILS PANEL
+            RIGHT EMPLOYEE DETAILS
         ================================================= */}
 
         {selectedEmployee && (
 
-          <aside className="employee-details-panel">
+          <aside className="employee-details">
 
-            <div className="details-header">
+            <div className="details-title">
 
               <h2>
                 Employee Details
@@ -869,9 +751,7 @@ export default function ManagerTeam() {
 
               <button
                 type="button"
-                onClick={() =>
-                  setSelectedEmployee(null)
-                }
+                onClick={() => setSelectedEmployee(null)}
               >
                 <FaTimes />
               </button>
@@ -879,9 +759,9 @@ export default function ManagerTeam() {
             </div>
 
 
-            <div className="employee-profile-top">
+            <div className="details-profile">
 
-              <div className="profile-image-wrap">
+              <div className="details-avatar">
 
                 <img
                   src={selectedEmployee.avatar}
@@ -889,34 +769,34 @@ export default function ManagerTeam() {
                 />
 
                 <span
-                  className={`profile-status-dot ${selectedEmployee.statusClass}`}
+                  className={`details-dot ${selectedEmployee.status}`}
                 ></span>
 
               </div>
 
 
-              <div className="profile-basic">
+              <div className="details-name">
 
-                <h3>
+                <strong>
                   {selectedEmployee.name}
-                </h3>
-
-                <span>
-                  {selectedEmployee.role}
-                </span>
+                </strong>
 
                 <small>
-                  {selectedEmployee.id}
+                  {selectedEmployee.role}
                 </small>
 
+                <em>
+                  {selectedEmployee.id}
+                </em>
+
               </div>
 
 
-              <div
-                className={`profile-working-status ${selectedEmployee.statusClass}`}
+              <span
+                className={`details-status ${selectedEmployee.status}`}
               >
                 ● {selectedEmployee.status}
-              </div>
+              </span>
 
             </div>
 
@@ -925,10 +805,7 @@ export default function ManagerTeam() {
 
             <div className="details-tabs">
 
-              <button
-                className="active"
-                type="button"
-              >
+              <button className="active" type="button">
                 Overview
               </button>
 
@@ -951,48 +828,38 @@ export default function ManagerTeam() {
             </div>
 
 
-            {/* GENERAL INFO */}
+            {/* BASIC DETAILS */}
 
-            <div className="details-section">
+            <div className="details-block">
 
               <DetailRow
                 icon={<FaBriefcase />}
                 label="Department"
-                value={
-                  selectedEmployee.department
-                }
+                value={selectedEmployee.department}
               />
 
               <DetailRow
                 icon={<FaCalendarAlt />}
                 label="Joined On"
-                value={
-                  selectedEmployee.joined
-                }
+                value={selectedEmployee.joined}
               />
 
               <DetailRow
-                icon={<FaUser />}
+                icon={<FaUserCheck />}
                 label="Reporting To"
-                value={
-                  selectedEmployee.reportingTo
-                }
+                value={selectedEmployee.reportingTo}
               />
 
               <DetailRow
                 icon={<FaEnvelope />}
                 label="Email"
-                value={
-                  selectedEmployee.email
-                }
+                value={selectedEmployee.email}
               />
 
               <DetailRow
                 icon={<FaPhone />}
                 label="Phone"
-                value={
-                  selectedEmployee.phone
-                }
+                value={selectedEmployee.phone}
               />
 
             </div>
@@ -1000,54 +867,39 @@ export default function ManagerTeam() {
 
             {/* TODAY ACTIVITY */}
 
-            <div className="details-section">
+            <div className="details-block">
 
-              <h4>
+              <h3>
                 Today's Activity
-              </h4>
-
+              </h3>
 
               <ActivityRow
-                icon={<FaCheckCircle />}
+                icon={<FaClock />}
                 label="Check In"
                 value={selectedEmployee.checkIn}
-                className="success"
               />
-
 
               <ActivityRow
                 icon={<FaTasks />}
                 label="Tasks Completed"
                 value={
-                  selectedEmployee.tasks.split(
-                    " / "
-                  )[0]
+                  selectedEmployee.tasks.split("/")[0].trim()
                 }
               />
-
 
               <ActivityRow
                 icon={<FaFileAlt />}
                 label="Daily Update"
-                value={
-                  selectedEmployee.dailyUpdate
-                }
-                className={
-                  selectedEmployee.dailyUpdate ===
-                  "Submitted"
-                    ? "success"
-                    : "warning"
+                value={selectedEmployee.dailyUpdate}
+                success={
+                  selectedEmployee.dailyUpdate === "Submitted"
                 }
               />
-
 
               <ActivityRow
                 icon={<FaBriefcase />}
                 label="Current Task"
-                value={
-                  selectedEmployee.currentTask
-                }
-                className="orange"
+                value={selectedEmployee.currentTask}
               />
 
             </div>
@@ -1055,51 +907,45 @@ export default function ManagerTeam() {
 
             {/* PERFORMANCE */}
 
-            <div className="details-section">
+            <div className="details-block">
 
-              <h4>
-                Performance{" "}
-                <span>(This Month)</span>
-              </h4>
-
+              <h3>
+                Performance <span>(This Month)</span>
+              </h3>
 
               <div className="performance-grid">
 
-                <PerformanceCard
+                <Performance
                   title="Task Completion"
                   value={
-                    selectedEmployee.performance
-                      .task
+                    selectedEmployee.performance.completion
                   }
                   change="↑ 8%"
                   positive
                 />
 
-                <PerformanceCard
+                <Performance
                   title="Attendance"
                   value={
-                    selectedEmployee.performance
-                      .attendance
+                    selectedEmployee.performance.attendance
                   }
                   change="↑ 5%"
                   positive
                 />
 
-                <PerformanceCard
+                <Performance
                   title="Updates Submission"
                   value={
-                    selectedEmployee.performance
-                      .updates
+                    selectedEmployee.performance.updates
                   }
                   change="↑ 12%"
                   positive
                 />
 
-                <PerformanceCard
+                <Performance
                   title="On-Time Tasks"
                   value={
-                    selectedEmployee.performance
-                      .onTime
+                    selectedEmployee.performance.onTime
                   }
                   change="↓ 3%"
                 />
@@ -1109,24 +955,23 @@ export default function ManagerTeam() {
             </div>
 
 
-            {/* ACTIONS */}
+            {/* ACTION BUTTONS */}
 
             <div className="details-actions">
 
               <button
                 className="message-btn"
-                onClick={handleMessage}
                 type="button"
+                onClick={() => alert("Message")}
               >
                 <FaCommentAlt />
                 Message
               </button>
 
-
               <button
                 className="profile-btn"
-                onClick={handleViewProfile}
                 type="button"
+                onClick={() => alert("Full Profile")}
               >
                 View Full Profile
                 <FaArrowRight />
@@ -1138,54 +983,6 @@ export default function ManagerTeam() {
 
         )}
 
-      </section>
-
-
-      {/* =================================================
-          FOOTER
-      ================================================= */}
-
-      <div className="team-footer">
-
-        <span>
-          Showing 1 to{" "}
-          {filteredEmployees.length} of 12 members
-        </span>
-
-        <div className="pagination">
-
-          <button type="button">
-            ←
-          </button>
-
-          <button
-            className="active"
-            type="button"
-          >
-            1
-          </button>
-
-          <button type="button">
-            2
-          </button>
-
-          <button type="button">
-            →
-          </button>
-
-        </div>
-
-        <div className="per-page">
-          <span>Show</span>
-
-          <select defaultValue="10">
-            <option value="10">10</option>
-            <option value="20">20</option>
-          </select>
-
-          <span>per page</span>
-        </div>
-
       </div>
 
     </div>
@@ -1194,32 +991,31 @@ export default function ManagerTeam() {
 
 
 /* =====================================================
-   COMPONENTS
+   SMALL COMPONENTS
 ===================================================== */
 
 function StatCard({
   icon,
-  iconClass,
-  label,
+  type,
+  title,
   value,
-  helper,
-  helperClass = "",
+  footer,
 }) {
   return (
-    <div className="team-stat-card">
+    <div className="my-team-stat-card">
 
-      <div
-        className={`team-stat-icon ${iconClass}`}
-      >
+      <div className={`stat-icon ${type}`}>
         {icon}
       </div>
 
-      <div>
-        <span>{label}</span>
+      <div className="stat-content">
+
+        <span>{title}</span>
+
         <strong>{value}</strong>
-        <small className={helperClass}>
-          {helper}
-        </small>
+
+        <small>{footer}</small>
+
       </div>
 
     </div>
@@ -1227,22 +1023,22 @@ function StatCard({
 }
 
 
-function FilterSelect({
+function FilterBox({
   label,
   value,
-  options,
   onChange,
+  options,
 }) {
   return (
-    <div className="filter-select">
+    <div className="filter-box">
 
-      <label>{label}</label>
+      <label>
+        {label}
+      </label>
 
       <select
         value={value}
-        onChange={(e) =>
-          onChange(e.target.value)
-        }
+        onChange={(e) => onChange(e.target.value)}
       >
 
         {options.map((option) => (
@@ -1255,8 +1051,6 @@ function FilterSelect({
         ))}
 
       </select>
-
-      <FaChevronDown />
 
     </div>
   );
@@ -1271,15 +1065,15 @@ function DetailRow({
   return (
     <div className="detail-row">
 
-      <div className="detail-icon">
+      <span className="detail-row-icon">
         {icon}
-      </div>
+      </span>
 
-      <span>
+      <span className="detail-row-label">
         {label}
       </span>
 
-      <strong>
+      <strong className="detail-row-value">
         {value}
       </strong>
 
@@ -1292,16 +1086,20 @@ function ActivityRow({
   icon,
   label,
   value,
-  className = "",
+  success,
 }) {
   return (
-    <div className="detail-activity-row">
+    <div className="activity-row">
 
-      <div
-        className={`activity-icon ${className}`}
+      <span
+        className={
+          success
+            ? "activity-icon success"
+            : "activity-icon"
+        }
       >
         {icon}
-      </div>
+      </span>
 
       <span>
         {label}
@@ -1316,11 +1114,11 @@ function ActivityRow({
 }
 
 
-function PerformanceCard({
+function Performance({
   title,
   value,
   change,
-  positive = false,
+  positive,
 }) {
   return (
     <div className="performance-card">
@@ -1335,7 +1133,9 @@ function PerformanceCard({
 
       <small
         className={
-          positive ? "positive" : "negative"
+          positive
+            ? "positive"
+            : "negative"
         }
       >
         {change}
