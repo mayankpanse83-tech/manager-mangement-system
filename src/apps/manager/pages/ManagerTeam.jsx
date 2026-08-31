@@ -1,34 +1,39 @@
 import React, { useMemo, useState } from "react";
 
 import {
+  FaBars,
   FaSearch,
+  FaBell,
+  FaChevronDown,
   FaUsers,
   FaUserCheck,
   FaUmbrellaBeach,
   FaExclamationCircle,
-  FaFilter,
   FaList,
   FaThLarge,
+  FaFilter,
   FaEllipsisV,
   FaTimes,
+  FaBriefcase,
   FaCalendarAlt,
+  FaEnvelope,
+  FaPhone,
   FaTasks,
   FaFileAlt,
-  FaPhone,
-  FaEnvelope,
-  FaBriefcase,
-  FaArrowRight,
+  FaClock,
   FaCommentAlt,
+  FaArrowRight,
+  FaPlus,
 } from "react-icons/fa";
 
 import "./ManagerTeam.css";
 
 
 /* =====================================================
-   TEAM DATA
+   DATA
 ===================================================== */
 
-const teamMembers = [
+const teamData = [
   {
     id: "EMP-001",
     name: "Aman Sharma",
@@ -37,7 +42,7 @@ const teamMembers = [
     status: "Working",
     checkIn: "09:12 AM",
     tasks: "4 / 5",
-    taskPercent: 80,
+    percent: 80,
     attendance: "98%",
     attendanceText: "Present",
     lastActivity: "10 min ago",
@@ -49,14 +54,8 @@ const teamMembers = [
     phone: "+91 98765 43210",
     dailyUpdate: "Submitted",
     currentTask: "Dashboard UI",
-    performance: {
-      task: "88%",
-      attendance: "98%",
-      updates: "96%",
-      onTime: "85%",
-    },
+    performance: ["88%", "98%", "96%", "85%"],
   },
-
   {
     id: "EMP-002",
     name: "Priya Singh",
@@ -65,7 +64,7 @@ const teamMembers = [
     status: "Working",
     checkIn: "09:05 AM",
     tasks: "5 / 5",
-    taskPercent: 100,
+    percent: 100,
     attendance: "96%",
     attendanceText: "Present",
     lastActivity: "25 min ago",
@@ -77,14 +76,8 @@ const teamMembers = [
     phone: "+91 98765 42310",
     dailyUpdate: "Submitted",
     currentTask: "API Integration",
-    performance: {
-      task: "92%",
-      attendance: "96%",
-      updates: "94%",
-      onTime: "90%",
-    },
+    performance: ["92%", "96%", "94%", "90%"],
   },
-
   {
     id: "EMP-003",
     name: "Rahul Verma",
@@ -93,7 +86,7 @@ const teamMembers = [
     status: "On Leave",
     checkIn: "Today",
     tasks: "2 / 4",
-    taskPercent: 50,
+    percent: 50,
     attendance: "89%",
     attendanceText: "On Leave",
     lastActivity: "Today",
@@ -105,14 +98,8 @@ const teamMembers = [
     phone: "+91 98765 42110",
     dailyUpdate: "Pending",
     currentTask: "API Integration",
-    performance: {
-      task: "74%",
-      attendance: "89%",
-      updates: "80%",
-      onTime: "72%",
-    },
+    performance: ["74%", "89%", "80%", "72%"],
   },
-
   {
     id: "EMP-004",
     name: "Neha Patel",
@@ -121,7 +108,7 @@ const teamMembers = [
     status: "Late",
     checkIn: "10:12 AM",
     tasks: "3 / 4",
-    taskPercent: 75,
+    percent: 75,
     attendance: "92%",
     attendanceText: "Present",
     lastActivity: "15 min ago",
@@ -133,14 +120,8 @@ const teamMembers = [
     phone: "+91 98765 42990",
     dailyUpdate: "Submitted",
     currentTask: "Testing & QA",
-    performance: {
-      task: "86%",
-      attendance: "92%",
-      updates: "91%",
-      onTime: "79%",
-    },
+    performance: ["86%", "92%", "91%", "79%"],
   },
-
   {
     id: "EMP-005",
     name: "Vikram Joshi",
@@ -149,7 +130,7 @@ const teamMembers = [
     status: "Working",
     checkIn: "09:18 AM",
     tasks: "4 / 6",
-    taskPercent: 67,
+    percent: 67,
     attendance: "95%",
     attendanceText: "Present",
     lastActivity: "30 min ago",
@@ -161,14 +142,8 @@ const teamMembers = [
     phone: "+91 98765 43555",
     dailyUpdate: "Submitted",
     currentTask: "Landing Page",
-    performance: {
-      task: "84%",
-      attendance: "95%",
-      updates: "90%",
-      onTime: "83%",
-    },
+    performance: ["84%", "95%", "90%", "83%"],
   },
-
   {
     id: "EMP-006",
     name: "Anjali Mehta",
@@ -177,7 +152,7 @@ const teamMembers = [
     status: "Late",
     checkIn: "10:20 AM",
     tasks: "2 / 5",
-    taskPercent: 40,
+    percent: 40,
     attendance: "90%",
     attendanceText: "Present",
     lastActivity: "Just now",
@@ -189,14 +164,18 @@ const teamMembers = [
     phone: "+91 98765 43444",
     dailyUpdate: "Pending",
     currentTask: "Backend API",
-    performance: {
-      task: "81%",
-      attendance: "90%",
-      updates: "88%",
-      onTime: "76%",
-    },
+    performance: ["81%", "90%", "88%", "76%"],
   },
 ];
+
+
+/* =====================================================
+   HELPER
+===================================================== */
+
+const cleanStatus = (status) => {
+  return status.toLowerCase().replace(/\s+/g, "-");
+};
 
 
 /* =====================================================
@@ -205,8 +184,7 @@ const teamMembers = [
 
 function ManagerTeam() {
 
-  const [selectedMember, setSelectedMember] =
-    useState(teamMembers[0]);
+  const [selected, setSelected] = useState(teamData[0]);
 
   const [search, setSearch] = useState("");
 
@@ -216,6 +194,9 @@ function ManagerTeam() {
   const [status, setStatus] =
     useState("All Status");
 
+  const [workload, setWorkload] =
+    useState("All Workload");
+
   const [view, setView] =
     useState("list");
 
@@ -224,119 +205,195 @@ function ManagerTeam() {
      FILTER
   =================================================== */
 
-  const filteredMembers = useMemo(() => {
+  const filteredData = useMemo(() => {
 
-    return teamMembers.filter((member) => {
+    return teamData.filter((item) => {
 
-      const searchValue =
+      const query =
         search.trim().toLowerCase();
 
-      const matchesSearch =
-        member.name
+      const searchMatch =
+        item.name
           .toLowerCase()
-          .includes(searchValue) ||
-        member.id
+          .includes(query) ||
+        item.id
           .toLowerCase()
-          .includes(searchValue);
+          .includes(query);
 
-      const matchesDepartment =
+      const departmentMatch =
         department === "All Departments" ||
-        member.department === department;
+        item.department === department;
 
-      const matchesStatus =
+      const statusMatch =
         status === "All Status" ||
-        member.status === status;
+        item.status === status;
+
+      let workloadMatch = true;
+
+      if (workload === "Low") {
+        workloadMatch =
+          item.percent < 50;
+      }
+
+      if (workload === "Medium") {
+        workloadMatch =
+          item.percent >= 50 &&
+          item.percent < 80;
+      }
+
+      if (workload === "High") {
+        workloadMatch =
+          item.percent >= 80;
+      }
 
       return (
-        matchesSearch &&
-        matchesDepartment &&
-        matchesStatus
+        searchMatch &&
+        departmentMatch &&
+        statusMatch &&
+        workloadMatch
       );
     });
 
-  }, [search, department, status]);
+  }, [
+    search,
+    department,
+    status,
+    workload
+  ]);
 
+
+  /* ===================================================
+     UI
+  =================================================== */
 
   return (
+    <div className="mt-page">
 
-    <div className="manager-team-page">
+      {/* HEADER */}
+
+      <div className="mt-header">
+
+        <div className="mt-header-left">
+
+          <button
+            type="button"
+            className="mt-menu-btn"
+          >
+            <FaBars />
+          </button>
+
+          <div>
+            <h1>My Team</h1>
+
+            <p>
+              Manage and monitor your team members
+            </p>
+          </div>
+
+        </div>
 
 
-      {/* =================================================
-         PAGE TITLE
-      ================================================= */}
+        <div className="mt-header-right">
 
-      <div className="team-page-title">
+          <div className="mt-header-search">
 
-        <div>
+            <FaSearch />
 
-          <h1>
-            My Team
-          </h1>
+            <input
+              type="text"
+              placeholder="Search anything..."
+            />
 
-          <p>
-            Manage and monitor your team members
-          </p>
+          </div>
+
+
+          <button
+            type="button"
+            className="mt-notification"
+          >
+            <FaBell />
+            <span>3</span>
+          </button>
+
+
+          <div className="mt-user">
+
+            <div className="mt-user-avatar">
+              R
+            </div>
+
+            <div className="mt-user-text">
+
+              <strong>
+                Rajat Verma
+              </strong>
+
+              <small>
+                Team Manager
+              </small>
+
+            </div>
+
+            <FaChevronDown />
+
+          </div>
 
         </div>
 
       </div>
 
 
-      {/* =================================================
-         STAT CARDS
-      ================================================= */}
+      {/* STATS */}
 
-      <div className="team-stats-grid">
+      <div className="mt-stats">
 
-        <TeamStat
+        <Stat
           icon={<FaUsers />}
+          type="purple"
           title="Team Size"
           value="12"
-          bottom="Total Members"
-          className="purple"
+          sub="Total Members"
         />
 
-        <TeamStat
+        <Stat
           icon={<FaUserCheck />}
+          type="green"
           title="Working"
           value="10"
-          bottom="83% of team"
-          className="green"
+          sub="83% of team"
         />
 
-        <TeamStat
+        <Stat
           icon={<FaUmbrellaBeach />}
+          type="orange"
           title="On Leave"
           value="1"
-          bottom="8% of team"
-          className="orange"
+          sub="8% of team"
         />
 
-        <TeamStat
+        <Stat
           icon={<FaExclamationCircle />}
+          type="red"
           title="Needs Attention"
           value="2"
-          bottom="View details →"
-          className="red"
+          sub="View details →"
         />
 
       </div>
 
 
-      {/* =================================================
-         SEARCH / FILTER
-      ================================================= */}
+      {/* FILTER */}
 
-      <div className="team-filter-container">
+      <div className="mt-filter">
 
-        <div className="team-filter-left">
+        <div className="mt-filter-group">
 
-          <div className="team-search">
+          <div className="mt-search">
 
             <FaSearch />
 
             <input
+              type="text"
               value={search}
               onChange={(e) =>
                 setSearch(e.target.value)
@@ -348,13 +405,11 @@ function ManagerTeam() {
 
 
           <select
-            className="team-select"
             value={department}
             onChange={(e) =>
               setDepartment(e.target.value)
             }
           >
-
             <option>
               All Departments
             </option>
@@ -375,13 +430,11 @@ function ManagerTeam() {
 
 
           <select
-            className="team-select"
             value={status}
             onChange={(e) =>
               setStatus(e.target.value)
             }
           >
-
             <option>
               All Status
             </option>
@@ -402,10 +455,11 @@ function ManagerTeam() {
 
 
           <select
-            className="team-select"
-            defaultValue="All Workload"
+            value={workload}
+            onChange={(e) =>
+              setWorkload(e.target.value)
+            }
           >
-
             <option>
               All Workload
             </option>
@@ -428,26 +482,24 @@ function ManagerTeam() {
 
 
         <button
-          className="assign-task"
           type="button"
+          className="mt-assign"
           onClick={() =>
             alert("Assign Task")
           }
         >
-          <span>+</span>
+          <FaPlus />
           Assign Task
         </button>
 
       </div>
 
 
-      {/* =================================================
-         LIST / GRID
-      ================================================= */}
+      {/* VIEW */}
 
-      <div className="team-view-toolbar">
+      <div className="mt-viewbar">
 
-        <div className="team-view-buttons">
+        <div className="mt-view-buttons">
 
           <button
             type="button"
@@ -483,7 +535,7 @@ function ManagerTeam() {
         </div>
 
 
-        <div className="team-sort">
+        <div className="mt-sort">
 
           <span>
             Sort by:
@@ -499,16 +551,15 @@ function ManagerTeam() {
               Name Z-A
             </option>
 
-            <option>
-              Attendance
-            </option>
-
           </select>
 
 
           <button type="button">
+
             <FaFilter />
+
             Filter
+
           </button>
 
         </div>
@@ -516,21 +567,17 @@ function ManagerTeam() {
       </div>
 
 
-      {/* =================================================
-         BODY
-      ================================================= */}
+      {/* CONTENT */}
 
-      <div className="team-body">
+      <div className="mt-content">
 
-        {/* TABLE */}
-
-        <div className="team-table-area">
+        <div className="mt-table-area">
 
           {view === "list" ? (
 
-            <div className="team-table-scroll">
+            <div className="mt-table-scroll">
 
-              <table>
+              <table className="mt-table">
 
                 <thead>
 
@@ -571,57 +618,55 @@ function ManagerTeam() {
 
                 <tbody>
 
-                  {filteredMembers.map(
-                    (member) => (
+                  {filteredData.map(
+                    (item) => (
 
                       <tr
-                        key={member.id}
+                        key={item.id}
                         className={
-                          selectedMember?.id === member.id
-                            ? "selected-row"
+                          selected?.id === item.id
+                            ? "selected"
                             : ""
                         }
                         onClick={() =>
-                          setSelectedMember(member)
+                          setSelected(item)
                         }
                       >
 
-                        {/* Employee */}
-
                         <td>
 
-                          <div className="team-employee">
+                          <div className="mt-employee">
 
-                            <div className="team-avatar">
+                            <div className="mt-photo">
 
                               <img
-                                src={member.avatar}
-                                alt={member.name}
+                                src={item.avatar}
+                                alt={item.name}
                               />
 
                               <span
                                 className={
-                                  member.status
-                                    .toLowerCase()
-                                    .replace(" ", "-")
+                                  cleanStatus(
+                                    item.status
+                                  )
                                 }
                               />
 
                             </div>
 
 
-                            <div className="team-employee-text">
+                            <div className="mt-employee-text">
 
                               <strong>
-                                {member.name}
+                                {item.name}
                               </strong>
 
                               <small>
-                                {member.role}
+                                {item.role}
                               </small>
 
                               <em>
-                                {member.id}
+                                {item.id}
                               </em>
 
                             </div>
@@ -631,63 +676,60 @@ function ManagerTeam() {
                         </td>
 
 
-                        {/* Department */}
-
                         <td>
-                          {member.department}
+                          {item.department}
                         </td>
 
-
-                        {/* Status */}
 
                         <td>
 
                           <strong
                             className={
-                              `status-${member.status
-                                .toLowerCase()
-                                .replace(" ", "-")}`
+                              `mt-status ${cleanStatus(
+                                item.status
+                              )}`
                             }
                           >
-                            ● {member.status}
+                            ● {item.status}
                           </strong>
 
-                          <small className="status-time">
-                            {member.status === "On Leave"
+                          <small className="mt-status-sub">
+
+                            {item.status === "On Leave"
                               ? "Sick Leave"
-                              : `Checked in ${member.checkIn}`}
+                              : `Checked in ${item.checkIn}`}
+
                           </small>
 
                         </td>
 
 
-                        {/* Tasks */}
-
                         <td>
 
-                          <div className="task-value">
+                          <div className="mt-task-info">
 
                             <strong>
-                              {member.tasks}
+                              {item.tasks}
                             </strong>
 
                             <span>
-                              {member.taskPercent}%
+                              {item.percent}%
                             </span>
 
                           </div>
 
-                          <div className="task-bar">
+
+                          <div className="mt-progress">
 
                             <span
                               className={
-                                member.status
-                                  .toLowerCase()
-                                  .replace(" ", "-")
+                                cleanStatus(
+                                  item.status
+                                )
                               }
                               style={{
                                 width:
-                                  `${member.taskPercent}%`,
+                                  `${item.percent}%`
                               }}
                             />
 
@@ -696,47 +738,43 @@ function ManagerTeam() {
                         </td>
 
 
-                        {/* Attendance */}
-
                         <td>
 
-                          <strong>
-                            {member.attendance}
+                          <strong className="mt-attendance">
+                            {item.attendance}
                           </strong>
 
-                          <small className="present-text">
-                            {member.attendanceText}
+                          <small>
+                            {item.attendanceText}
                           </small>
 
                         </td>
 
 
-                        {/* Activity */}
-
                         <td>
 
-                          <strong className="activity-main">
-                            {member.lastActivity}
+                          <strong className="mt-activity">
+                            {item.lastActivity}
                           </strong>
 
-                          <small className="activity-sub">
-                            {member.activity}
+                          <small>
+                            {item.activity}
                           </small>
 
                         </td>
 
-
-                        {/* Action */}
 
                         <td>
 
                           <button
                             type="button"
-                            className="action-button"
+                            className="mt-action"
                             onClick={(e) => {
+
                               e.stopPropagation();
 
-                              setSelectedMember(member);
+                              setSelected(item);
+
                             }}
                           >
                             <FaEllipsisV />
@@ -757,35 +795,35 @@ function ManagerTeam() {
 
           ) : (
 
-            <div className="team-grid">
+            <div className="mt-grid">
 
-              {filteredMembers.map(
-                (member) => (
+              {filteredData.map(
+                (item) => (
 
                   <button
-                    key={member.id}
                     type="button"
-                    className="team-grid-card"
+                    key={item.id}
+                    className="mt-grid-card"
                     onClick={() =>
-                      setSelectedMember(member)
+                      setSelected(item)
                     }
                   >
 
                     <img
-                      src={member.avatar}
-                      alt={member.name}
+                      src={item.avatar}
+                      alt={item.name}
                     />
 
                     <strong>
-                      {member.name}
+                      {item.name}
                     </strong>
 
                     <span>
-                      {member.role}
+                      {item.role}
                     </span>
 
                     <small>
-                      ● {member.status}
+                      ● {item.status}
                     </small>
 
                   </button>
@@ -800,11 +838,12 @@ function ManagerTeam() {
 
           {/* PAGINATION */}
 
-          <div className="team-pagination">
+          <div className="mt-pagination">
 
             <span>
               Showing 1 to 6 of 12 members
             </span>
+
 
             <div>
 
@@ -813,8 +852,8 @@ function ManagerTeam() {
               </button>
 
               <button
-                className="active"
                 type="button"
+                className="active"
               >
                 1
               </button>
@@ -829,9 +868,13 @@ function ManagerTeam() {
 
             </div>
 
+
             <span>
+
               Show&nbsp;
+
               <select defaultValue="10">
+
                 <option value="10">
                   10
                 </option>
@@ -839,8 +882,11 @@ function ManagerTeam() {
                 <option value="20">
                   20
                 </option>
+
               </select>
+
               &nbsp;per page
+
             </span>
 
           </div>
@@ -848,15 +894,13 @@ function ManagerTeam() {
         </div>
 
 
-        {/* =================================================
-           EMPLOYEE DETAILS
-        ================================================= */}
+        {/* DETAILS */}
 
-        {selectedMember && (
+        {selected && (
 
-          <aside className="team-details">
+          <aside className="mt-details">
 
-            <div className="team-details-heading">
+            <div className="mt-details-title">
 
               <strong>
                 Employee Details
@@ -865,7 +909,7 @@ function ManagerTeam() {
               <button
                 type="button"
                 onClick={() =>
-                  setSelectedMember(null)
+                  setSelected(null)
                 }
               >
                 <FaTimes />
@@ -874,40 +918,36 @@ function ManagerTeam() {
             </div>
 
 
-            {/* Profile */}
+            <div className="mt-profile">
 
-            <div className="team-profile">
-
-              <div className="team-profile-image">
+              <div className="mt-profile-photo">
 
                 <img
-                  src={selectedMember.avatar}
-                  alt={selectedMember.name}
+                  src={selected.avatar}
+                  alt={selected.name}
                 />
 
                 <span
                   className={
-                    selectedMember.status
-                      .toLowerCase()
-                      .replace(" ", "-")
+                    cleanStatus(selected.status)
                   }
                 />
 
               </div>
 
 
-              <div className="team-profile-name">
+              <div className="mt-profile-info">
 
                 <strong>
-                  {selectedMember.name}
+                  {selected.name}
                 </strong>
 
                 <small>
-                  {selectedMember.role}
+                  {selected.role}
                 </small>
 
                 <em>
-                  {selectedMember.id}
+                  {selected.id}
                 </em>
 
               </div>
@@ -915,20 +955,18 @@ function ManagerTeam() {
 
               <strong
                 className={
-                  `profile-status status-${selectedMember.status
-                    .toLowerCase()
-                    .replace(" ", "-")}`
+                  `mt-profile-status ${cleanStatus(
+                    selected.status
+                  )}`
                 }
               >
-                ● {selectedMember.status}
+                ● {selected.status}
               </strong>
 
             </div>
 
 
-            {/* Tabs */}
-
-            <div className="team-tabs">
+            <div className="mt-tabs">
 
               <button className="active">
                 Overview
@@ -953,132 +991,114 @@ function ManagerTeam() {
             </div>
 
 
-            {/* Information */}
-
-            <div className="team-detail-section">
+            <div className="mt-details-section">
 
               <Detail
                 icon={<FaBriefcase />}
                 label="Department"
-                value={selectedMember.department}
+                value={selected.department}
               />
 
               <Detail
                 icon={<FaCalendarAlt />}
                 label="Joined On"
-                value={selectedMember.joined}
+                value={selected.joined}
               />
 
               <Detail
                 icon={<FaUserCheck />}
                 label="Reporting To"
-                value={selectedMember.reportingTo}
+                value={selected.reportingTo}
               />
 
               <Detail
                 icon={<FaEnvelope />}
                 label="Email"
-                value={selectedMember.email}
+                value={selected.email}
               />
 
               <Detail
                 icon={<FaPhone />}
                 label="Phone"
-                value={selectedMember.phone}
+                value={selected.phone}
               />
 
             </div>
 
 
-            {/* Today's Activity */}
-
-            <div className="team-detail-section">
+            <div className="mt-details-section">
 
               <h3>
                 Today's Activity
               </h3>
 
-
               <Activity
-                icon={<FaCalendarAlt />}
+                icon={<FaClock />}
                 label="Check In"
-                value={selectedMember.checkIn}
+                value={selected.checkIn}
               />
-
 
               <Activity
                 icon={<FaTasks />}
                 label="Tasks Completed"
                 value={
-                  selectedMember.tasks
+                  selected.tasks
                     .split("/")[0]
                     .trim()
                 }
               />
 
-
               <Activity
                 icon={<FaFileAlt />}
                 label="Daily Update"
-                value={selectedMember.dailyUpdate}
+                value={selected.dailyUpdate}
               />
-
 
               <Activity
                 icon={<FaBriefcase />}
                 label="Current Task"
-                value={selectedMember.currentTask}
+                value={selected.currentTask}
               />
 
             </div>
 
 
-            {/* Performance */}
-
-            <div className="team-detail-section">
+            <div className="mt-details-section">
 
               <h3>
                 Performance
                 <span>
-                  &nbsp;(This Month)
+                  {" "}(This Month)
                 </span>
               </h3>
 
 
-              <div className="performance-cards">
+              <div className="mt-performance">
 
                 <Performance
                   title="Task Completion"
-                  value={
-                    selectedMember.performance.task
-                  }
+                  value={selected.performance[0]}
                   change="↑ 8%"
                   positive
                 />
 
                 <Performance
                   title="Attendance"
-                  value={
-                    selectedMember.performance.attendance
-                  }
+                  value={selected.performance[1]}
                   change="↑ 5%"
                   positive
                 />
 
                 <Performance
                   title="Updates Submission"
-                  value={
-                    selectedMember.performance.updates
-                  }
+                  value={selected.performance[2]}
                   change="↑ 12%"
                   positive
                 />
 
                 <Performance
                   title="On-Time Tasks"
-                  value={
-                    selectedMember.performance.onTime
-                  }
+                  value={selected.performance[3]}
                   change="↓ 3%"
                 />
 
@@ -1087,9 +1107,7 @@ function ManagerTeam() {
             </div>
 
 
-            {/* Buttons */}
-
-            <div className="team-detail-actions">
+            <div className="mt-detail-actions">
 
               <button
                 type="button"
@@ -1126,21 +1144,21 @@ function ManagerTeam() {
 
 
 /* =====================================================
-   COMPONENTS
+   STAT
 ===================================================== */
 
-function TeamStat({
+function Stat({
   icon,
+  type,
   title,
   value,
-  bottom,
-  className,
+  sub,
 }) {
   return (
-    <div className="team-stat-card">
+    <div className="mt-stat-card">
 
       <div
-        className={`team-stat-icon ${className}`}
+        className={`mt-stat-icon ${type}`}
       >
         {icon}
       </div>
@@ -1156,7 +1174,7 @@ function TeamStat({
         </strong>
 
         <small>
-          {bottom}
+          {sub}
         </small>
 
       </div>
@@ -1166,21 +1184,25 @@ function TeamStat({
 }
 
 
+/* =====================================================
+   DETAIL
+===================================================== */
+
 function Detail({
   icon,
   label,
   value,
 }) {
   return (
-    <div className="detail-line">
+    <div className="mt-detail-row">
 
-      <span className="detail-icon">
+      <span>
         {icon}
       </span>
 
-      <span>
+      <small>
         {label}
-      </span>
+      </small>
 
       <strong>
         {value}
@@ -1190,6 +1212,10 @@ function Detail({
   );
 }
 
+
+/* =====================================================
+   ACTIVITY
+===================================================== */
 
 function Activity({
   icon,
@@ -1197,15 +1223,15 @@ function Activity({
   value,
 }) {
   return (
-    <div className="activity-line">
+    <div className="mt-activity-row">
 
-      <span className="activity-icon">
+      <span>
         {icon}
       </span>
 
-      <span>
+      <small>
         {label}
-      </span>
+      </small>
 
       <strong>
         {value}
@@ -1215,6 +1241,10 @@ function Activity({
   );
 }
 
+
+/* =====================================================
+   PERFORMANCE
+===================================================== */
 
 function Performance({
   title,
@@ -1223,7 +1253,7 @@ function Performance({
   positive,
 }) {
   return (
-    <div className="performance-item">
+    <div className="mt-performance-card">
 
       <span>
         {title}
@@ -1242,65 +1272,14 @@ function Performance({
       >
         {change}
       </small>
-      <div className="team-page-header">
-
-  <div className="team-page-heading">
-
-    <button
-      type="button"
-      className="team-menu-button"
-    >
-      ☰
-    </button>
-
-    <div>
-      <h1>My Team</h1>
-      <p>Manage and monitor your team members</p>
-    </div>
-
-  </div>
-
-  <div className="team-page-actions">
-
-    <div className="team-page-search">
-      🔍
-      <input
-        type="text"
-        placeholder="Search anything..."
-      />
-    </div>
-
-    <button
-      type="button"
-      className="team-notification"
-    >
-      🔔
-      <span>3</span>
-    </button>
-
-    <div className="team-manager-profile">
-
-      <div className="team-manager-avatar">
-        M
-      </div>
-
-      <div>
-        <strong>Mayank Panse</strong>
-        <small>Team Manager</small>
-      </div>
-
-      <span>⌄</span>
 
     </div>
-
-  </div>
-
-</div>
-
-    </div>
-    
   );
 }
 
+
+/* =====================================================
+   EXPORT
+===================================================== */
 
 export default ManagerTeam;
