@@ -1642,3 +1642,585 @@
     font-size: 10px !important;
   }
 }
+/* =====================================================
+   FINAL MY TEAM LAYOUT FIX
+===================================================== */
+
+.mt-page {
+  width: 100% !important;
+  min-height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: #f5f7fb !important;
+}
+
+
+/* =====================================================
+   HEADER FIX
+===================================================== */
+
+.mt-header {
+  width: 100% !important;
+  height: 62px !important;
+
+  padding: 8px 20px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+
+  background: #ffffff !important;
+
+  border-bottom: 1px solid #e5e9ef !important;
+}
+
+.mt-header-left {
+  width: auto !important;
+  min-width: 0 !important;
+
+  display: flex !important;
+  align-items: center !important;
+
+  gap: 10px !important;
+}
+
+.mt-menu-btn {
+  width: 28px !important;
+  height: 28px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  border: 0 !important;
+  background: transparent !important;
+
+  color: #5d6b82 !important;
+  font-size: 15px !important;
+}
+
+.mt-header-left > div {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.mt-header-left h1 {
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: #111827 !important;
+
+  font-size: 21px !important;
+  font-weight: 700 !important;
+
+  line-height: 1.15 !important;
+}
+
+.mt-header-left p {
+  margin: 4px 0 0 !important;
+  padding: 0 !important;
+
+  color: #7c899f !important;
+
+  font-size: 9px !important;
+  line-height: 1.2 !important;
+}
+
+
+/* =====================================================
+   RIGHT HEADER
+===================================================== */
+
+.mt-header-right {
+  display: flex !important;
+  align-items: center !important;
+
+  gap: 14px !important;
+}
+
+.mt-header-search {
+  width: 190px !important;
+  height: 34px !important;
+
+  padding: 0 10px !important;
+
+  display: flex !important;
+  align-items: center !important;
+
+  gap: 7px !important;
+
+  border: 1px solid #dce3eb !important;
+  border-radius: 7px !important;
+
+  background: #ffffff !important;
+}
+
+.mt-header-search input {
+  font-size: 10px !important;
+}
+
+.mt-notification {
+  font-size: 15px !important;
+}
+
+.mt-user {
+  gap: 7px !important;
+}
+
+.mt-user-avatar {
+  width: 34px !important;
+  height: 34px !important;
+
+  font-size: 11px !important;
+}
+
+.mt-user-text strong {
+  font-size: 10px !important;
+}
+
+.mt-user-text small {
+  font-size: 7px !important;
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.mt-stats {
+  width: 100% !important;
+
+  padding: 12px 20px !important;
+
+  display: grid !important;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr)) !important;
+
+  gap: 12px !important;
+}
+
+.mt-stat-card {
+  height: 82px !important;
+  min-height: 82px !important;
+
+  padding: 11px !important;
+
+  gap: 11px !important;
+
+  border-radius: 10px !important;
+}
+
+.mt-stat-icon {
+  width: 38px !important;
+  height: 38px !important;
+
+  flex-basis: 38px !important;
+
+  border-radius: 9px !important;
+
+  font-size: 14px !important;
+}
+
+.mt-stat-card span {
+  font-size: 9px !important;
+}
+
+.mt-stat-card strong {
+  margin-top: 3px !important;
+
+  font-size: 22px !important;
+  line-height: 1 !important;
+}
+
+.mt-stat-card small {
+  margin-top: 4px !important;
+
+  font-size: 7px !important;
+}
+
+
+/* =====================================================
+   FILTER
+===================================================== */
+
+.mt-filter {
+  width: 100% !important;
+
+  padding: 0 20px 10px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+.mt-filter-group {
+  display: flex !important;
+  align-items: center !important;
+
+  gap: 8px !important;
+}
+
+.mt-search {
+  width: 210px !important;
+  height: 36px !important;
+}
+
+.mt-search input {
+  font-size: 9px !important;
+}
+
+.mt-filter-group select {
+  width: 105px !important;
+  height: 36px !important;
+
+  font-size: 8px !important;
+}
+
+.mt-assign {
+  height: 36px !important;
+
+  padding: 0 14px !important;
+
+  font-size: 9px !important;
+}
+
+
+/* =====================================================
+   VIEW BAR
+===================================================== */
+
+.mt-viewbar {
+  width: calc(100% - 40px) !important;
+
+  min-height: 40px !important;
+
+  margin: 0 20px !important;
+
+  padding: 5px 8px !important;
+}
+
+.mt-view-buttons button {
+  height: 28px !important;
+
+  padding: 0 10px !important;
+
+  font-size: 8px !important;
+}
+
+.mt-sort {
+  gap: 6px !important;
+}
+
+.mt-sort span,
+.mt-sort select,
+.mt-sort button {
+  font-size: 8px !important;
+}
+
+.mt-sort select,
+.mt-sort button {
+  height: 28px !important;
+}
+
+
+/* =====================================================
+   TABLE + DETAILS
+===================================================== */
+
+.mt-content {
+  width: calc(100% - 40px) !important;
+
+  margin: 0 20px !important;
+
+  grid-template-columns:
+    minmax(0, 1fr) 290px !important;
+
+  gap: 10px !important;
+}
+
+.mt-table th {
+  padding: 10px 8px !important;
+
+  font-size: 6px !important;
+}
+
+.mt-table td {
+  padding: 9px 8px !important;
+
+  font-size: 7px !important;
+}
+
+.mt-employee {
+  gap: 7px !important;
+}
+
+.mt-photo,
+.mt-photo img {
+  width: 34px !important;
+  height: 34px !important;
+}
+
+.mt-employee-text strong {
+  font-size: 8px !important;
+}
+
+.mt-employee-text small {
+  font-size: 6px !important;
+}
+
+.mt-employee-text em {
+  font-size: 5px !important;
+}
+
+.mt-status {
+  font-size: 7px !important;
+}
+
+.mt-status-sub {
+  font-size: 5px !important;
+}
+
+.mt-task-info {
+  width: 65px !important;
+}
+
+.mt-task-info strong {
+  font-size: 7px !important;
+}
+
+.mt-task-info span {
+  font-size: 5px !important;
+}
+
+.mt-progress {
+  width: 65px !important;
+}
+
+.mt-attendance {
+  font-size: 7px !important;
+}
+
+.mt-activity {
+  font-size: 7px !important;
+}
+
+
+/* =====================================================
+   DETAILS
+===================================================== */
+
+.mt-details-title {
+  min-height: 40px !important;
+}
+
+.mt-details-title strong {
+  font-size: 10px !important;
+}
+
+.mt-profile {
+  padding: 11px !important;
+}
+
+.mt-profile-photo img {
+  width: 50px !important;
+  height: 50px !important;
+}
+
+.mt-profile-info strong {
+  font-size: 9px !important;
+}
+
+.mt-profile-info small {
+  font-size: 6px !important;
+}
+
+.mt-profile-info em {
+  font-size: 5px !important;
+}
+
+.mt-profile-status {
+  font-size: 7px !important;
+}
+
+.mt-tabs button {
+  padding: 8px 6px !important;
+
+  font-size: 6px !important;
+}
+
+.mt-details-section {
+  padding: 9px 11px !important;
+}
+
+.mt-detail-row {
+  min-height: 23px !important;
+}
+
+.mt-detail-row > small {
+  font-size: 6px !important;
+}
+
+.mt-detail-row > strong {
+  font-size: 6px !important;
+}
+
+.mt-details-section h3 {
+  font-size: 7px !important;
+}
+
+.mt-activity-row {
+  min-height: 24px !important;
+}
+
+.mt-activity-row > small,
+.mt-activity-row > strong {
+  font-size: 6px !important;
+}
+
+.mt-performance-card span {
+  font-size: 5px !important;
+}
+
+.mt-performance-card strong {
+  font-size: 11px !important;
+}
+
+.mt-performance-card small {
+  font-size: 5px !important;
+}
+
+
+/* =====================================================
+   DESKTOP WIDTH CONTROL
+===================================================== */
+
+@media (min-width: 1200px) {
+
+  .mt-header-left {
+    flex: 0 0 auto !important;
+  }
+
+  .mt-content {
+    grid-template-columns:
+      minmax(0, 1fr) 290px !important;
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+  .mt-header {
+    height: auto !important;
+
+    padding: 9px 10px !important;
+
+    flex-direction: column !important;
+
+    align-items: stretch !important;
+
+    gap: 9px !important;
+  }
+
+  .mt-header-left {
+    gap: 8px !important;
+  }
+
+  .mt-header-left h1 {
+    font-size: 20px !important;
+  }
+
+  .mt-header-left p {
+    font-size: 8px !important;
+  }
+
+  .mt-header-right {
+    width: 100% !important;
+
+    display: grid !important;
+
+    grid-template-columns:
+      minmax(0, 1fr) auto auto !important;
+
+    gap: 7px !important;
+  }
+
+  .mt-header-search {
+    width: 100% !important;
+  }
+
+  .mt-stats {
+    padding: 9px 10px !important;
+
+    grid-template-columns: 1fr 1fr !important;
+
+    gap: 7px !important;
+  }
+
+  .mt-stat-card {
+    height: 74px !important;
+  }
+
+  .mt-filter {
+    padding: 0 10px 9px !important;
+
+    flex-direction: column !important;
+
+    align-items: stretch !important;
+  }
+
+  .mt-filter-group {
+    width: 100% !important;
+
+    display: grid !important;
+
+    grid-template-columns: 1fr 1fr !important;
+
+    gap: 7px !important;
+  }
+
+  .mt-search {
+    width: 100% !important;
+
+    grid-column: 1 / -1 !important;
+  }
+
+  .mt-filter-group select {
+    width: 100% !important;
+  }
+
+  .mt-assign {
+    width: 100% !important;
+
+    margin-top: 7px !important;
+  }
+
+  .mt-viewbar {
+    width: calc(100% - 20px) !important;
+
+    margin: 0 10px !important;
+
+    flex-direction: column !important;
+
+    align-items: stretch !important;
+  }
+
+  .mt-content {
+    width: calc(100% - 20px) !important;
+
+    margin: 0 10px !important;
+
+    display: flex !important;
+
+    flex-direction: column !important;
+  }
+
+}
