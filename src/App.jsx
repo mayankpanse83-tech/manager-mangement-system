@@ -277,63 +277,40 @@ function EmployeeLayout() {
 ===================================================== */
 
 function ManagerLayout() {
+  const location = useLocation();
+
+  const isTeamPage =
+    location.pathname === "/manager/team";
 
   return (
     <div className="manager-layout">
 
       {/* MANAGER SIDEBAR */}
-
       <ManagerSidebar />
 
-
-      {/* MAIN */}
-
+      {/* MANAGER MAIN */}
       <div className="manager-main">
 
-        {/* HEADER */}
-
-        <ManagerHeader />
-
+        {/* My Team par ye header nahi dikhana */}
+        {!isTeamPage && <ManagerHeader />}
 
         <main className="manager-content">
 
           <Routes>
 
-            {/* /manager */}
-
-            <Route
-              path="/manager"
-              element={
-                <Navigate
-                  to="/manager/dashboard"
-                  replace
-                />
-              }
-            />
-
-
             {/* DASHBOARD */}
-
             <Route
               path="/manager/dashboard"
-              element={
-                <ManagerDashboard />
-              }
+              element={<ManagerDashboard />}
             />
-
 
             {/* MY TEAM */}
-
             <Route
               path="/manager/team"
-              element={
-                <ManagerTeam />
-              }
+              element={<ManagerTeam />}
             />
 
-
             {/* ATTENDANCE */}
-
             <Route
               path="/manager/attendance"
               element={
@@ -343,9 +320,7 @@ function ManagerLayout() {
               }
             />
 
-
             {/* TASKS */}
-
             <Route
               path="/manager/tasks"
               element={
@@ -355,9 +330,7 @@ function ManagerLayout() {
               }
             />
 
-
             {/* DAILY UPDATES */}
-
             <Route
               path="/manager/daily-updates"
               element={
@@ -367,9 +340,7 @@ function ManagerLayout() {
               }
             />
 
-
             {/* LEAVE */}
-
             <Route
               path="/manager/leave"
               element={
@@ -379,21 +350,17 @@ function ManagerLayout() {
               }
             />
 
-
             {/* REPORTS */}
-
             <Route
               path="/manager/reports"
               element={
                 <ManagerPlaceholder
-                  title="Reports"
+                  title="Manager Reports"
                 />
               }
             />
 
-
             {/* PROFILE */}
-
             <Route
               path="/manager/profile"
               element={
@@ -403,9 +370,7 @@ function ManagerLayout() {
               }
             />
 
-
             {/* SETTINGS */}
-
             <Route
               path="/manager/settings"
               element={
@@ -415,9 +380,7 @@ function ManagerLayout() {
               }
             />
 
-
-            {/* UNKNOWN MANAGER URL */}
-
+            {/* DEFAULT */}
             <Route
               path="*"
               element={
