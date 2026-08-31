@@ -202,3 +202,203 @@
 
   color: #aebbd0;
 }
+/* =========================================
+   SIDEBAR BOTTOM USER SECTION FIX
+========================================= */
+
+.manager-sidebar {
+  height: 100vh !important;
+  min-height: 100vh !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  overflow: hidden !important;
+}
+
+
+/* Sidebar menu ko available space do */
+
+.manager-sidebar-menu {
+  flex: 1 !important;
+  min-height: 0 !important;
+
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+
+  padding-bottom: 20px !important;
+}
+
+
+/* =========================================
+   BOTTOM USER PROFILE
+========================================= */
+
+.manager-sidebar-profile,
+.sidebar-profile,
+.manager-user-profile {
+  width: 100% !important;
+
+  flex-shrink: 0 !important;
+
+  min-height: 88px !important;
+
+  padding: 12px 18px !important;
+
+  display: flex !important;
+  align-items: center !important;
+
+  gap: 10px !important;
+
+  background: #071d3b !important;
+
+  position: relative !important;
+
+  border-top: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+
+/* Profile avatar */
+
+.manager-sidebar-profile .avatar,
+.sidebar-profile .avatar,
+.manager-user-profile .avatar {
+  width: 38px !important;
+  height: 38px !important;
+
+  flex: 0 0 38px !important;
+
+  border-radius: 50% !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+
+/* Profile text */
+
+.manager-sidebar-profile .profile-info,
+.sidebar-profile .profile-info,
+.manager-user-profile .profile-info {
+  min-width: 0 !important;
+
+  flex: 1 !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  align-items: flex-start !important;
+
+  justify-content: center !important;
+
+  gap: 4px !important;
+}
+
+
+/* Name */
+
+.manager-sidebar-profile .profile-name,
+.sidebar-profile .profile-name,
+.manager-user-profile .profile-name {
+  display: block !important;
+
+  width: 100% !important;
+
+  margin: 0 !important;
+
+  color: #ffffff !important;
+
+  font-size: 14px !important;
+
+  font-weight: 700 !important;
+
+  line-height: 1.2 !important;
+
+  white-space: nowrap !important;
+
+  overflow: hidden !important;
+
+  text-overflow: ellipsis !important;
+}
+
+
+/* Role */
+
+.manager-sidebar-profile .profile-role,
+.sidebar-profile .profile-role,
+.manager-user-profile .profile-role {
+  display: block !important;
+
+  margin: 0 !important;
+
+  color: #d5def0 !important;
+
+  font-size: 10px !important;
+
+  line-height: 1.2 !important;
+}
+
+
+/* Dropdown */
+
+.manager-sidebar-profile svg,
+.sidebar-profile svg,
+.manager-user-profile svg {
+  flex-shrink: 0 !important;
+
+  color: #d7e0ee !important;
+
+  font-size: 11px !important;
+}
+
+
+/* =========================================
+   REMOVE OVERFLOW / OVERLAP
+========================================= */
+
+.manager-sidebar-profile h3,
+.manager-sidebar-profile p,
+.sidebar-profile h3,
+.sidebar-profile p,
+.manager-user-profile h3,
+.manager-user-profile p {
+  margin: 0 !important;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+  .manager-sidebar {
+    height: 100vh !important;
+    min-height: 100vh !important;
+  }
+
+  .manager-sidebar-menu {
+    padding-bottom: 15px !important;
+  }
+
+  .manager-sidebar-profile,
+  .sidebar-profile,
+  .manager-user-profile {
+    min-height: 78px !important;
+
+    padding: 10px 14px !important;
+  }
+
+  .manager-sidebar-profile .profile-name,
+  .sidebar-profile .profile-name,
+  .manager-user-profile .profile-name {
+    font-size: 12px !important;
+  }
+
+  .manager-sidebar-profile .profile-role,
+  .sidebar-profile .profile-role,
+  .manager-user-profile .profile-role {
+    font-size: 9px !important;
+  }
+}
