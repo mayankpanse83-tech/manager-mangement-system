@@ -1441,3 +1441,204 @@
     grid-template-columns: 1fr;
   }
 }
+/* =========================================
+   MY TEAM TITLE
+========================================= */
+
+.mt-header-left h1 {
+  margin: 0;
+  color: #111827 !important;
+  font-size: 24px !important;
+  font-weight: 700 !important;
+  line-height: 1.2;
+}
+
+.mt-header-left p {
+  margin-top: 5px;
+  color: #66758d !important;
+  font-size: 11px !important;
+}
+
+
+/* =========================================
+   GENERAL FONT SIZE IMPROVEMENT
+========================================= */
+
+.mt-stat-card span {
+  font-size: 11px !important;
+}
+
+.mt-stat-card strong {
+  font-size: 26px !important;
+}
+
+.mt-stat-card small {
+  font-size: 9px !important;
+}
+
+.mt-search input,
+.mt-filter-group select {
+  font-size: 11px !important;
+}
+
+.mt-view-buttons button,
+.mt-sort span,
+.mt-sort select,
+.mt-sort button {
+  font-size: 10px !important;
+}
+
+.mt-table th {
+  font-size: 8px !important;
+}
+
+.mt-table td {
+  font-size: 9px !important;
+}
+
+.mt-employee-text strong {
+  font-size: 10px !important;
+}
+
+.mt-employee-text small {
+  font-size: 8px !important;
+}
+
+.mt-employee-text em {
+  font-size: 7px !important;
+}
+
+.mt-status {
+  font-size: 9px !important;
+}
+
+.mt-status-sub {
+  font-size: 7px !important;
+}
+
+.mt-task-info strong {
+  font-size: 9px !important;
+}
+
+.mt-task-info span {
+  font-size: 7px !important;
+}
+
+.mt-attendance {
+  font-size: 9px !important;
+}
+
+.mt-table td > small {
+  font-size: 7px !important;
+}
+
+.mt-activity {
+  font-size: 9px !important;
+}
+
+
+/* =========================================
+   DETAILS PANEL FONT
+========================================= */
+
+.mt-details-title strong {
+  font-size: 12px !important;
+}
+
+.mt-profile-info strong {
+  font-size: 11px !important;
+}
+
+.mt-profile-info small {
+  font-size: 8px !important;
+}
+
+.mt-profile-status {
+  font-size: 8px !important;
+}
+
+.mt-tabs button {
+  font-size: 8px !important;
+}
+
+.mt-detail-row > small {
+  font-size: 8px !important;
+}
+
+.mt-detail-row > strong {
+  font-size: 8px !important;
+}
+
+.mt-details-section h3 {
+  font-size: 9px !important;
+}
+
+.mt-activity-row > small {
+  font-size: 8px !important;
+}
+
+.mt-activity-row > strong {
+  font-size: 8px !important;
+}
+
+.mt-performance-card span {
+  font-size: 7px !important;
+}
+
+.mt-performance-card strong {
+  font-size: 14px !important;
+}
+
+.mt-performance-card small {
+  font-size: 7px !important;
+}
+
+
+/* =========================================
+   ASSIGN TASK
+========================================= */
+
+.mt-assign {
+  font-size: 11px !important;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+  .mt-header-left h1 {
+    color: #111827 !important;
+    font-size: 22px !important;
+  }
+
+  .mt-header-left p {
+    font-size: 10px !important;
+  }
+
+  .mt-stat-card span {
+    font-size: 9px !important;
+  }
+
+  .mt-stat-card strong {
+    font-size: 21px !important;
+  }
+
+  .mt-stat-card small {
+    font-size: 8px !important;
+  }
+
+  .mt-search input {
+    font-size: 11px !important;
+  }
+
+  .mt-filter-group select {
+    font-size: 10px !important;
+  }
+
+  .mt-view-buttons button {
+    font-size: 10px !important;
+  }
+}
