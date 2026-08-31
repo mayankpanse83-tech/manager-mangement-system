@@ -1242,8 +1242,63 @@ function Performance({
       >
         {change}
       </small>
+      <div className="team-page-header">
+
+  <div className="team-page-heading">
+
+    <button
+      type="button"
+      className="team-menu-button"
+    >
+      ☰
+    </button>
+
+    <div>
+      <h1>My Team</h1>
+      <p>Manage and monitor your team members</p>
+    </div>
+
+  </div>
+
+  <div className="team-page-actions">
+
+    <div className="team-page-search">
+      🔍
+      <input
+        type="text"
+        placeholder="Search anything..."
+      />
+    </div>
+
+    <button
+      type="button"
+      className="team-notification"
+    >
+      🔔
+      <span>3</span>
+    </button>
+
+    <div className="team-manager-profile">
+
+      <div className="team-manager-avatar">
+        M
+      </div>
+
+      <div>
+        <strong>Mayank Panse</strong>
+        <small>Team Manager</small>
+      </div>
+
+      <span>⌄</span>
 
     </div>
+
+  </div>
+
+</div>
+
+    </div>
+    
   );
 }
 
