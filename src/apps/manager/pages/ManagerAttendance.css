@@ -1,4 +1,8 @@
-.ma-page {
+/* =====================================================
+   ATTENDANCE PAGE
+===================================================== */
+
+.attendance-page {
   width: 100%;
   min-height: 100vh;
 
@@ -13,9 +17,7 @@
   overflow-x: hidden;
 }
 
-.ma-page *,
-.ma-page *::before,
-.ma-page *::after {
+.attendance-page * {
   box-sizing: border-box;
 }
 
@@ -24,7 +26,7 @@
    HEADER
 ===================================================== */
 
-.ma-header {
+.attendance-header {
   width: 100%;
 
   display: flex;
@@ -36,31 +38,31 @@
   margin-bottom: 15px;
 }
 
-.ma-header h1 {
+.attendance-header h1 {
   margin: 0;
 
   color: #111827;
 
-  font-size: 23px;
+  font-size: 24px;
   font-weight: 700;
 }
 
-.ma-header p {
+.attendance-header p {
   margin: 5px 0 0;
 
-  color: #7c899f;
+  color: #7f8ca2;
 
   font-size: 10px;
 }
 
-.ma-header-actions {
+.attendance-header-actions {
   display: flex;
   align-items: center;
 
   gap: 8px;
 }
 
-.ma-date-picker {
+.attendance-date {
   height: 37px;
 
   display: flex;
@@ -70,34 +72,40 @@
 
   padding: 0 10px;
 
-  background: #fff;
+  background: #ffffff;
 
   border: 1px solid #dce3eb;
 
   border-radius: 7px;
 }
 
-.ma-date-picker svg {
-  color: #758198;
+.attendance-date svg {
+  color: #68768c;
 
   font-size: 11px;
 }
 
-.ma-date-picker input {
+.attendance-date input {
   border: 0;
   outline: 0;
 
-  background: #fff;
+  background: transparent;
 
-  color: #3e4b62;
+  color: #37445c;
 
   font-size: 9px;
 }
 
-.ma-export-btn {
+.attendance-header-actions > button {
   height: 37px;
 
   padding: 0 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
 
   border: 0;
 
@@ -105,10 +113,9 @@
 
   background: #5a37f2;
 
-  color: #fff;
+  color: #ffffff;
 
-  font-size: 10px;
-
+  font-size: 9px;
   font-weight: 700;
 
   cursor: pointer;
@@ -116,10 +123,10 @@
 
 
 /* =====================================================
-   STATS
+   SUMMARY
 ===================================================== */
 
-.ma-stats {
+.attendance-summary {
   width: 100%;
 
   display: grid;
@@ -132,7 +139,7 @@
   margin-bottom: 14px;
 }
 
-.ma-stat-card {
+.attendance-summary-card {
   min-width: 0;
 
   height: 84px;
@@ -144,18 +151,22 @@
 
   gap: 12px;
 
-  background: #fff;
+  background: #ffffff;
 
   border: 1px solid #e3e8ef;
 
   border-radius: 10px;
+
+  box-shadow:
+    0 2px 8px
+    rgba(20, 34, 60, 0.025);
 }
 
-.ma-stat-icon {
-  width: 39px;
-  height: 39px;
+.attendance-summary-icon {
+  width: 40px;
+  height: 40px;
 
-  flex: 0 0 39px;
+  flex: 0 0 40px;
 
   display: flex;
   align-items: center;
@@ -166,51 +177,53 @@
   font-size: 15px;
 }
 
-.ma-stat-icon.blue {
+.attendance-summary-icon.blue {
   background: #e9efff;
-  color: #4e6fe9;
+  color: #5271ea;
 }
 
-.ma-stat-icon.green {
+.attendance-summary-icon.green {
   background: #e4f8ef;
-  color: #0aa970;
+  color: #09a970;
 }
 
-.ma-stat-icon.orange {
+.attendance-summary-icon.orange {
   background: #fff0db;
-  color: #ef991d;
+  color: #ef991b;
 }
 
-.ma-stat-icon.red {
+.attendance-summary-icon.red {
   background: #ffe6eb;
-  color: #ef5269;
+  color: #ef5369;
 }
 
-.ma-stat-card > div:last-child {
+.attendance-summary-card > div:last-child {
   min-width: 0;
 
   display: flex;
   flex-direction: column;
 }
 
-.ma-stat-card span {
-  color: #68758d;
+.attendance-summary-card span {
+  color: #64718a;
 
   font-size: 9px;
 }
 
-.ma-stat-card strong {
+.attendance-summary-card strong {
   margin-top: 3px;
 
   color: #17233d;
 
-  font-size: 22px;
+  font-size: 23px;
+
+  line-height: 1;
 }
 
-.ma-stat-card small {
-  margin-top: 3px;
+.attendance-summary-card small {
+  margin-top: 4px;
 
-  color: #8490a4;
+  color: #8490a5;
 
   font-size: 7px;
 }
@@ -220,7 +233,7 @@
    FILTER
 ===================================================== */
 
-.ma-filter-section {
+.attendance-filters {
   width: 100%;
 
   display: flex;
@@ -231,8 +244,8 @@
   margin-bottom: 12px;
 }
 
-.ma-search-box {
-  width: 260px;
+.attendance-search {
+  width: 270px;
   height: 38px;
 
   display: flex;
@@ -242,52 +255,80 @@
 
   padding: 0 10px;
 
-  background: #fff;
+  background: #ffffff;
 
   border: 1px solid #dce3eb;
 
   border-radius: 7px;
 }
 
-.ma-search-box svg {
-  color: #8190a6;
+.attendance-search svg {
+  color: #8190a5;
 
   font-size: 11px;
 }
 
-.ma-search-box input {
+.attendance-search input {
   width: 100%;
 
   border: 0;
   outline: 0;
 
-  background: #fff !important;
+  background: #ffffff !important;
 
   color: #26344d !important;
 
   font-size: 10px;
 }
 
-.ma-filter-section > select {
-  width: 135px;
-  height: 38px;
+.attendance-search input::placeholder {
+  color: #99a4b4;
+}
 
-  padding: 0 9px;
+.attendance-select {
+  position: relative;
+
+  width: 145px;
+  height: 38px;
+}
+
+.attendance-select select {
+  width: 100%;
+  height: 100%;
+
+  padding: 0 28px 0 10px;
 
   border: 1px solid #dce3eb;
 
   border-radius: 7px;
 
-  background: #fff;
+  outline: 0;
 
-  color: #39465d;
+  background: #ffffff;
+
+  color: #39465e;
 
   font-size: 9px;
 
-  outline: 0;
+  appearance: none;
 }
 
-.ma-filter-btn {
+.attendance-select svg {
+  position: absolute;
+
+  top: 50%;
+  right: 10px;
+
+  transform: translateY(-50%);
+
+  pointer-events: none;
+
+  color: #7d899f;
+
+  font-size: 8px;
+}
+
+.attendance-filter-button {
   height: 38px;
 
   padding: 0 13px;
@@ -302,9 +343,9 @@
 
   border-radius: 7px;
 
-  background: #fff;
+  background: #ffffff;
 
-  color: #59667c;
+  color: #5d6a80;
 
   font-size: 9px;
 
@@ -313,13 +354,13 @@
 
 
 /* =====================================================
-   TABLE CARD
+   CARD
 ===================================================== */
 
-.ma-table-card {
+.attendance-card {
   width: 100%;
 
-  background: #fff;
+  background: #ffffff;
 
   border: 1px solid #e1e6ed;
 
@@ -328,7 +369,7 @@
   overflow: hidden;
 }
 
-.ma-table-title {
+.attendance-card-header {
   min-height: 58px;
 
   padding: 10px 14px;
@@ -340,15 +381,15 @@
   border-bottom: 1px solid #edf0f4;
 }
 
-.ma-table-title h2 {
+.attendance-card-header h2 {
   margin: 0;
 
-  color: #1a2741;
+  color: #1a2740;
 
   font-size: 13px;
 }
 
-.ma-table-title p {
+.attendance-card-header p {
   margin: 3px 0 0;
 
   color: #8490a5;
@@ -356,14 +397,27 @@
   font-size: 8px;
 }
 
-.ma-more-btn {
-  border: 0;
+.attendance-date-label {
+  height: 30px;
 
-  background: transparent;
+  padding: 0 9px;
 
-  color: #6d7990;
+  display: flex;
+  align-items: center;
 
-  cursor: pointer;
+  gap: 6px;
+
+  border: 1px solid #dfe4eb;
+
+  border-radius: 6px;
+
+  color: #68758c;
+
+  font-size: 8px;
+}
+
+.attendance-date-label svg {
+  font-size: 9px;
 }
 
 
@@ -371,7 +425,7 @@
    TABLE
 ===================================================== */
 
-.ma-table-scroll {
+.attendance-table-scroll {
   width: 100%;
 
   overflow-x: auto;
@@ -379,7 +433,16 @@
   -webkit-overflow-scrolling: touch;
 }
 
-.ma-table {
+.attendance-table-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.attendance-table-scroll::-webkit-scrollbar-thumb {
+  background: #cdd4df;
+  border-radius: 10px;
+}
+
+.attendance-card table {
   width: 100%;
 
   min-width: 850px;
@@ -389,14 +452,14 @@
   table-layout: fixed;
 }
 
-.ma-table th {
+.attendance-card th {
   padding: 11px 10px;
 
-  text-align: left;
+  background: #fafbfe;
 
   color: #77849a;
 
-  background: #fafbfe;
+  text-align: left;
 
   font-size: 7px;
 
@@ -405,10 +468,10 @@
   white-space: nowrap;
 }
 
-.ma-table td {
+.attendance-card td {
   padding: 11px 10px;
 
-  color: #39465d;
+  color: #3b4960;
 
   font-size: 8px;
 
@@ -417,80 +480,57 @@
   vertical-align: middle;
 }
 
-.ma-table tbody tr:hover {
+.attendance-card tbody tr:hover {
   background: #fbfaff;
 }
 
 
 /* =====================================================
-   EMPLOYEE
+   FAKE AVATAR
+   NO REAL PHOTO
 ===================================================== */
 
-.ma-employee {
+.attendance-employee {
   display: flex;
   align-items: center;
 
   gap: 8px;
 }
 
-.ma-avatar {
-  position: relative;
-
+.attendance-avatar {
   width: 36px;
   height: 36px;
 
   flex: 0 0 36px;
-}
 
-.ma-avatar img {
-  width: 36px;
-  height: 36px;
-
-  border-radius: 50%;
-
-  object-fit: cover;
-}
-
-.ma-avatar span {
-  position: absolute;
-
-  right: -1px;
-  bottom: 0;
-
-  width: 8px;
-  height: 8px;
-
-  border: 2px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   border-radius: 50%;
+
+  background: #e8ebf7;
+
+  color: #53627c;
+
+  font-size: 10px;
+  font-weight: 700;
 }
 
-.ma-avatar span.present {
-  background: #0aac70;
-}
+.attendance-employee > div:last-child {
+  min-width: 0;
 
-.ma-avatar span.late {
-  background: #ef981e;
-}
-
-.ma-avatar span.on-leave {
-  background: #4d75eb;
-}
-
-.ma-employee-info {
   display: flex;
   flex-direction: column;
-
-  min-width: 0;
 }
 
-.ma-employee-info strong {
+.attendance-employee strong {
   color: #25334b;
 
   font-size: 9px;
 }
 
-.ma-employee-info small {
+.attendance-employee small {
   margin-top: 2px;
 
   color: #8190a5;
@@ -498,10 +538,10 @@
   font-size: 7px;
 }
 
-.ma-employee-info em {
+.attendance-employee em {
   margin-top: 2px;
 
-  color: #a1a9b7;
+  color: #a0a9b8;
 
   font-size: 6px;
 
@@ -513,70 +553,25 @@
    STATUS
 ===================================================== */
 
-.ma-status.present {
+.attendance-status {
+  font-size: 8px;
+  font-weight: 600;
+}
+
+.attendance-status.present {
   color: #0aa970;
 }
 
-.ma-status.late {
-  color: #ef991d;
+.attendance-status.late {
+  color: #ef981c;
 }
 
-.ma-status.on-leave {
-  color: #4e74e9;
+.attendance-status.on-leave {
+  color: #4f75eb;
 }
 
-.ma-status {
-  font-size: 8px;
-}
-
-.ma-status-note {
-  display: block;
-
-  margin-top: 3px;
-
-  color: #8792a5;
-
-  font-size: 6px;
-}
-
-
-/* =====================================================
-   TIME
-===================================================== */
-
-.ma-time {
-  color: #26344d;
-
-  font-size: 8px;
-}
-
-.ma-hours {
-  color: #26344d;
-
-  font-size: 8px;
-}
-
-
-/* =====================================================
-   ACTION
-===================================================== */
-
-.ma-action-btn {
-  height: 27px;
-
-  padding: 0 9px;
-
-  border: 1px solid #dfe4eb;
-
-  border-radius: 5px;
-
-  background: #fff;
-
-  color: #5c6a81;
-
-  font-size: 7px;
-
-  cursor: pointer;
+.attendance-status.absent {
+  color: #eb5665;
 }
 
 
@@ -584,7 +579,7 @@
    FOOTER
 ===================================================== */
 
-.ma-table-footer {
+.attendance-footer {
   min-height: 44px;
 
   padding: 7px 10px;
@@ -596,20 +591,18 @@
   gap: 10px;
 }
 
-.ma-table-footer > span {
+.attendance-footer > span {
   color: #8792a5;
 
   font-size: 7px;
 }
 
-.ma-pagination {
+.attendance-footer > div {
   display: flex;
-  align-items: center;
-
   gap: 4px;
 }
 
-.ma-pagination button {
+.attendance-footer button {
   width: 23px;
   height: 23px;
 
@@ -617,21 +610,21 @@
 
   border-radius: 5px;
 
-  background: #fff;
+  background: #ffffff;
 
   color: #66738a;
 
-  cursor: pointer;
-
   font-size: 8px;
+
+  cursor: pointer;
 }
 
-.ma-pagination button.active {
+.attendance-footer button.active {
   background: #5a39ef;
 
   border-color: #5a39ef;
 
-  color: #fff;
+  color: #ffffff;
 }
 
 
@@ -641,16 +634,16 @@
 
 @media (max-width: 1000px) {
 
-  .ma-stats {
+  .attendance-summary {
     grid-template-columns: 1fr 1fr;
   }
 
-  .ma-header {
+  .attendance-header {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .ma-header-actions {
+  .attendance-header-actions {
     justify-content: flex-end;
   }
 
@@ -663,48 +656,43 @@
 
 @media (max-width: 768px) {
 
-  .ma-page {
+  .attendance-page {
     padding: 12px 10px 20px;
   }
 
-  .ma-header {
+  .attendance-header {
     gap: 10px;
   }
 
-  .ma-header h1 {
+  .attendance-header h1 {
     font-size: 21px;
   }
 
-  .ma-header p {
+  .attendance-header p {
     font-size: 9px;
   }
 
-  .ma-header-actions {
+  .attendance-header-actions {
     width: 100%;
 
     display: grid;
 
-    grid-template-columns: minmax(0, 1fr) auto;
-
-    gap: 7px;
+    grid-template-columns:
+      minmax(0, 1fr) auto;
   }
 
-  .ma-date-picker {
+  .attendance-date {
     width: 100%;
   }
 
-  .ma-export-btn {
-    height: 37px;
-  }
 
-
-  .ma-stats {
+  .attendance-summary {
     grid-template-columns: 1fr 1fr;
 
     gap: 8px;
   }
 
-  .ma-stat-card {
+  .attendance-summary-card {
     height: 76px;
 
     padding: 9px;
@@ -712,23 +700,29 @@
     gap: 8px;
   }
 
-  .ma-stat-icon {
+  .attendance-summary-icon {
     width: 32px;
     height: 32px;
 
     flex-basis: 32px;
+
+    font-size: 12px;
   }
 
-  .ma-stat-card span {
+  .attendance-summary-card span {
     font-size: 8px;
   }
 
-  .ma-stat-card strong {
+  .attendance-summary-card strong {
     font-size: 19px;
   }
 
+  .attendance-summary-card small {
+    font-size: 6px;
+  }
 
-  .ma-filter-section {
+
+  .attendance-filters {
     display: grid;
 
     grid-template-columns: 1fr 1fr;
@@ -736,42 +730,40 @@
     gap: 8px;
   }
 
-  .ma-search-box {
+  .attendance-search {
     width: 100%;
 
     grid-column: 1 / -1;
   }
 
-  .ma-filter-section > select {
+  .attendance-select {
     width: 100%;
   }
 
-  .ma-filter-btn {
+  .attendance-filter-button {
     width: 100%;
   }
 
 
-  .ma-table-title {
+  .attendance-card-header {
     padding: 10px;
-
-    min-height: 52px;
   }
 
-  .ma-table-title h2 {
+  .attendance-card-header h2 {
     font-size: 12px;
   }
 
-  .ma-table-title p {
+  .attendance-card-header p {
     font-size: 7px;
   }
 
 
-  .ma-table {
+  .attendance-table {
     min-width: 850px;
   }
 
 
-  .ma-table-footer {
+  .attendance-footer {
     flex-wrap: wrap;
 
     justify-content: center;
@@ -786,19 +778,19 @@
 
 @media (max-width: 480px) {
 
-  .ma-page {
+  .attendance-page {
     padding: 9px 8px 15px;
   }
 
-  .ma-stats {
+  .attendance-summary {
     gap: 7px;
   }
 
-  .ma-stat-card {
+  .attendance-summary-card {
     padding: 8px;
   }
 
-  .ma-stat-icon {
+  .attendance-summary-icon {
     width: 29px;
     height: 29px;
 
@@ -807,16 +799,28 @@
     font-size: 11px;
   }
 
-  .ma-stat-card span {
+  .attendance-summary-card span {
     font-size: 7px;
   }
 
-  .ma-stat-card strong {
+  .attendance-summary-card strong {
     font-size: 18px;
   }
 
-  .ma-stat-card small {
+  .attendance-summary-card small {
     font-size: 6px;
+  }
+
+  .attendance-filters {
+    grid-template-columns: 1fr;
+  }
+
+  .attendance-search {
+    grid-column: auto;
+  }
+
+  .attendance-filter-button {
+    height: 38px;
   }
 
 }
