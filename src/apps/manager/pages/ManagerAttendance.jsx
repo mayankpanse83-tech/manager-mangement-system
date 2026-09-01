@@ -1,23 +1,16 @@
-import React, { useMemo, useState } from "react";
-
+import React, { useState } from "react";
 import {
   FaSearch,
   FaCalendarAlt,
   FaUsers,
-  FaUserCheck,
-  FaUserClock,
-  FaUserTimes,
-  FaFilter,
+  FaCheckCircle,
+  FaClock,
+  FaTimesCircle,
+  FaDownload,
   FaChevronDown,
-  FaEllipsisV,
 } from "react-icons/fa";
 
 import "./ManagerAttendance.css";
-
-
-/* =====================================================
-   ATTENDANCE DATA
-===================================================== */
 
 const attendanceData = [
   {
@@ -25,10 +18,10 @@ const attendanceData = [
     name: "Aman Sharma",
     role: "UI Designer",
     department: "Design",
-    status: "Present",
     checkIn: "09:12 AM",
     checkOut: "06:10 PM",
     hours: "8h 58m",
+    status: "Present",
     avatar: "https://randomuser.me/api/portraits/men/32.jpg",
   },
   {
@@ -36,10 +29,10 @@ const attendanceData = [
     name: "Priya Singh",
     role: "Developer",
     department: "Development",
-    status: "Present",
     checkIn: "09:05 AM",
     checkOut: "06:02 PM",
     hours: "8h 57m",
+    status: "Present",
     avatar: "https://randomuser.me/api/portraits/women/44.jpg",
   },
   {
@@ -47,10 +40,10 @@ const attendanceData = [
     name: "Rahul Verma",
     role: "Developer",
     department: "Development",
+    checkIn: "--",
+    checkOut: "--",
+    hours: "--",
     status: "On Leave",
-    checkIn: "-",
-    checkOut: "-",
-    hours: "-",
     avatar: "https://randomuser.me/api/portraits/men/46.jpg",
   },
   {
@@ -58,10 +51,10 @@ const attendanceData = [
     name: "Neha Patel",
     role: "QA Engineer",
     department: "QA",
-    status: "Late",
     checkIn: "10:12 AM",
     checkOut: "06:20 PM",
     hours: "8h 08m",
+    status: "Late",
     avatar: "https://randomuser.me/api/portraits/women/65.jpg",
   },
   {
@@ -69,10 +62,10 @@ const attendanceData = [
     name: "Vikram Joshi",
     role: "UI Designer",
     department: "Design",
-    status: "Present",
     checkIn: "09:18 AM",
     checkOut: "06:15 PM",
     hours: "8h 57m",
+    status: "Present",
     avatar: "https://randomuser.me/api/portraits/men/52.jpg",
   },
   {
@@ -80,122 +73,75 @@ const attendanceData = [
     name: "Anjali Mehta",
     role: "Developer",
     department: "Development",
-    status: "Late",
     checkIn: "10:20 AM",
     checkOut: "06:30 PM",
     hours: "8h 10m",
+    status: "Late",
     avatar: "https://randomuser.me/api/portraits/women/50.jpg",
   },
 ];
 
-
-/* =====================================================
-   STATUS CLASS
-===================================================== */
-
-const statusClass = (status) =>
-  status.toLowerCase().replace(/\s+/g, "-");
-
-
-/* =====================================================
-   MAIN COMPONENT
-===================================================== */
-
 function ManagerAttendance() {
-
   const [search, setSearch] = useState("");
-
   const [department, setDepartment] =
     useState("All Departments");
-
   const [status, setStatus] =
     useState("All Status");
-
-  const [selectedDate, setSelectedDate] =
+  const [date, setDate] =
     useState("2026-09-01");
 
+  const filteredData = attendanceData.filter((item) => {
+    const searchText = search.toLowerCase();
 
-  /* ===================================================
-     FILTER
-  =================================================== */
+    const searchMatch =
+      item.name.toLowerCase().includes(searchText) ||
+      item.id.toLowerCase().includes(searchText);
 
-  const filteredEmployees = useMemo(() => {
+    const departmentMatch =
+      department === "All Departments" ||
+      item.department === department;
 
-    return attendanceData.filter((employee) => {
+    const statusMatch =
+      status === "All Status" ||
+      item.status === status;
 
-      const query =
-        search.trim().toLowerCase();
-
-      const searchMatch =
-        employee.name.toLowerCase().includes(query) ||
-        employee.id.toLowerCase().includes(query);
-
-      const departmentMatch =
-        department === "All Departments" ||
-        employee.department === department;
-
-      const statusMatch =
-        status === "All Status" ||
-        employee.status === status;
-
-      return (
-        searchMatch &&
-        departmentMatch &&
-        statusMatch
-      );
-
-    });
-
-  }, [search, department, status]);
-
+    return (
+      searchMatch &&
+      departmentMatch &&
+      statusMatch
+    );
+  });
 
   return (
-    <div className="ma-page">
+    <div className="attendance-page">
 
+      {/* HEADER */}
 
-      {/* =================================================
-         PAGE HEADER
-      ================================================= */}
-
-      <div className="ma-header">
+      <div className="attendance-header">
 
         <div>
-
-          <h1>
-            Attendance
-          </h1>
-
+          <h1>Attendance</h1>
           <p>
-            Monitor and manage your team's attendance
+            Track and manage your team's attendance
           </p>
-
         </div>
 
+        <div className="attendance-header-actions">
 
-        <div className="ma-header-actions">
-
-          <div className="ma-date-picker">
-
+          <div className="attendance-date">
             <FaCalendarAlt />
 
             <input
               type="date"
-              value={selectedDate}
+              value={date}
               onChange={(e) =>
-                setSelectedDate(e.target.value)
+                setDate(e.target.value)
               }
             />
-
           </div>
 
-
-          <button
-            type="button"
-            className="ma-export-btn"
-            onClick={() =>
-              alert("Attendance export")
-            }
-          >
+          <button type="button">
+            <FaDownload />
             Export
           </button>
 
@@ -204,342 +150,212 @@ function ManagerAttendance() {
       </div>
 
 
-      {/* =================================================
-         SUMMARY CARDS
-      ================================================= */}
+      {/* SUMMARY */}
 
-      <div className="ma-stats">
+      <div className="attendance-summary">
 
-        <AttendanceStat
-          type="blue"
+        <SummaryCard
           icon={<FaUsers />}
           title="Total Employees"
           value="12"
-          sub="Team members"
+          text="Team members"
+          type="blue"
         />
 
-        <AttendanceStat
-          type="green"
-          icon={<FaUserCheck />}
+        <SummaryCard
+          icon={<FaCheckCircle />}
           title="Present Today"
           value="10"
-          sub="83% attendance"
+          text="83% attendance"
+          type="green"
         />
 
-        <AttendanceStat
-          type="orange"
-          icon={<FaUserClock />}
+        <SummaryCard
+          icon={<FaClock />}
           title="Late Today"
           value="2"
-          sub="Needs attention"
+          text="Needs attention"
+          type="orange"
         />
 
-        <AttendanceStat
-          type="red"
-          icon={<FaUserTimes />}
+        <SummaryCard
+          icon={<FaTimesCircle />}
           title="On Leave"
           value="1"
-          sub="8% of team"
+          text="8% of team"
+          type="red"
         />
 
       </div>
 
 
-      {/* =================================================
-         FILTERS
-      ================================================= */}
+      {/* FILTER */}
 
-      <div className="ma-filter-section">
+      <div className="attendance-filters">
 
-        <div className="ma-search-box">
+        <div className="attendance-search">
 
           <FaSearch />
 
           <input
             type="text"
+            placeholder="Search employee name or ID..."
             value={search}
             onChange={(e) =>
               setSearch(e.target.value)
             }
-            placeholder="Search employee name or ID..."
           />
 
         </div>
 
 
-        <select
-          value={department}
-          onChange={(e) =>
-            setDepartment(e.target.value)
-          }
-        >
+        <div className="attendance-select">
 
-          <option>
-            All Departments
-          </option>
-
-          <option>
-            Design
-          </option>
-
-          <option>
-            Development
-          </option>
-
-          <option>
-            QA
-          </option>
-
-        </select>
-
-
-        <select
-          value={status}
-          onChange={(e) =>
-            setStatus(e.target.value)
-          }
-        >
-
-          <option>
-            All Status
-          </option>
-
-          <option>
-            Present
-          </option>
-
-          <option>
-            Late
-          </option>
-
-          <option>
-            On Leave
-          </option>
-
-        </select>
-
-
-        <button
-          type="button"
-          className="ma-filter-btn"
-        >
-          <FaFilter />
-          Filter
-        </button>
-
-      </div>
-
-
-      {/* =================================================
-         TABLE
-      ================================================= */}
-
-      <div className="ma-table-card">
-
-        <div className="ma-table-title">
-
-          <div>
-
-            <h2>
-              Team Attendance
-            </h2>
-
-            <p>
-              Daily attendance for selected date
-            </p>
-
-          </div>
-
-          <button
-            type="button"
-            className="ma-more-btn"
+          <select
+            value={department}
+            onChange={(e) =>
+              setDepartment(e.target.value)
+            }
           >
-            <FaEllipsisV />
-          </button>
+            <option>All Departments</option>
+            <option>Design</option>
+            <option>Development</option>
+            <option>QA</option>
+          </select>
+
+          <FaChevronDown />
 
         </div>
 
 
-        <div className="ma-table-scroll">
+        <div className="attendance-select">
 
-          <table className="ma-table">
+          <select
+            value={status}
+            onChange={(e) =>
+              setStatus(e.target.value)
+            }
+          >
+            <option>All Status</option>
+            <option>Present</option>
+            <option>Late</option>
+            <option>On Leave</option>
+          </select>
+
+          <FaChevronDown />
+
+        </div>
+
+      </div>
+
+
+      {/* TABLE */}
+
+      <div className="attendance-card">
+
+        <div className="attendance-card-header">
+
+          <div>
+            <h2>Team Attendance</h2>
+            <p>
+              Daily attendance records
+            </p>
+          </div>
+
+          <div className="attendance-date-label">
+            <FaCalendarAlt />
+            {date}
+          </div>
+
+        </div>
+
+
+        <div className="attendance-table-scroll">
+
+          <table>
 
             <thead>
-
               <tr>
-
-                <th>
-                  EMPLOYEE
-                </th>
-
-                <th>
-                  DEPARTMENT
-                </th>
-
-                <th>
-                  STATUS
-                </th>
-
-                <th>
-                  CHECK IN
-                </th>
-
-                <th>
-                  CHECK OUT
-                </th>
-
-                <th>
-                  WORKING HOURS
-                </th>
-
-                <th>
-                  ACTION
-                </th>
-
+                <th>EMPLOYEE</th>
+                <th>DEPARTMENT</th>
+                <th>CHECK IN</th>
+                <th>CHECK OUT</th>
+                <th>WORKING HOURS</th>
+                <th>STATUS</th>
               </tr>
-
             </thead>
-
 
             <tbody>
 
-              {filteredEmployees.map(
-                (employee) => (
+              {filteredData.map((employee) => (
 
-                  <tr
-                    key={employee.id}
-                  >
+                <tr key={employee.id}>
 
-                    {/* Employee */}
+                  <td>
 
-                    <td>
+                    <div className="attendance-employee">
 
-                      <div className="ma-employee">
+                      <img
+                        src={employee.avatar}
+                        alt={employee.name}
+                      />
 
-                        <div className="ma-avatar">
+                      <div>
+                        <strong>
+                          {employee.name}
+                        </strong>
 
-                          <img
-                            src={employee.avatar}
-                            alt={employee.name}
-                          />
+                        <small>
+                          {employee.role}
+                        </small>
 
-                          <span
-                            className={
-                              statusClass(
-                                employee.status
-                              )
-                            }
-                          />
-
-                        </div>
-
-
-                        <div className="ma-employee-info">
-
-                          <strong>
-                            {employee.name}
-                          </strong>
-
-                          <small>
-                            {employee.role}
-                          </small>
-
-                          <em>
-                            {employee.id}
-                          </em>
-
-                        </div>
-
+                        <em>
+                          {employee.id}
+                        </em>
                       </div>
 
-                    </td>
+                    </div>
+
+                  </td>
 
 
-                    {/* Department */}
-
-                    <td>
-                      {employee.department}
-                    </td>
+                  <td>
+                    {employee.department}
+                  </td>
 
 
-                    {/* Status */}
-
-                    <td>
-
-                      <strong
-                        className={
-                          `ma-status ${statusClass(
-                            employee.status
-                          )}`
-                        }
-                      >
-                        ● {employee.status}
-                      </strong>
-
-                      {employee.status === "Late" && (
-                        <small className="ma-status-note">
-                          Arrived late
-                        </small>
-                      )}
-
-                    </td>
+                  <td>
+                    {employee.checkIn}
+                  </td>
 
 
-                    {/* Check in */}
-
-                    <td>
-
-                      <span className="ma-time">
-                        {employee.checkIn}
-                      </span>
-
-                    </td>
+                  <td>
+                    {employee.checkOut}
+                  </td>
 
 
-                    {/* Check out */}
-
-                    <td>
-
-                      <span className="ma-time">
-                        {employee.checkOut}
-                      </span>
-
-                    </td>
+                  <td>
+                    <strong>
+                      {employee.hours}
+                    </strong>
+                  </td>
 
 
-                    {/* Hours */}
+                  <td>
 
-                    <td>
+                    <span
+                      className={`attendance-status ${employee.status
+                        .toLowerCase()
+                        .replace(/\s+/g, "-")}`}
+                    >
+                      ● {employee.status}
+                    </span>
 
-                      <strong className="ma-hours">
-                        {employee.hours}
-                      </strong>
+                  </td>
 
-                    </td>
+                </tr>
 
-
-                    {/* Action */}
-
-                    <td>
-
-                      <button
-                        type="button"
-                        className="ma-action-btn"
-                        onClick={() =>
-                          alert(
-                            `${employee.name} attendance`
-                          )
-                        }
-                      >
-                        View
-                      </button>
-
-                    </td>
-
-                  </tr>
-
-                )
-              )}
+              ))}
 
             </tbody>
 
@@ -548,18 +364,15 @@ function ManagerAttendance() {
         </div>
 
 
-        {/* =================================================
-           FOOTER
-        ================================================= */}
+        {/* FOOTER */}
 
-        <div className="ma-table-footer">
+        <div className="attendance-footer">
 
           <span>
-            Showing {filteredEmployees.length} of 12 employees
+            Showing {filteredData.length} of 12 employees
           </span>
 
-
-          <div className="ma-pagination">
+          <div>
 
             <button type="button">
               ←
@@ -591,39 +404,31 @@ function ManagerAttendance() {
 }
 
 
-/* =====================================================
-   STAT COMPONENT
-===================================================== */
+/* SUMMARY CARD */
 
-function AttendanceStat({
-  type,
+function SummaryCard({
   icon,
   title,
   value,
-  sub,
+  text,
+  type,
 }) {
   return (
-    <div className="ma-stat-card">
+    <div className="attendance-summary-card">
 
       <div
-        className={`ma-stat-icon ${type}`}
+        className={`attendance-summary-icon ${type}`}
       >
         {icon}
       </div>
 
       <div>
 
-        <span>
-          {title}
-        </span>
+        <span>{title}</span>
 
-        <strong>
-          {value}
-        </strong>
+        <strong>{value}</strong>
 
-        <small>
-          {sub}
-        </small>
+        <small>{text}</small>
 
       </div>
 
@@ -631,9 +436,5 @@ function AttendanceStat({
   );
 }
 
-
-/* =====================================================
-   EXPORT
-===================================================== */
 
 export default ManagerAttendance;
