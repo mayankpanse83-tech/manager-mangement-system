@@ -68,6 +68,9 @@ import ManagerDashboard
 import ManagerTeam
   from "./apps/manager/pages/ManagerTeam";
 
+  import ManagerAttendance
+  from "./apps/manager/pages/ManagerAttendance";
+
 
 import "./App.css";
 
@@ -390,8 +393,13 @@ function ManagerLayout() {
                 />
               }
             />
+            <Route
+  path="/manager/attendance"
+  element={<ManagerAttendance />}
+/>
 
           </Routes>
+          
 
         </main>
 
