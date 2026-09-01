@@ -288,104 +288,76 @@ function ManagerLayout() {
   return (
     <div className="manager-layout">
 
-      {/* MANAGER SIDEBAR */}
       <ManagerSidebar />
 
-      {/* MANAGER MAIN */}
       <div className="manager-main">
 
-        {/* My Team par ye header nahi dikhana */}
+        {/* My Team ka apna header hai */}
         {!isTeamPage && <ManagerHeader />}
 
         <main className="manager-content">
 
           <Routes>
 
-            {/* DASHBOARD */}
             <Route
               path="/manager/dashboard"
               element={<ManagerDashboard />}
             />
 
-            {/* MY TEAM */}
             <Route
               path="/manager/team"
               element={<ManagerTeam />}
             />
 
-            {/* ATTENDANCE */}
             <Route
               path="/manager/attendance"
-              element={
-                <ManagerPlaceholder
-                  title="Team Attendance"
-                />
-              }
+              element={<ManagerAttendance />}
             />
 
-            {/* TASKS */}
             <Route
               path="/manager/tasks"
               element={
-                <ManagerPlaceholder
-                  title="Team Tasks"
-                />
+                <ManagerPlaceholder title="Team Tasks" />
               }
             />
 
-            {/* DAILY UPDATES */}
             <Route
               path="/manager/daily-updates"
               element={
-                <ManagerPlaceholder
-                  title="Daily Updates"
-                />
+                <ManagerPlaceholder title="Daily Updates" />
               }
             />
 
-            {/* LEAVE */}
             <Route
               path="/manager/leave"
               element={
-                <ManagerPlaceholder
-                  title="Leave Requests"
-                />
+                <ManagerPlaceholder title="Leave Requests" />
               }
             />
 
-            {/* REPORTS */}
             <Route
               path="/manager/reports"
               element={
-                <ManagerPlaceholder
-                  title="Manager Reports"
-                />
+                <ManagerPlaceholder title="Manager Reports" />
               }
             />
 
-            {/* PROFILE */}
             <Route
               path="/manager/profile"
               element={
-                <ManagerPlaceholder
-                  title="Manager Profile"
-                />
+                <ManagerPlaceholder title="Manager Profile" />
               }
             />
 
-            {/* SETTINGS */}
             <Route
               path="/manager/settings"
               element={
-                <ManagerPlaceholder
-                  title="Manager Settings"
-                />
+                <ManagerPlaceholder title="Manager Settings" />
               }
             />
 
-            {/* DEFAULT */}
             <Route
-              path="*"
+              path="/manager/*"
               element={
                 <Navigate
                   to="/manager/dashboard"
@@ -393,13 +365,8 @@ function ManagerLayout() {
                 />
               }
             />
-            <Route
-  path="/manager/attendance"
-  element={<ManagerAttendance />}
-/>
 
           </Routes>
-          
 
         </main>
 
