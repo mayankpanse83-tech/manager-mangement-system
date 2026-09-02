@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
+
 import {
   FaSearch,
   FaFilter,
@@ -9,12 +10,9 @@ import {
   FaUserTimes,
   FaUmbrellaBeach,
   FaClock,
-  FaExclamationTriangle,
   FaCalendarAlt,
-  FaCircle,
   FaArrowUp,
-  FaArrowDown,
-  FaCheck,
+  FaEllipsisV,
 } from "react-icons/fa";
 
 import "./ManagerAttendance.css";
@@ -37,6 +35,7 @@ const employees = [
     hours: "8h 12m",
     lastActivity: "Working now",
   },
+
   {
     id: "EMP-002",
     name: "Priya Singh",
@@ -49,6 +48,7 @@ const employees = [
     hours: "8h 57m",
     lastActivity: "Checked out",
   },
+
   {
     id: "EMP-003",
     name: "Rahul Verma",
@@ -61,6 +61,7 @@ const employees = [
     hours: "—",
     lastActivity: "Sick Leave",
   },
+
   {
     id: "EMP-004",
     name: "Neha Patel",
@@ -73,6 +74,7 @@ const employees = [
     hours: "7h 10m",
     lastActivity: "Working now",
   },
+
   {
     id: "EMP-005",
     name: "Vikram Joshi",
@@ -85,6 +87,7 @@ const employees = [
     hours: "8h 52m",
     lastActivity: "Checked out",
   },
+
   {
     id: "EMP-006",
     name: "Anjali Mehta",
@@ -97,6 +100,7 @@ const employees = [
     hours: "6h 45m",
     lastActivity: "Working now",
   },
+
   {
     id: "EMP-007",
     name: "Karan Malhotra",
@@ -109,6 +113,7 @@ const employees = [
     hours: "—",
     lastActivity: "No check-in",
   },
+
   {
     id: "EMP-008",
     name: "Pooja Sharma",
@@ -131,45 +136,49 @@ const employees = [
 function ManagerAttendance() {
 
   const [search, setSearch] = useState("");
-  const [activeTab, setActiveTab] = useState("All");
+
+  const [activeTab, setActiveTab] =
+    useState("All");
+
   const [selectedEmployee, setSelectedEmployee] =
     useState(employees[0]);
 
   const tabs = [
-    { name: "All", count: 12 },
-    { name: "Working", count: 9 },
-    { name: "Late", count: 2 },
-    { name: "On Leave", count: 2 },
-    { name: "Absent", count: 1 },
+    { label: "All", count: 12 },
+    { label: "Working", count: 9 },
+    { label: "Late", count: 2 },
+    { label: "On Leave", count: 2 },
+    { label: "Absent", count: 1 },
   ];
 
 
   /* ===================================================
-     FILTER
+     FILTER DATA
   =================================================== */
 
-  const filteredEmployees = employees.filter((employee) => {
+  const filteredEmployees = useMemo(() => {
 
-    const searchValue =
+    const query =
       search.trim().toLowerCase();
 
-    const searchMatch =
-      employee.name.toLowerCase().includes(searchValue) ||
-      employee.id.toLowerCase().includes(searchValue);
+    return employees.filter((employee) => {
 
-    const tabMatch =
-      activeTab === "All" ||
-      (activeTab === "Working" &&
-        employee.status === "Working") ||
-      (activeTab === "Late" &&
-        employee.status === "Late") ||
-      (activeTab === "On Leave" &&
-        employee.status === "On Leave") ||
-      (activeTab === "Absent" &&
-        employee.status === "Absent");
+      const searchMatch =
+        employee.name
+          .toLowerCase()
+          .includes(query) ||
+        employee.id
+          .toLowerCase()
+          .includes(query);
 
-    return searchMatch && tabMatch;
-  });
+      const tabMatch =
+        activeTab === "All" ||
+        employee.status === activeTab;
+
+      return searchMatch && tabMatch;
+    });
+
+  }, [search, activeTab]);
 
 
   return (
@@ -177,36 +186,50 @@ function ManagerAttendance() {
 
 
       {/* =================================================
-         PAGE HEADER
+         HEADER
       ================================================= */}
 
       <div className="attendance-page-header">
 
-        <div>
-          <h1>Team Attendance</h1>
+        <div className="attendance-heading">
+
+          <h1>
+            Team Attendance
+          </h1>
 
           <p>
-            Monitor your team's attendance, working hours
-            and daily status.
+            Monitor your team's attendance,
+            working hours and daily status.
           </p>
+
         </div>
 
 
-        <div className="attendance-header-right">
+        <div className="attendance-header-actions">
+
 
           <button
             type="button"
-            className="attendance-today"
+            className="attendance-date-button"
           >
-            <span>Today, 29 Aug 2026</span>
+
+            <FaCalendarAlt />
+
+            <span>
+              Today, 29 Aug 2026
+            </span>
+
             <FaChevronDown />
+
           </button>
 
-          <div className="attendance-top-search">
+
+          <div className="attendance-header-search">
 
             <FaSearch />
 
             <input
+              type="text"
               value={search}
               onChange={(e) =>
                 setSearch(e.target.value)
@@ -216,17 +239,19 @@ function ManagerAttendance() {
 
           </div>
 
+
           <button
             type="button"
-            className="attendance-header-btn"
+            className="attendance-header-small-button"
           >
             <FaFilter />
             Filter
           </button>
 
+
           <button
             type="button"
-            className="attendance-header-btn"
+            className="attendance-header-small-button"
           >
             <FaDownload />
             Export
@@ -243,7 +268,7 @@ function ManagerAttendance() {
 
       <div className="attendance-stat-grid">
 
-        <AttendanceStat
+        <StatCard
           type="purple"
           icon={<FaUsers />}
           title="Team Members"
@@ -251,7 +276,7 @@ function ManagerAttendance() {
           footer="Total Members"
         />
 
-        <AttendanceStat
+        <StatCard
           type="green"
           icon={<FaUserCheck />}
           title="Present"
@@ -259,7 +284,7 @@ function ManagerAttendance() {
           footer="75% of team"
         />
 
-        <AttendanceStat
+        <StatCard
           type="red"
           icon={<FaUserTimes />}
           title="Absent"
@@ -267,7 +292,7 @@ function ManagerAttendance() {
           footer="8% of team"
         />
 
-        <AttendanceStat
+        <StatCard
           type="orange"
           icon={<FaUmbrellaBeach />}
           title="On Leave"
@@ -275,7 +300,7 @@ function ManagerAttendance() {
           footer="17% of team"
         />
 
-        <AttendanceStat
+        <StatCard
           type="blue"
           icon={<FaClock />}
           title="Late"
@@ -294,37 +319,38 @@ function ManagerAttendance() {
 
 
         {/* =================================================
-           LEFT
+           LEFT CONTENT
         ================================================= */}
 
-        <div className="attendance-left-column">
+        <div className="attendance-left">
 
 
-          {/* STATUS TABS */}
+          {/* TABS */}
 
-          <div className="attendance-tabs">
+          <div className="attendance-status-tabs">
 
             {tabs.map((tab) => (
 
               <button
-                key={tab.name}
+                key={tab.label}
                 type="button"
                 className={
-                  activeTab === tab.name
+                  activeTab === tab.label
                     ? "active"
                     : ""
                 }
                 onClick={() =>
-                  setActiveTab(tab.name)
+                  setActiveTab(tab.label)
                 }
               >
+
                 <span>
-                  {tab.name}
+                  {tab.label}
                 </span>
 
-                <strong>
+                <small>
                   {tab.count}
-                </strong>
+                </small>
 
               </button>
 
@@ -345,13 +371,33 @@ function ManagerAttendance() {
 
                   <tr>
 
-                    <th>EMPLOYEE</th>
-                    <th>CHECK IN</th>
-                    <th>CHECK OUT</th>
-                    <th>WORKING HOURS</th>
-                    <th>STATUS</th>
-                    <th>LAST ACTIVITY</th>
-                    <th>ACTIONS</th>
+                    <th>
+                      EMPLOYEE
+                    </th>
+
+                    <th>
+                      CHECK IN
+                    </th>
+
+                    <th>
+                      CHECK OUT
+                    </th>
+
+                    <th>
+                      WORKING HOURS
+                    </th>
+
+                    <th>
+                      STATUS
+                    </th>
+
+                    <th>
+                      LAST ACTIVITY
+                    </th>
+
+                    <th>
+                      ACTIONS
+                    </th>
 
                   </tr>
 
@@ -366,7 +412,8 @@ function ManagerAttendance() {
                       <tr
                         key={employee.id}
                         className={
-                          selectedEmployee?.id === employee.id
+                          selectedEmployee?.id ===
+                          employee.id
                             ? "selected"
                             : ""
                         }
@@ -375,19 +422,25 @@ function ManagerAttendance() {
                         }
                       >
 
-                        {/* EMPLOYEE */}
+                        {/* Employee */}
 
                         <td>
 
                           <div className="attendance-employee">
 
                             <div
-                              className={`attendance-avatar ${employee.status
-                                .toLowerCase()
-                                .replace(/\s+/g, "-")}`}
+                              className={
+                                `attendance-avatar ${employee.status
+                                  .toLowerCase()
+                                  .replace(
+                                    /\s+/g,
+                                    "-"
+                                  )}`
+                              }
                             >
                               {employee.initials}
                             </div>
+
 
                             <div className="attendance-employee-text">
 
@@ -406,7 +459,7 @@ function ManagerAttendance() {
                         </td>
 
 
-                        {/* CHECK IN */}
+                        {/* Check In */}
 
                         <td>
 
@@ -414,7 +467,7 @@ function ManagerAttendance() {
                             className={
                               employee.checkIn === "—"
                                 ? "muted"
-                                : "time-green"
+                                : "green-time"
                             }
                           >
                             {employee.checkIn}
@@ -423,20 +476,18 @@ function ManagerAttendance() {
                         </td>
 
 
-                        {/* CHECK OUT */}
+                        {/* Check Out */}
 
                         <td>
 
-                          <strong
-                            className="normal-time"
-                          >
+                          <strong className="normal-time">
                             {employee.checkOut}
                           </strong>
 
                         </td>
 
 
-                        {/* HOURS */}
+                        {/* Hours */}
 
                         <td>
 
@@ -447,7 +498,7 @@ function ManagerAttendance() {
                         </td>
 
 
-                        {/* STATUS */}
+                        {/* Status */}
 
                         <td>
 
@@ -455,7 +506,10 @@ function ManagerAttendance() {
                             className={
                               `attendance-status ${employee.status
                                 .toLowerCase()
-                                .replace(/\s+/g, "-")}`
+                                .replace(
+                                  /\s+/g,
+                                  "-"
+                                )}`
                             }
                           >
                             ● {employee.status}
@@ -464,65 +518,55 @@ function ManagerAttendance() {
                         </td>
 
 
-                        {/* ACTIVITY */}
+                        {/* Activity */}
 
                         <td>
 
-                          <div className="last-activity">
+                          <div className="attendance-activity">
 
-                            <span>
+                            <strong>
+                              {employee.lastActivity}
+                            </strong>
+
+                            <small>
                               {employee.status ===
-                              "On Leave"
-                                ? "Sick Leave"
-                                : employee.lastActivity}
-                            </span>
-
-                            {employee.status ===
-                              "Working" && (
-                              <small>
-                                Updated just now
-                              </small>
-                            )}
-
-                            {employee.status ===
-                              "Present" && (
-                              <small>
-                                Checked out
-                              </small>
-                            )}
-
-                            {employee.status ===
-                              "Late" && (
-                              <small>
-                                Checked in late
-                              </small>
-                            )}
-
-                            {employee.status ===
-                              "Absent" && (
-                              <small>
-                                Today
-                              </small>
-                            )}
+                              "Working"
+                                ? "Updated just now"
+                                : employee.status ===
+                                  "Present"
+                                ? "Checked out"
+                                : employee.status ===
+                                  "Late"
+                                ? "Checked in late"
+                                : employee.status ===
+                                  "Absent"
+                                ? "Today"
+                                : "Today"}
+                            </small>
 
                           </div>
 
                         </td>
 
 
-                        {/* ACTION */}
+                        {/* Action */}
 
                         <td>
 
                           <button
                             type="button"
                             className="attendance-action"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setSelectedEmployee(employee);
+                            onClick={(event) => {
+
+                              event.stopPropagation();
+
+                              setSelectedEmployee(
+                                employee
+                              );
+
                             }}
                           >
-                            •••
+                            <FaEllipsisV />
                           </button>
 
                         </td>
@@ -549,33 +593,50 @@ function ManagerAttendance() {
 
               <div className="attendance-pagination">
 
-                <button>
+                <button type="button">
                   ←
                 </button>
 
-                <button className="active">
+                <button
+                  type="button"
+                  className="active"
+                >
                   1
                 </button>
 
-                <button>
+                <button type="button">
                   2
                 </button>
 
-                <button>
+                <button type="button">
                   →
                 </button>
 
               </div>
 
+
               <div className="attendance-page-size">
+
+                <span>
+                  Show
+                </span>
+
                 <select defaultValue="10">
-                  <option value="10">10</option>
-                  <option value="20">20</option>
+
+                  <option value="10">
+                    10
+                  </option>
+
+                  <option value="20">
+                    20
+                  </option>
+
                 </select>
 
                 <span>
                   per page
                 </span>
+
               </div>
 
             </div>
@@ -583,51 +644,63 @@ function ManagerAttendance() {
           </div>
 
 
-          {/* BOTTOM CARDS */}
+          {/* =================================================
+             BOTTOM INFORMATION
+          ================================================= */}
 
           <div className="attendance-bottom-grid">
 
 
-            {/* Today's Summary */}
+            {/* TODAY SUMMARY */}
 
-            <div className="small-attendance-card">
+            <div className="attendance-small-card">
 
               <h3>
                 Today's Summary
               </h3>
 
-              <div className="summary-donut">
+              <div className="attendance-summary-content">
 
-                <div className="donut-circle">
-                  <strong>75%</strong>
-                  <small>Present Rate</small>
+                <div className="attendance-donut">
+
+                  <div>
+                    <strong>
+                      75%
+                    </strong>
+
+                    <small>
+                      Present Rate
+                    </small>
+                  </div>
+
                 </div>
 
-                <div className="summary-legend">
 
-                  <span>
-                    <i className="dot green"></i>
-                    Present
-                    <b>9 (75%)</b>
-                  </span>
+                <div className="attendance-legend">
 
-                  <span>
-                    <i className="dot orange"></i>
-                    Late
-                    <b>2 (17%)</b>
-                  </span>
+                  <Legend
+                    type="green"
+                    text="Present"
+                    value="9 (75%)"
+                  />
 
-                  <span>
-                    <i className="dot blue"></i>
-                    On Leave
-                    <b>2 (17%)</b>
-                  </span>
+                  <Legend
+                    type="orange"
+                    text="Late"
+                    value="2 (17%)"
+                  />
 
-                  <span>
-                    <i className="dot red"></i>
-                    Absent
-                    <b>1 (8%)</b>
-                  </span>
+                  <Legend
+                    type="blue"
+                    text="On Leave"
+                    value="2 (17%)"
+                  />
+
+                  <Legend
+                    type="red"
+                    text="Absent"
+                    value="1 (8%)"
+                  />
 
                 </div>
 
@@ -636,15 +709,16 @@ function ManagerAttendance() {
             </div>
 
 
-            {/* Average Hours */}
+            {/* AVERAGE HOURS */}
 
-            <div className="small-attendance-card">
+            <div className="attendance-small-card">
 
               <h3>
                 Average Working Hours
               </h3>
 
               <div className="average-hours">
+
                 <strong>
                   8h 14m
                 </strong>
@@ -653,32 +727,46 @@ function ManagerAttendance() {
                   <FaArrowUp />
                   5m from yesterday
                 </span>
+
               </div>
 
             </div>
 
 
-            {/* Attendance Trend */}
+            {/* ATTENDANCE TREND */}
 
-            <div className="small-attendance-card trend-card">
+            <div className="attendance-small-card">
 
               <h3>
                 Attendance Trend
                 <span>
-                  (This Month)
+                  {" "}(This Month)
                 </span>
               </h3>
 
-              <div className="fake-chart">
+              <div className="attendance-chart">
 
-                <div className="chart-line">
-                  <span className="point p1"></span>
-                  <span className="point p2"></span>
-                  <span className="point p3"></span>
-                  <span className="point p4"></span>
+                <div className="chart-bars">
+
+                  <span style={{ height: "45%" }}>
+                    86%
+                  </span>
+
+                  <span style={{ height: "65%" }}>
+                    90%
+                  </span>
+
+                  <span style={{ height: "80%" }}>
+                    93%
+                  </span>
+
+                  <span style={{ height: "90%" }}>
+                    95%
+                  </span>
+
                 </div>
 
-                <div className="chart-labels">
+                <div className="chart-bottom">
                   <span>W1</span>
                   <span>W2</span>
                   <span>W3</span>
@@ -690,9 +778,9 @@ function ManagerAttendance() {
             </div>
 
 
-            {/* Needs Attention */}
+            {/* NEEDS ATTENTION */}
 
-            <div className="small-attendance-card">
+            <div className="attendance-small-card">
 
               <h3>
                 Needs Attention
@@ -700,7 +788,7 @@ function ManagerAttendance() {
 
               <div className="attention-list">
 
-                <AttentionItem
+                <Attention
                   initials="RV"
                   name="Rahul Verma"
                   text="Absent today"
@@ -708,7 +796,7 @@ function ManagerAttendance() {
                   type="red"
                 />
 
-                <AttentionItem
+                <Attention
                   initials="NP"
                   name="Neha Patel"
                   text="Checked in at 10:12 AM"
@@ -716,7 +804,7 @@ function ManagerAttendance() {
                   type="orange"
                 />
 
-                <AttentionItem
+                <Attention
                   initials="AM"
                   name="Anjali Mehta"
                   text="Checked in at 10:20 AM"
@@ -727,8 +815,8 @@ function ManagerAttendance() {
               </div>
 
               <button
-                className="view-all-attention"
                 type="button"
+                className="attendance-view-all"
               >
                 View All →
               </button>
@@ -741,23 +829,28 @@ function ManagerAttendance() {
 
 
         {/* =================================================
-           RIGHT DETAILS PANEL
+           RIGHT DETAILS
         ================================================= */}
 
         {selectedEmployee && (
 
-          <aside className="attendance-details">
+          <aside className="attendance-details-panel">
 
 
-            {/* HEADER */}
+            {/* DETAILS HEADER */}
 
-            <div className="attendance-details-header">
+            <div className="details-header">
 
               <strong>
                 Employee Attendance Details
               </strong>
 
-              <button type="button">
+              <button
+                type="button"
+                onClick={() =>
+                  setSelectedEmployee(null)
+                }
+              >
                 ×
               </button>
 
@@ -766,17 +859,23 @@ function ManagerAttendance() {
 
             {/* PROFILE */}
 
-            <div className="attendance-details-profile">
+            <div className="details-profile">
 
               <div
-                className={`details-avatar ${selectedEmployee.status
-                  .toLowerCase()
-                  .replace(/\s+/g, "-")}`}
+                className={
+                  `details-avatar ${selectedEmployee.status
+                    .toLowerCase()
+                    .replace(
+                      /\s+/g,
+                      "-"
+                    )}`
+                }
               >
                 {selectedEmployee.initials}
               </div>
 
-              <div>
+
+              <div className="details-person">
 
                 <strong>
                   {selectedEmployee.name}
@@ -789,10 +888,16 @@ function ManagerAttendance() {
 
               </div>
 
+
               <span
-                className={`details-working ${selectedEmployee.status
-                  .toLowerCase()
-                  .replace(/\s+/g, "-")}`}
+                className={
+                  `details-status ${selectedEmployee.status
+                    .toLowerCase()
+                    .replace(
+                      /\s+/g,
+                      "-"
+                    )}`
+                }
               >
                 {selectedEmployee.status}
               </span>
@@ -831,24 +936,24 @@ function ManagerAttendance() {
                 Today's Attendance
               </h3>
 
-              <DetailLine
+              <DetailRow
                 label="Check In"
                 value={selectedEmployee.checkIn}
                 green
               />
 
-              <DetailLine
+              <DetailRow
                 label="Check Out"
                 value={selectedEmployee.checkOut}
               />
 
-              <DetailLine
+              <DetailRow
                 label="Working Hours"
                 value={selectedEmployee.hours}
                 green
               />
 
-              <DetailLine
+              <DetailRow
                 label="Status"
                 value={selectedEmployee.status}
                 green
@@ -865,30 +970,30 @@ function ManagerAttendance() {
                 This Month Overview
               </h3>
 
-              <div className="monthly-cards">
+              <div className="monthly-grid">
 
-                <MonthCard
-                  label="Present"
+                <Month
+                  title="Present"
                   value="21 Days"
-                  className="green"
+                  type="green"
                 />
 
-                <MonthCard
-                  label="Late"
+                <Month
+                  title="Late"
                   value="2 Days"
-                  className="orange"
+                  type="orange"
                 />
 
-                <MonthCard
-                  label="Absent"
+                <Month
+                  title="Absent"
                   value="1 Day"
-                  className="red"
+                  type="red"
                 />
 
-                <MonthCard
-                  label="On Leave"
+                <Month
+                  title="On Leave"
                   value="2 Days"
-                  className="blue"
+                  type="blue"
                 />
 
               </div>
@@ -896,11 +1001,11 @@ function ManagerAttendance() {
             </div>
 
 
-            {/* ATTENDANCE RATE */}
+            {/* RATE */}
 
             <div className="details-section">
 
-              <div className="rate-title">
+              <div className="rate-heading">
 
                 <span>
                   Attendance
@@ -912,7 +1017,7 @@ function ManagerAttendance() {
 
               </div>
 
-              <div className="attendance-rate-bar">
+              <div className="rate-bar">
 
                 <span
                   style={{
@@ -927,51 +1032,44 @@ function ManagerAttendance() {
 
             {/* TIMELINE */}
 
-            <div className="details-section timeline-section">
+            <div className="details-section">
 
               <h3>
                 Today's Timeline
               </h3>
 
-              <TimelineItem
+              <Timeline
                 time="09:12 AM"
                 text="Checked In"
-                color="blue"
               />
 
-              <TimelineItem
+              <Timeline
                 time="09:12 AM"
                 text="Work Started"
-                color="blue"
               />
 
-              <TimelineItem
+              <Timeline
                 time="01:15 PM"
                 text="Break Started"
-                color="blue"
               />
 
-              <TimelineItem
+              <Timeline
                 time="01:45 PM"
                 text="Break Ended"
-                color="blue"
               />
 
-              <TimelineItem
+              <Timeline
                 time="Now"
                 text="Working • 8h 12m"
-                color="green"
                 last
               />
 
             </div>
 
 
-            {/* FULL ATTENDANCE */}
-
             <button
-              className="full-attendance-button"
               type="button"
+              className="full-attendance-btn"
             >
               View Full Attendance
               <FaCalendarAlt />
@@ -989,10 +1087,10 @@ function ManagerAttendance() {
 
 
 /* =====================================================
-   STAT
+   STAT CARD
 ===================================================== */
 
-function AttendanceStat({
+function StatCard({
   icon,
   type,
   title,
@@ -1003,12 +1101,14 @@ function AttendanceStat({
     <div className="attendance-stat-card">
 
       <div
-        className={`attendance-stat-icon ${type}`}
+        className={
+          `attendance-stat-icon ${type}`
+        }
       >
         {icon}
       </div>
 
-      <div>
+      <div className="attendance-stat-text">
 
         <span>
           {title}
@@ -1030,10 +1130,39 @@ function AttendanceStat({
 
 
 /* =====================================================
-   ATTENTION ITEM
+   LEGEND
 ===================================================== */
 
-function AttentionItem({
+function Legend({
+  type,
+  text,
+  value,
+}) {
+  return (
+    <div className="attendance-legend-row">
+
+      <span
+        className={`legend-dot ${type}`}
+      />
+
+      <span>
+        {text}
+      </span>
+
+      <strong>
+        {value}
+      </strong>
+
+    </div>
+  );
+}
+
+
+/* =====================================================
+   ATTENTION
+===================================================== */
+
+function Attention({
   initials,
   name,
   text,
@@ -1043,11 +1172,15 @@ function AttentionItem({
   return (
     <div className="attention-item">
 
-      <div className={`attention-avatar ${type}`}>
+      <div
+        className={
+          `attention-avatar ${type}`
+        }
+      >
         {initials}
       </div>
 
-      <div className="attention-text">
+      <div className="attention-info">
 
         <strong>
           {name}
@@ -1059,7 +1192,11 @@ function AttentionItem({
 
       </div>
 
-      <span className={`attention-badge ${type}`}>
+      <span
+        className={
+          `attention-badge ${type}`
+        }
+      >
         {badge}
       </span>
 
@@ -1069,23 +1206,27 @@ function AttentionItem({
 
 
 /* =====================================================
-   DETAIL LINE
+   DETAIL ROW
 ===================================================== */
 
-function DetailLine({
+function DetailRow({
   label,
   value,
   green,
 }) {
   return (
-    <div className="detail-line">
+    <div className="detail-row">
 
       <span>
         {label}
       </span>
 
       <strong
-        className={green ? "green-text" : ""}
+        className={
+          green
+            ? "green-text"
+            : ""
+        }
       >
         {value}
       </strong>
@@ -1096,19 +1237,23 @@ function DetailLine({
 
 
 /* =====================================================
-   MONTH CARD
+   MONTH
 ===================================================== */
 
-function MonthCard({
-  label,
+function Month({
+  title,
   value,
-  className,
+  type,
 }) {
   return (
-    <div className={`month-card ${className}`}>
+    <div
+      className={
+        `month-card ${type}`
+      }
+    >
 
       <span>
-        {label}
+        {title}
       </span>
 
       <strong>
@@ -1124,22 +1269,23 @@ function MonthCard({
    TIMELINE
 ===================================================== */
 
-function TimelineItem({
+function Timeline({
   time,
   text,
-  color,
   last,
 }) {
   return (
-    <div className="timeline-item">
+    <div className="timeline-row">
 
       <span className="timeline-time">
         {time}
       </span>
 
-      <div className={`timeline-dot ${color}`}>
-        {!last && <span></span>}
-      </div>
+      <span
+        className={
+          `timeline-circle ${last ? "last" : ""}`
+        }
+      />
 
       <strong>
         {text}
@@ -1149,5 +1295,9 @@ function TimelineItem({
   );
 }
 
+
+/* =====================================================
+   EXPORT
+===================================================== */
 
 export default ManagerAttendance;
