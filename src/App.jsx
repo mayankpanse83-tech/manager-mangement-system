@@ -280,10 +280,9 @@ function EmployeeLayout() {
 ===================================================== */
 
 function ManagerLayout() {
-
   const location = useLocation();
 
-  const hideManagerHeader =
+  const isFullPage =
     location.pathname === "/manager/team" ||
     location.pathname === "/manager/attendance";
 
@@ -294,117 +293,69 @@ function ManagerLayout() {
 
       <div className="manager-main">
 
-        {!hideManagerHeader && (
-          <ManagerHeader />
-        )}
+        {/* Team aur Attendance ka apna header hai */}
+        {!isFullPage && <ManagerHeader />}
 
         <main className="manager-content">
 
           <Routes>
 
-            {/* DASHBOARD */}
-
             <Route
               path="/manager/dashboard"
-              element={
-                <ManagerDashboard />
-              }
+              element={<ManagerDashboard />}
             />
-
-
-            {/* MY TEAM */}
 
             <Route
               path="/manager/team"
-              element={
-                <ManagerTeam />
-              }
+              element={<ManagerTeam />}
             />
-
-
-            {/* ATTENDANCE */}
 
             <Route
               path="/manager/attendance"
-              element={
-                <ManagerAttendance />
-              }
+              element={<ManagerAttendance />}
             />
-
-
-            {/* TASKS */}
 
             <Route
               path="/manager/tasks"
               element={
-                <ManagerPlaceholder
-                  title="Team Tasks"
-                />
+                <ManagerPlaceholder title="Team Tasks" />
               }
             />
-
-
-            {/* DAILY UPDATES */}
 
             <Route
               path="/manager/daily-updates"
               element={
-                <ManagerPlaceholder
-                  title="Daily Updates"
-                />
+                <ManagerPlaceholder title="Daily Updates" />
               }
             />
-
-
-            {/* LEAVE */}
 
             <Route
               path="/manager/leave"
               element={
-                <ManagerPlaceholder
-                  title="Leave Requests"
-                />
+                <ManagerPlaceholder title="Leave Requests" />
               }
             />
-
-
-            {/* REPORTS */}
 
             <Route
               path="/manager/reports"
               element={
-                <ManagerPlaceholder
-                  title="Manager Reports"
-                />
+                <ManagerPlaceholder title="Manager Reports" />
               }
             />
-
-
-            {/* PROFILE */}
 
             <Route
               path="/manager/profile"
               element={
-                <ManagerPlaceholder
-                  title="Manager Profile"
-                />
+                <ManagerPlaceholder title="Manager Profile" />
               }
             />
-
-
-            {/* SETTINGS */}
 
             <Route
               path="/manager/settings"
               element={
-                <ManagerPlaceholder
-                  title="Manager Settings"
-                />
+                <ManagerPlaceholder title="Manager Settings" />
               }
             />
-
-
-            {/* INVALID */}
 
             <Route
               path="/manager/*"
