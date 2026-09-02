@@ -6,15 +6,13 @@ import {
   useLocation,
 } from "react-router-dom";
 
+
 /* =====================================================
    EMPLOYEE
 ===================================================== */
 
-import EmployeeSidebar
-  from "./apps/employee/component/Sidebar";
-
-import EmployeeHeader
-  from "./apps/employee/component/Header";
+import EmployeeSidebar from "./apps/employee/component/Sidebar";
+import EmployeeHeader from "./apps/employee/component/Header";
 
 import EmployeeDashboard
   from "./apps/employee/component/pages/Dashboard";
@@ -42,7 +40,7 @@ import EmployeeProfile
 
 
 /* =====================================================
-   LOGIN
+   AUTH
 ===================================================== */
 
 import Login
@@ -68,7 +66,7 @@ import ManagerDashboard
 import ManagerTeam
   from "./apps/manager/pages/ManagerTeam";
 
-  import ManagerAttendance
+import ManagerAttendance
   from "./apps/manager/pages/ManagerAttendance";
 
 
@@ -76,19 +74,14 @@ import "./App.css";
 
 
 /* =====================================================
-   MANAGER OTHER PAGE
+   PLACEHOLDER
 ===================================================== */
 
 function ManagerPlaceholder({ title }) {
   return (
     <div className="manager-placeholder">
-
       <h1>{title}</h1>
-
-      <p>
-        {title} page coming soon.
-      </p>
-
+      <p>{title} page coming soon.</p>
     </div>
   );
 }
@@ -100,23 +93,19 @@ function ManagerPlaceholder({ title }) {
 
 function AuthLayout() {
   return (
-    <div className="auth-layout">
+    <Routes>
 
-      <Routes>
+      <Route
+        path="/login"
+        element={<Login />}
+      />
 
-        <Route
-          path="/login"
-          element={<Login />}
-        />
+      <Route
+        path="/account-activation"
+        element={<AccountActivation />}
+      />
 
-        <Route
-          path="/account-activation"
-          element={<AccountActivation />}
-        />
-
-      </Routes>
-
-    </div>
+    </Routes>
   );
 }
 
@@ -127,138 +116,77 @@ function AuthLayout() {
 
 function EmployeeLayout() {
 
+  const location = useLocation();
+
+  const isDashboard =
+    location.pathname === "/" ||
+    location.pathname === "/dashboard";
+
   return (
     <div className="app-layout">
 
-      {/* SIDEBAR */}
-
       <EmployeeSidebar />
-
-
-      {/* MAIN */}
 
       <div className="main-area">
 
-        <EmployeeHeader />
-
+        {!isDashboard && (
+          <EmployeeHeader />
+        )}
 
         <main className="page-content">
 
           <Routes>
 
-            {/* HOME */}
-
             <Route
               path="/"
-              element={
-                <Navigate
-                  to="/employee/dashboard"
-                  replace
-                />
-              }
+              element={<EmployeeDashboard />}
             />
-
-
-            {/* DASHBOARD */}
-
-            <Route
-              path="/employee/dashboard"
-              element={
-                <EmployeeDashboard />
-              }
-            />
-
-
-            {/* OLD DASHBOARD */}
 
             <Route
               path="/dashboard"
-              element={
-                <Navigate
-                  to="/employee/dashboard"
-                  replace
-                />
-              }
+              element={<EmployeeDashboard />}
             />
-
-
-            {/* ATTENDANCE */}
 
             <Route
-              path="/employee/attendance"
-              element={
-                <EmployeeAttendance />
-              }
+              path="/attendance"
+              element={<EmployeeAttendance />}
             />
-
-
-            {/* TASKS */}
 
             <Route
-              path="/employee/tasks"
-              element={
-                <EmployeeTask />
-              }
+              path="/tasks"
+              element={<EmployeeTask />}
             />
-
-
-            {/* DAILY UPDATES */}
 
             <Route
-              path="/employee/daily-updates"
-              element={
-                <EmployeeDailyUpdates />
-              }
+              path="/daily-updates"
+              element={<EmployeeDailyUpdates />}
             />
-
-
-            {/* LEAVE */}
 
             <Route
-              path="/employee/leave"
-              element={
-                <EmployeeLeave />
-              }
+              path="/leave"
+              element={<EmployeeLeave />}
             />
-
-
-            {/* SALARY */}
 
             <Route
-              path="/employee/salary"
-              element={
-                <EmployeeSalary />
-              }
+              path="/salary"
+              element={<EmployeeSalary />}
             />
-
-
-            {/* REPORTS */}
 
             <Route
-              path="/employee/reports"
-              element={
-                <EmployeeReport />
-              }
+              path="/reports"
+              element={<EmployeeReport />}
             />
-
-
-            {/* PROFILE */}
 
             <Route
-              path="/employee/profile"
-              element={
-                <EmployeeProfile />
-              }
+              path="/profile"
+              element={<EmployeeProfile />}
             />
-
-
-            {/* UNKNOWN EMPLOYEE URL */}
 
             <Route
               path="*"
               element={
                 <Navigate
-                  to="/employee/dashboard"
+                  to="/dashboard"
                   replace
                 />
               }
@@ -280,82 +208,145 @@ function EmployeeLayout() {
 ===================================================== */
 
 function ManagerLayout() {
+
   const location = useLocation();
 
-  const isFullPage =
+  /*
+    Team aur Attendance ke pages ke andar
+    already apna page header hai.
+    Isliye ManagerHeader yahan nahi dikhayenge.
+  */
+
+  const hideManagerHeader =
     location.pathname === "/manager/team" ||
     location.pathname === "/manager/attendance";
+
 
   return (
     <div className="manager-layout">
 
+
+      {/* ================= SIDEBAR ================= */}
+
       <ManagerSidebar />
+
+
+      {/* ================= MAIN ================= */}
 
       <div className="manager-main">
 
-        {/* Team aur Attendance ka apna header hai */}
-        {!isFullPage && <ManagerHeader />}
+        {!hideManagerHeader && (
+          <ManagerHeader />
+        )}
+
 
         <main className="manager-content">
 
           <Routes>
 
+            {/* DASHBOARD */}
+
             <Route
               path="/manager/dashboard"
-              element={<ManagerDashboard />}
+              element={
+                <ManagerDashboard />
+              }
             />
+
+
+            {/* MY TEAM */}
 
             <Route
               path="/manager/team"
-              element={<ManagerTeam />}
+              element={
+                <ManagerTeam />
+              }
             />
+
+
+            {/* ATTENDANCE */}
 
             <Route
               path="/manager/attendance"
-              element={<ManagerAttendance />}
+              element={
+                <ManagerAttendance />
+              }
             />
+
+
+            {/* TASKS */}
 
             <Route
               path="/manager/tasks"
               element={
-                <ManagerPlaceholder title="Team Tasks" />
+                <ManagerPlaceholder
+                  title="Team Tasks"
+                />
               }
             />
+
+
+            {/* DAILY UPDATES */}
 
             <Route
               path="/manager/daily-updates"
               element={
-                <ManagerPlaceholder title="Daily Updates" />
+                <ManagerPlaceholder
+                  title="Daily Updates"
+                />
               }
             />
+
+
+            {/* LEAVE */}
 
             <Route
               path="/manager/leave"
               element={
-                <ManagerPlaceholder title="Leave Requests" />
+                <ManagerPlaceholder
+                  title="Leave Requests"
+                />
               }
             />
+
+
+            {/* REPORTS */}
 
             <Route
               path="/manager/reports"
               element={
-                <ManagerPlaceholder title="Manager Reports" />
+                <ManagerPlaceholder
+                  title="Manager Reports"
+                />
               }
             />
+
+
+            {/* PROFILE */}
 
             <Route
               path="/manager/profile"
               element={
-                <ManagerPlaceholder title="Manager Profile" />
+                <ManagerPlaceholder
+                  title="Manager Profile"
+                />
               }
             />
+
+
+            {/* SETTINGS */}
 
             <Route
               path="/manager/settings"
               element={
-                <ManagerPlaceholder title="Manager Settings" />
+                <ManagerPlaceholder
+                  title="Manager Settings"
+                />
               }
             />
+
+
+            {/* INVALID MANAGER URL */}
 
             <Route
               path="/manager/*"
@@ -379,34 +370,31 @@ function ManagerLayout() {
 
 
 /* =====================================================
-   MAIN APP
+   APP
 ===================================================== */
 
 function App() {
 
   const location = useLocation();
 
-
-  /* AUTH */
-
-  const isAuthPage =
+  const isAuth =
     location.pathname === "/login" ||
     location.pathname === "/account-activation";
 
 
-  if (isAuthPage) {
+  /* AUTH */
+
+  if (isAuth) {
     return <AuthLayout />;
   }
 
 
   /* MANAGER */
 
-  const isManagerPage =
+  if (
     location.pathname === "/manager" ||
-    location.pathname.startsWith("/manager/");
-
-
-  if (isManagerPage) {
+    location.pathname.startsWith("/manager/")
+  ) {
     return <ManagerLayout />;
   }
 
