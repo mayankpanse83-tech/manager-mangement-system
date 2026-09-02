@@ -1,115 +1,267 @@
 import React from "react";
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
 
-// ================= EMPLOYEE IMPORTS =================
-import Sidebar from "./apps/employee/component/Sidebar";
-import Header from "./apps/employee/component/Header";
+/* =====================================================
+   EMPLOYEE
+===================================================== */
 
-import Dashboard from "./apps/employee/component/pages/Dashboard";
-import Attendance from "./apps/employee/component/pages/Attendance";
-import Task from "./apps/employee/component/pages/Task";
-import DailyUpdates from "./apps/employee/component/pages/DailyUpdates";
-import Leave from "./apps/employee/component/pages/Leave";
-import Salary from "./apps/employee/component/pages/Salary";
-import Report from "./apps/employee/component/pages/Report";
-import Profile from "./apps/employee/component/pages/Profile";
+import EmployeeSidebar
+  from "./apps/employee/component/Sidebar";
 
-import Login from "./apps/employee/component/Login";
-import AccountActivation from "./apps/employee/component/AccountActivation";
+import EmployeeHeader
+  from "./apps/employee/component/Header";
 
-// ================= MANAGER IMPORTS =================
-import ManagerSidebar from "./apps/manager/component/ManagerSidebar";
-import ManagerHeader from "./apps/manager/component/ManagerHeader";
+import EmployeeDashboard
+  from "./apps/employee/component/pages/Dashboard";
 
-import ManagerDashboard from "./apps/manager/pages/ManagerDashboard";
-import ManagerTeam from "./apps/manager/pages/ManagerTeam";
-import ManagerAttendance from "./apps/manager/pages/ManagerAttendance";
+import EmployeeAttendance
+  from "./apps/employee/component/pages/Attendance";
+
+import EmployeeTask
+  from "./apps/employee/component/pages/Task";
+
+import EmployeeDailyUpdates
+  from "./apps/employee/component/pages/DailyUpdates";
+
+import EmployeeLeave
+  from "./apps/employee/component/pages/Leave";
+
+import EmployeeSalary
+  from "./apps/employee/component/pages/Salary";
+
+import EmployeeReport
+  from "./apps/employee/component/pages/Report";
+
+import EmployeeProfile
+  from "./apps/employee/component/pages/Profile";
 
 
-// ====================================================
-// AUTH PAGES
-// ====================================================
+/* =====================================================
+   LOGIN
+===================================================== */
 
-function AuthPages() {
+import Login
+  from "./apps/employee/component/pages/Login";
+
+import AccountActivation
+  from "./apps/employee/component/pages/AccountActivation";
+
+
+/* =====================================================
+   MANAGER
+===================================================== */
+
+import ManagerSidebar
+  from "./apps/manager/component/ManagerSidebar";
+
+import ManagerHeader
+  from "./apps/manager/component/ManagerHeader";
+
+import ManagerDashboard
+  from "./apps/manager/pages/ManagerDashboard";
+
+import ManagerTeam
+  from "./apps/manager/pages/ManagerTeam";
+
+  import ManagerAttendance
+  from "./apps/manager/pages/ManagerAttendance";
+
+
+import "./App.css";
+
+
+/* =====================================================
+   MANAGER OTHER PAGE
+===================================================== */
+
+function ManagerPlaceholder({ title }) {
   return (
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route
-        path="/account-activation"
-        element={<AccountActivation />}
-      />
-      <Route path="*" element={<Navigate to="/login" replace />} />
-    </Routes>
+    <div className="manager-placeholder">
+
+      <h1>{title}</h1>
+
+      <p>
+        {title} page coming soon.
+      </p>
+
+    </div>
   );
 }
 
 
-// ====================================================
-// EMPLOYEE LAYOUT
-// ====================================================
+/* =====================================================
+   AUTH LAYOUT
+===================================================== */
+
+function AuthLayout() {
+  return (
+    <div className="auth-layout">
+
+      <Routes>
+
+        <Route
+          path="/login"
+          element={<Login />}
+        />
+
+        <Route
+          path="/account-activation"
+          element={<AccountActivation />}
+        />
+
+      </Routes>
+
+    </div>
+  );
+}
+
+
+/* =====================================================
+   EMPLOYEE LAYOUT
+===================================================== */
 
 function EmployeeLayout() {
+
   return (
-    <div className="employee-layout">
+    <div className="app-layout">
 
-      <Sidebar />
+      {/* SIDEBAR */}
 
-      <div className="employee-main">
+      <EmployeeSidebar />
 
-        <Header />
 
-        <main className="employee-content">
+      {/* MAIN */}
+
+      <div className="main-area">
+
+        <EmployeeHeader />
+
+
+        <main className="page-content">
 
           <Routes>
 
+            {/* HOME */}
+
             <Route
               path="/"
-              element={<Navigate to="/dashboard" replace />}
+              element={
+                <Navigate
+                  to="/employee/dashboard"
+                  replace
+                />
+              }
             />
+
+
+            {/* DASHBOARD */}
+
+            <Route
+              path="/employee/dashboard"
+              element={
+                <EmployeeDashboard />
+              }
+            />
+
+
+            {/* OLD DASHBOARD */}
 
             <Route
               path="/dashboard"
-              element={<Dashboard />}
+              element={
+                <Navigate
+                  to="/employee/dashboard"
+                  replace
+                />
+              }
             />
 
-            <Route
-              path="/attendance"
-              element={<Attendance />}
-            />
+
+            {/* ATTENDANCE */}
 
             <Route
-              path="/task"
-              element={<Task />}
+              path="/employee/attendance"
+              element={
+                <EmployeeAttendance />
+              }
             />
 
-            <Route
-              path="/daily-updates"
-              element={<DailyUpdates />}
-            />
+
+            {/* TASKS */}
 
             <Route
-              path="/leave"
-              element={<Leave />}
+              path="/employee/tasks"
+              element={
+                <EmployeeTask />
+              }
             />
 
-            <Route
-              path="/salary"
-              element={<Salary />}
-            />
+
+            {/* DAILY UPDATES */}
 
             <Route
-              path="/reports"
-              element={<Report />}
+              path="/employee/daily-updates"
+              element={
+                <EmployeeDailyUpdates />
+              }
             />
 
+
+            {/* LEAVE */}
+
             <Route
-              path="/profile"
-              element={<Profile />}
+              path="/employee/leave"
+              element={
+                <EmployeeLeave />
+              }
             />
+
+
+            {/* SALARY */}
+
+            <Route
+              path="/employee/salary"
+              element={
+                <EmployeeSalary />
+              }
+            />
+
+
+            {/* REPORTS */}
+
+            <Route
+              path="/employee/reports"
+              element={
+                <EmployeeReport />
+              }
+            />
+
+
+            {/* PROFILE */}
+
+            <Route
+              path="/employee/profile"
+              element={
+                <EmployeeProfile />
+              }
+            />
+
+
+            {/* UNKNOWN EMPLOYEE URL */}
 
             <Route
               path="*"
-              element={<Navigate to="/dashboard" replace />}
+              element={
+                <Navigate
+                  to="/employee/dashboard"
+                  replace
+                />
+              }
             />
 
           </Routes>
@@ -123,15 +275,14 @@ function EmployeeLayout() {
 }
 
 
-// ====================================================
-// MANAGER LAYOUT
-// ====================================================
+/* =====================================================
+   MANAGER LAYOUT
+===================================================== */
 
 function ManagerLayout() {
-
   const location = useLocation();
 
-  const hideHeader =
+  const isFullPage =
     location.pathname === "/manager/team" ||
     location.pathname === "/manager/attendance";
 
@@ -142,21 +293,12 @@ function ManagerLayout() {
 
       <div className="manager-main">
 
-        {!hideHeader && <ManagerHeader />}
+        {/* Team aur Attendance ka apna header hai */}
+        {!isFullPage && <ManagerHeader />}
 
         <main className="manager-content">
 
           <Routes>
-
-            <Route
-              path="/manager"
-              element={
-                <Navigate
-                  to="/manager/dashboard"
-                  replace
-                />
-              }
-            />
 
             <Route
               path="/manager/dashboard"
@@ -174,7 +316,49 @@ function ManagerLayout() {
             />
 
             <Route
-              path="*"
+              path="/manager/tasks"
+              element={
+                <ManagerPlaceholder title="Team Tasks" />
+              }
+            />
+
+            <Route
+              path="/manager/daily-updates"
+              element={
+                <ManagerPlaceholder title="Daily Updates" />
+              }
+            />
+
+            <Route
+              path="/manager/leave"
+              element={
+                <ManagerPlaceholder title="Leave Requests" />
+              }
+            />
+
+            <Route
+              path="/manager/reports"
+              element={
+                <ManagerPlaceholder title="Manager Reports" />
+              }
+            />
+
+            <Route
+              path="/manager/profile"
+              element={
+                <ManagerPlaceholder title="Manager Profile" />
+              }
+            />
+
+            <Route
+              path="/manager/settings"
+              element={
+                <ManagerPlaceholder title="Manager Settings" />
+              }
+            />
+
+            <Route
+              path="/manager/*"
               element={
                 <Navigate
                   to="/manager/dashboard"
@@ -194,34 +378,43 @@ function ManagerLayout() {
 }
 
 
-// ====================================================
-// MAIN APP
-// ====================================================
+/* =====================================================
+   MAIN APP
+===================================================== */
 
 function App() {
 
   const location = useLocation();
 
-  // Login / Account Activation
-  const authPage =
+
+  /* AUTH */
+
+  const isAuthPage =
     location.pathname === "/login" ||
     location.pathname === "/account-activation";
 
-  if (authPage) {
-    return <AuthPages />;
+
+  if (isAuthPage) {
+    return <AuthLayout />;
   }
 
-  // Manager pages
-  const managerPage =
+
+  /* MANAGER */
+
+  const isManagerPage =
     location.pathname === "/manager" ||
     location.pathname.startsWith("/manager/");
 
-  if (managerPage) {
+
+  if (isManagerPage) {
     return <ManagerLayout />;
   }
 
-  // Employee pages
+
+  /* EMPLOYEE */
+
   return <EmployeeLayout />;
 }
+
 
 export default App;
