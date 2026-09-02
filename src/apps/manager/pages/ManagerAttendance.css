@@ -1351,3 +1351,13 @@
   }
 
 }
+/* =========================================
+   MOVE BOTTOM CARDS UP
+========================================= */
+
+.attendance-bottom-grid {
+  margin-top: -2px !important;
+
+  position: relative !important;
+  top: -18px !important;
+}
