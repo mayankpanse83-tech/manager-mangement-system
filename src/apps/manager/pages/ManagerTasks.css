@@ -907,111 +907,264 @@
     width: 100%;
   }
 }
-/* ===== TASK PAGE FONT SIZE ===== */
+/* =========================================================
+   FORCE BIGGER FONT + DARK/BLACK TEXT
+   YE TUMHARE ACTUAL .mt- CLASSES KE LIYE HAI
+========================================================= */
 
-.manager-tasks,
-.manager-tasks * {
-  font-family: Arial, sans-serif;
+/* Page Title */
+.mt-heading h1 {
+  font-size: 28px !important;
+  line-height: 1.2 !important;
+  color: #111111 !important;
+  font-weight: 800 !important;
 }
 
-/* Main title */
-.tasks-title,
-.tasks-header h1,
-.page-title {
-  font-size: 26px !important;
-  color: #111827 !important;
-  font-weight: 700 !important;
-}
-
-/* Subtitle */
-.tasks-subtitle,
-.tasks-header p {
-  font-size: 14px !important;
-  color: #4b5563 !important;
-}
-
-/* Cards */
-.task-card {
-  color: #111827 !important;
-}
-
-/* TASK NAME - BLACK */
-.task-title,
-.task-card h3,
-.task-card h4,
-.task-name {
-  color: #111827 !important;
+.mt-heading p {
   font-size: 15px !important;
-  font-weight: 600 !important;
-  opacity: 1 !important;
-}
-
-/* Employee name */
-.employee-name {
   color: #374151 !important;
-  font-size: 13px !important;
+  font-weight: 500 !important;
 }
 
-/* Column title */
-.board-title,
-.kanban-column h3,
-.column-header h3 {
-  font-size: 15px !important;
+
+/* Header Search */
+.mt-search-box input {
+  font-size: 12px !important;
   color: #111827 !important;
-  font-weight: 700 !important;
 }
+
+.mt-tool-btn {
+  font-size: 12px !important;
+  color: #1f2937 !important;
+}
+
 
 /* Stats */
-.stat-card h3,
-.stat-value {
-  font-size: 24px !important;
-  color: #111827 !important;
+.mt-stat-card p {
+  font-size: 11px !important;
+  color: #374151 !important;
+  font-weight: 600 !important;
 }
 
-.stat-card p,
-.stat-label {
-  font-size: 13px !important;
+.mt-stat-card h2 {
+  font-size: 24px !important;
+  color: #111111 !important;
+  font-weight: 800 !important;
+}
+
+.mt-stat-card span {
+  font-size: 10px !important;
+}
+
+
+/* Tabs */
+.mt-tabs button {
+  font-size: 11px !important;
+  font-weight: 600 !important;
   color: #374151 !important;
 }
 
-/* Right panel headings */
-.side-panel h3,
-.right-panel h3,
-.task-overview h3,
-.team-workload h3,
-.upcoming-deadlines h3 {
-  font-size: 16px !important;
-  color: #111827 !important;
+.mt-tabs button.active {
+  color: #4338ca !important;
   font-weight: 700 !important;
 }
 
-/* Tabs */
-.task-tabs button,
-.task-tabs span {
-  font-size: 13px !important;
-  color: #374151 !important;
+
+/* Filters */
+.mt-filter small {
+  font-size: 8px !important;
+  color: #64748b !important;
 }
 
-/* Filter text */
-.filter-group label,
-.filter-group select,
-.filter-group button {
-  font-size: 13px !important;
+.mt-filter button {
+  font-size: 11px !important;
+  color: #111827 !important;
+  font-weight: 500 !important;
 }
 
-/* Important: faded text remove */
-.task-card,
-.task-card *,
-.task-column,
-.task-column * {
+.mt-clear-btn {
+  font-size: 10px !important;
+}
+
+
+/* COLUMN TITLE */
+.mt-column-header strong {
+  font-size: 12px !important;
+  color: #111827 !important;
+  font-weight: 800 !important;
+}
+
+.mt-column-header span {
+  font-size: 11px !important;
+  color: #475569 !important;
+}
+
+
+/* =========================================================
+   TASK CARD - MAIN FIX
+========================================================= */
+
+.mt-task-card {
+  color: #111827 !important;
   opacity: 1 !important;
 }
 
-/* White task title ko force black */
-.task-card h3,
-.task-card h4,
-.task-card .task-title,
-.task-card .task-name {
+.mt-task-card h4 {
+  font-size: 13px !important;
+  color: #000000 !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
+
+
+/* Task person */
+.mt-task-person span {
+  font-size: 10px !important;
+  color: #374151 !important;
+  font-weight: 500 !important;
+}
+
+
+/* Priority */
+.mt-priority {
+  font-size: 10px !important;
+  font-weight: 600 !important;
+}
+
+
+/* Date */
+.mt-task-date,
+.mt-review-text {
+  font-size: 9px !important;
+  font-weight: 500 !important;
+}
+
+
+/* Progress date */
+.mt-progress-date {
+  font-size: 8px !important;
+}
+
+
+/* Completed Date */
+.mt-completed-date {
+  font-size: 8px !important;
+  color: #475569 !important;
+}
+
+
+/* Add Task */
+.mt-add-task {
+  font-size: 10px !important;
+  font-weight: 600 !important;
+}
+
+
+/* =========================================================
+   BOTTOM CARDS
+========================================================= */
+
+.mt-widget-header h3 {
+  font-size: 13px !important;
   color: #111827 !important;
-  text-shadow: none !important;
+  font-weight: 800 !important;
+}
+
+.mt-widget-header button {
+  font-size: 9px !important;
+  font-weight: 600 !important;
+}
+
+.mt-activity-row p {
+  font-size: 9px !important;
+  color: #475569 !important;
+}
+
+.mt-activity-row b {
+  color: #111827 !important;
+}
+
+.mt-activity-row span {
+  font-size: 8px !important;
+}
+
+.mt-overdue-task strong {
+  font-size: 11px !important;
+  color: #111827 !important;
+}
+
+.mt-overdue-task span,
+.mt-overdue-task small {
+  font-size: 8px !important;
+}
+
+.mt-overdue-task b {
+  font-size: 8px !important;
+}
+
+
+/* =========================================================
+   RIGHT PANEL
+========================================================= */
+
+.mt-create-task {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+}
+
+.mt-right-section h3 {
+  font-size: 13px !important;
+  color: #111827 !important;
+  font-weight: 800 !important;
+}
+
+.mt-overview-list div,
+.mt-overview-list b {
+  font-size: 9px !important;
+  color: #374151 !important;
+}
+
+
+/* Workload */
+.mt-workload-info strong {
+  font-size: 9px !important;
+  color: #111827 !important;
+}
+
+.mt-workload-row small {
+  font-size: 8px !important;
+}
+
+
+/* Deadlines */
+.mt-deadline-date {
+  font-size: 8px !important;
+  font-weight: 600 !important;
+}
+
+.mt-deadline-row strong {
+  font-size: 9px !important;
+  color: #111827 !important;
+}
+
+.mt-deadline-row small {
+  font-size: 8px !important;
+  color: #64748b !important;
+}
+
+
+/* Avatar */
+.mt-avatar {
+  font-size: 9px !important;
+}
+
+
+/* EXTRA FORCE - TASK TITLE HAMESHA BLACK */
+.mt-task-card h4,
+.mt-task-card h4 *,
+.mt-task-board .mt-task-card h4 {
+  color: #000000 !important;
+  opacity: 1 !important;
 }
