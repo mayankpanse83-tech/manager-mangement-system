@@ -907,3 +907,111 @@
     width: 100%;
   }
 }
+/* ===== TASK PAGE FONT SIZE ===== */
+
+.manager-tasks,
+.manager-tasks * {
+  font-family: Arial, sans-serif;
+}
+
+/* Main title */
+.tasks-title,
+.tasks-header h1,
+.page-title {
+  font-size: 26px !important;
+  color: #111827 !important;
+  font-weight: 700 !important;
+}
+
+/* Subtitle */
+.tasks-subtitle,
+.tasks-header p {
+  font-size: 14px !important;
+  color: #4b5563 !important;
+}
+
+/* Cards */
+.task-card {
+  color: #111827 !important;
+}
+
+/* TASK NAME - BLACK */
+.task-title,
+.task-card h3,
+.task-card h4,
+.task-name {
+  color: #111827 !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  opacity: 1 !important;
+}
+
+/* Employee name */
+.employee-name {
+  color: #374151 !important;
+  font-size: 13px !important;
+}
+
+/* Column title */
+.board-title,
+.kanban-column h3,
+.column-header h3 {
+  font-size: 15px !important;
+  color: #111827 !important;
+  font-weight: 700 !important;
+}
+
+/* Stats */
+.stat-card h3,
+.stat-value {
+  font-size: 24px !important;
+  color: #111827 !important;
+}
+
+.stat-card p,
+.stat-label {
+  font-size: 13px !important;
+  color: #374151 !important;
+}
+
+/* Right panel headings */
+.side-panel h3,
+.right-panel h3,
+.task-overview h3,
+.team-workload h3,
+.upcoming-deadlines h3 {
+  font-size: 16px !important;
+  color: #111827 !important;
+  font-weight: 700 !important;
+}
+
+/* Tabs */
+.task-tabs button,
+.task-tabs span {
+  font-size: 13px !important;
+  color: #374151 !important;
+}
+
+/* Filter text */
+.filter-group label,
+.filter-group select,
+.filter-group button {
+  font-size: 13px !important;
+}
+
+/* Important: faded text remove */
+.task-card,
+.task-card *,
+.task-column,
+.task-column * {
+  opacity: 1 !important;
+}
+
+/* White task title ko force black */
+.task-card h3,
+.task-card h4,
+.task-card .task-title,
+.task-card .task-name {
+  color: #111827 !important;
+  text-shadow: none !important;
+}
