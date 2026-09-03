@@ -8,14 +8,14 @@ import {
   FaUserTimes,
   FaUmbrellaBeach,
   FaClock,
-  FaCalendarAlt,
   FaChevronDown,
   FaEllipsisV,
   FaArrowUp,
+  FaCalendarAlt,
+  FaTimes,
 } from "react-icons/fa";
 
 import "./ManagerAttendance.css";
-
 
 const employees = [
   {
@@ -108,11 +108,101 @@ const employees = [
   },
 ];
 
-
 function getStatusClass(status) {
   return status.toLowerCase().replace(/\s+/g, "-");
 }
 
+function StatCard({ type, icon, title, value, sub }) {
+  return (
+    <div className="attendance-stat-card">
+      <div className={`attendance-stat-icon ${type}`}>
+        {icon}
+      </div>
+
+      <div className="attendance-stat-content">
+        <span>{title}</span>
+        <strong>{value}</strong>
+        <small>{sub}</small>
+      </div>
+    </div>
+  );
+}
+
+function Tab({ label, count, active, onClick }) {
+  return (
+    <button
+      type="button"
+      className={active ? "active" : ""}
+      onClick={onClick}
+    >
+      <span>{label}</span>
+      <small>{count}</small>
+    </button>
+  );
+}
+
+function Legend({ type, text, value }) {
+  return (
+    <div className="legend-row">
+      <span className={`legend-dot ${type}`} />
+      <span>{text}</span>
+      <strong>{value}</strong>
+    </div>
+  );
+}
+
+function Attention({ initials, name, detail, badge, type }) {
+  return (
+    <div className="attention-item">
+      <div className={`attention-avatar ${type}`}>
+        {initials}
+      </div>
+
+      <div className="attention-info">
+        <strong>{name}</strong>
+        <small>{detail}</small>
+      </div>
+
+      <span className={`attention-badge ${type}`}>
+        {badge}
+      </span>
+    </div>
+  );
+}
+
+function DetailRow({ label, value, green }) {
+  return (
+    <div className="detail-row">
+      <span>{label}</span>
+      <strong className={green ? "green-text" : ""}>
+        {value}
+      </strong>
+    </div>
+  );
+}
+
+function MonthCard({ type, title, value }) {
+  return (
+    <div className={`month-card ${type}`}>
+      <span>{title}</span>
+      <strong>{value}</strong>
+    </div>
+  );
+}
+
+function TimelineRow({ time, text, last }) {
+  return (
+    <div className="timeline-row">
+      <span className="timeline-time">{time}</span>
+
+      <span className={`timeline-marker ${last ? "last" : ""}`} />
+
+      <strong className={last ? "green-text" : ""}>
+        {text}
+      </strong>
+    </div>
+  );
+}
 
 function ManagerAttendance() {
   const [search, setSearch] = useState("");
@@ -133,28 +223,20 @@ function ManagerAttendance() {
     return matchesSearch && matchesTab;
   });
 
-
   return (
     <div className="attendance-page">
 
-
-      {/* =================================================
-         PAGE HEADER
-      ================================================= */}
-
+      {/* HEADER */}
       <div className="attendance-page-header">
 
         <div className="attendance-heading">
-
           <h1>Team Attendance</h1>
 
           <p>
-            Monitor your team's attendance,
-            working hours and daily status.
+            Monitor your team's attendance, working hours
+            and daily status.
           </p>
-
         </div>
-
 
         <div className="attendance-page-actions">
 
@@ -167,7 +249,6 @@ function ManagerAttendance() {
           </button>
 
           <div className="attendance-search-top">
-
             <FaSearch />
 
             <input
@@ -178,7 +259,6 @@ function ManagerAttendance() {
               }
               placeholder="Search employee..."
             />
-
           </div>
 
           <button
@@ -196,16 +276,10 @@ function ManagerAttendance() {
             <FaDownload />
             Export
           </button>
-
         </div>
-
       </div>
 
-
-      {/* =================================================
-         STAT CARDS
-      ================================================= */}
-
+      {/* STAT CARDS */}
       <div className="attendance-stats">
 
         <StatCard
@@ -247,26 +321,15 @@ function ManagerAttendance() {
           value="2"
           sub="17% of team"
         />
-
       </div>
 
-
-      {/* =================================================
-         MAIN AREA
-      ================================================= */}
-
+      {/* MAIN CONTENT */}
       <div className="attendance-layout">
 
-
-        {/* =================================================
-           LEFT
-        ================================================= */}
-
+        {/* LEFT SIDE */}
         <div className="attendance-left">
 
-
           {/* TABS */}
-
           <div className="attendance-tabs">
 
             <Tab
@@ -303,20 +366,15 @@ function ManagerAttendance() {
               active={activeTab === "Absent"}
               onClick={() => setActiveTab("Absent")}
             />
-
           </div>
 
-
           {/* TABLE */}
-
           <div className="attendance-table-card">
 
             <div className="attendance-table-scroll">
 
               <table>
-
                 <thead>
-
                   <tr>
                     <th>EMPLOYEE</th>
                     <th>CHECK IN</th>
@@ -326,12 +384,9 @@ function ManagerAttendance() {
                     <th>LAST ACTIVITY</th>
                     <th>ACTIONS</th>
                   </tr>
-
                 </thead>
 
-
                 <tbody>
-
                   {filteredEmployees.map((employee) => (
 
                     <tr
@@ -347,7 +402,6 @@ function ManagerAttendance() {
                     >
 
                       <td>
-
                         <div className="attendance-employee">
 
                           <div
@@ -361,7 +415,6 @@ function ManagerAttendance() {
                           </div>
 
                           <div className="attendance-employee-info">
-
                             <strong>
                               {employee.name}
                             </strong>
@@ -373,16 +426,11 @@ function ManagerAttendance() {
                             <em>
                               {employee.id}
                             </em>
-
                           </div>
-
                         </div>
-
                       </td>
 
-
                       <td>
-
                         <strong
                           className={
                             employee.checkIn === "—"
@@ -392,30 +440,21 @@ function ManagerAttendance() {
                         >
                           {employee.checkIn}
                         </strong>
-
                       </td>
 
-
                       <td>
-
                         <strong>
                           {employee.checkOut}
                         </strong>
-
                       </td>
 
-
                       <td>
-
                         <strong>
                           {employee.hours}
                         </strong>
-
                       </td>
 
-
                       <td>
-
                         <span
                           className={
                             `attendance-status ${getStatusClass(
@@ -425,14 +464,10 @@ function ManagerAttendance() {
                         >
                           ● {employee.status}
                         </span>
-
                       </td>
 
-
                       <td>
-
                         <div className="attendance-last">
-
                           <strong>
                             {employee.activity}
                           </strong>
@@ -444,18 +479,12 @@ function ManagerAttendance() {
                               ? "Checked out"
                               : employee.status === "Late"
                               ? "Checked in late"
-                              : employee.status === "Absent"
-                              ? "Today"
                               : "Today"}
                           </small>
-
                         </div>
-
                       </td>
 
-
                       <td>
-
                         <button
                           type="button"
                           className="attendance-more"
@@ -466,21 +495,14 @@ function ManagerAttendance() {
                         >
                           <FaEllipsisV />
                         </button>
-
                       </td>
 
                     </tr>
-
                   ))}
-
                 </tbody>
-
               </table>
 
             </div>
-
-
-            {/* FOOTER */}
 
             <div className="attendance-table-footer">
 
@@ -489,67 +511,41 @@ function ManagerAttendance() {
               </span>
 
               <div className="attendance-pagination">
-
                 <button>←</button>
                 <button className="active">1</button>
                 <button>2</button>
                 <button>→</button>
-
               </div>
 
               <div className="attendance-per-page">
-
                 <span>Show</span>
 
                 <select defaultValue="10">
-
                   <option value="10">10</option>
                   <option value="20">20</option>
-
                 </select>
 
                 <span>per page</span>
-
               </div>
 
             </div>
-
           </div>
 
-
-          {/* =================================================
-             LOWER CARDS
-          ================================================= */}
-
+          {/* LOWER CARDS */}
           <div className="attendance-lower-grid">
 
-
-            {/* TODAY SUMMARY */}
-
+            {/* SUMMARY */}
             <div className="attendance-small-card">
-
-              <h3>
-                Today's Summary
-              </h3>
+              <h3>Today's Summary</h3>
 
               <div className="summary-layout">
 
                 <div className="summary-donut">
-
                   <div className="summary-donut-inner">
-
-                    <strong>
-                      75%
-                    </strong>
-
-                    <small>
-                      Present Rate
-                    </small>
-
+                    <strong>75%</strong>
+                    <small>Present Rate</small>
                   </div>
-
                 </div>
-
 
                 <div className="summary-legend">
 
@@ -578,51 +574,33 @@ function ManagerAttendance() {
                   />
 
                 </div>
-
               </div>
-
             </div>
 
-
             {/* AVERAGE */}
-
             <div className="attendance-small-card">
-
-              <h3>
-                Average Working Hours
-              </h3>
+              <h3>Average Working Hours</h3>
 
               <div className="average-working">
-
-                <strong>
-                  8h 14m
-                </strong>
+                <strong>8h 14m</strong>
 
                 <span>
                   <FaArrowUp />
                   5m from yesterday
                 </span>
-
               </div>
-
             </div>
 
-
             {/* TREND */}
-
             <div className="attendance-small-card">
-
               <h3>
                 Attendance Trend
-                <span>
-                  {" "}(This Month)
-                </span>
+                <span> (This Month)</span>
               </h3>
 
               <div className="trend-chart">
 
                 <div className="trend-bars">
-
                   <div style={{ height: "48%" }}>
                     <span>86%</span>
                   </div>
@@ -638,30 +616,21 @@ function ManagerAttendance() {
                   <div style={{ height: "90%" }}>
                     <span>95%</span>
                   </div>
-
                 </div>
 
                 <div className="trend-labels">
-
                   <span>W1</span>
                   <span>W2</span>
                   <span>W3</span>
                   <span>W4</span>
-
                 </div>
 
               </div>
-
             </div>
 
-
-            {/* NEEDS ATTENTION */}
-
+            {/* ATTENTION */}
             <div className="attendance-small-card">
-
-              <h3>
-                Needs Attention
-              </h3>
+              <h3>Needs Attention</h3>
 
               <div className="attention-list">
 
@@ -697,27 +666,16 @@ function ManagerAttendance() {
               >
                 View All →
               </button>
-
             </div>
 
           </div>
-
         </div>
 
-
-        {/* =================================================
-           RIGHT DETAILS
-        ================================================= */}
-
+        {/* RIGHT DETAILS */}
         {selected && (
-
           <aside className="attendance-details">
 
-
-            {/* HEADER */}
-
             <div className="details-header">
-
               <strong>
                 Employee Attendance Details
               </strong>
@@ -728,13 +686,9 @@ function ManagerAttendance() {
                   setSelected(null)
                 }
               >
-                ×
+                <FaTimes />
               </button>
-
             </div>
-
-
-            {/* PROFILE */}
 
             <div className="details-profile">
 
@@ -749,15 +703,11 @@ function ManagerAttendance() {
               </div>
 
               <div className="details-person">
-
-                <strong>
-                  {selected.name}
-                </strong>
+                <strong>{selected.name}</strong>
 
                 <small>
                   {selected.role} • {selected.id}
                 </small>
-
               </div>
 
               <span
@@ -772,37 +722,18 @@ function ManagerAttendance() {
 
             </div>
 
-
-            {/* DETAILS TABS */}
-
             <div className="details-tabs">
-
               <button className="active">
                 Overview
               </button>
 
-              <button>
-                Monthly View
-              </button>
-
-              <button>
-                Timeline
-              </button>
-
-              <button>
-                History
-              </button>
-
+              <button>Monthly View</button>
+              <button>Timeline</button>
+              <button>History</button>
             </div>
 
-
-            {/* TODAY */}
-
             <div className="details-section">
-
-              <h3>
-                Today's Attendance
-              </h3>
+              <h3>Today's Attendance</h3>
 
               <DetailRow
                 label="Check In"
@@ -826,17 +757,10 @@ function ManagerAttendance() {
                 value={selected.status}
                 green
               />
-
             </div>
 
-
-            {/* MONTH */}
-
             <div className="details-section">
-
-              <h3>
-                This Month Overview
-              </h3>
+              <h3>This Month Overview</h3>
 
               <div className="month-grid">
 
@@ -865,44 +789,23 @@ function ManagerAttendance() {
                 />
 
               </div>
-
             </div>
-
-
-            {/* ATTENDANCE */}
 
             <div className="details-section">
 
               <div className="attendance-rate">
-
-                <span>
-                  Attendance
-                </span>
-
-                <strong>
-                  95%
-                </strong>
-
+                <span>Attendance</span>
+                <strong>95%</strong>
               </div>
 
               <div className="attendance-rate-bar">
-
-                <span
-                  style={{ width: "95%" }}
-                />
-
+                <span style={{ width: "95%" }} />
               </div>
 
             </div>
 
-
-            {/* TIMELINE */}
-
             <div className="details-section">
-
-              <h3>
-                Today's Timeline
-              </h3>
+              <h3>Today's Timeline</h3>
 
               <TimelineRow
                 time="09:12 AM"
@@ -910,7 +813,7 @@ function ManagerAttendance() {
               />
 
               <TimelineRow
-                time="09:12 AM"
+                time="09:18 AM"
                 text="Work Started"
               />
 
@@ -929,9 +832,7 @@ function ManagerAttendance() {
                 text="Working • 8h 12m"
                 last
               />
-
             </div>
-
 
             <button
               type="button"
@@ -942,237 +843,11 @@ function ManagerAttendance() {
             </button>
 
           </aside>
-
         )}
 
       </div>
-
     </div>
   );
 }
-
-
-/* =====================================================
-   STAT CARD
-===================================================== */
-
-function StatCard({
-  type,
-  icon,
-  title,
-  value,
-  sub,
-}) {
-  return (
-    <div className="attendance-stat-card">
-
-      <div
-        className={
-          `attendance-stat-icon ${type}`
-        }
-      >
-        {icon}
-      </div>
-
-      <div className="attendance-stat-content">
-
-        <span>
-          {title}
-        </span>
-
-        <strong>
-          {value}
-        </strong>
-
-        <small>
-          {sub}
-        </small>
-
-      </div>
-
-    </div>
-  );
-}
-
-
-/* =====================================================
-   TAB
-===================================================== */
-
-function Tab({
-  label,
-  count,
-  active,
-  onClick,
-}) {
-  return (
-    <button
-      type="button"
-      className={active ? "active" : ""}
-      onClick={onClick}
-    >
-      <span>{label}</span>
-      <small>{count}</small>
-    </button>
-  );
-}
-
-
-/* =====================================================
-   LEGEND
-===================================================== */
-
-function Legend({
-  type,
-  text,
-  value,
-}) {
-  return (
-    <div className="legend-row">
-
-      <span className={`legend-dot ${type}`} />
-
-      <span>
-        {text}
-      </span>
-
-      <strong>
-        {value}
-      </strong>
-
-    </div>
-  );
-}
-
-
-/* =====================================================
-   ATTENTION
-===================================================== */
-
-function Attention({
-  initials,
-  name,
-  detail,
-  badge,
-  type,
-}) {
-  return (
-    <div className="attention-item">
-
-      <div
-        className={
-          `attention-avatar ${type}`
-        }
-      >
-        {initials}
-      </div>
-
-      <div className="attention-info">
-
-        <strong>
-          {name}
-        </strong>
-
-        <small>
-          {detail}
-        </small>
-
-      </div>
-
-      <span
-        className={
-          `attention-badge ${type}`
-        }
-      >
-        {badge}
-      </span>
-
-    </div>
-  );
-}
-
-
-/* =====================================================
-   DETAIL ROW
-===================================================== */
-
-function DetailRow({
-  label,
-  value,
-  green,
-}) {
-  return (
-    <div className="detail-row">
-
-      <span>
-        {label}
-      </span>
-
-      <strong
-        className={green ? "green-text" : ""}
-      >
-        {value}
-      </strong>
-
-    </div>
-  );
-}
-
-
-/* =====================================================
-   MONTH CARD
-===================================================== */
-
-function MonthCard({
-  type,
-  title,
-  value,
-}) {
-  return (
-    <div className={`month-card ${type}`}>
-
-      <span>
-        {title}
-      </span>
-
-      <strong>
-        {value}
-      </strong>
-
-    </div>
-  );
-}
-
-
-/* =====================================================
-   TIMELINE
-===================================================== */
-
-function TimelineRow({
-  time,
-  text,
-  last,
-}) {
-  return (
-    <div className="timeline-row">
-
-      <span className="timeline-time">
-        {time}
-      </span>
-
-      <span
-        className={
-          `timeline-marker ${last ? "last" : ""}`
-        }
-      />
-
-      <strong>
-        {text}
-      </strong>
-
-    </div>
-  );
-}
-
 
 export default ManagerAttendance;
