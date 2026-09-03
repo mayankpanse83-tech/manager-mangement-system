@@ -370,9 +370,12 @@ function ManagerLayout() {
             />
 
             <Route
-          path="/manager/tasks"
-          element={<ManagerTasks />}
-        />
+              path="/manager/tasks"
+              element={
+                <ManagerPlaceholder title="Manager Tasks" />
+              }
+            />
+
 
           </Routes>
 
