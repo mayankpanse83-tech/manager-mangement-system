@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import {
-  FaHome,
   FaUsers,
   FaCalendarCheck,
-  FaTasks,
-  FaClipboardList,
-  FaFileAlt,
-  FaUser,
-  FaCog,
   FaSearch,
   FaFilter,
   FaDownload,
@@ -17,7 +11,6 @@ import {
   FaCheckCircle,
   FaClock,
   FaExclamationCircle,
-  FaUmbrellaBeach,
   FaArrowUp,
   FaPaperclip,
 } from "react-icons/fa";
@@ -128,105 +121,6 @@ function ManagerDailyUpadates() {
 
   return (
     <div className="mdu-page">
-
-      {/* SIDEBAR */}
-      <aside className="mdu-sidebar">
-
-        <div className="mdu-brand">
-          <div className="mdu-logo">W</div>
-
-          <div>
-            <h2>WorkForce</h2>
-            <span>Manager Workspace</span>
-          </div>
-        </div>
-
-        <nav className="mdu-nav">
-
-          <a href="/manager/dashboard">
-            <FaHome />
-            <span>Dashboard</span>
-          </a>
-
-          <a href="/manager/team">
-            <FaUsers />
-            <span>My Team</span>
-          </a>
-
-          <a href="/manager/attendance">
-            <FaCalendarCheck />
-            <span>Team Attendance</span>
-          </a>
-
-          <a href="/manager/tasks">
-            <FaTasks />
-            <span>Tasks</span>
-          </a>
-
-          <a
-            href="/manager/daily-updates"
-            className="active"
-          >
-            <FaClipboardList />
-            <span>Daily Updates</span>
-          </a>
-
-          <a href="/manager/leave">
-            <FaUmbrellaBeach />
-            <span>Leave Requests</span>
-          </a>
-
-          <a href="/manager/reports">
-            <FaFileAlt />
-            <span>Reports</span>
-          </a>
-
-        </nav>
-
-        <div className="mdu-sidebar-bottom">
-
-          <a href="/manager/profile">
-            <FaUser />
-            <span>Profile</span>
-          </a>
-
-          <a href="/manager/settings">
-            <FaCog />
-            <span>Settings</span>
-          </a>
-
-        </div>
-
-        <div className="mdu-help-box">
-          <strong>Need Help?</strong>
-          <span>
-            Contact admin or
-            <br />
-            send a request.
-          </span>
-
-          <div className="mdu-help-icon">?</div>
-
-          <button>Contact Admin</button>
-        </div>
-
-        <div className="mdu-manager-profile">
-
-          <div className="mdu-manager-avatar">
-            RV
-          </div>
-
-          <div>
-            <strong>Rajat Verma</strong>
-            <span>Team Manager</span>
-          </div>
-
-          <FaChevronDown />
-
-        </div>
-
-      </aside>
-
 
       {/* MAIN */}
       <main className="mdu-main">
