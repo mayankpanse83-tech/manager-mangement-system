@@ -74,7 +74,13 @@ import ManagerAttendance
 import ManagerTasks
   from "./apps/manager/pages/ManagerTasks";
 
-  import ManagerDailyUpadates from "./apps/manager/pages/ManagerDailyUpadates";
+import ManagerDailyUpadates
+  from "./apps/manager/pages/ManagerDailyUpadates";
+
+
+/* =====================================================
+   APP CSS
+===================================================== */
 
 import "./App.css";
 
@@ -116,6 +122,16 @@ function AuthLayout() {
           element={<AccountActivation />}
         />
 
+        <Route
+          path="*"
+          element={
+            <Navigate
+              to="/login"
+              replace
+            />
+          }
+        />
+
       </Routes>
 
     </div>
@@ -152,11 +168,6 @@ function EmployeeLayout() {
             />
 
             <Route
-              path="/employee/dashboard"
-              element={<EmployeeDashboard />}
-            />
-
-            <Route
               path="/dashboard"
               element={
                 <Navigate
@@ -164,6 +175,11 @@ function EmployeeLayout() {
                   replace
                 />
               }
+            />
+
+            <Route
+              path="/employee/dashboard"
+              element={<EmployeeDashboard />}
             />
 
             <Route
@@ -230,13 +246,16 @@ function ManagerLayout() {
 
   const location = useLocation();
 
+  /*
+    In pages par ManagerHeader nahi dikhana hai
+    kyunki in pages ka apna design/header hai.
+  */
 
-  /* इन pages का अपना header है */
-
-  const isFullPage =
+  const hideManagerHeader =
     location.pathname === "/manager/team" ||
     location.pathname === "/manager/attendance" ||
-    location.pathname === "/manager/tasks";
+    location.pathname === "/manager/tasks" ||
+    location.pathname === "/manager/daily-updates";
 
 
   return (
@@ -246,15 +265,17 @@ function ManagerLayout() {
 
       <div className="manager-main">
 
-        {/* ManagerTasks का अपना header है */}
-        {!isFullPage && <ManagerHeader />}
-
+        {!hideManagerHeader && (
+          <ManagerHeader />
+        )}
 
         <main className="manager-content">
 
           <Routes>
 
-            {/* DASHBOARD */}
+            {/* =========================================
+               MANAGER ROOT
+            ========================================= */}
 
             <Route
               path="/manager"
@@ -266,13 +287,20 @@ function ManagerLayout() {
               }
             />
 
+
+            {/* =========================================
+               DASHBOARD
+            ========================================= */}
+
             <Route
               path="/manager/dashboard"
               element={<ManagerDashboard />}
             />
 
 
-            {/* TEAM */}
+            {/* =========================================
+               MY TEAM
+            ========================================= */}
 
             <Route
               path="/manager/team"
@@ -280,7 +308,9 @@ function ManagerLayout() {
             />
 
 
-            {/* ATTENDANCE */}
+            {/* =========================================
+               TEAM ATTENDANCE
+            ========================================= */}
 
             <Route
               path="/manager/attendance"
@@ -288,7 +318,9 @@ function ManagerLayout() {
             />
 
 
-            {/* TASKS - REAL MANAGER TASKS PAGE */}
+            {/* =========================================
+               MANAGER TASKS
+            ========================================= */}
 
             <Route
               path="/manager/tasks"
@@ -296,19 +328,19 @@ function ManagerLayout() {
             />
 
 
-            {/* DAILY UPDATES */}
+            {/* =========================================
+               DAILY UPDATES
+            ========================================= */}
 
             <Route
               path="/manager/daily-updates"
-              element={
-                <ManagerPlaceholder
-                  title="Daily Updates"
-                />
-              }
+              element={<ManagerDailyUpadates />}
             />
 
 
-            {/* LEAVE */}
+            {/* =========================================
+               LEAVE
+            ========================================= */}
 
             <Route
               path="/manager/leave"
@@ -320,7 +352,9 @@ function ManagerLayout() {
             />
 
 
-            {/* REPORTS */}
+            {/* =========================================
+               REPORTS
+            ========================================= */}
 
             <Route
               path="/manager/reports"
@@ -332,7 +366,9 @@ function ManagerLayout() {
             />
 
 
-            {/* PROFILE */}
+            {/* =========================================
+               PROFILE
+            ========================================= */}
 
             <Route
               path="/manager/profile"
@@ -344,7 +380,9 @@ function ManagerLayout() {
             />
 
 
-            {/* SETTINGS */}
+            {/* =========================================
+               SETTINGS
+            ========================================= */}
 
             <Route
               path="/manager/settings"
@@ -356,7 +394,9 @@ function ManagerLayout() {
             />
 
 
-            {/* UNKNOWN MANAGER URL */}
+            {/* =========================================
+               UNKNOWN MANAGER URL
+            ========================================= */}
 
             <Route
               path="*"
@@ -367,11 +407,6 @@ function ManagerLayout() {
                 />
               }
             />
-
-            <Route
-  path="/manager/daily-updates"
-  element={<ManagerDailyUpadates />}
-/>
 
           </Routes>
 
@@ -393,7 +428,9 @@ function App() {
   const location = useLocation();
 
 
-  /* AUTH PAGES */
+  /* ================================================
+     AUTH PAGE
+  ================================================ */
 
   const isAuthPage =
     location.pathname === "/login" ||
@@ -405,7 +442,9 @@ function App() {
   }
 
 
-  /* MANAGER PAGES */
+  /* ================================================
+     MANAGER PAGE
+  ================================================ */
 
   const isManagerPage =
     location.pathname === "/manager" ||
@@ -417,7 +456,9 @@ function App() {
   }
 
 
-  /* EMPLOYEE PAGES */
+  /* ================================================
+     EMPLOYEE PAGE
+  ================================================ */
 
   return <EmployeeLayout />;
 }
