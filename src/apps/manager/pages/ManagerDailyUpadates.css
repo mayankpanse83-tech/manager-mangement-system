@@ -1611,3 +1611,21 @@
 .history-item small {
   font-size: 7px !important;
 }
+/* Search box white fix */
+.mdu-header-search,
+.mdu-table-search {
+  background: #ffffff !important;
+}
+
+.mdu-header-search input,
+.mdu-table-search input {
+  background: #ffffff !important;
+  color: #374151 !important;
+  -webkit-text-fill-color: #374151 !important;
+}
+
+.mdu-header-search input::placeholder,
+.mdu-table-search input::placeholder {
+  color: #98a2b3 !important;
+  opacity: 1 !important;
+}
