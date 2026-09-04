@@ -1430,3 +1430,184 @@
     min-width: 850px;
   }
 }
+/* =========================================
+   FONT SIZE + TITLE FIX
+========================================= */
+
+.mdu-title-area h1 {
+  color: #111827 !important;
+  font-size: 25px !important;
+  font-weight: 700 !important;
+  line-height: 1.2;
+}
+
+.mdu-title-area p {
+  color: #667085 !important;
+  font-size: 11px !important;
+}
+
+/* Header buttons */
+.mdu-date-btn,
+.mdu-small-btn {
+  font-size: 10px !important;
+}
+
+.mdu-header-search input {
+  font-size: 10px !important;
+}
+
+/* Stat cards */
+.mdu-stat-card span {
+  font-size: 10px !important;
+}
+
+.mdu-stat-card strong {
+  font-size: 25px !important;
+}
+
+.mdu-stat-card small {
+  font-size: 9px !important;
+}
+
+/* Tabs */
+.mdu-tabs button {
+  font-size: 10px !important;
+}
+
+/* Filters */
+.mdu-table-search input {
+  font-size: 10px !important;
+}
+
+.mdu-select-box span {
+  font-size: 8px !important;
+}
+
+.mdu-select-box strong {
+  font-size: 9px !important;
+}
+
+/* Table */
+.mdu-table th {
+  font-size: 8px !important;
+}
+
+.mdu-table td {
+  font-size: 10px !important;
+}
+
+.mdu-employee strong {
+  font-size: 10px !important;
+}
+
+.mdu-employee span {
+  font-size: 8px !important;
+}
+
+.mdu-employee small {
+  font-size: 7px !important;
+}
+
+.mdu-status {
+  font-size: 8px !important;
+}
+
+.mdu-summary {
+  font-size: 9px !important;
+}
+
+.mdu-review-btn,
+.mdu-reminder-btn {
+  font-size: 8px !important;
+}
+
+/* Pagination */
+.mdu-pagination > span {
+  font-size: 8px !important;
+}
+
+.mdu-per-page span,
+.mdu-per-page small {
+  font-size: 8px !important;
+}
+
+/* Bottom cards */
+.mdu-analytics-card h3 {
+  font-size: 10px !important;
+}
+
+.mdu-legend div {
+  font-size: 8px !important;
+}
+
+.mdu-chart-days {
+  font-size: 8px !important;
+}
+
+.mdu-chart-summary span {
+  font-size: 8px !important;
+}
+
+.mdu-chart-summary strong {
+  font-size: 11px !important;
+}
+
+/* Right employee panel */
+.mdu-profile-top h2 {
+  font-size: 12px !important;
+  color: #111827 !important;
+}
+
+.mdu-profile-top p {
+  font-size: 8px !important;
+}
+
+.mdu-submitted-badge {
+  font-size: 7px !important;
+}
+
+.mdu-detail-date > div {
+  font-size: 8px !important;
+}
+
+.mdu-detail-section h3,
+.mdu-feedback h3,
+.mdu-history h3 {
+  font-size: 9px !important;
+}
+
+.mdu-detail-section p {
+  font-size: 8px !important;
+}
+
+.check-item,
+.pending-item,
+.plan-item,
+.no-blocker {
+  font-size: 8px !important;
+}
+
+.attachment-box strong {
+  font-size: 8px !important;
+}
+
+.attachment-box span {
+  font-size: 7px !important;
+}
+
+.mdu-feedback p {
+  font-size: 8px !important;
+}
+
+.mdu-feedback button {
+  font-size: 8px !important;
+}
+
+.history-item strong {
+  font-size: 8px !important;
+}
+
+.history-item span,
+.history-item small {
+  font-size: 7px !important;
+}
