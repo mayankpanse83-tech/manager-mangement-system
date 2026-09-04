@@ -370,7 +370,7 @@ function ManagerLayout() {
             />
 
             <Route
-  path="/manager/daily-updates"
+  path="/manager/dailyupdates"
   element={<ManagerDailyUpdates />}
 />
 
