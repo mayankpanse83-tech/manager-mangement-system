@@ -74,6 +74,8 @@ import ManagerAttendance
 import ManagerTasks
   from "./apps/manager/pages/ManagerTasks";
 
+  import ManagerDailyUpdates from "./apps/manager/pages/ManagerDailyUpdates";
+
 
 import "./App.css";
 
@@ -366,6 +368,11 @@ function ManagerLayout() {
                 />
               }
             />
+
+            <Route
+  path="/manager/daily-updates"
+  element={<ManagerDailyUpdates />}
+/>
 
           </Routes>
 
