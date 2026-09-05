@@ -1173,3 +1173,61 @@
   -webkit-text-fill-color: #111827 !important;
   box-shadow: 0 0 0 1000px #ffffff inset !important;
 }
+/* ===== TEAM LEAVE CALENDAR - BIGGER ===== */
+
+.mt-calendar {
+  padding: 18px !important;
+}
+
+.mt-calendar h3 {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+}
+
+.mt-calendar-header {
+  font-size: 14px !important;
+  margin-bottom: 18px !important;
+}
+
+/* Calendar grid */
+.mt-calendar-grid {
+  width: 100% !important;
+  display: grid !important;
+  grid-template-columns: repeat(7, 1fr) !important;
+  gap: 8px !important;
+}
+
+/* Day names */
+.mt-calendar-grid .day-name {
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  padding: 8px 0 !important;
+}
+
+/* Calendar dates */
+.mt-calendar-grid .calendar-day {
+  min-height: 34px !important;
+  height: 34px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+
+/* Approved / Pending dates */
+.mt-calendar-grid .approved,
+.mt-calendar-grid .pending {
+  min-height: 34px !important;
+  font-size: 12px !important;
+}
+
+/* Calendar legend */
+.mt-calendar-legend {
+  margin-top: 18px !important;
+  gap: 14px !important;
+}
+
+.mt-calendar-legend span {
+  font-size: 10px !important;
+}
