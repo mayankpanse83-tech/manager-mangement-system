@@ -921,3 +921,166 @@
     width: 100%;
   }
 }
+/* =========================================
+   FIX: MONTH OVERVIEW CARDS
+========================================= */
+
+.details-section {
+  position: relative;
+  width: 100%;
+  padding: 16px 15px !important;
+  overflow: hidden;
+}
+
+.details-section h3 {
+  margin: 0 0 14px !important;
+  position: relative;
+  z-index: 2;
+  color: #26344d !important;
+  font-size: 13px !important;
+  line-height: 1.3;
+}
+
+/* Month cards */
+.month-grid {
+  width: 100%;
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+  margin-top: 0 !important;
+  position: relative;
+  z-index: 1;
+}
+
+.month-card {
+  width: 100%;
+  min-height: 82px !important;
+  padding: 12px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 7px !important;
+  border-radius: 8px !important;
+  position: relative;
+}
+
+.month-card span {
+  display: block;
+  font-size: 11px !important;
+  line-height: 1.2;
+}
+
+.month-card strong {
+  display: block;
+  font-size: 15px !important;
+  line-height: 1.2;
+}
+
+/* Present */
+.month-card.green {
+  background: #e8f8ef !important;
+  color: #149c64 !important;
+}
+
+/* Late */
+.month-card.orange {
+  background: #fff2d9 !important;
+  color: #df8a10 !important;
+}
+
+/* Absent */
+.month-card.red {
+  background: #ffe8ea !important;
+  color: #e34d59 !important;
+}
+
+/* On Leave */
+.month-card.blue {
+  background: #e8efff !important;
+  color: #4b70e3 !important;
+}
+
+
+/* =========================================
+   TODAY ATTENDANCE FIX
+========================================= */
+
+.detail-row {
+  min-height: 34px !important;
+  display: grid !important;
+  grid-template-columns: 72px 1fr !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.detail-row span {
+  font-size: 10px !important;
+  color: #748198 !important;
+}
+
+.detail-row strong {
+  font-size: 10px !important;
+  text-align: right !important;
+  color: #26344d !important;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+  .details-section {
+    padding: 16px 14px !important;
+  }
+
+  .details-section h3 {
+    font-size: 13px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .month-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  .month-card {
+    min-height: 88px !important;
+    padding: 12px !important;
+  }
+
+  .month-card span {
+    font-size: 11px !important;
+  }
+
+  .month-card strong {
+    font-size: 15px !important;
+  }
+}
+
+
+/* =========================================
+   VERY SMALL SCREEN
+========================================= */
+
+@media (max-width: 420px) {
+
+  .month-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 9px !important;
+  }
+
+  .month-card {
+    min-height: 84px !important;
+  }
+
+  .month-card span {
+    font-size: 10px !important;
+  }
+
+  .month-card strong {
+    font-size: 14px !important;
+  }
+}
