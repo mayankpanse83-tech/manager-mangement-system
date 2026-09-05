@@ -1074,19 +1074,102 @@
     white-space: nowrap;
   }
 }
-/* Manager Action comment box */
-.manager-leave-requests .comment-box,
-.manager-leave-requests .manager-comment,
-.manager-leave-requests .action-comment,
+/* =========================================
+   BLACK / DARK ELEMENTS -> WHITE
+   ManagerLeaveRequests
+   ========================================= */
+
+/* Checkbox */
+.manager-leave-requests input[type="checkbox"],
+.manager-leave-requests input[type="checkbox"]:checked {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.manager-leave-requests input[type="checkbox"]:checked {
+  background: #ffffff !important;
+}
+
+/* Select / dropdown */
+.manager-leave-requests select {
+  background: #ffffff !important;
+  color: #334155 !important;
+  border: 1px solid #dbe2ea !important;
+}
+
+/* Page-size dropdown */
+.manager-leave-requests select option {
+  background: #ffffff !important;
+  color: #111827 !important;
+}
+
+/* Dark input fields */
+.manager-leave-requests input,
 .manager-leave-requests textarea {
   background: #ffffff !important;
   color: #111827 !important;
-  border: 1px solid #d9e0ea !important;
+  border-color: #dbe2ea !important;
 }
-.manager-leave-requests .checkbox,
-.manager-leave-requests .custom-checkbox,
-.manager-leave-requests .check-box {
+
+/* Placeholder */
+.manager-leave-requests input::placeholder,
+.manager-leave-requests textarea::placeholder {
+  color: #94a3b8 !important;
+  opacity: 1 !important;
+}
+
+/* Manager comment box */
+.manager-leave-requests textarea {
   background: #ffffff !important;
-  border: 1px solid #cbd5e1 !important;
+  color: #111827 !important;
+  border: 1px solid #dbe2ea !important;
+}
+
+/* Any dark button/select */
+.manager-leave-requests button {
+  color: inherit;
+}
+
+/* Specifically dark background controls */
+.manager-leave-requests .dark,
+.manager-leave-requests .dark-bg,
+.manager-leave-requests .dark-control,
+.manager-leave-requests .page-size,
+.manager-leave-requests .show-control {
+  background: #ffffff !important;
+  color: #334155 !important;
+}
+
+/* Pagination buttons */
+.manager-leave-requests .pagination button {
+  background: #ffffff !important;
+  color: #334155 !important;
+  border: 1px solid #dbe2ea !important;
+}
+
+.manager-leave-requests .pagination button.active {
+  background: #4f46e5 !important;
   color: #ffffff !important;
+}
+
+/* Keep table white */
+.manager-leave-requests table,
+.manager-leave-requests tbody,
+.manager-leave-requests tr,
+.manager-leave-requests td {
+  background: #ffffff !important;
+}
+
+/* Remove black text/background caused by browser autofill */
+.manager-leave-requests input:-webkit-autofill,
+.manager-leave-requests textarea:-webkit-autofill,
+.manager-leave-requests select:-webkit-autofill {
+  -webkit-text-fill-color: #111827 !important;
+  box-shadow: 0 0 0 1000px #ffffff inset !important;
 }
