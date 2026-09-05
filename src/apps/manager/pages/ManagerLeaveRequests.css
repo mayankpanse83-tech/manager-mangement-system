@@ -1074,3 +1074,93 @@
     white-space: nowrap;
   }
 }
+/* =========================================
+   REMOVE ALL BLACK / DARK BACKGROUNDS
+   ========================================= */
+
+/* Main page */
+.manager-leave-requests,
+.manager-leave-requests * {
+  box-sizing: border-box;
+}
+
+/* Search input */
+.manager-leave-requests input,
+.manager-leave-requests input[type="text"],
+.manager-leave-requests input[type="search"] {
+  background: #ffffff !important;
+  color: #111827 !important;
+}
+
+/* Select / dropdown */
+.manager-leave-requests select {
+  background: #ffffff !important;
+  color: #111827 !important;
+  border: 1px solid #d9e0ea !important;
+}
+
+/* All buttons */
+.manager-leave-requests button {
+  color: #374151;
+}
+
+/* Dark dropdown buttons */
+.manager-leave-requests button,
+.manager-leave-requests .filter-button,
+.manager-leave-requests .select-button {
+  background-color: #ffffff !important;
+}
+
+/* Pagination */
+.manager-leave-requests .pagination select,
+.manager-leave-requests .rows-select,
+.manager-leave-requests .per-page select {
+  background: #ffffff !important;
+  color: #111827 !important;
+}
+
+/* Any dark/black box */
+.manager-leave-requests .dark,
+.manager-leave-requests .black,
+.manager-leave-requests .dark-bg,
+.manager-leave-requests .black-bg {
+  background: #ffffff !important;
+  color: #111827 !important;
+}
+
+/* Textareas / comment box */
+.manager-leave-requests textarea {
+  background: #ffffff !important;
+  color: #111827 !important;
+  border: 1px solid #d9e0ea !important;
+}
+
+/* Placeholder */
+.manager-leave-requests input::placeholder,
+.manager-leave-requests textarea::placeholder {
+  color: #9ca3af !important;
+  opacity: 1 !important;
+}
+
+/* Checkbox */
+.manager-leave-requests input[type="checkbox"] {
+  accent-color: #4f46e5;
+  background: #ffffff !important;
+}
+
+/* Chrome/Edge autofill dark background fix */
+.manager-leave-requests input:-webkit-autofill,
+.manager-leave-requests textarea:-webkit-autofill,
+.manager-leave-requests select:-webkit-autofill {
+  -webkit-text-fill-color: #111827 !important;
+  box-shadow: 0 0 0 1000px #ffffff inset !important;
+}
+
+/* If any element has inline black background */
+.manager-leave-requests [style*="background: #000"],
+.manager-leave-requests [style*="background:#000"],
+.manager-leave-requests [style*="background-color: #000"],
+.manager-leave-requests [style*="background-color:#000"] {
+  background: #ffffff !important;
+  color: #111827 !important;
+}
