@@ -1231,3 +1231,55 @@
 .mt-calendar-legend span {
   font-size: 10px !important;
 }
+/* ================================
+   TEAM LEAVE CALENDAR - BIGGER
+================================ */
+
+.team-leave-calendar {
+  width: 100% !important;
+  min-height: 420px !important;
+  padding: 20px !important;
+}
+
+.team-leave-calendar h3 {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+}
+
+/* Calendar table */
+.team-leave-calendar table {
+  width: 100% !important;
+  height: 320px !important;
+  table-layout: fixed !important;
+}
+
+/* Week days */
+.team-leave-calendar th {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  padding: 12px 5px !important;
+}
+
+/* Dates */
+.team-leave-calendar td {
+  font-size: 14px !important;
+  height: 42px !important;
+  padding: 8px !important;
+}
+
+/* Date number */
+.team-leave-calendar td span {
+  font-size: 14px !important;
+}
+
+/* Calendar navigation */
+.team-leave-calendar button {
+  font-size: 14px !important;
+}
+
+/* Legend */
+.team-leave-calendar .legend,
+.team-leave-calendar .calendar-legend {
+  font-size: 12px !important;
+  margin-top: 15px !important;
+}
