@@ -1231,55 +1231,140 @@
 .mt-calendar-legend span {
   font-size: 10px !important;
 }
-/* ================================
-   TEAM LEAVE CALENDAR - BIGGER
-================================ */
+/* =========================================
+   MANAGER LEAVE REQUESTS - FONT SIZE BOOST
+   ========================================= */
 
-.team-leave-calendar {
-  width: 100% !important;
-  min-height: 420px !important;
-  padding: 20px !important;
+/* Main page title */
+.manager-leave-requests h1 {
+  font-size: 26px !important;
+  font-weight: 700 !important;
+  color: #111827 !important;
 }
 
-.team-leave-calendar h3 {
-  font-size: 18px !important;
+/* All normal text */
+.manager-leave-requests {
+  font-size: 14px;
+}
+
+/* Header subtitle */
+.manager-leave-requests p {
+  font-size: 13px !important;
+}
+
+/* Top statistics */
+.manager-leave-requests .stat-card h2,
+.manager-leave-requests .stat-card .value {
+  font-size: 24px !important;
+}
+
+.manager-leave-requests .stat-card p,
+.manager-leave-requests .stat-card span {
+  font-size: 12px !important;
+}
+
+/* Tabs */
+.manager-leave-requests .tabs button {
+  font-size: 13px !important;
+}
+
+/* Search / filters */
+.manager-leave-requests input,
+.manager-leave-requests select,
+.manager-leave-requests button {
+  font-size: 13px !important;
+}
+
+/* Table headings */
+.manager-leave-requests table th {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+
+/* Table content */
+.manager-leave-requests table td {
+  font-size: 13px !important;
+}
+
+/* Employee name */
+.manager-leave-requests table td strong {
+  font-size: 14px !important;
+  color: #111827 !important;
+}
+
+/* Employee designation */
+.manager-leave-requests table td small {
+  font-size: 11px !important;
+}
+
+/* Leave type */
+.manager-leave-requests .leave-type {
+  font-size: 12px !important;
+}
+
+/* Status badge */
+.manager-leave-requests .status,
+.manager-leave-requests .status-badge {
+  font-size: 12px !important;
+}
+
+/* Action buttons */
+.manager-leave-requests .action-btn,
+.manager-leave-requests .view-btn {
+  font-size: 12px !important;
+}
+
+/* Right side panel */
+.manager-leave-requests .right-panel h3,
+.manager-leave-requests aside h3 {
+  font-size: 17px !important;
   font-weight: 700 !important;
 }
 
-/* Calendar table */
-.team-leave-calendar table {
-  width: 100% !important;
-  height: 320px !important;
-  table-layout: fixed !important;
-}
-
-/* Week days */
-.team-leave-calendar th {
+.manager-leave-requests .right-panel,
+.manager-leave-requests aside {
   font-size: 13px !important;
-  font-weight: 600 !important;
-  padding: 12px 5px !important;
 }
 
-/* Dates */
-.team-leave-calendar td {
+/* Right panel employee name */
+.manager-leave-requests .right-panel strong,
+.manager-leave-requests aside strong {
+  font-size: 15px !important;
+}
+
+/* Calendar */
+.manager-leave-requests .calendar {
+  font-size: 13px !important;
+}
+
+.manager-leave-requests .calendar h3 {
+  font-size: 16px !important;
+}
+
+.manager-leave-requests .calendar th {
+  font-size: 11px !important;
+}
+
+.manager-leave-requests .calendar td {
+  font-size: 13px !important;
+}
+
+/* Upcoming leave */
+.manager-leave-requests .upcoming-leave strong {
   font-size: 14px !important;
-  height: 42px !important;
-  padding: 8px !important;
 }
 
-/* Date number */
-.team-leave-calendar td span {
-  font-size: 14px !important;
+.manager-leave-requests .upcoming-leave span {
+  font-size: 11px !important;
 }
 
-/* Calendar navigation */
-.team-leave-calendar button {
-  font-size: 14px !important;
+/* Team availability */
+.manager-leave-requests .team-availability {
+  font-size: 13px !important;
 }
 
-/* Legend */
-.team-leave-calendar .legend,
-.team-leave-calendar .calendar-legend {
-  font-size: 12px !important;
-  margin-top: 15px !important;
+/* Force text visibility */
+.manager-leave-requests,
+.manager-leave-requests * {
+  opacity: 1 !important;
 }
