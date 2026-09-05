@@ -77,6 +77,9 @@ import ManagerTasks
 import ManagerDailyUpadates
   from "./apps/manager/pages/ManagerDailyUpadates";
 
+import ManagerLeaveRequests
+  from "./apps/manager/pages/ManagerLeaveRequests";
+
 
 /* =====================================================
    APP CSS
@@ -407,6 +410,11 @@ function ManagerLayout() {
                 />
               }
             />
+
+            <Route
+  path="/manager/leave"
+  element={<ManagerLeaveRequests />}
+/>
 
           </Routes>
 
