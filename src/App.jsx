@@ -396,6 +396,11 @@ function ManagerLayout() {
               }
             />
 
+            <Route
+  path="/manager/leave"
+  element={<ManagerLeaveRequests />}
+/>
+
 
             {/* =========================================
                UNKNOWN MANAGER URL
@@ -410,11 +415,6 @@ function ManagerLayout() {
                 />
               }
             />
-
-            <Route
-  path="/manager/leave"
-  element={<ManagerLeaveRequests />}
-/>
 
           </Routes>
 
