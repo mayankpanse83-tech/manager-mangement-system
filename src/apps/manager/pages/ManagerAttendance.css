@@ -1190,3 +1190,12 @@
     font-size: 17px !important;
   }
 }
+@media (max-width: 768px) {
+  .attendance-layout {
+    grid-template-columns: 1fr !important;
+  }
+
+  .attendance-details {
+    width: 100% !important;
+  }
+}
