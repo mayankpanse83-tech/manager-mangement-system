@@ -1,906 +1,1456 @@
 import React, { useState } from "react";
+
 import {
-  FiSearch,
-  FiFilter,
-  FiDownload,
-  FiChevronDown,
-  FiBell,
-  FiClock,
-  FiCheckCircle,
-  FiXCircle,
-  FiUsers,
-  FiCalendar,
-  FiMoreVertical,
-  FiArrowLeft,
-  FiArrowRight,
-  FiFileText,
-  FiInfo,
-  FiX,
-  FiCheck,
-} from "react-icons/fi";
+  FaBell,
+  FaSearch,
+  FaFilter,
+  FaDownload,
+  FaChevronDown,
+  FaChevronLeft,
+  FaChevronRight,
+  FaTimes,
+  FaCheck,
+  FaClock,
+  FaCalendarAlt,
+  FaEllipsisV,
+  FaInfoCircle,
+  FaPaperclip,
+  FaClipboardList,
+  FaUmbrellaBeach,
+  FaUsers,
+} from "react-icons/fa";
 
 import "./ManagerLeaveRequests.css";
+
 
 const leaveRequests = [
   {
     id: 1,
     name: "Rahul Verma",
+    role: "Developer",
+    empId: "EMP-003",
     initials: "RV",
-    role: "EMP-003 • Developer",
+    avatarClass: "orange-avatar",
     leaveType: "Sick Leave",
-    type: "sick",
-    dates: "18 Aug 2026 - 19 Aug 2026",
+    dates: ["18 Aug 2026", "19 Aug 2026"],
     duration: "2 Days",
     reason: "Medical appointment",
     status: "Pending",
-    submittedDate: "17 Aug 2026",
-    submittedTime: "06:24 PM",
+    submitted: "17 Aug 2026",
+    time: "06:24 PM",
   },
   {
     id: 2,
     name: "Neha Patel",
+    role: "QA Engineer",
+    empId: "EMP-004",
     initials: "NP",
-    role: "EMP-004 • QA Engineer",
+    avatarClass: "dark-avatar",
     leaveType: "Casual Leave",
-    type: "casual",
-    dates: "22 Aug 2026",
+    dates: ["22 Aug 2026"],
     duration: "1 Day",
     reason: "Family function",
     status: "Pending",
-    submittedDate: "16 Aug 2026",
-    submittedTime: "11:10 AM",
+    submitted: "16 Aug 2026",
+    time: "11:10 AM",
   },
   {
     id: 3,
     name: "Aman Sharma",
+    role: "UI Designer",
+    empId: "EMP-001",
     initials: "AS",
-    role: "EMP-001 • UI Designer",
+    avatarClass: "green-avatar",
     leaveType: "Paid Leave",
-    type: "paid",
-    dates: "25 Aug 2026 - 27 Aug 2026",
+    dates: ["25 Aug 2026", "27 Aug 2026"],
     duration: "3 Days",
     reason: "Personal work",
     status: "Pending",
-    submittedDate: "15 Aug 2026",
-    submittedTime: "04:35 PM",
+    submitted: "15 Aug 2026",
+    time: "04:35 PM",
   },
   {
     id: 4,
     name: "Priya Singh",
+    role: "Developer",
+    empId: "EMP-002",
     initials: "PS",
-    role: "EMP-002 • Developer",
+    avatarClass: "brown-avatar",
     leaveType: "Half Day",
-    type: "half",
-    dates: "21 Aug 2026",
+    dates: ["21 Aug 2026"],
     duration: "Half Day",
     reason: "Doctor consultation",
     status: "Pending",
-    submittedDate: "15 Aug 2026",
-    submittedTime: "01:20 PM",
+    submitted: "15 Aug 2026",
+    time: "01:20 PM",
   },
 ];
 
-function Avatar({ initials, large = false }) {
-  return (
-    <div className={`ml-avatar ${large ? "ml-avatar-large" : ""}`}>
-      {initials}
-    </div>
-  );
-}
 
 function ManagerLeaveRequests() {
+
+  const [activeTab, setActiveTab] = useState("All");
+
+  const [search, setSearch] = useState("");
+
   const [selectedRequest, setSelectedRequest] = useState(
     leaveRequests[0]
   );
 
-  const [activeTab, setActiveTab] = useState("Pending (4)");
 
-  const stats = [
-    {
-      title: "Pending Requests",
-      value: "4",
-      text: "Needs Action",
-      icon: <FiClock />,
-      color: "orange",
-    },
-    {
-      title: "Approved",
-      value: "18",
-      text: "This Year",
-      icon: <FiCheckCircle />,
-      color: "green",
-    },
-    {
-      title: "Rejected",
-      value: "3",
-      text: "This Year",
-      icon: <FiXCircle />,
-      color: "red",
-    },
-    {
-      title: "On Leave Today",
-      value: "2",
-      text: "Team Members",
-      icon: <FiUsers />,
-      color: "blue",
-    },
-    {
-      title: "Upcoming Leave",
-      value: "5",
-      text: "Next 30 Days",
-      icon: <FiCalendar />,
-      color: "purple",
-    },
-  ];
+  const filteredRequests = leaveRequests.filter((request) => {
 
-  const tabs = [
-    "All (26)",
-    "Pending (4)",
-    "Approved (18)",
-    "Rejected (3)",
-    "Cancelled (1)",
-  ];
+    const matchesSearch =
+      request.name
+        .toLowerCase()
+        .includes(search.toLowerCase()) ||
+      request.empId
+        .toLowerCase()
+        .includes(search.toLowerCase());
+
+
+    if (activeTab === "All") {
+      return matchesSearch;
+    }
+
+    if (activeTab === "Pending") {
+      return (
+        matchesSearch &&
+        request.status === "Pending"
+      );
+    }
+
+    if (activeTab === "Approved") {
+      return (
+        matchesSearch &&
+        request.status === "Approved"
+      );
+    }
+
+    if (activeTab === "Rejected") {
+      return (
+        matchesSearch &&
+        request.status === "Rejected"
+      );
+    }
+
+    return matchesSearch;
+  });
+
 
   return (
-    <div className="manager-leave-page">
+    <div className="mlr-page">
 
-      {/* MAIN */}
-      <div className="ml-main">
+      {/* =====================================================
+          MAIN PAGE
+      ===================================================== */}
 
-        {/* HEADER */}
-        <div className="ml-header">
+      <main className="mlr-main">
 
-          <div className="ml-heading">
-            <h1>Leave Requests</h1>
+
+        {/* =====================================================
+            HEADER
+        ===================================================== */}
+
+        <header className="mlr-header">
+
+          <div className="mlr-heading">
+
+            <h1>
+              Leave Requests
+            </h1>
+
             <p>
               Review and manage your team's leave requests.
             </p>
+
           </div>
 
-          <div className="ml-header-actions">
 
-            <button className="ml-date-btn">
-              <FiCalendar />
-              <span>01 Aug 2026 - 31 Aug 2026</span>
-              <FiChevronDown />
+          <div className="mlr-header-actions">
+
+
+            <button className="mlr-date-btn">
+
+              <FaCalendarAlt />
+
+              <span>
+                01 Aug 2026 – 31 Aug 2026
+              </span>
+
+              <FaChevronDown />
+
             </button>
 
-            <div className="ml-search">
-              <FiSearch />
+
+            <div className="mlr-search-top">
+
+              <FaSearch />
+
               <input
                 type="text"
                 placeholder="Search employee..."
               />
+
             </div>
 
-            <button className="ml-action-btn">
-              <FiFilter />
+
+            <button className="mlr-action-btn">
+
+              <FaFilter />
+
               Filter
+
             </button>
 
-            <button className="ml-action-btn">
-              <FiDownload />
+
+            <button className="mlr-action-btn">
+
+              <FaDownload />
+
               Export
-              <FiChevronDown />
+
+              <FaChevronDown />
+
             </button>
 
-            <div className="ml-notification">
-              <FiBell />
-              <span>3</span>
+
+            <div className="mlr-notification">
+
+              <FaBell />
+
+              <span>
+                3
+              </span>
+
             </div>
 
-            <Avatar initials="RV" />
 
-            <div className="ml-manager">
-              <strong>Rajat Verma</strong>
-              <small>Team Manager</small>
-            </div>
+            <div className="mlr-header-user">
 
-            <FiChevronDown className="ml-manager-arrow" />
-
-          </div>
-
-        </div>
-
-
-        {/* STATS */}
-        <div className="ml-stats">
-
-          {stats.map((item, index) => (
-
-            <div className="ml-stat-card" key={index}>
-
-              <div className={`ml-stat-icon ${item.color}`}>
-                {item.icon}
+              <div className="mlr-header-avatar">
+                RV
               </div>
 
               <div>
-                <p>{item.title}</p>
-                <h2>{item.value}</h2>
-                <small className={item.color}>
-                  {item.text}
+
+                <strong>
+                  Rajat Verma
+                </strong>
+
+                <small>
+                  Team Manager
                 </small>
+
               </div>
+
+              <FaChevronDown />
 
             </div>
 
-          ))}
-
-        </div>
-
-
-        {/* TABS */}
-        <div className="ml-tabs">
-
-          {tabs.map((tab) => (
-
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={
-                activeTab === tab ? "active" : ""
-              }
-            >
-              {tab}
-            </button>
-
-          ))}
-
-        </div>
-
-
-        {/* FILTERS */}
-        <div className="ml-filters">
-
-          <div className="ml-table-search">
-            <FiSearch />
-
-            <input
-              placeholder="Search by name or employee ID..."
-            />
           </div>
 
-
-          <button className="ml-select">
-
-            <span>
-              <small>Leave Type</small>
-              All Types
-            </span>
-
-            <FiChevronDown />
-
-          </button>
+        </header>
 
 
-          <button className="ml-select">
 
-            <span>
-              <small>Department</small>
-              All Departments
-            </span>
+        {/* =====================================================
+            CONTENT
+        ===================================================== */}
 
-            <FiChevronDown />
-
-          </button>
+        <div className="mlr-content">
 
 
-          <button className="ml-select">
+          {/* =================================================
+              LEFT
+          ================================================= */}
 
-            <span>
-              <small>Date Range</small>
-              Select Date Range
-            </span>
-
-            <FiChevronDown />
-
-          </button>
+          <section className="mlr-left">
 
 
-          <button className="ml-clear">
-            Clear Filters
-          </button>
+            {/* =================================================
+                STAT CARDS
+            ================================================= */}
 
-        </div>
+            <div className="mlr-stats">
 
 
-        {/* TABLE */}
-        <div className="ml-table-card">
+              <StatCard
+                icon={<FaClock />}
+                iconClass="orange"
+                title="Pending Requests"
+                value="4"
+                subtitle="Needs Action"
+                subtitleClass="orange-text"
+              />
 
-          <div className="ml-table">
 
-            <div className="ml-row ml-table-head">
+              <StatCard
+                icon={<FaCheck />}
+                iconClass="green"
+                title="Approved"
+                value="18"
+                subtitle="This Year"
+                subtitleClass="green-text"
+              />
 
-              <div>
-                <input type="checkbox" />
-              </div>
 
-              <div>EMPLOYEE</div>
-              <div>LEAVE TYPE</div>
-              <div>DATES</div>
-              <div>DURATION</div>
-              <div>REASON</div>
-              <div>STATUS</div>
-              <div>SUBMITTED ON</div>
-              <div>ACTIONS</div>
+              <StatCard
+                icon={<FaTimes />}
+                iconClass="red"
+                title="Rejected"
+                value="3"
+                subtitle="This Year"
+                subtitleClass="red-text"
+              />
+
+
+              <StatCard
+                icon={<FaUsers />}
+                iconClass="blue"
+                title="On Leave Today"
+                value="2"
+                subtitle="Team Members"
+              />
+
+
+              <StatCard
+                icon={<FaCalendarAlt />}
+                iconClass="purple"
+                title="Upcoming Leave"
+                value="5"
+                subtitle="Next 30 Days"
+              />
+
 
             </div>
 
 
-            {leaveRequests.map((request) => (
 
-              <div
-                className={`ml-row ml-data-row ${
-                  selectedRequest.id === request.id
-                    ? "selected"
-                    : ""
-                }`}
-                key={request.id}
-              >
+            {/* =================================================
+                REQUEST PANEL
+            ================================================= */}
 
-                <div>
-                  <input type="checkbox" />
+            <div className="mlr-panel">
+
+
+              {/* TABS */}
+
+              <div className="mlr-tabs">
+
+                {[
+                  ["All", 26],
+                  ["Pending", 4],
+                  ["Approved", 18],
+                  ["Rejected", 3],
+                  ["Cancelled", 1],
+                ].map(([tab, count]) => (
+
+                  <button
+                    key={tab}
+                    type="button"
+                    className={
+                      activeTab === tab
+                        ? "active"
+                        : ""
+                    }
+                    onClick={() =>
+                      setActiveTab(tab)
+                    }
+                  >
+                    {tab} ({count})
+                  </button>
+
+                ))}
+
+              </div>
+
+
+
+              {/* FILTER ROW */}
+
+              <div className="mlr-filters">
+
+
+                <div className="mlr-search-box">
+
+                  <FaSearch />
+
+                  <input
+                    type="text"
+                    value={search}
+                    onChange={(e) =>
+                      setSearch(e.target.value)
+                    }
+                    placeholder="Search by name or employee ID..."
+                  />
+
                 </div>
 
 
-                <div
-                  className="ml-employee"
-                  onClick={() =>
-                    setSelectedRequest(request)
-                  }
+                <FilterSelect
+                  label="Leave Type"
+                  value="All Types"
+                />
+
+
+                <FilterSelect
+                  label="Department"
+                  value="All Departments"
+                />
+
+
+                <FilterSelect
+                  label="Date Range"
+                  value="Select Date Range"
+                />
+
+
+                <button
+                  type="button"
+                  className="mlr-clear"
+                  onClick={() => {
+                    setSearch("");
+                    setActiveTab("All");
+                  }}
                 >
+                  Clear Filters
+                </button>
 
-                  <Avatar initials={request.initials} />
+              </div>
 
-                  <div>
-                    <strong>{request.name}</strong>
-                    <small>{request.role}</small>
+
+
+              {/* TABLE */}
+
+              <div className="mlr-table-scroll">
+
+                <table className="mlr-table">
+
+                  <thead>
+
+                    <tr>
+
+                      <th></th>
+
+                      <th>
+                        EMPLOYEE
+                      </th>
+
+                      <th>
+                        LEAVE TYPE
+                      </th>
+
+                      <th>
+                        DATES
+                      </th>
+
+                      <th>
+                        DURATION
+                      </th>
+
+                      <th>
+                        REASON
+                      </th>
+
+                      <th>
+                        STATUS
+                      </th>
+
+                      <th>
+                        SUBMITTED ON
+                      </th>
+
+                      <th>
+                        ACTIONS
+                      </th>
+
+                    </tr>
+
+                  </thead>
+
+
+                  <tbody>
+
+                    {filteredRequests.length === 0 ? (
+
+                      <tr>
+
+                        <td
+                          colSpan="9"
+                          className="mlr-empty"
+                        >
+                          No leave requests found.
+                        </td>
+
+                      </tr>
+
+                    ) : (
+
+                      filteredRequests.map(
+                        (request) => (
+
+                          <tr
+                            key={request.id}
+                            className={
+                              selectedRequest.id ===
+                              request.id
+                                ? "selected-row"
+                                : ""
+                            }
+                            onClick={() =>
+                              setSelectedRequest(request)
+                            }
+                          >
+
+
+                            <td>
+
+                              <input
+                                type="checkbox"
+                                onClick={(e) =>
+                                  e.stopPropagation()
+                                }
+                              />
+
+                            </td>
+
+
+                            <td>
+
+                              <div className="mlr-employee">
+
+                                <div
+                                  className={`mlr-avatar ${request.avatarClass}`}
+                                >
+                                  {request.initials}
+                                </div>
+
+
+                                <div>
+
+                                  <strong>
+                                    {request.name}
+                                  </strong>
+
+                                  <small>
+                                    {request.empId}
+                                    {" • "}
+                                    {request.role}
+                                  </small>
+
+                                </div>
+
+                              </div>
+
+                            </td>
+
+
+                            <td>
+
+                              <span
+                                className={`mlr-leave-type ${request.leaveType
+                                  .toLowerCase()
+                                  .replaceAll(" ", "-")}`}
+                              >
+                                {request.leaveType}
+                              </span>
+
+                            </td>
+
+
+                            <td>
+
+                              <div className="mlr-dates">
+
+                                <span>
+                                  {request.dates[0]}
+                                </span>
+
+                                {request.dates[1] && (
+                                  <span>
+                                    {request.dates[1]}
+                                  </span>
+                                )}
+
+                              </div>
+
+                            </td>
+
+
+                            <td>
+                              {request.duration}
+                            </td>
+
+
+                            <td>
+                              {request.reason}
+                            </td>
+
+
+                            <td>
+
+                              <span className="mlr-status pending">
+                                {request.status}
+                              </span>
+
+                            </td>
+
+
+                            <td>
+
+                              <div className="mlr-submitted">
+
+                                <span>
+                                  {request.submitted}
+                                </span>
+
+                                <small>
+                                  {request.time}
+                                </small>
+
+                              </div>
+
+                            </td>
+
+
+                            <td>
+
+                              <div className="mlr-row-actions">
+
+                                <button
+                                  type="button"
+                                  className="mlr-view-btn"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setSelectedRequest(
+                                      request
+                                    );
+                                  }}
+                                >
+                                  View
+                                </button>
+
+
+                                <button
+                                  type="button"
+                                  className="mlr-more"
+                                  onClick={(e) =>
+                                    e.stopPropagation()
+                                  }
+                                >
+                                  <FaEllipsisV />
+                                </button>
+
+                              </div>
+
+                            </td>
+
+                          </tr>
+
+                        )
+                      )
+
+                    )}
+
+                  </tbody>
+
+                </table>
+
+              </div>
+
+
+
+              {/* PAGINATION */}
+
+              <div className="mlr-pagination">
+
+                <span>
+                  Showing 1 to{" "}
+                  {filteredRequests.length}{" "}
+                  of {filteredRequests.length} requests
+                </span>
+
+
+                <div className="mlr-page-buttons">
+
+                  <button type="button">
+                    ‹
+                  </button>
+
+                  <button
+                    type="button"
+                    className="active"
+                  >
+                    1
+                  </button>
+
+                  <button type="button">
+                    ›
+                  </button>
+
+                </div>
+
+
+                <div className="mlr-per-page">
+
+                  Show
+
+                  <select defaultValue="10">
+
+                    <option value="10">
+                      10
+                    </option>
+
+                    <option value="20">
+                      20
+                    </option>
+
+                  </select>
+
+                  per page
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+
+            {/* =================================================
+                BOTTOM CARDS
+            ================================================= */}
+
+            <div className="mlr-bottom-grid">
+
+
+              {/* CALENDAR */}
+
+              <div className="mlr-bottom-card">
+
+                <div className="mlr-card-header">
+
+                  <h3>
+                    Team Leave Calendar
+                  </h3>
+
+
+                  <div className="mlr-calendar-controls">
+
+                    <button type="button">
+                      <FaChevronLeft />
+                    </button>
+
+                    <strong>
+                      August 2026
+                    </strong>
+
+                    <button type="button">
+                      <FaChevronRight />
+                    </button>
+
                   </div>
 
                 </div>
 
 
-                <div>
-                  <span
-                    className={`ml-leave-tag ${request.type}`}
-                  >
-                    {request.leaveType}
+                <div className="mlr-calendar">
+
+                  <div className="calendar-weekdays">
+
+                    <span>Sun</span>
+                    <span>Mon</span>
+                    <span>Tue</span>
+                    <span>Wed</span>
+                    <span>Thu</span>
+                    <span>Fri</span>
+                    <span>Sat</span>
+
+                  </div>
+
+
+                  <div className="calendar-days">
+
+                    {[
+                      "",
+                      "",
+                      "",
+                      "",
+                      "",
+                      "",
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9,
+                      10,
+                      11,
+                      12,
+                      13,
+                      14,
+                      15,
+                      16,
+                      17,
+                      18,
+                      19,
+                      20,
+                      21,
+                      22,
+                      23,
+                      24,
+                      25,
+                      26,
+                      27,
+                      28,
+                      29,
+                      30,
+                      31,
+                    ].map((day, index) => (
+
+                      <div
+                        key={index}
+                        className={`calendar-day ${
+                          day === 18 ||
+                          day === 19
+                            ? "pending-day"
+                            : ""
+                        } ${
+                          day === 27
+                            ? "approved-day"
+                            : ""
+                        }`}
+                      >
+                        {day}
+                      </div>
+
+                    ))}
+
+                  </div>
+
+                </div>
+
+
+                <div className="calendar-legend">
+
+                  <span>
+                    <i className="approved-dot"></i>
+                    Approved Leave
                   </span>
-                </div>
 
-
-                <div className="ml-date-text">
-                  {request.dates}
-                </div>
-
-
-                <div>{request.duration}</div>
-
-
-                <div>{request.reason}</div>
-
-
-                <div>
-                  <span className="ml-status pending">
-                    {request.status}
+                  <span>
+                    <i className="pending-dot"></i>
+                    Pending Leave
                   </span>
+
+                  <span>
+                    <i className="holiday-dot"></i>
+                    Holiday
+                  </span>
+
                 </div>
 
-
-                <div className="ml-submitted">
-                  <span>{request.submittedDate}</span>
-                  <small>{request.submittedTime}</small>
-                </div>
+              </div>
 
 
-                <div className="ml-actions">
 
-                  <button
-                    onClick={() =>
-                      setSelectedRequest(request)
-                    }
-                  >
-                    View
+              {/* UPCOMING */}
+
+              <div className="mlr-bottom-card">
+
+                <div className="mlr-card-header">
+
+                  <h3>
+                    Upcoming Leave
+                  </h3>
+
+                  <button type="button">
+                    View All
                   </button>
 
-                  <FiMoreVertical />
+                </div>
+
+
+                <div className="mlr-upcoming">
+
+                  <UpcomingItem
+                    initials="RV"
+                    color="orange-avatar"
+                    name="Rahul Verma"
+                    type="Sick Leave"
+                    date="18 Aug – 19 Aug"
+                    days="2 Days"
+                  />
+
+                  <UpcomingItem
+                    initials="PS"
+                    color="dark-avatar"
+                    name="Priya Singh"
+                    type="Casual Leave"
+                    date="20 Aug"
+                    days="1 Day"
+                  />
+
+                  <UpcomingItem
+                    initials="NP"
+                    color="green-avatar"
+                    name="Neha Patel"
+                    type="Paid Leave"
+                    date="22 Aug"
+                    days="1 Day"
+                  />
+
+                  <UpcomingItem
+                    initials="AS"
+                    color="brown-avatar"
+                    name="Aman Sharma"
+                    type="Sick Leave"
+                    date="25 Aug – 27 Aug"
+                    days="3 Days"
+                  />
 
                 </div>
 
               </div>
 
-            ))}
-
-          </div>
 
 
-          {/* PAGINATION */}
-          <div className="ml-pagination">
+              {/* AVAILABILITY */}
 
-            <span>
-              Showing 1 to 4 of 4 requests
-            </span>
+              <div className="mlr-bottom-card">
 
-            <div className="ml-page-buttons">
+                <div className="mlr-card-header">
 
-              <button>
-                <FiArrowLeft />
-              </button>
+                  <h3>
 
-              <button className="page-active">
-                1
-              </button>
+                    Team Availability
 
-              <button>
-                <FiArrowRight />
-              </button>
+                    <FaInfoCircle />
 
-            </div>
+                  </h3>
+
+                </div>
 
 
-            <div className="ml-per-page">
-              Show
+                <div className="mlr-availability">
 
-              <select defaultValue="10">
-                <option value="10">10</option>
-              </select>
+                  <div className="availability-donut">
 
-              per page
-            </div>
+                    <div>
 
-          </div>
+                      <strong>
+                        12
+                      </strong>
 
-        </div>
+                      <span>
+                        Team Members
+                      </span>
 
+                    </div>
 
-        {/* BOTTOM */}
-        <div className="ml-bottom-grid">
-
-
-          {/* CALENDAR */}
-          <div className="ml-widget ml-calendar-widget">
-
-            <div className="ml-widget-title">
-
-              <h3>Team Leave Calendar</h3>
-
-              <div className="ml-month-controls">
-                <button>
-                  <FiArrowLeft />
-                </button>
-
-                <strong>August 2026</strong>
-
-                <button>
-                  <FiArrowRight />
-                </button>
-              </div>
-
-            </div>
+                  </div>
 
 
-            <div className="ml-weekdays">
-              <span>Sun</span>
-              <span>Mon</span>
-              <span>Tue</span>
-              <span>Wed</span>
-              <span>Thu</span>
-              <span>Fri</span>
-              <span>Sat</span>
-            </div>
+                  <div className="availability-list">
+
+                    <div>
+
+                      <i className="available"></i>
+
+                      <span>
+                        Available
+                      </span>
+
+                      <strong>
+                        9
+                      </strong>
+
+                    </div>
 
 
-            <div className="ml-calendar-grid">
+                    <div>
 
-              {[
-                "", "", "", "", "", "", 1,
-                2, 3, 4, 5, 6, 7, 8,
-                9, 10, 11, 12, 13, 14, 15,
-                16, 17, 18, 19, 20, 21, 22,
-                23, 24, 25, 26, 27, 28, 29,
-                30, 31,
-              ].map((day, index) => (
+                      <i className="onleave"></i>
 
-                <span
-                  key={index}
-                  className={
-                    [18, 19].includes(day)
-                      ? "approved-day"
-                      : [21, 25, 26, 27].includes(day)
-                      ? "pending-day"
-                      : ""
-                  }
-                >
-                  {day}
-                </span>
+                      <span>
+                        On Leave
+                      </span>
 
-              ))}
+                      <strong>
+                        2
+                      </strong>
 
-            </div>
+                    </div>
 
 
-            <div className="ml-calendar-legend">
-              <span>
-                <i className="approved-dot" />
-                Approved Leave
-              </span>
+                    <div>
 
-              <span>
-                <i className="pending-dot" />
-                Pending Leave
-              </span>
+                      <i className="late"></i>
 
-              <span>
-                <i className="holiday-dot" />
-                Holiday
-              </span>
-            </div>
+                      <span>
+                        Late
+                      </span>
 
-          </div>
+                      <strong>
+                        1
+                      </strong>
 
+                    </div>
 
-          {/* UPCOMING LEAVE */}
-          <div className="ml-widget">
+                  </div>
 
-            <div className="ml-widget-title">
-              <h3>Upcoming Leave (Next 10 Days)</h3>
-
-              <button className="ml-view-all">
-                View All
-              </button>
-            </div>
+                </div>
 
 
-            <div className="ml-upcoming-list">
+                <div className="availability-note">
 
-              <div className="ml-upcoming-row">
+                  <FaInfoCircle />
 
-                <Avatar initials="RV" />
+                  2 team members are on leave today.
 
-                <div>
-                  <strong>Rahul Verma</strong>
-
-                  <span className="ml-leave-tag sick">
-                    Sick Leave
+                  <span>
+                    View Team Calendar →
                   </span>
 
-                  <small>18 Aug - 19 Aug</small>
-                </div>
-
-                <b>2 Days</b>
-
-              </div>
-
-
-              <div className="ml-upcoming-row">
-
-                <Avatar initials="PS" />
-
-                <div>
-                  <strong>Priya Singh</strong>
-
-                  <span className="ml-leave-tag casual">
-                    Casual Leave
-                  </span>
-
-                  <small>20 Aug 2026</small>
-                </div>
-
-                <b>1 Day</b>
-
-              </div>
-
-
-              <div className="ml-upcoming-row">
-
-                <Avatar initials="NP" />
-
-                <div>
-                  <strong>Neha Patel</strong>
-
-                  <span className="ml-leave-tag paid">
-                    Paid Leave
-                  </span>
-
-                  <small>22 Aug 2026</small>
-                </div>
-
-                <b>1 Day</b>
-
-              </div>
-
-
-              <div className="ml-upcoming-row">
-
-                <Avatar initials="AS" />
-
-                <div>
-                  <strong>Aman Sharma</strong>
-
-                  <span className="ml-leave-tag sick">
-                    Sick Leave
-                  </span>
-
-                  <small>25 Aug - 27 Aug</small>
-                </div>
-
-                <b>3 Days</b>
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          {/* TEAM AVAILABILITY */}
-          <div className="ml-widget ml-availability-widget">
-
-            <div className="ml-widget-title">
-
-              <h3>
-                Team Availability
-                <FiInfo />
-              </h3>
-
-            </div>
-
-
-            <div className="ml-availability-content">
-
-              <div className="ml-donut">
-
-                <div className="ml-donut-center">
-                  <strong>12</strong>
-                  <span>Team Members</span>
-                </div>
-
-              </div>
-
-
-              <div className="ml-availability-list">
-
-                <div>
-                  <span className="green-dot" />
-                  Available
-                  <b>9</b>
-                </div>
-
-                <div>
-                  <span className="blue-dot" />
-                  On Leave
-                  <b>2</b>
-                </div>
-
-                <div>
-                  <span className="orange-dot" />
-                  Late
-                  <b>1</b>
                 </div>
 
               </div>
 
             </div>
 
+          </section>
 
-            <div className="ml-availability-info">
 
-              <FiInfo />
+
+          {/* =================================================
+              RIGHT DETAILS
+          ================================================= */}
+
+          <aside className="mlr-details">
+
+
+            <div className="mlr-details-header">
+
+              <h2>
+                Leave Request Details
+              </h2>
+
+              <button type="button">
+                <FaTimes />
+              </button>
+
+            </div>
+
+
+            <div className="mlr-details-profile">
+
+              <div className="mlr-details-avatar">
+
+                {selectedRequest.initials}
+
+              </div>
+
 
               <div>
+
                 <strong>
-                  2 team members are on leave today.
+                  {selectedRequest.name}
                 </strong>
 
-                <button>
-                  View Team Calendar →
-                </button>
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      {/* RIGHT PANEL */}
-      <aside className="ml-right-panel">
-
-        <div className="ml-detail-header">
-
-          <h2>Leave Request Details</h2>
-
-          <button>
-            <FiX />
-          </button>
-
-        </div>
-
-
-        {/* PROFILE */}
-        <div className="ml-detail-person">
-
-          <Avatar
-            initials={selectedRequest.initials}
-            large
-          />
-
-          <div>
-            <strong>{selectedRequest.name}</strong>
-            <span>{selectedRequest.role}</span>
-          </div>
-
-          <b>Pending</b>
-
-        </div>
-
-
-        {/* LEAVE INFO */}
-        <div className="ml-detail-section">
-
-          <div className="ml-detail-row">
-            <FiCalendar />
-
-            <div>
-              <small>Leave Type</small>
-              <span>{selectedRequest.leaveType}</span>
-            </div>
-          </div>
-
-
-          <div className="ml-detail-row">
-            <FiCalendar />
-
-            <div>
-              <small>Duration</small>
-              <span>
-                {selectedRequest.dates}
-                {" "}({selectedRequest.duration})
-              </span>
-            </div>
-          </div>
-
-
-          <div className="ml-detail-row">
-            <FiFileText />
-
-            <div>
-              <small>Reason</small>
-              <span>{selectedRequest.reason}</span>
-            </div>
-          </div>
-
-
-          <div className="ml-detail-row">
-            <FiCalendar />
-
-            <div>
-              <small>Submitted On</small>
-              <span>
-                {selectedRequest.submittedDate}
-                {" - "}
-                {selectedRequest.submittedTime}
-              </span>
-            </div>
-          </div>
-
-        </div>
-
-
-        {/* LEAVE BALANCE */}
-        <div className="ml-detail-section">
-
-          <h3>Leave Balance</h3>
-
-          <div className="ml-balance-row">
-            <FiCalendar />
-
-            <span>Sick Leave</span>
-
-            <b>5 / 8 Days</b>
-          </div>
-
-          <div className="ml-balance-row">
-            <FiCalendar />
-
-            <span>After Approval</span>
-
-            <b>3 Days remaining</b>
-          </div>
-
-        </div>
-
-
-        {/* ATTACHMENT */}
-        <div className="ml-detail-section">
-
-          <h3>Attachment</h3>
-
-          <div className="ml-attachment">
-
-            <FiFileText />
-
-            <div>
-              <strong>medical-document.pdf</strong>
-              <small>2.4 MB</small>
-            </div>
-
-            <FiDownload />
-
-          </div>
-
-        </div>
-
-
-        {/* TIMELINE */}
-        <div className="ml-detail-section">
-
-          <h3>Request Timeline</h3>
-
-          <div className="ml-timeline">
-
-            <div className="timeline-item done">
-
-              <i />
-
-              <div>
-                <strong>Request Submitted</strong>
                 <span>
-                  17 Aug 2026 • 06:24 PM
+                  {selectedRequest.empId}
+                  {" • "}
+                  {selectedRequest.role}
                 </span>
+
               </div>
+
+
+              <span className="mlr-details-status">
+                Pending
+              </span>
 
             </div>
 
 
-            <div className="timeline-item waiting">
 
-              <i />
+            {/* LEAVE INFORMATION */}
 
-              <div>
-                <strong>Waiting for Manager Approval</strong>
-                <span>Current Status</span>
+            <section className="mlr-details-section">
+
+              <h3>
+                Leave Information
+              </h3>
+
+
+              <DetailItem
+                icon={<FaCalendarAlt />}
+                label="Leave Type"
+                value={selectedRequest.leaveType}
+                highlight
+              />
+
+
+              <DetailItem
+                icon={<FaCalendarAlt />}
+                label="Duration"
+                value="18 Aug 2026 – 19 Aug 2026 (2 Days)"
+              />
+
+
+              <DetailItem
+                icon={<FaClipboardList />}
+                label="Reason"
+                value={selectedRequest.reason}
+              />
+
+
+              <DetailItem
+                icon={<FaClock />}
+                label="Submitted On"
+                value="17 Aug 2026 • 06:24 PM"
+              />
+
+            </section>
+
+
+
+            {/* LEAVE BALANCE */}
+
+            <section className="mlr-details-section">
+
+              <h3>
+                Leave Balance
+              </h3>
+
+
+              <DetailItem
+                icon={<FaUmbrellaBeach />}
+                label="Sick Leave"
+                value="5 / 8"
+              />
+
+
+              <DetailItem
+                icon={<FaCheck />}
+                label="After Approval"
+                value="3 Days remaining"
+              />
+
+            </section>
+
+
+
+            {/* ATTACHMENT */}
+
+            <section className="mlr-details-section">
+
+              <h3>
+                Attachment
+              </h3>
+
+
+              <div className="mlr-attachment">
+
+                <div className="attachment-icon">
+                  <FaPaperclip />
+                </div>
+
+
+                <div>
+
+                  <strong>
+                    medical-document.pdf
+                  </strong>
+
+                  <small>
+                    2.4 MB
+                  </small>
+
+                </div>
+
+
+                <FaDownload />
+
               </div>
 
-            </div>
+            </section>
 
-          </div>
+
+
+            {/* TIMELINE */}
+
+            <section className="mlr-details-section">
+
+              <h3>
+                Request Timeline
+              </h3>
+
+
+              <TimelineItem
+                color="green"
+                title="Request Submitted"
+                text="17 Aug 2026 • 06:24 PM"
+              />
+
+
+              <TimelineItem
+                color="purple"
+                title="Waiting for Manager Approval"
+                text="Current Status"
+              />
+
+            </section>
+
+
+
+            {/* MANAGER ACTION */}
+
+            <section className="mlr-manager-action">
+
+              <h3>
+                Manager Action
+              </h3>
+
+
+              <textarea
+                placeholder="Add a comment (optional)..."
+              />
+
+
+              <div className="mlr-approval-buttons">
+
+                <button
+                  type="button"
+                  className="reject"
+                >
+                  <FaTimes />
+                  Reject
+                </button>
+
+
+                <button
+                  type="button"
+                  className="approve"
+                >
+                  <FaCheck />
+                  Approve
+                </button>
+
+              </div>
+
+            </section>
+
+          </aside>
 
         </div>
 
-
-        {/* MANAGER ACTION */}
-        <div className="ml-manager-action">
-
-          <h3>Manager Action</h3>
-
-          <textarea
-            placeholder="Add a comment (optional)..."
-          />
-
-          <div className="ml-decision-buttons">
-
-            <button className="ml-reject-btn">
-              <FiX />
-              Reject
-            </button>
-
-            <button className="ml-approve-btn">
-              <FiCheck />
-              Approve
-            </button>
-
-          </div>
-
-        </div>
-
-      </aside>
+      </main>
 
     </div>
   );
 }
+
+
+/* =====================================================
+   STAT CARD
+===================================================== */
+
+function StatCard({
+  icon,
+  iconClass,
+  title,
+  value,
+  subtitle,
+  subtitleClass = "",
+}) {
+  return (
+    <div className="mlr-stat-card">
+
+      <div
+        className={`mlr-stat-icon ${iconClass}`}
+      >
+        {icon}
+      </div>
+
+
+      <div>
+
+        <span>
+          {title}
+        </span>
+
+        <strong>
+          {value}
+        </strong>
+
+        <small className={subtitleClass}>
+          {subtitle}
+        </small>
+
+      </div>
+
+    </div>
+  );
+}
+
+
+/* =====================================================
+   FILTER SELECT
+===================================================== */
+
+function FilterSelect({
+  label,
+  value,
+}) {
+  return (
+    <div className="mlr-select">
+
+      <span>
+        {label}
+      </span>
+
+      <strong>
+        {value}
+      </strong>
+
+      <FaChevronDown />
+
+    </div>
+  );
+}
+
+
+/* =====================================================
+   UPCOMING ITEM
+===================================================== */
+
+function UpcomingItem({
+  initials,
+  color,
+  name,
+  type,
+  date,
+  days,
+}) {
+  return (
+    <div className="upcoming-item">
+
+      <div
+        className={`upcoming-avatar ${color}`}
+      >
+        {initials}
+      </div>
+
+
+      <div className="upcoming-info">
+
+        <strong>
+          {name}
+        </strong>
+
+        <span>
+          {type}
+        </span>
+
+        <small>
+          {date}
+        </small>
+
+      </div>
+
+
+      <strong className="upcoming-days">
+        {days}
+      </strong>
+
+    </div>
+  );
+}
+
+
+/* =====================================================
+   DETAIL ITEM
+===================================================== */
+
+function DetailItem({
+  icon,
+  label,
+  value,
+  highlight = false,
+}) {
+  return (
+    <div className="detail-item">
+
+      <div className="detail-item-icon">
+        {icon}
+      </div>
+
+
+      <span>
+        {label}
+      </span>
+
+
+      <strong
+        className={
+          highlight
+            ? "highlight-value"
+            : ""
+        }
+      >
+        {value}
+      </strong>
+
+    </div>
+  );
+}
+
+
+/* =====================================================
+   TIMELINE ITEM
+===================================================== */
+
+function TimelineItem({
+  color,
+  title,
+  text,
+}) {
+  return (
+    <div className="timeline-item">
+
+      <div
+        className={`timeline-dot ${color}`}
+      >
+
+        {color === "green" ? (
+          <FaCheck />
+        ) : (
+          <FaClock />
+        )}
+
+      </div>
+
+
+      <div>
+
+        <strong>
+          {title}
+        </strong>
+
+        <span>
+          {text}
+        </span>
+
+      </div>
+
+    </div>
+  );
+}
+
 
 export default ManagerLeaveRequests;
