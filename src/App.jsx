@@ -258,7 +258,8 @@ function ManagerLayout() {
     location.pathname === "/manager/team" ||
     location.pathname === "/manager/attendance" ||
     location.pathname === "/manager/tasks" ||
-    location.pathname === "/manager/daily-updates";
+    location.pathname === "/manager/daily-updates" ||
+    location.pathname === "/manager/leave";
 
 
   return (
@@ -342,16 +343,12 @@ function ManagerLayout() {
 
 
             {/* =========================================
-               LEAVE
+               LEAVE REQUESTS
             ========================================= */}
 
             <Route
               path="/manager/leave"
-              element={
-                <ManagerPlaceholder
-                  title="Leave Requests"
-                />
-              }
+              element={<ManagerLeaveRequests />}
             />
 
 
@@ -395,12 +392,6 @@ function ManagerLayout() {
                 />
               }
             />
-
-            <Route
-  path="/manager/leave"
-  element={<ManagerLeaveRequests />}
-/>
-
 
             {/* =========================================
                UNKNOWN MANAGER URL
