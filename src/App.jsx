@@ -81,6 +81,7 @@ import ManagerLeaveRequests
   from "./apps/manager/pages/ManagerLeaveRequests";
 
 import ManagerReports from "./apps/manager/pages/ManagerReports";
+import ManagerProfile from "./apps/manager/pages/ManagerProfile";
 
 /* =====================================================
    APP CSS
@@ -261,7 +262,8 @@ function ManagerLayout() {
     location.pathname === "/manager/tasks" ||
     location.pathname === "/manager/daily-updates" ||
     location.pathname === "/manager/leave" ||
-    location.pathname === "/manager/reports";
+    location.pathname === "/manager/reports" ||
+    location.pathname === "/manager/profile";
 
 
   return (
@@ -370,11 +372,7 @@ function ManagerLayout() {
 
             <Route
               path="/manager/profile"
-              element={
-                <ManagerPlaceholder
-                  title="Manager Profile"
-                />
-              }
+              element={<ManagerProfile />}
             />
 
 
