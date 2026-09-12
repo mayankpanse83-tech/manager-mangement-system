@@ -521,9 +521,7 @@ function AdminLayout() {
 ===================================================== */
 
 function App() {
-
   const location = useLocation();
-
 
   /* ================================================
      AUTH PAGE
@@ -533,11 +531,21 @@ function App() {
     location.pathname === "/login" ||
     location.pathname === "/account-activation";
 
-
   if (isAuthPage) {
     return <AuthLayout />;
   }
 
+  /* ================================================
+     ADMIN PAGE
+  ================================================ */
+
+  const isAdminPage =
+    location.pathname === "/admin" ||
+    location.pathname.startsWith("/admin/");
+
+  if (isAdminPage) {
+    return <AdminLayout />;
+  }
 
   /* ================================================
      MANAGER PAGE
@@ -547,11 +555,9 @@ function App() {
     location.pathname === "/manager" ||
     location.pathname.startsWith("/manager/");
 
-
   if (isManagerPage) {
     return <ManagerLayout />;
   }
-
 
   /* ================================================
      EMPLOYEE PAGE
@@ -559,19 +565,5 @@ function App() {
 
   return <EmployeeLayout />;
 }
-
-
-/* ================================================
-     ADMIN PAGE
-  ================================================ */
-
-const isAdminPage =
-  location.pathname === "/admin" ||
-  location.pathname.startsWith("/admin/");
-
-if (isAdminPage) {
-  return <AdminLayout />;
-}
-
 
 export default App;
