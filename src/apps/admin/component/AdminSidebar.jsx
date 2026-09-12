@@ -1,192 +1,172 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import {
-  FaHome,
-  FaUsers,
-  FaUserTie,
-  FaBuilding,
-  FaClock,
-  FaTasks,
-  FaFileAlt,
-  FaCalendarAlt,
-  FaMoneyBillWave,
-  FaChartBar,
-  FaCog,
-  FaHeadset,
-  FaChevronDown,
-  FaPlus,
-} from "react-icons/fa";
+  FiHome,
+  FiUsers,
+  FiUserCheck,
+  FiGrid,
+  FiClock,
+  FiCheckSquare,
+  FiFileText,
+  FiCalendar,
+  FiDollarSign,
+  FiBarChart2,
+  FiSettings,
+  FiHeadphones,
+  FiChevronDown,
+} from "react-icons/fi";
 
 import "./AdminSidebar.css";
 
-const AdminSidebar = () => {
+const menuItems = [
+  {
+    label: "Dashboard",
+    icon: FiHome,
+    path: "/admin/dashboard",
+  },
+  {
+    label: "Employees",
+    icon: FiUsers,
+    path: "/admin/employees",
+  },
+  {
+    label: "Managers",
+    icon: FiUserCheck,
+    path: "/admin/managers",
+  },
+  {
+    label: "Departments",
+    icon: FiFileText,
+    path: "/admin/departments",
+  },
+  {
+    label: "Attendance",
+    icon: FiClock,
+    path: "/admin/attendance",
+  },
+  {
+    label: "Tasks",
+    icon: FiCheckSquare,
+    path: "/admin/tasks",
+  },
+  {
+    label: "Daily Updates",
+    icon: FiFileText,
+    path: "/admin/daily-updates",
+  },
+  {
+    label: "Leave Management",
+    icon: FiCalendar,
+    path: "/admin/leave",
+  },
+  {
+    label: "Payroll",
+    icon: FiDollarSign,
+    path: "/admin/payroll",
+  },
+  {
+    label: "Reports",
+    icon: FiBarChart2,
+    path: "/admin/reports",
+  },
+  {
+    label: "Settings",
+    icon: FiSettings,
+    path: "/admin/settings",
+  },
+];
+
+function AdminSidebar() {
+  const currentPath = window.location.pathname;
+
   return (
     <aside className="admin-sidebar">
 
       {/* LOGO */}
-      <div className="admin-brand">
-        <div className="admin-brand-icon">W</div>
+      <div className="admin-logo-section">
+        <div className="admin-logo">
+          W
+        </div>
 
-        <div className="admin-brand-text">
+        <div className="admin-brand">
           <h2>WorkForce</h2>
           <span>Admin Console</span>
         </div>
       </div>
 
-      {/* NAVIGATION */}
-      <nav className="admin-nav">
+      {/* MENU */}
+      <nav className="admin-menu">
 
-        <NavLink
-          to="/admin/dashboard"
-          className={({ isActive }) =>
-            `admin-nav-item ${isActive ? "active" : ""}`
-          }
-        >
-          <FaHome />
-          <span>Dashboard</span>
-        </NavLink>
+        {menuItems.map((item) => {
+          const Icon = item.icon;
 
-        <NavLink
-          to="/admin/employees"
-          className={({ isActive }) =>
-            `admin-nav-item ${isActive ? "active" : ""}`
-          }
-        >
-          <FaUsers />
-          <span>Employees</span>
-        </NavLink>
+          const isActive =
+            currentPath === item.path ||
+            (item.label === "Dashboard" &&
+              currentPath === "/admin");
 
-        <NavLink
-          to="/admin/managers"
-          className={({ isActive }) =>
-            `admin-nav-item ${isActive ? "active" : ""}`
-          }
-        >
-          <FaUserTie />
-          <span>Managers</span>
-        </NavLink>
+          return (
+            <a
+              key={item.label}
+              href={item.path}
+              className={`admin-menu-item ${
+                isActive ? "active" : ""
+              }`}
+            >
+              <Icon className="admin-menu-icon" />
 
-        <NavLink
-          to="/admin/departments"
-          className={({ isActive }) =>
-            `admin-nav-item ${isActive ? "active" : ""}`
-          }
-        >
-          <FaBuilding />
-          <span>Departments</span>
-        </NavLink>
-
-        <NavLink
-          to="/admin/attendance"
-          className={({ isActive }) =>
-            `admin-nav-item ${isActive ? "active" : ""}`
-          }
-        >
-          <FaClock />
-          <span>Attendance</span>
-        </NavLink>
-
-        <NavLink
-          to="/admin/tasks"
-          className={({ isActive }) =>
-            `admin-nav-item ${isActive ? "active" : ""}`
-          }
-        >
-          <FaTasks />
-          <span>Tasks</span>
-        </NavLink>
-
-        <NavLink
-          to="/admin/daily-updates"
-          className={({ isActive }) =>
-            `admin-nav-item ${isActive ? "active" : ""}`
-          }
-        >
-          <FaFileAlt />
-          <span>Daily Updates</span>
-        </NavLink>
-
-        <NavLink
-          to="/admin/leave"
-          className={({ isActive }) =>
-            `admin-nav-item ${isActive ? "active" : ""}`
-          }
-        >
-          <FaCalendarAlt />
-          <span>Leave Management</span>
-        </NavLink>
-
-        <NavLink
-          to="/admin/payroll"
-          className={({ isActive }) =>
-            `admin-nav-item ${isActive ? "active" : ""}`
-          }
-        >
-          <FaMoneyBillWave />
-          <span>Payroll</span>
-        </NavLink>
-
-        <NavLink
-          to="/admin/reports"
-          className={({ isActive }) =>
-            `admin-nav-item ${isActive ? "active" : ""}`
-          }
-        >
-          <FaChartBar />
-          <span>Reports</span>
-        </NavLink>
-
-        <NavLink
-          to="/admin/settings"
-          className={({ isActive }) =>
-            `admin-nav-item ${isActive ? "active" : ""}`
-          }
-        >
-          <FaCog />
-          <span>Settings</span>
-        </NavLink>
+              <span>{item.label}</span>
+            </a>
+          );
+        })}
 
       </nav>
 
-      {/* SUPPORT */}
-      <div className="admin-support">
-        <div className="support-icon">
-          <FaHeadset />
+      {/* BOTTOM AREA */}
+      <div className="admin-sidebar-bottom">
+
+        {/* NEED HELP */}
+        <div className="admin-help-box">
+
+          <div className="help-text">
+            <h4>Need Help?</h4>
+
+            <p>
+              Contact support
+              <br />
+              or raise a request.
+            </p>
+          </div>
+
+          <div className="help-icon">
+            <FiHeadphones />
+          </div>
+
+          <button>
+            Contact Support
+          </button>
+
         </div>
 
-        <h4>Need Help?</h4>
+        {/* USER */}
+        <div className="admin-user-card">
 
-        <p>
-          Contact support<br />
-          or raise a request.
-        </p>
+          <div className="admin-user-avatar">
+            AU
+          </div>
 
-        <button>
-          <FaHeadset />
-          Contact Support
-        </button>
-      </div>
+          <div className="admin-user-info">
+            <strong>Admin User</strong>
+            <span>Organization Admin</span>
+          </div>
 
-      {/* ADMIN PROFILE */}
-      <div className="admin-profile">
+          <FiChevronDown className="user-arrow" />
 
-        <div className="admin-profile-avatar">
-          AU
         </div>
-
-        <div className="admin-profile-info">
-          <strong>Admin User</strong>
-          <span>Organization Admin</span>
-        </div>
-
-        <button className="admin-profile-dropdown">
-          <FaChevronDown />
-        </button>
 
       </div>
 
     </aside>
   );
-};
+}
 
 export default AdminSidebar;
