@@ -80,13 +80,19 @@ import ManagerDailyUpadates
 import ManagerLeaveRequests
   from "./apps/manager/pages/ManagerLeaveRequests";
 
-import ManagerReports from "./apps/manager/pages/ManagerReports";
+import ManagerReports
+  from "./apps/manager/pages/ManagerReports";
 
-import ManagerProfile from "./apps/manager/pages/ManagerProfile";
+import ManagerProfile
+  from "./apps/manager/pages/ManagerProfile";
+
 
 /* =====================================================
    ADMIN
 ===================================================== */
+
+import AdminDashboard
+  from "./apps/admin/pages/AdminDashboard";
 
 
 /* =====================================================
@@ -104,10 +110,7 @@ function ManagerPlaceholder({ title }) {
   return (
     <div className="manager-placeholder">
       <h1>{title}</h1>
-
-      <p>
-        {title} page coming soon.
-      </p>
+      <p>{title} page coming soon.</p>
     </div>
   );
 }
@@ -120,7 +123,6 @@ function ManagerPlaceholder({ title }) {
 function AuthLayout() {
   return (
     <div className="auth-layout">
-
       <Routes>
 
         <Route
@@ -144,7 +146,6 @@ function AuthLayout() {
         />
 
       </Routes>
-
     </div>
   );
 }
@@ -254,13 +255,7 @@ function EmployeeLayout() {
 ===================================================== */
 
 function ManagerLayout() {
-
   const location = useLocation();
-
-  /*
-    In pages par ManagerHeader nahi dikhana hai
-    kyunki in pages ka apna design/header hai.
-  */
 
   const hideManagerHeader =
     location.pathname === "/manager/team" ||
@@ -270,7 +265,6 @@ function ManagerLayout() {
     location.pathname === "/manager/leave" ||
     location.pathname === "/manager/reports" ||
     location.pathname === "/manager/profile";
-
 
   return (
     <div className="manager-layout">
@@ -287,10 +281,6 @@ function ManagerLayout() {
 
           <Routes>
 
-            {/* =========================================
-               MANAGER ROOT
-            ========================================= */}
-
             <Route
               path="/manager"
               element={
@@ -301,90 +291,45 @@ function ManagerLayout() {
               }
             />
 
-
-            {/* =========================================
-               DASHBOARD
-            ========================================= */}
-
             <Route
               path="/manager/dashboard"
               element={<ManagerDashboard />}
             />
-
-
-            {/* =========================================
-               MY TEAM
-            ========================================= */}
 
             <Route
               path="/manager/team"
               element={<ManagerTeam />}
             />
 
-
-            {/* =========================================
-               TEAM ATTENDANCE
-            ========================================= */}
-
             <Route
               path="/manager/attendance"
               element={<ManagerAttendance />}
             />
-
-
-            {/* =========================================
-               MANAGER TASKS
-            ========================================= */}
 
             <Route
               path="/manager/tasks"
               element={<ManagerTasks />}
             />
 
-
-            {/* =========================================
-               DAILY UPDATES
-            ========================================= */}
-
             <Route
               path="/manager/daily-updates"
               element={<ManagerDailyUpadates />}
             />
-
-
-            {/* =========================================
-               LEAVE REQUESTS
-            ========================================= */}
 
             <Route
               path="/manager/leave"
               element={<ManagerLeaveRequests />}
             />
 
-
-            {/* =========================================
-               REPORTS
-            ========================================= */}
-
             <Route
               path="/manager/reports"
               element={<ManagerReports />}
             />
 
-
-            {/* =========================================
-               PROFILE
-            ========================================= */}
-
             <Route
               path="/manager/profile"
               element={<ManagerProfile />}
             />
-
-
-            {/* =========================================
-               SETTINGS
-            ========================================= */}
 
             <Route
               path="/manager/settings"
@@ -394,10 +339,6 @@ function ManagerLayout() {
                 />
               }
             />
-
-            {/* =========================================
-               UNKNOWN MANAGER URL
-            ========================================= */}
 
             <Route
               path="*"
@@ -422,6 +363,7 @@ function ManagerLayout() {
 
 /* =====================================================
    ADMIN SIDEBAR
+   Screenshot-style WorkForce sidebar
 ===================================================== */
 
 function AdminSidebar() {
@@ -439,192 +381,96 @@ function AdminSidebar() {
     ["⚙", "Settings", "/admin/settings"],
   ];
 
-  return (
-    <aside
-      style={{
-        width: 245,
-        minHeight: "100vh",
-        background: "#111827",
-        color: "#fff",
-        padding: "24px 16px",
-        boxSizing: "border-box",
-        flexShrink: 0,
-      }}
-    >
-      <div style={{ fontSize: 22, fontWeight: 800, marginBottom: 6 }}>
-        Admin Panel
-      </div>
-      <div style={{ fontSize: 12, color: "#9ca3af", marginBottom: 28 }}>
-        Management System
-      </div>
-
-      <nav style={{ display: "grid", gap: 7 }}>
-        {menu.map(([icon, label, path]) => (
-          <a
-            key={path}
-            href={path}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 12,
-              padding: "12px 13px",
-              borderRadius: 9,
-              color: "#e5e7eb",
-              textDecoration: "none",
-              fontSize: 14,
-              fontWeight: 600,
-            }}
-          >
-            <span style={{ width: 22, textAlign: "center" }}>{icon}</span>
-            {label}
-          </a>
-        ))}
-      </nav>
-    </aside>
-  );
-}
-
-
-/* =====================================================
-   ADMIN DASHBOARD
-===================================================== */
-
-function AdminDashboard() {
-  const stats = [
-    ["Total Employees", "124", "👥"],
-    ["Managers", "12", "👔"],
-    ["Departments", "8", "🏢"],
-    ["Present Today", "109", "✓"],
-  ];
+  const currentPath = window.location.pathname;
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        background: "#f5f7fb",
-        padding: "30px",
-        boxSizing: "border-box",
-        color: "#111827",
-        fontFamily: "Arial, sans-serif",
-      }}
-    >
-      <div style={{ marginBottom: 26 }}>
-        <h1 style={{ margin: 0, fontSize: 30, fontWeight: 800 }}>
-          Admin Dashboard
-        </h1>
-        <p style={{ margin: "7px 0 0", color: "#6b7280", fontSize: 14 }}>
-          Manage employees, managers and your organization.
-        </p>
-      </div>
+    <aside className="wf-admin-sidebar">
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-          gap: 18,
-          marginBottom: 22,
-        }}
-      >
-        {stats.map(([title, value, icon]) => (
-          <div
-            key={title}
-            style={{
-              background: "#fff",
-              border: "1px solid #e5e7eb",
-              borderRadius: 14,
-              padding: 20,
-              boxShadow: "0 4px 14px rgba(15,23,42,.05)",
-            }}
-          >
-            <div style={{ fontSize: 24, marginBottom: 12 }}>{icon}</div>
-            <div style={{ color: "#6b7280", fontSize: 13 }}>{title}</div>
-            <div style={{ marginTop: 6, fontSize: 28, fontWeight: 800 }}>
-              {value}
-            </div>
+      {/* LOGO */}
+      <div className="wf-admin-logo">
+        <div className="wf-logo-box">W</div>
+
+        <div>
+          <div className="wf-brand-name">WorkForce</div>
+          <div className="wf-brand-subtitle">
+            Admin Console
           </div>
-        ))}
+        </div>
       </div>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "minmax(0, 1.5fr) minmax(280px, 1fr)",
-          gap: 20,
-        }}
-      >
-        <div
-          style={{
-            background: "#fff",
-            border: "1px solid #e5e7eb",
-            borderRadius: 14,
-            padding: 22,
-          }}
-        >
-          <h2 style={{ margin: "0 0 18px", fontSize: 20 }}>
-            Organization Overview
-          </h2>
+      {/* MENU */}
+      <nav className="wf-admin-menu">
 
-          {[
-            ["Employees", 124],
-            ["Managers", 12],
-            ["Departments", 8],
-            ["Active Projects", 27],
-          ].map(([label, value]) => (
-            <div
-              key={label}
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                padding: "14px 0",
-                borderBottom: "1px solid #eef0f4",
-                fontSize: 15,
-              }}
-            >
-              <span>{label}</span>
-              <strong>{value}</strong>
-            </div>
-          ))}
-        </div>
+        {menu.map(([icon, label, path]) => {
+          const active =
+            currentPath === path ||
+            (label === "Dashboard" &&
+              currentPath === "/admin");
 
-        <div
-          style={{
-            background: "#fff",
-            border: "1px solid #e5e7eb",
-            borderRadius: 14,
-            padding: 22,
-          }}
-        >
-          <h2 style={{ margin: "0 0 18px", fontSize: 20 }}>
-            Quick Actions
-          </h2>
-
-          {[
-            ["Add Employee", "/admin/employees"],
-            ["Manage Managers", "/admin/managers"],
-            ["View Attendance", "/admin/attendance"],
-            ["Open Reports", "/admin/reports"],
-          ].map(([label, path]) => (
+          return (
             <a
               key={path}
               href={path}
-              style={{
-                display: "block",
-                padding: "12px 14px",
-                marginBottom: 10,
-                borderRadius: 9,
-                background: "#f3f4f6",
-                color: "#111827",
-                textDecoration: "none",
-                fontWeight: 600,
-                fontSize: 14,
-              }}
+              className={`wf-admin-item ${
+                active ? "active" : ""
+              }`}
             >
-              {label} →
+              <span className="wf-admin-icon">
+                {icon}
+              </span>
+
+              <span>{label}</span>
             </a>
-          ))}
+          );
+        })}
+
+      </nav>
+
+      {/* BOTTOM */}
+      <div className="wf-admin-bottom">
+
+        <div className="wf-help-box">
+
+          <div>
+            <strong>Need Help?</strong>
+
+            <p>
+              Contact support
+              <br />
+              or raise a request.
+            </p>
+          </div>
+
+          <div className="wf-help-circle">
+            🎧
+          </div>
+
+          <button>
+            Contact Support
+          </button>
+
         </div>
+
+        <div className="wf-user-box">
+
+          <div className="wf-user-avatar">
+            AU
+          </div>
+
+          <div className="wf-user-details">
+            <strong>Admin User</strong>
+            <span>Organization Admin</span>
+          </div>
+
+          <span className="wf-user-arrow">
+            ⌄
+          </span>
+
+        </div>
+
       </div>
-    </div>
+
+    </aside>
   );
 }
 
@@ -635,91 +481,134 @@ function AdminDashboard() {
 
 function AdminLayout() {
   return (
-    <div className="admin-layout">
+    <div className="wf-admin-layout">
+
       <AdminSidebar />
 
-      <div className="admin-main">
-        <main className="admin-content">
-          <Routes>
+      <main className="wf-admin-main">
+        <Routes>
 
-            <Route
-              path="/admin"
-              element={
-                <Navigate
-                  to="/admin/dashboard"
-                  replace
-                />
-              }
-            />
+          {/* /admin → dashboard */}
+          <Route
+            path="/admin"
+            element={
+              <Navigate
+                to="/admin/dashboard"
+                replace
+              />
+            }
+          />
 
-            <Route
-              path="/admin/dashboard"
-              element={<AdminDashboard />}
-            />
+          {/* ADMIN DASHBOARD */}
+          <Route
+            path="/admin/dashboard"
+            element={<AdminDashboard />}
+          />
 
-            <Route
-              path="/admin/employees"
-              element={<div>Employees</div>}
-            />
+          {/* ADMIN PAGES */}
+          <Route
+            path="/admin/employees"
+            element={
+              <div className="wf-admin-placeholder">
+                <h1>Employees</h1>
+              </div>
+            }
+          />
 
-            <Route
-              path="/admin/managers"
-              element={<div>Managers</div>}
-            />
+          <Route
+            path="/admin/managers"
+            element={
+              <div className="wf-admin-placeholder">
+                <h1>Managers</h1>
+              </div>
+            }
+          />
 
-            <Route
-              path="/admin/departments"
-              element={<div>Departments</div>}
-            />
+          <Route
+            path="/admin/departments"
+            element={
+              <div className="wf-admin-placeholder">
+                <h1>Departments</h1>
+              </div>
+            }
+          />
 
-            <Route
-              path="/admin/attendance"
-              element={<div>Attendance</div>}
-            />
+          <Route
+            path="/admin/attendance"
+            element={
+              <div className="wf-admin-placeholder">
+                <h1>Attendance</h1>
+              </div>
+            }
+          />
 
-            <Route
-              path="/admin/tasks"
-              element={<div>Tasks</div>}
-            />
+          <Route
+            path="/admin/tasks"
+            element={
+              <div className="wf-admin-placeholder">
+                <h1>Tasks</h1>
+              </div>
+            }
+          />
 
-            <Route
-              path="/admin/daily-updates"
-              element={<div>Daily Updates</div>}
-            />
+          <Route
+            path="/admin/daily-updates"
+            element={
+              <div className="wf-admin-placeholder">
+                <h1>Daily Updates</h1>
+              </div>
+            }
+          />
 
-            <Route
-              path="/admin/leave"
-              element={<div>Leave Management</div>}
-            />
+          <Route
+            path="/admin/leave"
+            element={
+              <div className="wf-admin-placeholder">
+                <h1>Leave Management</h1>
+              </div>
+            }
+          />
 
-            <Route
-              path="/admin/payroll"
-              element={<div>Payroll</div>}
-            />
+          <Route
+            path="/admin/payroll"
+            element={
+              <div className="wf-admin-placeholder">
+                <h1>Payroll</h1>
+              </div>
+            }
+          />
 
-            <Route
-              path="/admin/reports"
-              element={<div>Reports</div>}
-            />
+          <Route
+            path="/admin/reports"
+            element={
+              <div className="wf-admin-placeholder">
+                <h1>Reports</h1>
+              </div>
+            }
+          />
 
-            <Route
-              path="/admin/settings"
-              element={<div>Settings</div>}
-            />
+          <Route
+            path="/admin/settings"
+            element={
+              <div className="wf-admin-placeholder">
+                <h1>Settings</h1>
+              </div>
+            }
+          />
 
-            <Route
-              path="*"
-              element={
-                <Navigate
-                  to="/admin/dashboard"
-                  replace
-                />
-              }
-            />
+          <Route
+            path="*"
+            element={
+              <Navigate
+                to="/admin/dashboard"
+                replace
+              />
+            }
+          />
 
-          </Routes>
-        </main>
-      </div>
+        </Routes>
+      </main>
+
     </div>
   );
 }
@@ -760,3 +649,259 @@ function App() {
 }
 
 export default App;
+
+
+/* =====================================================
+   ADMIN SIDEBAR STYLES
+   These are injected once by this component file.
+===================================================== */
+
+const adminStyle = document.createElement("style");
+
+adminStyle.innerHTML = `
+.wf-admin-layout {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  background: #f7f9fc;
+}
+
+.wf-admin-sidebar {
+  width: 140px;
+  min-width: 140px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  background: #071a36;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.wf-admin-logo {
+  height: 58px;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  box-sizing: border-box;
+}
+
+.wf-logo-box {
+  width: 27px;
+  height: 27px;
+  flex-shrink: 0;
+  border-radius: 7px;
+  background: linear-gradient(135deg,#5146f5,#3625d8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.wf-brand-name {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 15px;
+  white-space: nowrap;
+}
+
+.wf-brand-subtitle {
+  color: #9eafc5;
+  font-size: 6.5px;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
+.wf-admin-menu {
+  padding: 8px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.wf-admin-item {
+  width: 100%;
+  height: 32px;
+  padding: 0 7px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #dbe4f0;
+  text-decoration: none;
+  font-size: 9px;
+  font-weight: 600;
+  box-sizing: border-box;
+  transition: .2s ease;
+}
+
+.wf-admin-item:hover {
+  background: rgba(255,255,255,.08);
+  color: #fff;
+}
+
+.wf-admin-item.active {
+  background: linear-gradient(90deg,#5146f5,#4228e9);
+  color: #fff;
+  box-shadow: 0 5px 12px rgba(69,52,235,.25);
+}
+
+.wf-admin-icon {
+  width: 15px;
+  min-width: 15px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.wf-admin-bottom {
+  margin-top: auto;
+  padding: 6px;
+}
+
+.wf-help-box {
+  position: relative;
+  padding: 9px 7px;
+  margin-bottom: 7px;
+  border-radius: 7px;
+  background: linear-gradient(145deg,#102e60,#0b2450);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.wf-help-box strong {
+  font-size: 8px;
+  display: block;
+}
+
+.wf-help-box p {
+  margin: 3px 0 0;
+  color: #b7c5d8;
+  font-size: 5.5px;
+  line-height: 8px;
+}
+
+.wf-help-circle {
+  position: absolute;
+  right: 6px;
+  top: 8px;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  background: rgba(79,70,229,.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+}
+
+.wf-help-box button {
+  width: 100%;
+  height: 20px;
+  margin-top: 7px;
+  border: 0;
+  border-radius: 4px;
+  background: #4935ee;
+  color: #fff;
+  font-size: 5.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.wf-user-box {
+  height: 43px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 7px;
+  background: #102849;
+  box-sizing: border-box;
+}
+
+.wf-user-avatar {
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: linear-gradient(135deg,#475569,#1e293b);
+  border: 1px solid #718096;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 7px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.wf-user-details {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.wf-user-details strong {
+  color: #fff;
+  font-size: 6.5px;
+  white-space: nowrap;
+}
+
+.wf-user-details span {
+  color: #9eafc5;
+  font-size: 5px;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
+.wf-user-arrow {
+  color: #aab7c8;
+  font-size: 9px;
+}
+
+.wf-admin-main {
+  margin-left: 140px;
+  width: calc(100% - 140px);
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.wf-admin-placeholder {
+  min-height: 100vh;
+  padding: 30px;
+  background: #f7f9fc;
+}
+
+.wf-admin-placeholder h1 {
+  margin: 0;
+  color: #172033;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@media (max-width: 700px) {
+  .wf-admin-sidebar {
+    width: 120px;
+    min-width: 120px;
+  }
+
+  .wf-admin-main {
+    margin-left: 120px;
+    width: calc(100% - 120px);
+  }
+
+  .wf-admin-item {
+    font-size: 8px;
+  }
+}
+`;
+
+if (!document.getElementById("wf-admin-runtime-style")) {
+  adminStyle.id = "wf-admin-runtime-style";
+  document.head.appendChild(adminStyle);
+}
