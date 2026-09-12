@@ -715,7 +715,7 @@ adminStyle.innerHTML = `
 
 .wf-brand-subtitle {
   color: #9eafc5;
-  font-size: 12px;
+  font-size: 14px;
   margin-top: 4px;
   white-space: nowrap;
 }
@@ -737,7 +737,7 @@ adminStyle.innerHTML = `
   gap: 12px;
   color: #dbe4f0;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   box-sizing: border-box;
   transition: .2s ease;
@@ -777,14 +777,14 @@ adminStyle.innerHTML = `
 }
 
 .wf-help-box strong {
-  font-size: 15px;
+  font-size: 17px;
   display: block;
 }
 
 .wf-help-box p {
   margin: 3px 0 0;
   color: #b7c5d8;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 14px;
 }
 
@@ -799,7 +799,7 @@ adminStyle.innerHTML = `
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .wf-help-box button {
@@ -810,7 +810,7 @@ adminStyle.innerHTML = `
   border-radius: 4px;
   background: #4935ee;
   color: #fff;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -835,7 +835,7 @@ adminStyle.innerHTML = `
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
   flex-shrink: 0;
 }
@@ -849,7 +849,7 @@ adminStyle.innerHTML = `
 
 .wf-user-details strong {
   color: #fff;
-  font-size: 9px;
+  font-size: 11px;
   white-space: nowrap;
 }
 
@@ -862,7 +862,7 @@ adminStyle.innerHTML = `
 
 .wf-user-arrow {
   color: #aab7c8;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .wf-admin-main {
@@ -896,7 +896,7 @@ adminStyle.innerHTML = `
   }
 
   .wf-admin-item {
-    font-size: 11px;
+    font-size: 13px;
   }
 }
 `;
