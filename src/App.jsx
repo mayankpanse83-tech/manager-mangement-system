@@ -88,7 +88,6 @@ import ManagerProfile from "./apps/manager/pages/ManagerProfile";
    ADMIN
 ===================================================== */
 
-import AdminSidebar from "./apps/admin/component/AdminSidebar";
 
 /* =====================================================
    APP CSS
@@ -420,6 +419,216 @@ function ManagerLayout() {
   );
 }
 
+
+/* =====================================================
+   ADMIN SIDEBAR
+===================================================== */
+
+function AdminSidebar() {
+  const menu = [
+    ["📊", "Dashboard", "/admin/dashboard"],
+    ["👥", "Employees", "/admin/employees"],
+    ["👔", "Managers", "/admin/managers"],
+    ["🏢", "Departments", "/admin/departments"],
+    ["🕒", "Attendance", "/admin/attendance"],
+    ["✓", "Tasks", "/admin/tasks"],
+    ["📝", "Daily Updates", "/admin/daily-updates"],
+    ["📅", "Leave Management", "/admin/leave"],
+    ["💰", "Payroll", "/admin/payroll"],
+    ["📈", "Reports", "/admin/reports"],
+    ["⚙", "Settings", "/admin/settings"],
+  ];
+
+  return (
+    <aside
+      style={{
+        width: 245,
+        minHeight: "100vh",
+        background: "#111827",
+        color: "#fff",
+        padding: "24px 16px",
+        boxSizing: "border-box",
+        flexShrink: 0,
+      }}
+    >
+      <div style={{ fontSize: 22, fontWeight: 800, marginBottom: 6 }}>
+        Admin Panel
+      </div>
+      <div style={{ fontSize: 12, color: "#9ca3af", marginBottom: 28 }}>
+        Management System
+      </div>
+
+      <nav style={{ display: "grid", gap: 7 }}>
+        {menu.map(([icon, label, path]) => (
+          <a
+            key={path}
+            href={path}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 12,
+              padding: "12px 13px",
+              borderRadius: 9,
+              color: "#e5e7eb",
+              textDecoration: "none",
+              fontSize: 14,
+              fontWeight: 600,
+            }}
+          >
+            <span style={{ width: 22, textAlign: "center" }}>{icon}</span>
+            {label}
+          </a>
+        ))}
+      </nav>
+    </aside>
+  );
+}
+
+
+/* =====================================================
+   ADMIN DASHBOARD
+===================================================== */
+
+function AdminDashboard() {
+  const stats = [
+    ["Total Employees", "124", "👥"],
+    ["Managers", "12", "👔"],
+    ["Departments", "8", "🏢"],
+    ["Present Today", "109", "✓"],
+  ];
+
+  return (
+    <div
+      style={{
+        minHeight: "100vh",
+        background: "#f5f7fb",
+        padding: "30px",
+        boxSizing: "border-box",
+        color: "#111827",
+        fontFamily: "Arial, sans-serif",
+      }}
+    >
+      <div style={{ marginBottom: 26 }}>
+        <h1 style={{ margin: 0, fontSize: 30, fontWeight: 800 }}>
+          Admin Dashboard
+        </h1>
+        <p style={{ margin: "7px 0 0", color: "#6b7280", fontSize: 14 }}>
+          Manage employees, managers and your organization.
+        </p>
+      </div>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+          gap: 18,
+          marginBottom: 22,
+        }}
+      >
+        {stats.map(([title, value, icon]) => (
+          <div
+            key={title}
+            style={{
+              background: "#fff",
+              border: "1px solid #e5e7eb",
+              borderRadius: 14,
+              padding: 20,
+              boxShadow: "0 4px 14px rgba(15,23,42,.05)",
+            }}
+          >
+            <div style={{ fontSize: 24, marginBottom: 12 }}>{icon}</div>
+            <div style={{ color: "#6b7280", fontSize: 13 }}>{title}</div>
+            <div style={{ marginTop: 6, fontSize: 28, fontWeight: 800 }}>
+              {value}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "minmax(0, 1.5fr) minmax(280px, 1fr)",
+          gap: 20,
+        }}
+      >
+        <div
+          style={{
+            background: "#fff",
+            border: "1px solid #e5e7eb",
+            borderRadius: 14,
+            padding: 22,
+          }}
+        >
+          <h2 style={{ margin: "0 0 18px", fontSize: 20 }}>
+            Organization Overview
+          </h2>
+
+          {[
+            ["Employees", 124],
+            ["Managers", 12],
+            ["Departments", 8],
+            ["Active Projects", 27],
+          ].map(([label, value]) => (
+            <div
+              key={label}
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                padding: "14px 0",
+                borderBottom: "1px solid #eef0f4",
+                fontSize: 15,
+              }}
+            >
+              <span>{label}</span>
+              <strong>{value}</strong>
+            </div>
+          ))}
+        </div>
+
+        <div
+          style={{
+            background: "#fff",
+            border: "1px solid #e5e7eb",
+            borderRadius: 14,
+            padding: 22,
+          }}
+        >
+          <h2 style={{ margin: "0 0 18px", fontSize: 20 }}>
+            Quick Actions
+          </h2>
+
+          {[
+            ["Add Employee", "/admin/employees"],
+            ["Manage Managers", "/admin/managers"],
+            ["View Attendance", "/admin/attendance"],
+            ["Open Reports", "/admin/reports"],
+          ].map(([label, path]) => (
+            <a
+              key={path}
+              href={path}
+              style={{
+                display: "block",
+                padding: "12px 14px",
+                marginBottom: 10,
+                borderRadius: 9,
+                background: "#f3f4f6",
+                color: "#111827",
+                textDecoration: "none",
+                fontWeight: 600,
+                fontSize: 14,
+              }}
+            >
+              {label} →
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
 /* =====================================================
    ADMIN LAYOUT
 ===================================================== */
@@ -523,10 +732,6 @@ function AdminLayout() {
 function App() {
   const location = useLocation();
 
-  /* ================================================
-     AUTH PAGE
-  ================================================ */
-
   const isAuthPage =
     location.pathname === "/login" ||
     location.pathname === "/account-activation";
@@ -534,10 +739,6 @@ function App() {
   if (isAuthPage) {
     return <AuthLayout />;
   }
-
-  /* ================================================
-     ADMIN PAGE
-  ================================================ */
 
   const isAdminPage =
     location.pathname === "/admin" ||
@@ -547,10 +748,6 @@ function App() {
     return <AdminLayout />;
   }
 
-  /* ================================================
-     MANAGER PAGE
-  ================================================ */
-
   const isManagerPage =
     location.pathname === "/manager" ||
     location.pathname.startsWith("/manager/");
@@ -558,10 +755,6 @@ function App() {
   if (isManagerPage) {
     return <ManagerLayout />;
   }
-
-  /* ================================================
-     EMPLOYEE PAGE
-  ================================================ */
 
   return <EmployeeLayout />;
 }
