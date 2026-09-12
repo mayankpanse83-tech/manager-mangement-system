@@ -369,3 +369,18 @@ body {
   }
 
 }
+.admin-layout {
+  min-height: 100vh;
+  display: flex;
+}
+
+.admin-main {
+  flex: 1;
+  margin-left: 225px;
+  min-width: 0;
+}
+
+.admin-content {
+  width: 100%;
+  min-height: 100vh;
+}

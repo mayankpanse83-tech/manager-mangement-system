@@ -81,7 +81,14 @@ import ManagerLeaveRequests
   from "./apps/manager/pages/ManagerLeaveRequests";
 
 import ManagerReports from "./apps/manager/pages/ManagerReports";
+
 import ManagerProfile from "./apps/manager/pages/ManagerProfile";
+
+/* =====================================================
+   ADMIN
+===================================================== */
+
+import AdminDashboard from "./apps/admin/pages/AdminDashboard";
 
 /* =====================================================
    APP CSS
@@ -413,6 +420,101 @@ function ManagerLayout() {
   );
 }
 
+/* =====================================================
+   ADMIN LAYOUT
+===================================================== */
+
+function AdminLayout() {
+  return (
+    <div className="admin-layout">
+      <AdminSidebar />
+
+      <div className="admin-main">
+        <main className="admin-content">
+          <Routes>
+
+            <Route
+              path="/admin"
+              element={
+                <Navigate
+                  to="/admin/dashboard"
+                  replace
+                />
+              }
+            />
+
+            <Route
+              path="/admin/dashboard"
+              element={<AdminDashboard />}
+            />
+
+            <Route
+              path="/admin/employees"
+              element={<div>Employees</div>}
+            />
+
+            <Route
+              path="/admin/managers"
+              element={<div>Managers</div>}
+            />
+
+            <Route
+              path="/admin/departments"
+              element={<div>Departments</div>}
+            />
+
+            <Route
+              path="/admin/attendance"
+              element={<div>Attendance</div>}
+            />
+
+            <Route
+              path="/admin/tasks"
+              element={<div>Tasks</div>}
+            />
+
+            <Route
+              path="/admin/daily-updates"
+              element={<div>Daily Updates</div>}
+            />
+
+            <Route
+              path="/admin/leave"
+              element={<div>Leave Management</div>}
+            />
+
+            <Route
+              path="/admin/payroll"
+              element={<div>Payroll</div>}
+            />
+
+            <Route
+              path="/admin/reports"
+              element={<div>Reports</div>}
+            />
+
+            <Route
+              path="/admin/settings"
+              element={<div>Settings</div>}
+            />
+
+            <Route
+              path="*"
+              element={
+                <Navigate
+                  to="/admin/dashboard"
+                  replace
+                />
+              }
+            />
+
+          </Routes>
+        </main>
+      </div>
+    </div>
+  );
+}
+
 
 /* =====================================================
    MAIN APP
@@ -456,6 +558,19 @@ function App() {
   ================================================ */
 
   return <EmployeeLayout />;
+}
+
+
+/* ================================================
+     ADMIN PAGE
+  ================================================ */
+
+const isAdminPage =
+  location.pathname === "/admin" ||
+  location.pathname.startsWith("/admin/");
+
+if (isAdminPage) {
+  return <AdminLayout />;
 }
 
 
