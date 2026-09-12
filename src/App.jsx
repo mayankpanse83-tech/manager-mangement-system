@@ -88,7 +88,7 @@ import ManagerProfile from "./apps/manager/pages/ManagerProfile";
    ADMIN
 ===================================================== */
 
-import AdminDashboard from "./apps/admin/pages/AdminDashboard";
+import AdminSidebar from "./apps/admin/component/AdminSidebar";
 
 /* =====================================================
    APP CSS
