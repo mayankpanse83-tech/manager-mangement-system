@@ -667,8 +667,8 @@ adminStyle.innerHTML = `
 }
 
 .wf-admin-sidebar {
-  width: 140px;
-  min-width: 140px;
+  width: 280px;
+  min-width: 280px;
   height: 100vh;
   position: fixed;
   left: 0;
@@ -683,8 +683,8 @@ adminStyle.innerHTML = `
 }
 
 .wf-admin-logo {
-  height: 58px;
-  padding: 0 8px;
+  height: 76px;
+  padding: 0 14px;
   display: flex;
   align-items: center;
   gap: 7px;
@@ -693,21 +693,21 @@ adminStyle.innerHTML = `
 }
 
 .wf-logo-box {
-  width: 27px;
-  height: 27px;
+  width: 38px;
+  height: 38px;
   flex-shrink: 0;
   border-radius: 7px;
   background: linear-gradient(135deg,#5146f5,#3625d8);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 900;
 }
 
 .wf-brand-name {
   color: #fff;
-  font-size: 13px;
+  font-size: 24px;
   font-weight: 800;
   line-height: 15px;
   white-space: nowrap;
@@ -715,13 +715,13 @@ adminStyle.innerHTML = `
 
 .wf-brand-subtitle {
   color: #9eafc5;
-  font-size: 6.5px;
-  margin-top: 2px;
+  font-size: 12px;
+  margin-top: 4px;
   white-space: nowrap;
 }
 
 .wf-admin-menu {
-  padding: 8px 6px;
+  padding: 14px 10px;
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -729,15 +729,15 @@ adminStyle.innerHTML = `
 
 .wf-admin-item {
   width: 100%;
-  height: 32px;
-  padding: 0 7px;
+  height: 46px;
+  padding: 0 12px;
   border-radius: 6px;
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 12px;
   color: #dbe4f0;
   text-decoration: none;
-  font-size: 9px;
+  font-size: 16px;
   font-weight: 600;
   box-sizing: border-box;
   transition: .2s ease;
@@ -755,20 +755,20 @@ adminStyle.innerHTML = `
 }
 
 .wf-admin-icon {
-  width: 15px;
-  min-width: 15px;
+  width: 22px;
+  min-width: 22px;
   text-align: center;
-  font-size: 12px;
+  font-size: 18px;
 }
 
 .wf-admin-bottom {
   margin-top: auto;
-  padding: 6px;
+  padding: 10px;
 }
 
 .wf-help-box {
   position: relative;
-  padding: 9px 7px;
+  padding: 14px 12px;
   margin-bottom: 7px;
   border-radius: 7px;
   background: linear-gradient(145deg,#102e60,#0b2450);
@@ -777,23 +777,23 @@ adminStyle.innerHTML = `
 }
 
 .wf-help-box strong {
-  font-size: 8px;
+  font-size: 15px;
   display: block;
 }
 
 .wf-help-box p {
   margin: 3px 0 0;
   color: #b7c5d8;
-  font-size: 5.5px;
-  line-height: 8px;
+  font-size: 10px;
+  line-height: 14px;
 }
 
 .wf-help-circle {
   position: absolute;
   right: 6px;
   top: 8px;
-  width: 23px;
-  height: 23px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   background: rgba(79,70,229,.5);
   display: flex;
@@ -804,20 +804,20 @@ adminStyle.innerHTML = `
 
 .wf-help-box button {
   width: 100%;
-  height: 20px;
+  height: 32px;
   margin-top: 7px;
   border: 0;
   border-radius: 4px;
   background: #4935ee;
   color: #fff;
-  font-size: 5.5px;
+  font-size: 11px;
   font-weight: 700;
   cursor: pointer;
 }
 
 .wf-user-box {
-  height: 43px;
-  padding: 5px;
+  height: 58px;
+  padding: 8px;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -835,7 +835,7 @@ adminStyle.innerHTML = `
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 800;
   flex-shrink: 0;
 }
@@ -849,25 +849,25 @@ adminStyle.innerHTML = `
 
 .wf-user-details strong {
   color: #fff;
-  font-size: 6.5px;
+  font-size: 9px;
   white-space: nowrap;
 }
 
 .wf-user-details span {
   color: #9eafc5;
-  font-size: 5px;
+  font-size: 7px;
   margin-top: 2px;
   white-space: nowrap;
 }
 
 .wf-user-arrow {
   color: #aab7c8;
-  font-size: 9px;
+  font-size: 13px;
 }
 
 .wf-admin-main {
-  margin-left: 140px;
-  width: calc(100% - 140px);
+  margin-left: 280px;
+  width: calc(100% - 280px);
   min-height: 100vh;
   box-sizing: border-box;
 }
@@ -886,17 +886,17 @@ adminStyle.innerHTML = `
 
 @media (max-width: 700px) {
   .wf-admin-sidebar {
-    width: 120px;
-    min-width: 120px;
+    width: 170px;
+    min-width: 170px;
   }
 
   .wf-admin-main {
-    margin-left: 120px;
-    width: calc(100% - 120px);
+    margin-left: 170px;
+    width: calc(100% - 170px);
   }
 
   .wf-admin-item {
-    font-size: 8px;
+    font-size: 11px;
   }
 }
 `;
