@@ -777,10 +777,13 @@
 ================================ */
 
 /* Good Evening, Admin */
+/* Good Evening, Admin - soft dark */
 .admin-dashboard-page .ad-topbar h1 {
-  color: #111827 !important;
+  color: #26344a !important;
   opacity: 1 !important;
   visibility: visible !important;
+  font-weight: 700 !important;
+  text-shadow: none !important;
 }
 
 /* Header subtitle */
