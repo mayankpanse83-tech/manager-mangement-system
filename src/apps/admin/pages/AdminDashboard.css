@@ -772,3 +772,47 @@
   .ad-stats-grid { grid-template-columns:repeat(2,1fr); }
   .ad-attention-grid { grid-template-columns:repeat(2,1fr); }
 }
+/* ================================
+   HEADER TEXT + SEARCH FIX
+================================ */
+
+/* Good Evening, Admin */
+.admin-dashboard-page .ad-topbar h1 {
+  color: #111827 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Header subtitle */
+.admin-dashboard-page .ad-topbar p {
+  color: #64748b !important;
+  opacity: 1 !important;
+}
+
+/* Search box */
+.admin-dashboard-page .ad-search {
+  background: #ffffff !important;
+  border: 1px solid #dfe5ed !important;
+  color: #64748b !important;
+}
+
+/* Search input */
+.admin-dashboard-page .ad-search input {
+  background: #ffffff !important;
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Search placeholder */
+.admin-dashboard-page .ad-search input::placeholder {
+  color: #94a3b8 !important;
+  opacity: 1 !important;
+}
+
+/* Search icon */
+.admin-dashboard-page .ad-search svg {
+  color: #64748b !important;
+}
