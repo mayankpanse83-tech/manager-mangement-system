@@ -818,3 +818,117 @@
   background: #4035dc !important;
   border-color: #4035dc !important;
 }
+/* ================= FONT SIZE INCREASE ================= */
+
+/* Header */
+.admin-emp-title h1 {
+  font-size: 28px !important;
+}
+
+.admin-emp-title p {
+  font-size: 15px !important;
+}
+
+/* Search */
+.admin-emp-search input {
+  font-size: 13px !important;
+}
+
+/* Header buttons */
+.admin-outline-btn,
+.admin-add-btn {
+  font-size: 13px !important;
+}
+
+/* Stat cards */
+.admin-stat-card span {
+  font-size: 13px !important;
+}
+
+.admin-stat-card h2 {
+  font-size: 24px !important;
+}
+
+.admin-stat-card small {
+  font-size: 10px !important;
+}
+
+/* Tabs */
+.admin-emp-tabs button {
+  font-size: 12px !important;
+}
+
+/* Filters */
+.admin-filter-bar button {
+  font-size: 11px !important;
+}
+
+/* Table headings */
+.admin-employee-table th {
+  font-size: 9px !important;
+}
+
+/* Table text */
+.admin-employee-table td {
+  font-size: 10px !important;
+}
+
+/* Employee name */
+.employee-info strong {
+  font-size: 11px !important;
+}
+
+/* Employee email */
+.employee-info small {
+  font-size: 9px !important;
+}
+
+/* Status */
+.status {
+  font-size: 9px !important;
+}
+
+/* Footer */
+.admin-table-footer {
+  font-size: 10px !important;
+}
+
+/* Right details panel */
+.details-header h2 {
+  font-size: 15px !important;
+}
+
+.details-profile h3 {
+  font-size: 13px !important;
+}
+
+.details-profile span,
+.details-profile p {
+  font-size: 10px !important;
+}
+
+/* Detail tabs */
+.details-tabs button {
+  font-size: 9px !important;
+}
+
+/* Section headings */
+.details-section h4,
+.quick-actions h4 {
+  font-size: 11px !important;
+}
+
+/* Detail information */
+.detail-row span,
+.detail-row strong {
+  font-size: 10px !important;
+}
+
+/* Buttons */
+.details-buttons button {
+  font-size: 9px !important;
+}
+
+.quick-grid button {
+  font-size: 9px !important;
+}
