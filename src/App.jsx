@@ -10,103 +10,55 @@ import {
    EMPLOYEE
 ===================================================== */
 
-import EmployeeSidebar
-  from "./apps/employee/component/Sidebar";
+import EmployeeSidebar from "./apps/employee/component/Sidebar";
+import EmployeeHeader from "./apps/employee/component/Header";
 
-import EmployeeHeader
-  from "./apps/employee/component/Header";
-
-import EmployeeDashboard
-  from "./apps/employee/component/pages/Dashboard";
-
-import EmployeeAttendance
-  from "./apps/employee/component/pages/Attendance";
-
-import EmployeeTask
-  from "./apps/employee/component/pages/Task";
-
-import EmployeeDailyUpdates
-  from "./apps/employee/component/pages/DailyUpdates";
-
-import EmployeeLeave
-  from "./apps/employee/component/pages/Leave";
-
-import EmployeeSalary
-  from "./apps/employee/component/pages/Salary";
-
-import EmployeeReport
-  from "./apps/employee/component/pages/Report";
-
-import EmployeeProfile
-  from "./apps/employee/component/pages/Profile";
-
+import EmployeeDashboard from "./apps/employee/component/pages/Dashboard";
+import EmployeeAttendance from "./apps/employee/component/pages/Attendance";
+import EmployeeTask from "./apps/employee/component/pages/Task";
+import EmployeeDailyUpdates from "./apps/employee/component/pages/DailyUpdates";
+import EmployeeLeave from "./apps/employee/component/pages/Leave";
+import EmployeeSalary from "./apps/employee/component/pages/Salary";
+import EmployeeReport from "./apps/employee/component/pages/Report";
+import EmployeeProfile from "./apps/employee/component/pages/Profile";
 
 /* =====================================================
    LOGIN
 ===================================================== */
 
-import Login
-  from "./apps/employee/component/pages/Login";
-
-import AccountActivation
-  from "./apps/employee/component/pages/AccountActivation";
-
+import Login from "./apps/employee/component/pages/Login";
+import AccountActivation from "./apps/employee/component/pages/AccountActivation";
 
 /* =====================================================
    MANAGER
 ===================================================== */
 
-import ManagerSidebar
-  from "./apps/manager/component/ManagerSidebar";
+import ManagerSidebar from "./apps/manager/component/ManagerSidebar";
+import ManagerHeader from "./apps/manager/component/ManagerHeader";
 
-import ManagerHeader
-  from "./apps/manager/component/ManagerHeader";
-
-import ManagerDashboard
-  from "./apps/manager/pages/ManagerDashboard";
-
-import ManagerTeam
-  from "./apps/manager/pages/ManagerTeam";
-
-import ManagerAttendance
-  from "./apps/manager/pages/ManagerAttendance";
-
-import ManagerTasks
-  from "./apps/manager/pages/ManagerTasks";
-
-import ManagerDailyUpadates
-  from "./apps/manager/pages/ManagerDailyUpadates";
-
-import ManagerLeaveRequests
-  from "./apps/manager/pages/ManagerLeaveRequests";
-
-import ManagerReports
-  from "./apps/manager/pages/ManagerReports";
-
-import ManagerProfile
-  from "./apps/manager/pages/ManagerProfile";
-
+import ManagerDashboard from "./apps/manager/pages/ManagerDashboard";
+import ManagerTeam from "./apps/manager/pages/ManagerTeam";
+import ManagerAttendance from "./apps/manager/pages/ManagerAttendance";
+import ManagerTasks from "./apps/manager/pages/ManagerTasks";
+import ManagerDailyUpadates from "./apps/manager/pages/ManagerDailyUpadates";
+import ManagerLeaveRequests from "./apps/manager/pages/ManagerLeaveRequests";
+import ManagerReports from "./apps/manager/pages/ManagerReports";
+import ManagerProfile from "./apps/manager/pages/ManagerProfile";
 
 /* =====================================================
    ADMIN
 ===================================================== */
 
-import AdminDashboard
-  from "./apps/admin/pages/AdminDashboard";
-
-import AdminEmployees
-  from "./apps/admin/pages/AdminEmployees";
-
-import AdminManagers
-  from "./apps/admin/pages/AdminManagers";
-
+import AdminDashboard from "./apps/admin/pages/AdminDashboard";
+import AdminEmployees from "./apps/admin/pages/AdminEmployees";
+import AdminManagers from "./apps/admin/pages/AdminManagers";
+import AdminDepartments from "./apps/admin/pages/AdminDepartments";
 
 /* =====================================================
    APP CSS
 ===================================================== */
 
 import "./App.css";
-
 
 /* =====================================================
    MANAGER PLACEHOLDER
@@ -121,7 +73,6 @@ function ManagerPlaceholder({ title }) {
   );
 }
 
-
 /* =====================================================
    AUTH LAYOUT
 ===================================================== */
@@ -129,7 +80,6 @@ function ManagerPlaceholder({ title }) {
 function AuthLayout() {
   return (
     <div className="auth-layout">
-
       <Routes>
 
         <Route
@@ -153,11 +103,9 @@ function AuthLayout() {
         />
 
       </Routes>
-
     </div>
   );
 }
-
 
 /* =====================================================
    EMPLOYEE LAYOUT
@@ -256,7 +204,6 @@ function EmployeeLayout() {
     </div>
   );
 }
-
 
 /* =====================================================
    MANAGER LAYOUT
@@ -369,10 +316,8 @@ function ManagerLayout() {
   );
 }
 
-
 /* =====================================================
    ADMIN SIDEBAR
-   Screenshot-style WorkForce sidebar
 ===================================================== */
 
 function AdminSidebar() {
@@ -397,7 +342,6 @@ function AdminSidebar() {
     <aside className="wf-admin-sidebar">
 
       {/* LOGO */}
-
       <div className="wf-admin-logo">
 
         <div className="wf-logo-box">
@@ -418,9 +362,7 @@ function AdminSidebar() {
 
       </div>
 
-
       {/* MENU */}
-
       <nav className="wf-admin-menu">
 
         {menu.map(([icon, label, path]) => {
@@ -433,7 +375,6 @@ function AdminSidebar() {
             );
 
           return (
-
             <a
               key={path}
               href={path}
@@ -451,16 +392,13 @@ function AdminSidebar() {
               </span>
 
             </a>
-
           );
 
         })}
 
       </nav>
 
-
       {/* BOTTOM */}
-
       <div className="wf-admin-bottom">
 
         <div className="wf-help-box">
@@ -488,7 +426,6 @@ function AdminSidebar() {
           </button>
 
         </div>
-
 
         <div className="wf-user-box">
 
@@ -520,7 +457,6 @@ function AdminSidebar() {
   );
 }
 
-
 /* =====================================================
    ADMIN LAYOUT
 ===================================================== */
@@ -537,7 +473,6 @@ function AdminLayout() {
         <Routes>
 
           {/* /admin → dashboard */}
-
           <Route
             path="/admin"
             element={
@@ -548,161 +483,103 @@ function AdminLayout() {
             }
           />
 
-
           {/* ADMIN DASHBOARD */}
-
           <Route
             path="/admin/dashboard"
             element={<AdminDashboard />}
           />
 
-
           {/* ADMIN EMPLOYEES */}
-
           <Route
             path="/admin/employees"
             element={<AdminEmployees />}
           />
 
-
           {/* ADMIN MANAGERS */}
-
           <Route
             path="/admin/managers"
             element={<AdminManagers />}
           />
 
-
-          {/* DEPARTMENTS */}
-
+          {/* =================================================
+              ADMIN DEPARTMENTS
+          ================================================= */}
           <Route
             path="/admin/departments"
-            element={
-              <div className="wf-admin-placeholder">
-
-                <h1>
-                  Departments
-                </h1>
-
-              </div>
-            }
+            element={<AdminDepartments />}
           />
 
-
           {/* ATTENDANCE */}
-
           <Route
             path="/admin/attendance"
             element={
               <div className="wf-admin-placeholder">
-
-                <h1>
-                  Attendance
-                </h1>
-
+                <h1>Attendance</h1>
               </div>
             }
           />
 
-
           {/* TASKS */}
-
           <Route
             path="/admin/tasks"
             element={
               <div className="wf-admin-placeholder">
-
-                <h1>
-                  Tasks
-                </h1>
-
+                <h1>Tasks</h1>
               </div>
             }
           />
 
-
           {/* DAILY UPDATES */}
-
           <Route
             path="/admin/daily-updates"
             element={
               <div className="wf-admin-placeholder">
-
-                <h1>
-                  Daily Updates
-                </h1>
-
+                <h1>Daily Updates</h1>
               </div>
             }
           />
 
-
           {/* LEAVE */}
-
           <Route
             path="/admin/leave"
             element={
               <div className="wf-admin-placeholder">
-
-                <h1>
-                  Leave Management
-                </h1>
-
+                <h1>Leave Management</h1>
               </div>
             }
           />
 
-
           {/* PAYROLL */}
-
           <Route
             path="/admin/payroll"
             element={
               <div className="wf-admin-placeholder">
-
-                <h1>
-                  Payroll
-                </h1>
-
+                <h1>Payroll</h1>
               </div>
             }
           />
 
-
           {/* REPORTS */}
-
           <Route
             path="/admin/reports"
             element={
               <div className="wf-admin-placeholder">
-
-                <h1>
-                  Reports
-                </h1>
-
+                <h1>Reports</h1>
               </div>
             }
           />
 
-
           {/* SETTINGS */}
-
           <Route
             path="/admin/settings"
             element={
               <div className="wf-admin-placeholder">
-
-                <h1>
-                  Settings
-                </h1>
-
+                <h1>Settings</h1>
               </div>
             }
           />
 
-
           {/* ADMIN FALLBACK */}
-
           <Route
             path="*"
             element={
@@ -721,7 +598,6 @@ function AdminLayout() {
   );
 }
 
-
 /* =====================================================
    MAIN APP
 ===================================================== */
@@ -730,51 +606,38 @@ function App() {
 
   const location = useLocation();
 
-
   /* AUTH */
-
   const isAuthPage =
     location.pathname === "/login" ||
     location.pathname === "/account-activation";
-
 
   if (isAuthPage) {
     return <AuthLayout />;
   }
 
-
   /* ADMIN */
-
   const isAdminPage =
     location.pathname === "/admin" ||
     location.pathname.startsWith("/admin/");
-
 
   if (isAdminPage) {
     return <AdminLayout />;
   }
 
-
   /* MANAGER */
-
   const isManagerPage =
     location.pathname === "/manager" ||
     location.pathname.startsWith("/manager/");
-
 
   if (isManagerPage) {
     return <ManagerLayout />;
   }
 
-
   /* EMPLOYEE */
-
   return <EmployeeLayout />;
 }
 
-
 export default App;
-
 
 /* =====================================================
    ADMIN SIDEBAR STYLES
@@ -790,7 +653,6 @@ adminStyle.innerHTML = `
   display: flex;
   background: #f7f9fc;
 }
-
 
 .wf-admin-sidebar {
   width: 280px;
@@ -815,14 +677,12 @@ adminStyle.innerHTML = `
     sans-serif;
 }
 
-
 .wf-admin-logo {
   height: 76px;
   padding: 0 14px;
 
   display: flex;
   align-items: center;
-
   gap: 7px;
 
   border-bottom:
@@ -832,11 +692,9 @@ adminStyle.innerHTML = `
   box-sizing: border-box;
 }
 
-
 .wf-logo-box {
   width: 38px;
   height: 38px;
-
   flex-shrink: 0;
 
   border-radius: 7px;
@@ -856,39 +714,28 @@ adminStyle.innerHTML = `
   font-weight: 900;
 }
 
-
 .wf-brand-name {
   color: #fff;
-
   font-size: 24px;
   font-weight: 800;
-
   line-height: 15px;
-
   white-space: nowrap;
 }
-
 
 .wf-brand-subtitle {
   color: #9eafc5;
-
   font-size: 14px;
-
   margin-top: 4px;
-
   white-space: nowrap;
 }
-
 
 .wf-admin-menu {
   padding: 14px 10px;
 
   display: flex;
   flex-direction: column;
-
   gap: 2px;
 }
-
 
 .wf-admin-item {
   width: 100%;
@@ -900,29 +747,22 @@ adminStyle.innerHTML = `
 
   display: flex;
   align-items: center;
-
   gap: 12px;
 
   color: #dbe4f0;
-
   text-decoration: none;
 
   font-size: 18px;
   font-weight: 600;
 
   box-sizing: border-box;
-
   transition: .2s ease;
 }
 
-
 .wf-admin-item:hover {
-  background:
-    rgba(255,255,255,.08);
-
+  background: rgba(255,255,255,.08);
   color: #fff;
 }
-
 
 .wf-admin-item.active {
   background:
@@ -939,28 +779,23 @@ adminStyle.innerHTML = `
     rgba(69,52,235,.25);
 }
 
-
 .wf-admin-icon {
   width: 22px;
   min-width: 22px;
 
   text-align: center;
-
   font-size: 18px;
 }
-
 
 .wf-admin-bottom {
   margin-top: auto;
   padding: 10px;
 }
 
-
 .wf-help-box {
   position: relative;
 
   padding: 14px 12px;
-
   margin-bottom: 7px;
 
   border-radius: 7px;
@@ -973,16 +808,13 @@ adminStyle.innerHTML = `
     );
 
   overflow: hidden;
-
   box-sizing: border-box;
 }
-
 
 .wf-help-box strong {
   font-size: 17px;
   display: block;
 }
-
 
 .wf-help-box p {
   margin: 3px 0 0;
@@ -990,10 +822,8 @@ adminStyle.innerHTML = `
   color: #b7c5d8;
 
   font-size: 12px;
-
   line-height: 14px;
 }
-
 
 .wf-help-circle {
   position: absolute;
@@ -1016,7 +846,6 @@ adminStyle.innerHTML = `
   font-size: 13px;
 }
 
-
 .wf-help-box button {
   width: 100%;
   height: 32px;
@@ -1036,7 +865,6 @@ adminStyle.innerHTML = `
   cursor: pointer;
 }
 
-
 .wf-user-box {
   height: 58px;
 
@@ -1044,7 +872,6 @@ adminStyle.innerHTML = `
 
   display: flex;
   align-items: center;
-
   gap: 6px;
 
   border-radius: 7px;
@@ -1053,7 +880,6 @@ adminStyle.innerHTML = `
 
   box-sizing: border-box;
 }
-
 
 .wf-user-avatar {
   width: 27px;
@@ -1068,9 +894,7 @@ adminStyle.innerHTML = `
       #1e293b
     );
 
-  border:
-    1px solid
-    #718096;
+  border: 1px solid #718096;
 
   display: flex;
   align-items: center;
@@ -1082,43 +906,34 @@ adminStyle.innerHTML = `
   flex-shrink: 0;
 }
 
-
 .wf-user-details {
   min-width: 0;
-
   flex: 1;
 
   display: flex;
   flex-direction: column;
 }
 
-
 .wf-user-details strong {
   color: #fff;
 
   font-size: 11px;
-
   white-space: nowrap;
 }
-
 
 .wf-user-details span {
   color: #9eafc5;
 
   font-size: 7px;
-
   margin-top: 2px;
 
   white-space: nowrap;
 }
 
-
 .wf-user-arrow {
   color: #aab7c8;
-
   font-size: 15px;
 }
-
 
 .wf-admin-main {
   margin-left: 280px;
@@ -1131,7 +946,6 @@ adminStyle.innerHTML = `
   box-sizing: border-box;
 }
 
-
 .wf-admin-placeholder {
   min-height: 100vh;
 
@@ -1139,7 +953,6 @@ adminStyle.innerHTML = `
 
   background: #f7f9fc;
 }
-
 
 .wf-admin-placeholder h1 {
   margin: 0;
@@ -1151,7 +964,6 @@ adminStyle.innerHTML = `
     Helvetica,
     sans-serif;
 }
-
 
 @media (max-width: 700px) {
 
@@ -1175,7 +987,6 @@ adminStyle.innerHTML = `
 
 `;
 
-
 if (!document.getElementById("wf-admin-runtime-style")) {
 
   adminStyle.id =
@@ -1184,5 +995,4 @@ if (!document.getElementById("wf-admin-runtime-style")) {
   document.head.appendChild(
     adminStyle
   );
-
 }
