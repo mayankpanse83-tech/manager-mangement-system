@@ -779,3 +779,42 @@
   }
 
 }
+/* Black box fix */
+.admin-emp-search {
+  background: #ffffff !important;
+}
+
+.admin-emp-search input {
+  background: #ffffff !important;
+  color: #263249 !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.admin-emp-search input::placeholder {
+  color: #8a94a6 !important;
+  opacity: 1;
+}
+
+/* Employee name/email cards ko white rakho */
+.employee-info {
+  background: transparent !important;
+}
+
+/* Checkbox black na dikhe */
+.admin-employee-table input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  background: #ffffff !important;
+  border: 1px solid #cfd5df !important;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.admin-employee-table input[type="checkbox"]:checked {
+  background: #4035dc !important;
+  border-color: #4035dc !important;
+}
