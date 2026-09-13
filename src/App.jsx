@@ -93,6 +93,8 @@ import ManagerProfile
 
 import AdminDashboard
   from "./apps/admin/pages/AdminDashboard";
+import AdminEmployees
+  from "./apps/admin/pages/AdminEmployees";
 
 
 /* =====================================================
@@ -508,11 +510,7 @@ function AdminLayout() {
           {/* ADMIN PAGES */}
           <Route
             path="/admin/employees"
-            element={
-              <div className="wf-admin-placeholder">
-                <h1>Employees</h1>
-              </div>
-            }
+            element={<AdminEmployees />}
           />
 
           <Route
