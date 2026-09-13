@@ -95,6 +95,8 @@ import AdminDashboard
   from "./apps/admin/pages/AdminDashboard";
 import AdminEmployees
   from "./apps/admin/pages/AdminEmployees";
+import AdminManagers 
+  from "./apps/admin/pages/AdminManagers";
 
 
 /* =====================================================
