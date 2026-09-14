@@ -9,20 +9,20 @@ import {
   FaUsers,
   FaUserCheck,
   FaUserTimes,
-  FaCalendarAlt,
   FaBriefcase,
   FaClock,
-  FaExclamationCircle,
-  FaCheckCircle,
-  FaTimesCircle,
-  FaFileAlt,
+  FaCalendarAlt,
   FaChevronLeft,
   FaChevronRight,
+  FaTimesCircle,
+  FaFileAlt,
+  FaCheckCircle,
   FaArrowUp,
+  FaExclamationTriangle,
 } from "react-icons/fa";
 import "./AdminAttendance.css";
 
-const employeeData = [
+const employees = [
   {
     id: "EMP-001",
     name: "Aman Sharma",
@@ -113,7 +113,7 @@ const employeeData = [
   },
 ];
 
-const departmentData = [
+const departments = [
   ["Development", "68", "61", "3", "4", "91%"],
   ["Design", "24", "23", "0", "1", "96%"],
   ["Marketing", "31", "27", "2", "2", "88%"],
@@ -122,80 +122,125 @@ const departmentData = [
   ["HR", "12", "12", "0", "0", "97%"],
 ];
 
+const calendarDays = [
+  { day: 31, muted: true, type: "holiday" },
+  { day: 1, type: "present" },
+  { day: 2, type: "absent" },
+  { day: 3, type: "present" },
+  { day: 4, type: "present" },
+  { day: 5 },
+  { day: 6 },
+
+  { day: 7, type: "present" },
+  { day: 8, type: "present" },
+  { day: 9, type: "late" },
+  { day: 10, type: "present" },
+  { day: 11, type: "selected" },
+  { day: 12, type: "present" },
+  { day: 13 },
+
+  { day: 14, type: "absent" },
+  { day: 15, type: "late" },
+  { day: 16, type: "present" },
+  { day: 17, type: "present" },
+  { day: 18, type: "present" },
+  { day: 19 },
+  { day: 20 },
+
+  { day: 21, type: "present" },
+  { day: 22, type: "present" },
+  { day: 23 },
+  { day: 24, type: "present" },
+  { day: 25, type: "present" },
+  { day: 26, type: "late" },
+  { day: 27 },
+
+  { day: 28, type: "present" },
+  { day: 29, type: "present" },
+  { day: 30, type: "present" },
+  { day: 1, muted: true },
+  { day: 2, muted: true },
+  { day: 3, muted: true },
+  { day: 4, muted: true },
+];
+
 const AdminAttendance = () => {
-  const [employees] = useState(employeeData);
-  const [activeTab, setActiveTab] = useState("All");
   const [search, setSearch] = useState("");
+  const [tab, setTab] = useState("All");
   const [department, setDepartment] = useState("All Departments");
   const [manager, setManager] = useState("All Managers");
   const [selectedDate, setSelectedDate] = useState(11);
-  const [month, setMonth] = useState("September 2026");
-  const [openMenu, setOpenMenu] = useState(null);
+  const [openAction, setOpenAction] = useState(null);
+  const [currentMonth, setCurrentMonth] = useState("September 2026");
 
   const filteredEmployees = useMemo(() => {
     return employees.filter((employee) => {
-      const searchValue = search.trim().toLowerCase();
+      const text = search.trim().toLowerCase();
 
-      const matchesSearch =
-        !searchValue ||
-        employee.name.toLowerCase().includes(searchValue) ||
-        employee.id.toLowerCase().includes(searchValue) ||
-        employee.department.toLowerCase().includes(searchValue);
+      const searchMatch =
+        !text ||
+        employee.name.toLowerCase().includes(text) ||
+        employee.id.toLowerCase().includes(text) ||
+        employee.department.toLowerCase().includes(text);
 
-      const matchesDepartment =
+      const departmentMatch =
         department === "All Departments" ||
         employee.department === department;
 
-      const matchesManager =
+      const managerMatch =
         manager === "All Managers" ||
         employee.manager === manager;
 
-      const matchesTab =
-        activeTab === "All" ||
-        (activeTab === "Present" &&
-          ["Present", "Working"].includes(employee.status)) ||
-        (activeTab === "Late" && employee.status === "Late") ||
-        (activeTab === "On Leave" && employee.status === "On Leave") ||
-        (activeTab === "Absent" && employee.status === "Absent");
+      let tabMatch = true;
+
+      if (tab === "Present") {
+        tabMatch = ["Present", "Working"].includes(employee.status);
+      }
+
+      if (tab === "Late") {
+        tabMatch = employee.status === "Late";
+      }
+
+      if (tab === "On Leave") {
+        tabMatch = employee.status === "On Leave";
+      }
+
+      if (tab === "Absent") {
+        tabMatch = employee.status === "Absent";
+      }
 
       return (
-        matchesSearch &&
-        matchesDepartment &&
-        matchesManager &&
-        matchesTab
+        searchMatch &&
+        departmentMatch &&
+        managerMatch &&
+        tabMatch
       );
     });
-  }, [employees, search, department, manager, activeTab]);
+  }, [search, department, manager, tab]);
 
-  const getInitials = (name) =>
+  const initials = (name) =>
     name
       .split(" ")
-      .map((item) => item[0])
+      .map((word) => word[0])
       .join("")
       .slice(0, 2);
 
-  const statusClass = (status) => {
-    return status.toLowerCase().replace(/\s+/g, "-");
+  const previousMonth = () => {
+    setCurrentMonth("August 2026");
   };
 
-  const changeMonth = (direction) => {
-    setMonth(
-      direction === "next"
-        ? "October 2026"
-        : "August 2026"
-    );
+  const nextMonth = () => {
+    setCurrentMonth("October 2026");
   };
 
   return (
     <div className="admin-attendance-page">
 
-      {/* =================================================
-          HEADER
-      ================================================= */}
+      {/* ================= HEADER ================= */}
 
-      <div className="attendance-header">
+      <header className="attendance-header">
 
-        <div>
+        <div className="attendance-title-area">
           <h1>Attendance</h1>
           <p>
             Monitor organization-wide attendance, working hours and
@@ -211,7 +256,7 @@ const AdminAttendance = () => {
             <FaChevronDown />
           </button>
 
-          <div className="attendance-search">
+          <div className="attendance-search-box">
             <FaSearch />
             <input
               type="text"
@@ -221,43 +266,43 @@ const AdminAttendance = () => {
             />
           </div>
 
-          <button className="attendance-filter-btn">
+          <button className="outline-btn">
             <FaFilter />
             Filters
           </button>
 
-          <button className="attendance-export-btn">
+          <button className="outline-btn">
             <FaDownload />
             Export
           </button>
 
-          <button className="attendance-notification">
+          <button className="notification-btn">
             <FaBell />
             <span>3</span>
           </button>
 
-          <div className="attendance-admin-user">
-            <div className="admin-user-avatar">AU</div>
+          <div className="admin-user-area">
+            <div className="admin-user-avatar">
+              AU
+            </div>
 
-            <div>
+            <div className="admin-user-text">
               <strong>Admin User</strong>
-              <small>Organization Admin</small>
+              <span>Organization Admin</span>
             </div>
 
             <FaChevronDown />
           </div>
 
         </div>
-      </div>
+      </header>
 
-      {/* =================================================
-          STAT CARDS
-      ================================================= */}
+      {/* ================= STAT CARDS ================= */}
 
-      <div className="attendance-stat-grid">
+      <section className="attendance-stat-grid">
 
-        <div className="attendance-stat blue">
-          <div className="attendance-stat-icon">
+        <div className="attendance-stat-card blue">
+          <div className="stat-icon">
             <FaUsers />
           </div>
 
@@ -268,8 +313,8 @@ const AdminAttendance = () => {
           </div>
         </div>
 
-        <div className="attendance-stat green">
-          <div className="attendance-stat-icon">
+        <div className="attendance-stat-card green">
+          <div className="stat-icon">
             <FaUserCheck />
           </div>
 
@@ -280,8 +325,8 @@ const AdminAttendance = () => {
           </div>
         </div>
 
-        <div className="attendance-stat red">
-          <div className="attendance-stat-icon">
+        <div className="attendance-stat-card red">
+          <div className="stat-icon">
             <FaUserTimes />
           </div>
 
@@ -292,8 +337,8 @@ const AdminAttendance = () => {
           </div>
         </div>
 
-        <div className="attendance-stat orange">
-          <div className="attendance-stat-icon">
+        <div className="attendance-stat-card orange">
+          <div className="stat-icon">
             <FaBriefcase />
           </div>
 
@@ -304,8 +349,8 @@ const AdminAttendance = () => {
           </div>
         </div>
 
-        <div className="attendance-stat purple">
-          <div className="attendance-stat-icon">
+        <div className="attendance-stat-card purple">
+          <div className="stat-icon">
             <FaClock />
           </div>
 
@@ -316,21 +361,15 @@ const AdminAttendance = () => {
           </div>
         </div>
 
-      </div>
+      </section>
 
-      {/* =================================================
-          MAIN AREA
-      ================================================= */}
+      {/* ================= MAIN AREA ================= */}
 
-      <div className="attendance-main-grid">
+      <div className="attendance-content-grid">
 
-        {/* =================================================
-            TABLE AREA
-        ================================================= */}
+        {/* LEFT TABLE */}
 
-        <div className="attendance-list">
-
-          {/* TABS */}
+        <section className="attendance-table-section">
 
           <div className="attendance-tabs">
             {[
@@ -339,22 +378,18 @@ const AdminAttendance = () => {
               ["Late", "22"],
               ["On Leave", "14"],
               ["Absent", "13"],
-            ].map(([label, count]) => (
+            ].map(([name, count]) => (
               <button
-                key={label}
-                className={
-                  activeTab === label ? "active" : ""
-                }
-                onClick={() => setActiveTab(label)}
+                key={name}
+                className={tab === name ? "active" : ""}
+                onClick={() => setTab(name)}
               >
-                {label} ({count})
+                {name} ({count})
               </button>
             ))}
           </div>
 
-          {/* FILTER ROW */}
-
-          <div className="attendance-filters">
+          <div className="attendance-filter-row">
 
             <select
               value={department}
@@ -386,14 +421,12 @@ const AdminAttendance = () => {
               <option>Pooja Desai</option>
             </select>
 
-            <button className="attendance-filter-date">
+            <button className="date-filter-small">
               <FaCalendarAlt />
               Date
             </button>
 
           </div>
-
-          {/* TABLE */}
 
           <div className="attendance-table-card">
 
@@ -431,11 +464,14 @@ const AdminAttendance = () => {
                         <div className="attendance-person">
 
                           <div className="attendance-avatar">
-                            {getInitials(employee.name)}
+                            {initials(employee.name)}
                           </div>
 
                           <div>
-                            <strong>{employee.name}</strong>
+                            <strong>
+                              {employee.name}
+                            </strong>
+
                             <span>
                               {employee.designation}
                             </span>
@@ -445,22 +481,17 @@ const AdminAttendance = () => {
                       </td>
 
                       <td>{employee.id}</td>
-
                       <td>{employee.department}</td>
-
                       <td>{employee.manager}</td>
-
                       <td>{employee.checkIn}</td>
-
                       <td>{employee.checkOut}</td>
-
                       <td>{employee.hours}</td>
 
                       <td>
                         <span
-                          className={`attendance-status ${statusClass(
-                            employee.status
-                          )}`}
+                          className={`attendance-status ${employee.status
+                            .toLowerCase()
+                            .replace(" ", "-")}`}
                         >
                           <i></i>
                           {employee.status}
@@ -468,13 +499,13 @@ const AdminAttendance = () => {
                       </td>
 
                       <td>
-
-                        <div className="attendance-actions">
+                        <div className="attendance-action-wrap">
 
                           <button
+                            className="action-dots"
                             onClick={() =>
-                              setOpenMenu(
-                                openMenu === employee.id
+                              setOpenAction(
+                                openAction === employee.id
                                   ? null
                                   : employee.id
                               )
@@ -483,8 +514,8 @@ const AdminAttendance = () => {
                             <FaEllipsisV />
                           </button>
 
-                          {openMenu === employee.id && (
-                            <div className="attendance-action-menu">
+                          {openAction === employee.id && (
+                            <div className="action-menu">
 
                               <button>
                                 View Details
@@ -502,7 +533,6 @@ const AdminAttendance = () => {
                           )}
 
                         </div>
-
                       </td>
 
                     </tr>
@@ -514,15 +544,13 @@ const AdminAttendance = () => {
 
             </div>
 
-            {/* PAGINATION */}
-
-            <div className="attendance-pagination">
+            <div className="table-footer">
 
               <span>
-                Showing 1 to 8 of 248 employees
+                Showing 1 to {filteredEmployees.length} of 248 employees
               </span>
 
-              <div className="pagination-pages">
+              <div className="pagination">
 
                 <button>
                   <FaChevronLeft />
@@ -533,7 +561,9 @@ const AdminAttendance = () => {
                 <button>3</button>
                 <button>4</button>
                 <button>5</button>
+
                 <span>...</span>
+
                 <button>31</button>
 
                 <button>
@@ -542,7 +572,7 @@ const AdminAttendance = () => {
 
               </div>
 
-              <span className="show-count">
+              <div className="show-page">
                 Show
                 <select>
                   <option>8</option>
@@ -550,124 +580,123 @@ const AdminAttendance = () => {
                   <option>20</option>
                 </select>
                 per page
-              </span>
-
-            </div>
-
-          </div>
-        </div>
-
-        {/* =================================================
-            CALENDAR + ISSUES
-        ================================================= */}
-
-        <aside className="attendance-right">
-
-          {/* CALENDAR */}
-
-          <div className="attendance-side-card">
-
-            <div className="calendar-header">
-
-              <h2>Calendar View</h2>
-
-              <div>
-                <button onClick={() => changeMonth("prev")}>
-                  <FaChevronLeft />
-                </button>
-
-                <strong>{month}</strong>
-
-                <button onClick={() => changeMonth("next")}>
-                  <FaChevronRight />
-                </button>
-
-                <button className="today-btn">
-                  Today
-                </button>
               </div>
 
             </div>
 
-            <div className="calendar-week">
-              <span>Mon</span>
-              <span>Tue</span>
-              <span>Wed</span>
-              <span>Thu</span>
-              <span>Fri</span>
-              <span>Sat</span>
-              <span>Sun</span>
+          </div>
+        </section>
+
+        {/* RIGHT SIDE */}
+
+        <aside className="attendance-sidebar">
+
+          {/* CALENDAR */}
+
+          <div className="calendar-card">
+
+            <div className="calendar-card-header">
+
+              <h2>Calendar View</h2>
+
+              <div className="calendar-controls">
+
+                <button onClick={previousMonth}>
+                  <FaChevronLeft />
+                </button>
+
+                <strong>{currentMonth}</strong>
+
+                <button onClick={nextMonth}>
+                  <FaChevronRight />
+                </button>
+
+                <button className="today-button">
+                  Today
+                </button>
+
+              </div>
+
             </div>
 
-            <div className="calendar-days">
-
+            <div className="calendar-weekdays">
               {[
-                31,
-                1, 2, 3, 4, 5, 6,
-                7, 8, 9, 10, 11, 12, 13,
-                14, 15, 16, 17, 18, 19, 20,
-                21, 22, 23, 24, 25, 26, 27,
-                28, 29, 30, 1, 2, 3, 4,
-              ].map((day, index) => {
+                "Mon",
+                "Tue",
+                "Wed",
+                "Thu",
+                "Fri",
+                "Sat",
+                "Sun",
+              ].map((day) => (
+                <span key={day}>{day}</span>
+              ))}
+            </div>
 
-                const actualDay =
-                  index === 0 ? 31 : day;
+            <div className="calendar-grid">
 
-                return (
-                  <button
-                    key={`${day}-${index}`}
-                    className={`
-                      calendar-day
-                      ${selectedDate === actualDay ? "selected" : ""}
-                      ${
-                        index < 1
-                          ? "muted"
-                          : ""
-                      }
-                    `}
-                    onClick={() =>
-                      setSelectedDate(actualDay)
+              {calendarDays.map((item, index) => (
+                <button
+                  key={`${item.day}-${index}`}
+                  className={`
+                    calendar-cell
+                    ${item.muted ? "muted" : ""}
+                    ${item.day === selectedDate && !item.muted ? "selected" : ""}
+                  `}
+                  onClick={() => {
+                    if (!item.muted) {
+                      setSelectedDate(item.day);
                     }
-                  >
-                    <span>{day}</span>
+                  }}
+                >
 
-                    {index % 7 === 0 && (
-                      <i className="present-dot"></i>
-                    )}
+                  <span>{item.day}</span>
 
-                    {index % 9 === 0 && (
-                      <i className="late-dot"></i>
-                    )}
-                  </button>
-                );
-              })}
+                  {item.type === "present" && (
+                    <i className="calendar-dot present"></i>
+                  )}
+
+                  {item.type === "late" && (
+                    <i className="calendar-dot late"></i>
+                  )}
+
+                  {item.type === "absent" && (
+                    <i className="calendar-dot absent"></i>
+                  )}
+
+                  {item.type === "holiday" && (
+                    <i className="calendar-dot holiday"></i>
+                  )}
+
+                </button>
+              ))}
 
             </div>
 
             <div className="calendar-legend">
 
               <span>
-                <i className="present-dot"></i>
+                <i className="present"></i>
                 Present
               </span>
 
               <span>
-                <i className="late-dot"></i>
+                <i className="late"></i>
                 Late
               </span>
 
               <span>
-                <i className="absent-dot"></i>
+                <i className="absent"></i>
                 Absent
               </span>
 
               <span>
-                <i className="leave-dot"></i>
+                <i className="leave"></i>
                 Leave
               </span>
 
               <span>
-                <i className="holiday-dot"></i>
+                <i className="holiday"></i>
                 Holiday
               </span>
 
@@ -677,67 +706,67 @@ const AdminAttendance = () => {
 
           {/* ISSUES */}
 
-          <div className="attendance-side-card issues-card">
+          <div className="issues-card">
 
-            <div className="side-card-title">
+            <div className="issues-header">
               <h2>Attendance Issues</h2>
               <button>View All</button>
             </div>
 
-            <div className="issue-item">
+            <div className="issue-row">
 
-              <span className="issue-icon red">
+              <div className="issue-icon red">
                 <FaTimesCircle />
-              </span>
+              </div>
 
-              <div>
+              <div className="issue-text">
                 <strong>Missing Check-in</strong>
-                <small>13 employees</small>
+                <span>13 employees</span>
               </div>
 
               <button>Review →</button>
 
             </div>
 
-            <div className="issue-item">
+            <div className="issue-row">
 
-              <span className="issue-icon orange">
+              <div className="issue-icon orange">
                 <FaClock />
-              </span>
+              </div>
 
-              <div>
+              <div className="issue-text">
                 <strong>Late Check-in</strong>
-                <small>22 employees</small>
+                <span>22 employees</span>
               </div>
 
               <button>View →</button>
 
             </div>
 
-            <div className="issue-item">
+            <div className="issue-row">
 
-              <span className="issue-icon orange">
+              <div className="issue-icon orange">
                 <FaClock />
-              </span>
+              </div>
 
-              <div>
+              <div className="issue-text">
                 <strong>Missing Check-out</strong>
-                <small>7 employees</small>
+                <span>7 employees</span>
               </div>
 
               <button>Review →</button>
 
             </div>
 
-            <div className="issue-item">
+            <div className="issue-row">
 
-              <span className="issue-icon purple">
+              <div className="issue-icon purple">
                 <FaFileAlt />
-              </span>
+              </div>
 
-              <div>
+              <div className="issue-text">
                 <strong>Correction Requests</strong>
-                <small>4 pending</small>
+                <span>4 pending</span>
               </div>
 
               <button>Review →</button>
@@ -749,22 +778,20 @@ const AdminAttendance = () => {
         </aside>
       </div>
 
-      {/* =================================================
-          BOTTOM ANALYTICS
-      ================================================= */}
+      {/* ================= BOTTOM ANALYTICS ================= */}
 
-      <div className="attendance-bottom-grid">
+      <div className="attendance-bottom">
 
         {/* DEPARTMENT */}
 
-        <div className="attendance-bottom-card">
+        <section className="bottom-card department-card">
 
-          <div className="bottom-card-title">
+          <div className="bottom-card-header">
             <h2>Department Attendance</h2>
             <button>View All</button>
           </div>
 
-          <table className="department-table">
+          <table>
 
             <thead>
               <tr>
@@ -779,33 +806,22 @@ const AdminAttendance = () => {
 
             <tbody>
 
-              {departmentData.map((row) => (
+              {departments.map((row) => (
                 <tr key={row[0]}>
 
                   <td>{row[0]}</td>
                   <td>{row[1]}</td>
-
-                  <td className="green-number">
-                    {row[2]}
-                  </td>
-
-                  <td className="red-number">
-                    {row[3]}
-                  </td>
-
+                  <td className="green-text">{row[2]}</td>
+                  <td className="red-text">{row[3]}</td>
                   <td>{row[4]}</td>
 
                   <td>
-                    <div className="department-progress">
+                    <div className="dept-progress">
 
                       <span>{row[5]}</span>
 
                       <div>
-                        <i
-                          style={{
-                            width: row[5],
-                          }}
-                        ></i>
+                        <i style={{ width: row[5] }}></i>
                       </div>
 
                     </div>
@@ -815,16 +831,15 @@ const AdminAttendance = () => {
               ))}
 
             </tbody>
-
           </table>
-
-        </div>
+        </section>
 
         {/* TREND */}
 
-        <div className="attendance-bottom-card">
+        <section className="bottom-card trend-card">
 
-          <div className="bottom-card-title">
+          <div className="bottom-card-header">
+
             <h2>Attendance Trend</h2>
 
             <select>
@@ -832,11 +847,12 @@ const AdminAttendance = () => {
               <option>Last Month</option>
               <option>This Year</option>
             </select>
+
           </div>
 
-          <div className="trend-chart">
+          <div className="trend-graph">
 
-            <div className="trend-y">
+            <div className="trend-values">
               <span>100%</span>
               <span>90%</span>
               <span>80%</span>
@@ -846,27 +862,27 @@ const AdminAttendance = () => {
 
             <div className="trend-area">
 
-              <div className="trend-grid-line"></div>
-              <div className="trend-grid-line"></div>
-              <div className="trend-grid-line"></div>
-              <div className="trend-grid-line"></div>
-              <div className="trend-grid-line"></div>
+              <div className="trend-line"></div>
+              <div className="trend-line"></div>
+              <div className="trend-line"></div>
+              <div className="trend-line"></div>
+              <div className="trend-line"></div>
 
               <svg
                 viewBox="0 0 500 160"
                 preserveAspectRatio="none"
               >
                 <polyline
-                  points="20,95 155,58 285,94 420,62"
+                  points="20,92 170,52 320,94 470,58"
                   fill="none"
-                  stroke="#4778ec"
+                  stroke="#4b78e8"
                   strokeWidth="3"
                 />
 
-                <circle cx="20" cy="95" r="4" />
-                <circle cx="155" cy="58" r="4" />
-                <circle cx="285" cy="94" r="4" />
-                <circle cx="420" cy="62" r="4" />
+                <circle cx="20" cy="92" r="4" />
+                <circle cx="170" cy="52" r="4" />
+                <circle cx="320" cy="94" r="4" />
+                <circle cx="470" cy="58" r="4" />
               </svg>
 
             </div>
@@ -880,7 +896,7 @@ const AdminAttendance = () => {
             <span>W4</span>
           </div>
 
-          <div className="trend-stats">
+          <div className="trend-summary">
 
             <div>
               <span>Highest</span>
@@ -902,20 +918,20 @@ const AdminAttendance = () => {
 
           </div>
 
-        </div>
+        </section>
 
-        {/* WORKING HOURS + ACTIVITY */}
+        {/* WORKING HOURS */}
 
-        <div className="attendance-bottom-card working-summary">
+        <section className="bottom-card working-card">
 
-          <div className="bottom-card-title">
+          <div className="bottom-card-header">
             <h2>
               Working Hours
-              <span>(This Month)</span>
+              <small>(This Month)</small>
             </h2>
           </div>
 
-          <div className="working-stats">
+          <div className="working-stat-grid">
 
             <div>
               <FaClock />
@@ -936,75 +952,59 @@ const AdminAttendance = () => {
             </div>
 
             <div>
-              <FaExclamationCircle />
+              <FaExclamationTriangle />
               <span>Missing Hours</span>
               <strong>18h</strong>
             </div>
 
           </div>
 
-          <div className="recent-title">
+          <div className="recent-heading">
             <h3>Recent Attendance Activity</h3>
             <button>View All</button>
           </div>
 
-          <div className="recent-activity">
+          <div className="recent-list">
 
             <div>
-              <span className="activity-dot green">
-                <FaCheckCircle />
-              </span>
-
+              <FaCheckCircle className="recent-green" />
               <p>
                 Aman Sharma checked in
                 <small>09:12 AM • Design</small>
               </p>
-
-              <time>2 hours ago</time>
+              <span>2 hours ago</span>
             </div>
 
             <div>
-              <span className="activity-dot orange">
-                <FaClock />
-              </span>
-
+              <FaClock className="recent-orange" />
               <p>
                 Neha Patel late check-in
                 <small>10:12 AM • QA</small>
               </p>
-
-              <time>3 hours ago</time>
+              <span>3 hours ago</span>
             </div>
 
             <div>
-              <span className="activity-dot red">
-                <FaTimesCircle />
-              </span>
-
+              <FaTimesCircle className="recent-red" />
               <p>
                 Rahul Verma applied for leave
                 <small>Full day • Development</small>
               </p>
-
-              <time>5 hours ago</time>
+              <span>5 hours ago</span>
             </div>
 
             <div>
-              <span className="activity-dot green">
-                <FaCheckCircle />
-              </span>
-
+              <FaCheckCircle className="recent-green" />
               <p>
                 Priya Singh checked out
                 <small>06:01 PM • Development</small>
               </p>
-
-              <time>7 hours ago</time>
+              <span>7 hours ago</span>
             </div>
 
           </div>
 
-        </div>
+        </section>
 
       </div>
 

@@ -1,387 +1,431 @@
+/* =========================================================
+   ADMIN ATTENDANCE - FIXED
+   ========================================================= */
+
 .admin-attendance-page {
   width: 100%;
   min-height: 100vh;
-  padding: 18px 20px 25px;
+  padding: 22px;
   box-sizing: border-box;
   background: #f7f9fc;
+  color: #1d2939;
   font-family: Arial, Helvetica, sans-serif;
-  color: #172033;
 }
 
-/* ================================
+/* =========================================================
    HEADER
-================================ */
+   ========================================================= */
 
 .attendance-header {
   display: flex;
-  justify-content: space-between;
   align-items: flex-start;
+  justify-content: space-between;
   gap: 20px;
-  margin-bottom: 15px;
+  margin-bottom: 18px;
 }
 
-.attendance-header h1 {
+.attendance-title-area h1 {
   margin: 0;
-  font-size: 25px;
+  font-size: 27px;
+  font-weight: 700;
+  color: #111827 !important;
 }
 
-.attendance-header p {
-  margin: 5px 0 0;
-  font-size: 11px;
-  color: #748197;
+.attendance-title-area p {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: #69778c;
 }
 
 .attendance-header-actions {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   flex-wrap: wrap;
   justify-content: flex-end;
 }
 
 .attendance-date-btn,
-.attendance-filter-btn,
-.attendance-export-btn {
-  height: 34px;
-  border: 1px solid #dfe5ee;
-  border-radius: 5px;
+.outline-btn {
+  height: 35px;
+  padding: 0 11px;
+  border: 1px solid #dce3ec;
+  border-radius: 6px;
   background: #fff;
-  color: #56637a;
+  color: #526078;
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 0 9px;
-  font-size: 8px;
+  font-size: 9px;
   cursor: pointer;
 }
 
-.attendance-date-btn svg:last-child {
-  font-size: 8px;
+.attendance-date-btn svg,
+.outline-btn svg {
+  font-size: 9px;
 }
 
-.attendance-export-btn {
-  background: #fff;
-}
-
-.attendance-search {
-  width: 150px;
-  height: 34px;
-  padding: 0 9px;
+.attendance-search-box {
+  width: 170px;
+  height: 35px;
+  padding: 0 10px;
   box-sizing: border-box;
-  border: 1px solid #dfe5ee;
-  border-radius: 5px;
+  border: 1px solid #dce3ec;
+  border-radius: 6px;
   background: #fff;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
 }
 
-.attendance-search svg {
-  font-size: 9px;
-  color: #778398;
+.attendance-search-box svg {
+  color: #738197;
+  font-size: 10px;
 }
 
-.attendance-search input {
+.attendance-search-box input {
   width: 100%;
   border: 0;
   outline: 0;
-  font-size: 8px;
-  color: #425067;
   background: transparent;
+  font-size: 9px;
+  color: #334155;
 }
 
-.attendance-notification {
+.notification-btn {
   position: relative;
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
   border: 0;
   background: transparent;
-  color: #758196;
-  font-size: 14px;
+  color: #6f7c90;
+  font-size: 16px;
+  cursor: pointer;
 }
 
-.attendance-notification span {
+.notification-btn span {
   position: absolute;
+  right: 0;
   top: -2px;
-  right: -2px;
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
   background: #ef4444;
   color: #fff;
-  border-radius: 50%;
-  font-size: 7px;
+  font-size: 8px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
-.attendance-admin-user {
+.admin-user-area {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .admin-user-avatar {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #37465d, #8290a3);
+  background: linear-gradient(135deg, #263247, #7b8ba3);
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 8px;
+  font-size: 9px;
   font-weight: 700;
 }
 
-.attendance-admin-user div:nth-child(2) {
+.admin-user-text {
   display: flex;
   flex-direction: column;
+  gap: 2px;
 }
 
-.attendance-admin-user strong {
+.admin-user-text strong {
+  font-size: 10px;
+  color: #243047;
+}
+
+.admin-user-text span {
+  font-size: 8px;
+  color: #7e899b;
+}
+
+.admin-user-area > svg {
+  color: #7a8699;
   font-size: 9px;
 }
 
-.attendance-admin-user small {
-  margin-top: 2px;
-  color: #8993a5;
-  font-size: 7px;
-}
-
-.attendance-admin-user > svg {
-  font-size: 8px;
-  color: #778397;
-}
-
-/* ================================
+/* =========================================================
    STAT CARDS
-================================ */
+   ========================================================= */
 
 .attendance-stat-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 9px;
-  margin-bottom: 10px;
+  gap: 11px;
+  margin-bottom: 12px;
 }
 
-.attendance-stat {
-  min-height: 75px;
-  padding: 11px;
-  box-sizing: border-box;
+.attendance-stat-card {
+  min-height: 88px;
+  padding: 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
   background: #fff;
-  border: 1px solid #e4eaf2;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  box-sizing: border-box;
+}
+
+.stat-icon {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
   border-radius: 7px;
   display: flex;
-  align-items: center;
-  gap: 9px;
-}
-
-.attendance-stat-icon {
-  width: 37px;
-  height: 37px;
-  flex: 0 0 37px;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  font-size: 15px;
+  align-items: center;
+  font-size: 16px;
 }
 
-.attendance-stat.blue .attendance-stat-icon {
-  color: #3562ee;
+.attendance-stat-card.blue .stat-icon {
   background: #edf3ff;
+  color: #3864ef;
 }
 
-.attendance-stat.green .attendance-stat-icon {
-  color: #15a66a;
+.attendance-stat-card.green .stat-icon {
   background: #eaf9f1;
+  color: #14a66b;
 }
 
-.attendance-stat.red .attendance-stat-icon {
-  color: #ef4444;
+.attendance-stat-card.red .stat-icon {
   background: #fff0f0;
-}
-
-.attendance-stat.orange .attendance-stat-icon {
-  color: #f59e0b;
-  background: #fff5e5;
-}
-
-.attendance-stat.purple .attendance-stat-icon {
-  color: #6a52ed;
-  background: #efedff;
-}
-
-.attendance-stat span {
-  display: block;
-  font-size: 7px;
-  color: #738097;
-}
-
-.attendance-stat strong {
-  display: block;
-  margin-top: 4px;
-  font-size: 19px;
-  line-height: 1;
-}
-
-.attendance-stat small {
-  display: block;
-  margin-top: 4px;
-  font-size: 7px;
-  color: #18a76b;
-}
-
-.attendance-stat.red small,
-.attendance-stat.purple small {
   color: #ef4444;
 }
 
-/* ================================
-   MAIN GRID
-================================ */
-
-.attendance-main-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 275px;
-  gap: 10px;
+.attendance-stat-card.orange .stat-icon {
+  background: #fff5e4;
+  color: #f59e0b;
 }
 
-/* ================================
+.attendance-stat-card.purple .stat-icon {
+  background: #efedff;
+  color: #6653e8;
+}
+
+.attendance-stat-card span {
+  display: block;
+  font-size: 8px;
+  color: #748097;
+}
+
+.attendance-stat-card strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 21px;
+  line-height: 1;
+  color: #1e293b;
+}
+
+.attendance-stat-card small {
+  display: block;
+  margin-top: 5px;
+  font-size: 7px;
+  color: #18a66b;
+}
+
+.attendance-stat-card.red small,
+.attendance-stat-card.purple small {
+  color: #ef4444;
+}
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.attendance-content-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 305px;
+  gap: 12px;
+  align-items: start;
+}
+
+.attendance-table-section {
+  min-width: 0;
+}
+
+/* =========================================================
    TABS
-================================ */
+   ========================================================= */
 
 .attendance-tabs {
-  height: 40px;
-  padding: 0 7px;
+  height: 43px;
+  padding: 0 10px;
   display: flex;
-  gap: 4px;
   align-items: stretch;
-  border: 1px solid #e3e8ef;
-  border-radius: 7px 7px 0 0;
+  gap: 4px;
   background: #fff;
+  border: 1px solid #e1e7ef;
+  border-radius: 8px 8px 0 0;
 }
 
 .attendance-tabs button {
   position: relative;
   border: 0;
   background: transparent;
-  padding: 0 9px;
-  color: #718096;
-  font-size: 8px;
+  padding: 0 10px;
+  color: #6e7b90;
+  font-size: 9px;
   cursor: pointer;
 }
 
 .attendance-tabs button.active {
-  color: #4038d2;
-  font-weight: 600;
+  color: #3f37ce;
+  font-weight: 700;
 }
 
 .attendance-tabs button.active::after {
   content: "";
   position: absolute;
-  height: 2px;
-  left: 5px;
-  right: 5px;
+  left: 6px;
+  right: 6px;
   bottom: 0;
+  height: 2px;
+  border-radius: 5px 5px 0 0;
   background: #4f46e5;
 }
 
-/* ================================
-   FILTERS
-================================ */
+/* =========================================================
+   FILTER ROW
+   ========================================================= */
 
-.attendance-filters {
-  min-height: 43px;
-  padding: 7px;
-  background: #fafbfc;
-  border-left: 1px solid #e3e8ef;
-  border-right: 1px solid #e3e8ef;
+.attendance-filter-row {
+  padding: 8px;
   display: flex;
-  gap: 7px;
+  gap: 8px;
+  background: #fafbfc;
+  border-left: 1px solid #e1e7ef;
+  border-right: 1px solid #e1e7ef;
 }
 
-.attendance-filters select,
-.attendance-filter-date {
-  height: 29px;
-  min-width: 125px;
-  border: 1px solid #dfe5ed;
-  border-radius: 4px;
+.attendance-filter-row select,
+.date-filter-small {
+  height: 31px;
+  min-width: 145px;
+  border: 1px solid #dce3eb;
+  border-radius: 5px;
   background: #fff;
-  color: #68758a;
+  color: #68758b;
+  padding: 0 9px;
   font-size: 8px;
-  padding: 0 8px;
 }
 
-.attendance-filter-date {
+.date-filter-small {
   display: flex;
   align-items: center;
   gap: 5px;
   cursor: pointer;
 }
 
-/* ================================
+/* =========================================================
    TABLE
-================================ */
+   ========================================================= */
 
 .attendance-table-card {
   background: #fff;
-  border: 1px solid #e3e8ef;
-  border-radius: 0 0 7px 7px;
+  border: 1px solid #e1e7ef;
+  border-radius: 0 0 8px 8px;
   overflow: hidden;
 }
 
 .attendance-table-scroll {
+  width: 100%;
   overflow-x: auto;
 }
 
 .attendance-table-card table {
   width: 100%;
-  min-width: 930px;
+  min-width: 1000px;
   border-collapse: collapse;
 }
 
-.attendance-table-card th {
-  height: 31px;
-  padding: 0 5px;
+.attendance-table-card thead th {
+  height: 34px;
+  padding: 0 7px;
   background: #fafbfc;
   border-bottom: 1px solid #e8edf3;
+  color: #778398;
   text-align: left;
   font-size: 6px;
-  color: #7a8699;
-}
-
-.attendance-table-card td {
-  height: 40px;
-  padding: 4px 5px;
-  border-bottom: 1px solid #eef1f5;
-  font-size: 7px;
-  color: #59677d;
+  font-weight: 700;
   white-space: nowrap;
 }
 
-.attendance-table-card tr:hover {
-  background: #fafbff;
+.attendance-table-card tbody td {
+  height: 50px;
+  padding: 5px 7px;
+  border-bottom: 1px solid #edf1f5;
+  color: #56657b;
+  font-size: 8px;
+  white-space: nowrap;
+}
+
+.attendance-table-card tbody tr:hover {
+  background: #fbfcff;
+}
+
+/* WHITE CHECKBOX */
+
+.attendance-table-card input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  border: 1px solid #cbd3df;
+  border-radius: 3px;
+  background: #fff !important;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.attendance-table-card input[type="checkbox"]:checked {
+  background: #4f46e5 !important;
+  border-color: #4f46e5;
+  position: relative;
+}
+
+.attendance-table-card input[type="checkbox"]:checked::after {
+  content: "✓";
+  position: absolute;
+  left: 3px;
+  top: 0px;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
 }
 
 .attendance-person {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
 }
 
 .attendance-avatar {
-  width: 26px;
-  height: 26px;
-  flex: 0 0 26px;
+  width: 31px;
+  height: 31px;
+  flex: 0 0 31px;
   border-radius: 50%;
-  background: linear-gradient(145deg, #dce5ee, #f7fafc);
+  background: linear-gradient(145deg, #dfe8f0, #f7fafc);
+  color: #263248;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #2a374c;
-  font-size: 7px;
+  font-size: 8px;
   font-weight: 700;
 }
 
@@ -391,23 +435,26 @@
 }
 
 .attendance-person strong {
-  font-size: 8px;
   color: #273247;
+  font-size: 8px;
+  font-weight: 700;
 }
 
 .attendance-person span {
-  margin-top: 2px;
-  font-size: 6px;
+  margin-top: 3px;
   color: #8993a4;
+  font-size: 6px;
 }
+
+/* STATUS */
 
 .attendance-status {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 4px 6px;
-  border-radius: 4px;
-  font-size: 6px;
+  padding: 5px 8px;
+  border-radius: 5px;
+  font-size: 7px;
   font-weight: 600;
 }
 
@@ -419,18 +466,18 @@
 
 .attendance-status.working,
 .attendance-status.present {
-  color: #149e65;
-  background: #e9f9f1;
+  background: #e8f8ef;
+  color: #149c63;
 }
 
 .attendance-status.working i,
 .attendance-status.present i {
-  background: #15a66a;
+  background: #16aa6b;
 }
 
 .attendance-status.on-leave {
-  color: #d99109;
   background: #fff5e1;
+  color: #d98a07;
 }
 
 .attendance-status.on-leave i {
@@ -438,329 +485,359 @@
 }
 
 .attendance-status.late {
-  color: #604bd9;
   background: #efedff;
+  color: #624edc;
 }
 
 .attendance-status.late i {
-  background: #694fe5;
-}
-
-.attendance-status.absent {
-  color: #ef4444;
-  background: #fff0f0;
-}
-
-.attendance-status.absent i {
-  background: #ef4444;
+  background: #6c50e7;
 }
 
 /* ACTION */
 
-.attendance-actions {
+.attendance-action-wrap {
   position: relative;
 }
 
-.attendance-actions > button {
-  width: 25px;
-  height: 25px;
+.action-dots {
+  width: 27px;
+  height: 27px;
   border: 0;
   background: transparent;
-  color: #778397;
+  color: #758197;
   cursor: pointer;
 }
 
-.attendance-action-menu {
+.action-menu {
   position: absolute;
+  top: 27px;
   right: 0;
-  top: 25px;
-  z-index: 50;
-  width: 125px;
-  padding: 4px;
-  border: 1px solid #e1e6ee;
-  border-radius: 5px;
+  z-index: 100;
+  width: 135px;
+  padding: 5px;
+  border: 1px solid #dfe5ed;
+  border-radius: 6px;
   background: #fff;
-  box-shadow: 0 8px 20px rgba(15, 23, 42, .12);
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.12);
 }
 
-.attendance-action-menu button {
+.action-menu button {
   width: 100%;
-  height: 26px;
+  height: 30px;
   border: 0;
   background: transparent;
+  color: #5d6a7e;
   text-align: left;
-  padding: 0 6px;
-  color: #5f6c80;
-  font-size: 7px;
+  padding: 0 8px;
+  font-size: 8px;
   cursor: pointer;
+  border-radius: 4px;
 }
 
-.attendance-action-menu button:hover {
+.action-menu button:hover {
   background: #f5f7fb;
 }
 
-/* ================================
-   PAGINATION
-================================ */
+/* FOOTER */
 
-.attendance-pagination {
-  min-height: 42px;
-  padding: 0 9px;
+.table-footer {
+  min-height: 48px;
+  padding: 0 11px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: 10px;
 }
 
-.attendance-pagination > span {
+.table-footer > span {
+  color: #7c8798;
   font-size: 7px;
-  color: #7b8799;
 }
 
-.pagination-pages {
+.pagination {
   display: flex;
   align-items: center;
-  gap: 3px;
+  gap: 4px;
 }
 
-.pagination-pages button {
-  width: 22px;
-  height: 22px;
-  border: 1px solid #e0e6ee;
+.pagination button {
+  width: 23px;
+  height: 23px;
+  border: 1px solid #dfe5ed;
   border-radius: 4px;
   background: #fff;
   color: #68758a;
   font-size: 7px;
 }
 
-.pagination-pages button.active {
-  background: #4f46e5;
+.pagination button.active {
   color: #fff;
+  background: #4f46e5;
   border-color: #4f46e5;
 }
 
-.pagination-pages span {
+.pagination span {
+  color: #8a94a4;
   font-size: 8px;
-  color: #8993a4;
 }
 
-.show-count {
+.show-page {
   display: flex;
   align-items: center;
   gap: 5px;
-}
-
-.show-count select {
-  height: 23px;
-  border: 1px solid #dfe5ed;
-  border-radius: 4px;
+  color: #7b8798;
   font-size: 7px;
 }
 
-/* ================================
-   RIGHT SIDE
-================================ */
-
-.attendance-side-card {
-  padding: 10px;
+.show-page select {
+  height: 24px;
+  border: 1px solid #dfe5ed;
+  border-radius: 4px;
   background: #fff;
-  border: 1px solid #e3e8ef;
-  border-radius: 7px;
-  box-sizing: border-box;
+  font-size: 7px;
 }
 
-.calendar-header {
+/* =========================================================
+   CALENDAR
+   ========================================================= */
+
+.attendance-sidebar {
+  min-width: 0;
+}
+
+.calendar-card {
+  padding: 12px;
+  border: 1px solid #e0e6ee;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.calendar-card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 5px;
+  gap: 6px;
 }
 
-.calendar-header h2,
-.side-card-title h2 {
+.calendar-card-header h2 {
   margin: 0;
-  font-size: 10px;
-  color: #273247;
+  font-size: 11px;
+  color: #1f2b40;
 }
 
-.calendar-header > div {
+.calendar-controls {
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
-.calendar-header > div button {
-  width: 22px;
-  height: 22px;
-  border: 1px solid #e0e5ec;
+.calendar-controls button {
+  width: 25px;
+  height: 25px;
+  border: 1px solid #dfe5ed;
   border-radius: 4px;
   background: #fff;
-  color: #667389;
+  color: #657288;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 7px;
-}
-
-.calendar-header strong {
-  font-size: 7px;
-  color: #69758a;
-}
-
-.calendar-header .today-btn {
-  width: 37px;
-  color: #4f46e5;
-}
-
-.calendar-week {
-  margin-top: 11px;
-  padding-bottom: 5px;
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-}
-
-.calendar-week span {
-  text-align: center;
-  font-size: 6px;
-  color: #8690a2;
-}
-
-.calendar-days {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  border-top: 1px solid #eef1f5;
-  border-left: 1px solid #eef1f5;
-}
-
-.calendar-day {
-  position: relative;
-  height: 29px;
-  padding: 3px;
-  border: 0;
-  border-right: 1px solid #eef1f5;
-  border-bottom: 1px solid #eef1f5;
-  background: #fff;
-  color: #4e5b70;
-  font-size: 7px;
   cursor: pointer;
 }
 
-.calendar-day span {
-  position: absolute;
-  top: 4px;
-  right: 5px;
+.calendar-controls strong {
+  font-size: 8px;
+  font-weight: 600;
+  color: #5e6b80;
+  white-space: nowrap;
 }
 
-.calendar-day.selected {
-  background: #4f46e5;
+.calendar-controls .today-button {
+  width: 39px;
+  color: #4f46e5;
+}
+
+.calendar-weekdays {
+  margin-top: 14px;
+  padding-bottom: 6px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border-bottom: 1px solid #edf1f5;
+}
+
+.calendar-weekdays span {
+  text-align: center;
+  color: #7f899a;
+  font-size: 7px;
+  font-weight: 600;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border-left: 1px solid #edf1f5;
+  border-top: 1px solid #edf1f5;
+}
+
+.calendar-cell {
+  position: relative;
+  height: 42px;
+  padding: 0;
+  border: 0;
+  border-right: 1px solid #edf1f5;
+  border-bottom: 1px solid #edf1f5;
+  background: #fff;
+  color: #38465a;
+  cursor: pointer;
+}
+
+.calendar-cell > span {
+  position: absolute;
+  top: 8px;
+  right: 9px;
+  font-size: 9px;
+  font-weight: 500;
+}
+
+.calendar-cell.muted {
+  color: #c4cbd5;
+  cursor: default;
+}
+
+.calendar-cell.selected {
+  background: #5146e8;
   color: #fff;
-  border-color: #4f46e5;
 }
 
-.calendar-day.muted {
-  color: #c3cad5;
+.calendar-cell.selected > span {
+  color: #fff;
 }
 
-.calendar-day i {
+.calendar-dot {
   position: absolute;
-  bottom: 4px;
+  bottom: 8px;
   left: 50%;
-  width: 4px;
-  height: 4px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   transform: translateX(-50%);
 }
 
-.present-dot {
-  background: #14a66a;
+.calendar-dot.present {
+  background: #13a56a;
 }
 
-.late-dot {
+.calendar-dot.late {
   background: #f59e0b;
 }
 
-.absent-dot {
+.calendar-dot.absent {
   background: #ef4444;
 }
 
-.leave-dot {
-  background: #6954e8;
+.calendar-dot.holiday {
+  background: #8c98a9;
 }
 
-.holiday-dot {
-  background: #94a3b8;
-}
-
-.calendar-day.selected .present-dot,
-.calendar-day.selected .late-dot,
-.calendar-day.selected .absent-dot {
+.calendar-cell.selected .calendar-dot {
   background: #fff;
 }
 
 .calendar-legend {
-  margin-top: 8px;
-  padding-top: 7px;
+  margin-top: 10px;
+  padding-top: 9px;
   border-top: 1px solid #edf1f5;
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
-  gap: 6px 8px;
+  gap: 8px;
 }
 
 .calendar-legend span {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 3px;
-  font-size: 6px;
+  gap: 4px;
   color: #758196;
+  font-size: 6px;
 }
 
 .calendar-legend i {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  display: inline-block;
 }
 
-/* ================================
+.calendar-legend i.present {
+  background: #13a56a;
+}
+
+.calendar-legend i.late {
+  background: #f59e0b;
+}
+
+.calendar-legend i.absent {
+  background: #ef4444;
+}
+
+.calendar-legend i.leave {
+  background: #6953e8;
+}
+
+.calendar-legend i.holiday {
+  background: #919baa;
+}
+
+/* =========================================================
    ISSUES
-================================ */
+   ========================================================= */
 
 .issues-card {
-  margin-top: 10px;
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid #e0e6ee;
+  border-radius: 8px;
+  background: #fff;
 }
 
-.side-card-title {
+.issues-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 7px;
+  padding-bottom: 8px;
   border-bottom: 1px solid #edf1f5;
 }
 
-.side-card-title button {
+.issues-header h2 {
+  margin: 0;
+  font-size: 11px;
+  color: #253147;
+}
+
+.issues-header button {
   border: 0;
   background: transparent;
   color: #4f46e5;
   font-size: 7px;
 }
 
-.issue-item {
-  min-height: 48px;
+.issue-row {
+  min-height: 52px;
   display: grid;
-  grid-template-columns: 25px 1fr auto;
-  gap: 7px;
+  grid-template-columns: 28px 1fr auto;
+  gap: 8px;
   align-items: center;
   border-bottom: 1px solid #f0f2f5;
 }
 
-.issue-item:last-child {
+.issue-row:last-child {
   border-bottom: 0;
 }
 
 .issue-icon {
-  width: 22px;
-  height: 22px;
-  border-radius: 5px;
+  width: 25px;
+  height: 25px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -773,167 +850,169 @@
 }
 
 .issue-icon.orange {
-  background: #fff5e2;
+  background: #fff5e1;
   color: #f59e0b;
 }
 
 .issue-icon.purple {
   background: #efedff;
-  color: #6652df;
+  color: #6651e4;
 }
 
-.issue-item div {
+.issue-text {
   display: flex;
   flex-direction: column;
 }
 
-.issue-item strong {
-  font-size: 7px;
-  color: #2d3850;
+.issue-text strong {
+  font-size: 8px;
+  color: #29354a;
 }
 
-.issue-item small {
+.issue-text span {
   margin-top: 3px;
-  font-size: 6px;
-  color: #8993a4;
+  color: #8792a4;
+  font-size: 7px;
 }
 
-.issue-item > button {
+.issue-row > button {
   border: 0;
   background: transparent;
   color: #4f46e5;
   font-size: 7px;
+  cursor: pointer;
 }
 
-/* ================================
-   BOTTOM GRID
-================================ */
+/* =========================================================
+   BOTTOM AREA
+   ========================================================= */
 
-.attendance-bottom-grid {
-  margin-top: 10px;
+.attendance-bottom {
+  margin-top: 12px;
   display: grid;
-  grid-template-columns: 1.1fr .9fr 1fr;
-  gap: 10px;
+  grid-template-columns: 1.12fr .9fr 1fr;
+  gap: 12px;
 }
 
-.attendance-bottom-card {
+.bottom-card {
+  padding: 12px;
+  border: 1px solid #e0e6ee;
+  border-radius: 8px;
   background: #fff;
-  border: 1px solid #e3e8ef;
-  border-radius: 7px;
-  padding: 10px;
-  box-sizing: border-box;
   min-width: 0;
 }
 
-.bottom-card-title {
+.bottom-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.bottom-card-title h2 {
+.bottom-card-header h2 {
   margin: 0;
-  font-size: 10px;
-  color: #273247;
+  font-size: 11px;
+  color: #253147;
 }
 
-.bottom-card-title button,
-.bottom-card-title select {
+.bottom-card-header h2 small {
+  font-size: 7px;
+  font-weight: 400;
+  color: #8792a4;
+}
+
+.bottom-card-header button,
+.bottom-card-header select {
   border: 0;
   background: transparent;
   color: #4f46e5;
   font-size: 7px;
 }
 
-.bottom-card-title select {
-  border: 1px solid #e0e6ee;
-  background: #fff;
-  color: #667389;
-  padding: 4px 6px;
+.bottom-card-header select {
+  border: 1px solid #dfe5ed;
   border-radius: 4px;
+  padding: 4px 7px;
+  color: #667389;
+  background: #fff;
 }
 
-/* ================================
-   DEPARTMENT TABLE
-================================ */
+/* DEPARTMENT TABLE */
 
-.department-table {
+.department-card table {
   width: 100%;
-  margin-top: 7px;
+  margin-top: 8px;
   border-collapse: collapse;
 }
 
-.department-table th {
-  padding: 5px 4px;
+.department-card th {
+  padding: 6px 4px;
+  background: #fafbfc;
+  color: #7a8699;
   text-align: left;
   font-size: 5px;
-  color: #7c8798;
-  background: #fafbfc;
 }
 
-.department-table td {
-  padding: 6px 4px;
-  border-top: 1px solid #eef1f5;
+.department-card td {
+  padding: 7px 4px;
+  border-top: 1px solid #edf1f5;
+  color: #5d697d;
   font-size: 7px;
-  color: #5c697e;
 }
 
-.green-number {
-  color: #14a66b !important;
+.green-text {
+  color: #14a76b !important;
   font-weight: 600;
 }
 
-.red-number {
+.red-text {
   color: #ef4444 !important;
 }
 
-.department-progress {
+.dept-progress {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
 }
 
-.department-progress span {
+.dept-progress span {
   font-size: 7px;
-  color: #15a66a;
+  color: #14a76b;
 }
 
-.department-progress > div {
-  width: 45px;
+.dept-progress > div {
+  width: 55px;
   height: 5px;
   border-radius: 10px;
-  background: #e9eef4;
+  background: #e8edf3;
   overflow: hidden;
 }
 
-.department-progress i {
+.dept-progress i {
   display: block;
   height: 100%;
-  border-radius: inherit;
-  background: #15a66a;
+  border-radius: 10px;
+  background: #14a76b;
 }
 
-/* ================================
-   TREND
-================================ */
+/* TREND */
 
-.trend-chart {
-  height: 132px;
+.trend-graph {
+  height: 130px;
   margin-top: 8px;
   display: flex;
 }
 
-.trend-y {
-  width: 28px;
+.trend-values {
+  width: 30px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding-bottom: 17px;
 }
 
-.trend-y span {
+.trend-values span {
+  color: #8b95a5;
   font-size: 6px;
-  color: #8a94a4;
 }
 
 .trend-area {
@@ -944,30 +1023,30 @@
   border-bottom: 1px solid #edf1f5;
 }
 
-.trend-grid-line {
+.trend-line {
   position: absolute;
   left: 0;
   width: 100%;
   border-top: 1px dashed #eef1f5;
 }
 
-.trend-grid-line:nth-child(1) {
+.trend-line:nth-child(1) {
   top: 0;
 }
 
-.trend-grid-line:nth-child(2) {
+.trend-line:nth-child(2) {
   top: 25%;
 }
 
-.trend-grid-line:nth-child(3) {
+.trend-line:nth-child(3) {
   top: 50%;
 }
 
-.trend-grid-line:nth-child(4) {
+.trend-line:nth-child(4) {
   top: 75%;
 }
 
-.trend-grid-line:nth-child(5) {
+.trend-line:nth-child(5) {
   top: 100%;
 }
 
@@ -979,198 +1058,183 @@
 }
 
 .trend-area circle {
-  fill: #4778ec;
+  fill: #4b78e8;
 }
 
 .trend-weeks {
-  margin-left: 29px;
+  margin-left: 30px;
   display: flex;
   justify-content: space-around;
 }
 
 .trend-weeks span {
+  color: #7d8799;
   font-size: 6px;
-  color: #7f899b;
 }
 
-.trend-stats {
-  margin-top: 9px;
+.trend-summary {
+  margin-top: 10px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 5px;
 }
 
-.trend-stats div {
+.trend-summary div {
   padding: 7px;
-  background: #fafbfc;
-  border: 1px solid #eef1f5;
+  border: 1px solid #edf1f5;
   border-radius: 5px;
+  background: #fafbfc;
 }
 
-.trend-stats span {
+.trend-summary span {
   display: block;
   font-size: 6px;
   color: #8792a4;
 }
 
-.trend-stats strong {
+.trend-summary strong {
   display: block;
-  margin-top: 4px;
+  margin-top: 3px;
   font-size: 14px;
-  color: #243149;
+  color: #233149;
 }
 
-.trend-stats small {
+.trend-summary small {
   display: block;
   margin-top: 2px;
   font-size: 6px;
-  color: #7f899b;
+  color: #7d8799;
 }
 
-/* ================================
-   WORKING HOURS
-================================ */
+/* WORKING HOURS */
 
-.bottom-card-title h2 span {
-  font-size: 7px;
-  color: #8792a4;
-  font-weight: 400;
-}
-
-.working-stats {
-  margin-top: 8px;
+.working-stat-grid {
+  margin-top: 9px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 5px;
 }
 
-.working-stats div {
+.working-stat-grid > div {
   padding: 7px 4px;
-  border-radius: 5px;
   background: #fafbfc;
+  border: 1px solid #edf1f5;
+  border-radius: 5px;
   text-align: center;
 }
 
-.working-stats svg {
+.working-stat-grid svg {
   font-size: 10px;
-  color: #5e52e5;
+  color: #5d52e6;
 }
 
-.working-stats span {
+.working-stat-grid span {
   display: block;
   margin-top: 4px;
   font-size: 5px;
   color: #8792a4;
 }
 
-.working-stats strong {
+.working-stat-grid strong {
   display: block;
   margin-top: 3px;
   font-size: 9px;
-  color: #243149;
+  color: #273349;
 }
 
-.recent-title {
-  margin-top: 10px;
-  padding-bottom: 5px;
+.recent-heading {
+  margin-top: 11px;
+  padding-bottom: 6px;
   border-bottom: 1px solid #edf1f5;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.recent-title h3 {
+.recent-heading h3 {
   margin: 0;
   font-size: 8px;
-  color: #2c374b;
+  color: #2b374c;
 }
 
-.recent-title button {
+.recent-heading button {
   border: 0;
   background: transparent;
   color: #4f46e5;
   font-size: 6px;
 }
 
-.recent-activity > div {
-  min-height: 34px;
+.recent-list > div {
+  min-height: 37px;
   display: grid;
-  grid-template-columns: 21px 1fr auto;
+  grid-template-columns: 18px 1fr auto;
   gap: 6px;
   align-items: center;
   border-bottom: 1px solid #f0f2f5;
 }
 
-.recent-activity > div:last-child {
+.recent-list > div:last-child {
   border-bottom: 0;
 }
 
-.activity-dot {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 7px;
+.recent-list svg {
+  font-size: 9px;
 }
 
-.activity-dot.green {
+.recent-green {
   color: #14a66a;
-  background: #eaf9f1;
 }
 
-.activity-dot.orange {
+.recent-orange {
   color: #f59e0b;
-  background: #fff5e4;
 }
 
-.activity-dot.red {
+.recent-red {
   color: #ef4444;
-  background: #fff0f0;
 }
 
-.recent-activity p {
+.recent-list p {
   margin: 0;
+  color: #59677c;
   font-size: 6px;
-  color: #4f5c72;
 }
 
-.recent-activity p small {
+.recent-list p small {
   display: block;
   margin-top: 2px;
   font-size: 5px;
-  color: #8b95a5;
+  color: #8a94a4;
 }
 
-.recent-activity time {
+.recent-list > div > span {
+  color: #8a94a4;
   font-size: 5px;
-  color: #8b95a5;
+  white-space: nowrap;
 }
 
-/* ================================
+/* =========================================================
    RESPONSIVE
-================================ */
+   ========================================================= */
 
-@media (max-width: 1250px) {
+@media (max-width: 1300px) {
   .attendance-stat-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .attendance-main-grid {
+  .attendance-content-grid {
     grid-template-columns: 1fr;
   }
 
-  .attendance-bottom-grid {
+  .attendance-bottom {
     grid-template-columns: 1fr 1fr;
   }
 
-  .working-summary {
+  .working-card {
     grid-column: 1 / -1;
   }
 }
 
-@media (max-width: 850px) {
+@media (max-width: 900px) {
   .attendance-header {
     flex-direction: column;
   }
@@ -1184,11 +1248,11 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .attendance-bottom-grid {
+  .attendance-bottom {
     grid-template-columns: 1fr;
   }
 
-  .working-summary {
+  .working-card {
     grid-column: auto;
   }
 }
@@ -1202,26 +1266,40 @@
     grid-template-columns: 1fr;
   }
 
-  .attendance-filters {
+  .attendance-filter-row {
     flex-direction: column;
   }
 
-  .attendance-filters select,
-  .attendance-filter-date {
+  .attendance-filter-row select,
+  .date-filter-small {
     width: 100%;
   }
 
-  .attendance-pagination {
-    flex-wrap: wrap;
-    padding: 8px;
+  .attendance-header-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 
-  .calendar-header {
+  .attendance-search-box {
+    width: 100%;
+    grid-column: 1 / -1;
+  }
+
+  .admin-user-area {
+    display: none;
+  }
+
+  .table-footer {
+    flex-wrap: wrap;
+    padding: 9px;
+  }
+
+  .calendar-card-header {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .working-stats {
+  .working-stat-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
