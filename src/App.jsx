@@ -53,6 +53,8 @@ import AdminDashboard from "./apps/admin/pages/AdminDashboard";
 import AdminEmployees from "./apps/admin/pages/AdminEmployees";
 import AdminManagers from "./apps/admin/pages/AdminManagers";
 import AdminDepartments from "./apps/admin/pages/AdminDepartments";
+import AdminAttendance from "./apps/admin/pages/AdminAttendance";
+
 
 /* =====================================================
    APP CSS
@@ -512,11 +514,7 @@ function AdminLayout() {
           {/* ATTENDANCE */}
           <Route
             path="/admin/attendance"
-            element={
-              <div className="wf-admin-placeholder">
-                <h1>Attendance</h1>
-              </div>
-            }
+            element={<AdminAttendance />}
           />
 
           {/* TASKS */}
