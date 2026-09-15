@@ -54,6 +54,7 @@ import AdminEmployees from "./apps/admin/pages/AdminEmployees";
 import AdminManagers from "./apps/admin/pages/AdminManagers";
 import AdminDepartments from "./apps/admin/pages/AdminDepartments";
 import AdminAttendance from "./apps/admin/pages/AdminAttendance";
+import AdminTasks from "./apps/admin/pages/AdminTasks";
 
 
 /* =====================================================
@@ -519,13 +520,9 @@ function AdminLayout() {
 
           {/* TASKS */}
           <Route
-            path="/admin/tasks"
-            element={
-              <div className="wf-admin-placeholder">
-                <h1>Tasks</h1>
-              </div>
-            }
-          />
+  path="/admin/tasks"
+  element={<AdminTasks />}
+/>
 
           {/* DAILY UPDATES */}
           <Route
