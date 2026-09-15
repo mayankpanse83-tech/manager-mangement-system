@@ -1605,3 +1605,44 @@
     grid-column: auto !important;
   }
 }
+/* =========================================================
+   MOVE 3 ANALYTICS CARDS UP
+   ========================================================= */
+
+.task-analytics {
+  margin-top: -1px !important;
+  transform: translateY(-35px) !important;
+}
+
+/* Cards ke beech ka gap compact rakho */
+.task-analytics > .analytics-card {
+  margin-top: 0 !important;
+}
+
+/* Left task table ka neeche extra space hatao */
+.task-table-card {
+  margin-bottom: 0 !important;
+}
+
+.task-footer {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Analytics ko table ke immediately baad rakho */
+.task-list-area {
+  margin-bottom: 0 !important;
+}
+
+/* Responsive */
+@media (max-width: 1250px) {
+  .task-analytics {
+    transform: translateY(-20px) !important;
+  }
+}
+
+@media (max-width: 800px) {
+  .task-analytics {
+    transform: translateY(-10px) !important;
+  }
+}
