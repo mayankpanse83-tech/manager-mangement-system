@@ -1606,43 +1606,230 @@
   }
 }
 /* =========================================================
-   MOVE 3 ANALYTICS CARDS UP
+   FINAL FIX - 3 ANALYTICS CARDS
+   TABLE KE JUST NICHE RAHENGE
+   ========================================================= */
+
+/* Main page grid */
+.admin-tasks-page {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 285px !important;
+  column-gap: 10px !important;
+  align-items: start !important;
+}
+
+/* Header full width */
+.admin-tasks-header {
+  grid-column: 1 / -1 !important;
+  grid-row: 1 !important;
+  width: 100% !important;
+}
+
+/* Statistics full width */
+.task-stat-grid {
+  grid-column: 1 / -1 !important;
+  grid-row: 2 !important;
+  width: 100% !important;
+}
+
+/* Wrapper ko invisible karo */
+.admin-tasks-content {
+  display: contents !important;
+}
+
+/* =========================================================
+   LEFT TASK TABLE
+   ========================================================= */
+
+.task-list-area {
+  grid-column: 1 !important;
+  grid-row: 3 !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  align-self: start !important;
+}
+
+/* =========================================================
+   RIGHT TASK DETAILS
+   ========================================================= */
+
+.task-details-panel {
+  grid-column: 2 !important;
+
+  /* IMPORTANT:
+     right panel dono rows cover karega
+     aur left analytics ko push nahi karega
+  */
+  grid-row: 3 / span 2 !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  align-self: start !important;
+
+  margin: 0 !important;
+}
+
+/* =========================================================
+   ANALYTICS - TABLE KE JUST NICHE
    ========================================================= */
 
 .task-analytics {
-  margin-top: -1px !important;
-  transform: translateY(-35px) !important;
+  grid-column: 1 !important;
+  grid-row: 4 !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+
+  margin-top: 10px !important;
+  margin-bottom: 0 !important;
+
+  transform: none !important;
+
+  display: grid !important;
+  grid-template-columns:
+    minmax(0, 1.1fr)
+    minmax(0, .9fr)
+    minmax(0, 1fr) !important;
+
+  gap: 10px !important;
+
+  align-items: start !important;
 }
 
-/* Cards ke beech ka gap compact rakho */
+/* Analytics cards */
 .task-analytics > .analytics-card {
-  margin-top: 0 !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+
+  margin: 0 !important;
+
+  box-sizing: border-box !important;
+
+  overflow: hidden !important;
 }
 
-/* Left task table ka neeche extra space hatao */
+/* =========================================================
+   LEFT PERFORMANCE CARD
+   ========================================================= */
+
+.task-analytics .analytics-card table {
+  width: 100% !important;
+  max-width: 100% !important;
+
+  table-layout: fixed !important;
+}
+
+.task-analytics .analytics-card th,
+.task-analytics .analytics-card td {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* =========================================================
+   COMPLETION TREND
+   ========================================================= */
+
+.task-analytics .completion-chart {
+  width: 100% !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+.task-analytics .chart-area {
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+.task-analytics .chart-area svg {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: block !important;
+}
+
+/* =========================================================
+   PRIORITY CARD
+   ========================================================= */
+
+.task-analytics .priority-card {
+  width: 100% !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+.task-analytics .priority-content {
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+/* =========================================================
+   REMOVE EXTRA SPACE
+   ========================================================= */
+
+.task-list-area {
+  margin-bottom: 0 !important;
+}
+
 .task-table-card {
   margin-bottom: 0 !important;
 }
 
 .task-footer {
   margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
 }
 
-/* Analytics ko table ke immediately baad rakho */
-.task-list-area {
-  margin-bottom: 0 !important;
-}
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
 
-/* Responsive */
 @media (max-width: 1250px) {
+
+  .admin-tasks-page {
+    display: block !important;
+  }
+
+  .admin-tasks-header,
+  .task-stat-grid {
+    width: 100% !important;
+  }
+
+  .admin-tasks-content {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .task-list-area {
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+
+  .task-details-panel {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    margin-top: 10px !important;
+  }
+
   .task-analytics {
-    transform: translateY(-20px) !important;
+    grid-column: auto !important;
+    grid-row: auto !important;
+
+    margin-top: 10px !important;
+
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .task-analytics .priority-card {
+    grid-column: 1 / -1 !important;
   }
 }
 
 @media (max-width: 800px) {
+
   .task-analytics {
-    transform: translateY(-10px) !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .task-analytics .priority-card {
+    grid-column: auto !important;
   }
 }
