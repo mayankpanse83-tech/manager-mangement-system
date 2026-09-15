@@ -1396,3 +1396,29 @@
     flex-direction: column;
   }
 }
+/* Bottom 3 cards ko blank gap me upar lao */
+.task-bottom-section {
+  margin-top: -520px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Bottom ke cards */
+.task-bottom-section > div {
+  min-height: 250px;
+}
+
+/* 3 cards ka proper layout */
+.task-bottom-section {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 1fr;
+  gap: 14px;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .task-bottom-section {
+    grid-template-columns: 1fr;
+    margin-top: 20px;
+  }
+}
