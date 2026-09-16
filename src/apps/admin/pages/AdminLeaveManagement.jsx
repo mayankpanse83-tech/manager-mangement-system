@@ -15,12 +15,12 @@ import {
   FaDatabase,
   FaEllipsisV,
   FaCalendarAlt,
-  FaUser,
   FaHeart,
   FaUmbrellaBeach,
   FaPlaneDeparture,
   FaFileAlt,
   FaInfoCircle,
+  FaSun,
 } from "react-icons/fa";
 
 import "./AdminLeaveManagement.css";
