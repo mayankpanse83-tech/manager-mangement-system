@@ -55,6 +55,7 @@ import AdminManagers from "./apps/admin/pages/AdminManagers";
 import AdminDepartments from "./apps/admin/pages/AdminDepartments";
 import AdminAttendance from "./apps/admin/pages/AdminAttendance";
 import AdminTasks from "./apps/admin/pages/AdminTasks";
+import AdminDailyUpdates from "./apps/admin/pages/AdminDailyUpdates";
 
 
 /* =====================================================
@@ -527,11 +528,7 @@ function AdminLayout() {
           {/* DAILY UPDATES */}
           <Route
             path="/admin/daily-updates"
-            element={
-              <div className="wf-admin-placeholder">
-                <h1>Daily Updates</h1>
-              </div>
-            }
+            element={<AdminDailyUpdates />}
           />
 
           {/* LEAVE */}
