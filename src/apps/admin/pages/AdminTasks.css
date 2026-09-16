@@ -1855,3 +1855,47 @@
     transform: none !important;
   }
 }
+/* =========================================================
+   REMOVE LARGE GAP ABOVE ANALYTICS
+   ========================================================= */
+
+.task-analytics {
+  margin-top: 0 !important;
+  transform: translateY(0) !important;
+  position: relative !important;
+  top: -2px !important;
+}
+
+/* Task table ke baad unnecessary space remove */
+.task-list-area {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.task-table-card {
+  margin-bottom: 0 !important;
+}
+
+/* Analytics cards directly below table */
+.admin-tasks-content {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Right side details apni jagah rahe */
+.task-details-panel {
+  align-self: start !important;
+}
+
+/* Analytics cards ki top spacing minimum */
+.task-analytics > .analytics-card {
+  margin-top: 0 !important;
+}
+
+/* Desktop */
+@media (min-width: 1251px) {
+  .task-analytics {
+    margin-top: 0 !important;
+    top: -2px !important;
+  }
+}
