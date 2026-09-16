@@ -56,6 +56,7 @@ import AdminDepartments from "./apps/admin/pages/AdminDepartments";
 import AdminAttendance from "./apps/admin/pages/AdminAttendance";
 import AdminTasks from "./apps/admin/pages/AdminTasks";
 import AdminDailyUpdates from "./apps/admin/pages/AdminDailyUpdates";
+import AdminLeaveManagement from "./apps/admin/pages/AdminLeaveManagement";
 
 
 /* =====================================================
