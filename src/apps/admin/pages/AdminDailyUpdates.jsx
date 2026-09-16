@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+
 import {
   FaSearch,
   FaFilter,
@@ -14,15 +15,17 @@ import {
   FaChevronLeft,
   FaChevronRight,
   FaCalendarAlt,
-  FaUser,
-  FaTasks,
-  FaPaperclip,
-  FaCommentAlt,
-  FaExclamationTriangle,
   FaCircle,
+  FaExclamationTriangle,
+  FaCommentAlt,
+  FaTimesCircle,
 } from "react-icons/fa";
 
 import "./AdminDailyUpdates.css";
+
+/* =========================================================
+   DATA
+========================================================= */
 
 const updatesData = [
   {
@@ -116,13 +119,22 @@ const departmentData = [
   ["HR", "12", "12", "0", "100%"],
 ];
 
+/* =========================================================
+   COMPONENT
+========================================================= */
+
 const AdminDailyUpdates = () => {
   const [activeTab, setActiveTab] = useState("All");
   const [search, setSearch] = useState("");
   const [department, setDepartment] = useState("All Departments");
-  const [selectedEmployee, setSelectedEmployee] = useState(updatesData[0]);
+  const [selectedEmployee, setSelectedEmployee] =
+    useState(updatesData[0]);
   const [period, setPeriod] = useState("Today");
   const [openMenu, setOpenMenu] = useState(null);
+
+  /* =======================================================
+     FILTER DATA
+  ======================================================= */
 
   const filteredUpdates = useMemo(() => {
     return updatesData.filter((item) => {
@@ -156,29 +168,41 @@ const AdminDailyUpdates = () => {
         matchesTab = item.status === "Reviewed";
       }
 
-      return matchesSearch && matchesDepartment && matchesTab;
+      return (
+        matchesSearch &&
+        matchesDepartment &&
+        matchesTab
+      );
     });
   }, [search, department, activeTab]);
+
+  /* =======================================================
+     HELPERS
+  ======================================================= */
 
   const initials = (name) =>
     name
       .split(" ")
       .map((word) => word[0])
       .join("")
-      .slice(0, 2);
+      .slice(0, 2)
+      .toUpperCase();
 
   return (
     <div className="admin-daily-updates-page">
 
-      {/* ================= HEADER ================= */}
+      {/* ===================================================
+          HEADER
+      =================================================== */}
 
-      <div className="adu-header">
+      <header className="adu-header">
 
-        <div>
+        <div className="adu-header-title">
           <h1>Daily Updates</h1>
+
           <p>
-            Monitor daily work updates and reporting compliance across the
-            organization.
+            Monitor daily work updates and reporting compliance
+            across the organization.
           </p>
         </div>
 
@@ -186,12 +210,13 @@ const AdminDailyUpdates = () => {
 
           <button className="adu-date-button">
             <FaCalendarAlt />
-            Thu, 11 Sep 2026
+            <span>Thu, 11 Sep 2026</span>
             <FaChevronDown />
           </button>
 
           <div className="adu-search">
             <FaSearch />
+
             <input
               type="text"
               placeholder="Search employee, department..."
@@ -216,7 +241,10 @@ const AdminDailyUpdates = () => {
           </button>
 
           <div className="adu-admin-user">
-            <div className="adu-admin-avatar">AU</div>
+
+            <div className="adu-admin-avatar">
+              AU
+            </div>
 
             <div>
               <strong>Admin User</strong>
@@ -224,19 +252,23 @@ const AdminDailyUpdates = () => {
             </div>
 
             <FaChevronDown />
+
           </div>
 
         </div>
-      </div>
+      </header>
 
-      {/* ================= STATS ================= */}
+      {/* ===================================================
+          STAT CARDS
+      =================================================== */}
 
-      <div className="adu-stat-grid">
+      <section className="adu-stat-grid">
 
         <div className="adu-stat blue">
           <div className="adu-stat-icon">
             <FaUsers />
           </div>
+
           <div>
             <span>Total Employees</span>
             <strong>248</strong>
@@ -248,6 +280,7 @@ const AdminDailyUpdates = () => {
           <div className="adu-stat-icon">
             <FaCheckCircle />
           </div>
+
           <div>
             <span>Submitted Today</span>
             <strong>218</strong>
@@ -259,6 +292,7 @@ const AdminDailyUpdates = () => {
           <div className="adu-stat-icon">
             <FaClock />
           </div>
+
           <div>
             <span>Pending Review</span>
             <strong>21</strong>
@@ -270,6 +304,7 @@ const AdminDailyUpdates = () => {
           <div className="adu-stat-icon">
             <FaExclamationCircle />
           </div>
+
           <div>
             <span>Missing Updates</span>
             <strong>9</strong>
@@ -281,6 +316,7 @@ const AdminDailyUpdates = () => {
           <div className="adu-stat-icon">
             <FaFileAlt />
           </div>
+
           <div>
             <span>Reviewed</span>
             <strong>204</strong>
@@ -288,13 +324,17 @@ const AdminDailyUpdates = () => {
           </div>
         </div>
 
-      </div>
+      </section>
 
-      {/* ================= MAIN ================= */}
+      {/* ===================================================
+          MAIN CONTENT
+      =================================================== */}
 
       <div className="adu-main">
 
-        {/* LEFT */}
+        {/* =================================================
+            LEFT TABLE
+        ================================================= */}
 
         <section className="adu-left">
 
@@ -311,8 +351,14 @@ const AdminDailyUpdates = () => {
             ].map(([name, count]) => (
               <button
                 key={name}
-                className={activeTab === name ? "active" : ""}
-                onClick={() => setActiveTab(name)}
+                className={
+                  activeTab === name
+                    ? "active"
+                    : ""
+                }
+                onClick={() =>
+                  setActiveTab(name)
+                }
               >
                 {name} ({count})
               </button>
@@ -320,7 +366,7 @@ const AdminDailyUpdates = () => {
 
           </div>
 
-          {/* PERIODS */}
+          {/* DATE PERIOD */}
 
           <div className="adu-period-row">
 
@@ -333,8 +379,14 @@ const AdminDailyUpdates = () => {
             ].map((item) => (
               <button
                 key={item}
-                className={period === item ? "active" : ""}
-                onClick={() => setPeriod(item)}
+                className={
+                  period === item
+                    ? "active"
+                    : ""
+                }
+                onClick={() =>
+                  setPeriod(item)
+                }
               >
                 {item}
               </button>
@@ -352,9 +404,14 @@ const AdminDailyUpdates = () => {
 
             <select
               value={department}
-              onChange={(e) => setDepartment(e.target.value)}
+              onChange={(e) =>
+                setDepartment(e.target.value)
+              }
             >
-              <option>All Departments</option>
+              <option>
+                All Departments
+              </option>
+
               <option>Development</option>
               <option>Design</option>
               <option>Marketing</option>
@@ -363,12 +420,19 @@ const AdminDailyUpdates = () => {
               <option>HR</option>
             </select>
 
-            <select>
-              <option>All Managers</option>
+            <select defaultValue="All Managers">
+
+              <option>
+                All Managers
+              </option>
+
               <option>Rajat Verma</option>
               <option>Neha Sharma</option>
               <option>Amit Jain</option>
               <option>Sneha Kulkarni</option>
+              <option>Rohit Malhotra</option>
+              <option>Pooja Desai</option>
+
             </select>
 
           </div>
@@ -382,10 +446,13 @@ const AdminDailyUpdates = () => {
               <table>
 
                 <thead>
+
                   <tr>
+
                     <th>
                       <input type="checkbox" />
                     </th>
+
                     <th>EMPLOYEE</th>
                     <th>DEPARTMENT</th>
                     <th>MANAGER</th>
@@ -393,92 +460,137 @@ const AdminDailyUpdates = () => {
                     <th>STATUS</th>
                     <th>SUBMITTED AT</th>
                     <th>ACTIONS</th>
+
                   </tr>
+
                 </thead>
 
                 <tbody>
 
-                  {filteredUpdates.map((employee) => (
-                    <tr
-                      key={employee.id}
-                      className={
-                        selectedEmployee?.id === employee.id
-                          ? "selected"
-                          : ""
-                      }
-                      onClick={() => setSelectedEmployee(employee)}
-                    >
+                  {filteredUpdates.map(
+                    (employee) => (
+                      <tr
+                        key={employee.id}
+                        className={
+                          selectedEmployee?.id ===
+                          employee.id
+                            ? "selected"
+                            : ""
+                        }
+                        onClick={() =>
+                          setSelectedEmployee(
+                            employee
+                          )
+                        }
+                      >
 
-                      <td>
-                        <input
-                          type="checkbox"
-                          onClick={(e) => e.stopPropagation()}
-                        />
-                      </td>
+                        <td>
+                          <input
+                            type="checkbox"
+                            onClick={(e) =>
+                              e.stopPropagation()
+                            }
+                          />
+                        </td>
 
-                      <td>
-                        <div className="adu-person">
+                        <td>
 
-                          <div className="adu-avatar">
-                            {initials(employee.name)}
-                          </div>
+                          <div className="adu-person">
 
-                          <div>
-                            <strong>{employee.name}</strong>
-                            <span>{employee.designation}</span>
-                          </div>
-
-                        </div>
-                      </td>
-
-                      <td>{employee.department}</td>
-                      <td>{employee.manager}</td>
-                      <td>{employee.tasks}</td>
-
-                      <td>
-                        <span
-                          className={`adu-status ${employee.status
-                            .toLowerCase()
-                            .replace(/\s+/g, "-")}`}
-                        >
-                          <i></i>
-                          {employee.status}
-                        </span>
-                      </td>
-
-                      <td>{employee.submittedAt}</td>
-
-                      <td>
-
-                        <div className="adu-action">
-
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setOpenMenu(
-                                openMenu === employee.id
-                                  ? null
-                                  : employee.id
-                              );
-                            }}
-                          >
-                            <FaEllipsisV />
-                          </button>
-
-                          {openMenu === employee.id && (
-                            <div className="adu-dropdown">
-                              <button>View Update</button>
-                              <button>Review Update</button>
-                              <button>Send Reminder</button>
+                            <div className="adu-avatar">
+                              {initials(
+                                employee.name
+                              )}
                             </div>
-                          )}
 
-                        </div>
+                            <div>
+                              <strong>
+                                {employee.name}
+                              </strong>
 
-                      </td>
+                              <span>
+                                {employee.designation}
+                              </span>
+                            </div>
 
-                    </tr>
-                  ))}
+                          </div>
+
+                        </td>
+
+                        <td>
+                          {employee.department}
+                        </td>
+
+                        <td>
+                          {employee.manager}
+                        </td>
+
+                        <td>
+                          {employee.tasks}
+                        </td>
+
+                        <td>
+
+                          <span
+                            className={`adu-status ${employee.status
+                              .toLowerCase()
+                              .replace(/\s+/g, "-")}`}
+                          >
+                            <i></i>
+                            {employee.status}
+                          </span>
+
+                        </td>
+
+                        <td>
+                          {employee.submittedAt}
+                        </td>
+
+                        <td>
+
+                          <div className="adu-action">
+
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+
+                                setOpenMenu(
+                                  openMenu ===
+                                    employee.id
+                                    ? null
+                                    : employee.id
+                                );
+                              }}
+                            >
+                              <FaEllipsisV />
+                            </button>
+
+                            {openMenu ===
+                              employee.id && (
+                              <div className="adu-dropdown">
+
+                                <button>
+                                  View Update
+                                </button>
+
+                                <button>
+                                  Review Update
+                                </button>
+
+                                <button>
+                                  Send Reminder
+                                </button>
+
+                              </div>
+                            )}
+
+                          </div>
+
+                        </td>
+
+                      </tr>
+                    )
+                  )}
 
                 </tbody>
 
@@ -486,7 +598,7 @@ const AdminDailyUpdates = () => {
 
             </div>
 
-            {/* FOOTER */}
+            {/* TABLE FOOTER */}
 
             <div className="adu-table-footer">
 
@@ -500,12 +612,17 @@ const AdminDailyUpdates = () => {
                   <FaChevronLeft />
                 </button>
 
-                <button className="active">1</button>
+                <button className="active">
+                  1
+                </button>
+
                 <button>2</button>
                 <button>3</button>
                 <button>4</button>
                 <button>5</button>
+
                 <span>...</span>
+
                 <button>31</button>
 
                 <button>
@@ -515,13 +632,17 @@ const AdminDailyUpdates = () => {
               </div>
 
               <div className="adu-page-size">
+
                 Show
+
                 <select>
                   <option>8</option>
                   <option>10</option>
                   <option>20</option>
                 </select>
+
                 per page
+
               </div>
 
             </div>
@@ -530,36 +651,54 @@ const AdminDailyUpdates = () => {
 
         </section>
 
-        {/* ================= RIGHT DETAILS ================= */}
+        {/* =================================================
+            RIGHT DETAILS
+        ================================================= */}
 
         {selectedEmployee && (
           <aside className="adu-details">
 
             <div className="adu-details-header">
+
               <h2>Daily Update Details</h2>
 
               <button
-                onClick={() => setSelectedEmployee(null)}
+                onClick={() =>
+                  setSelectedEmployee(null)
+                }
               >
                 ×
               </button>
+
             </div>
+
+            {/* PROFILE */}
 
             <div className="adu-detail-profile">
 
               <div className="adu-detail-avatar">
-                {initials(selectedEmployee.name)}
+                {initials(
+                  selectedEmployee.name
+                )}
               </div>
 
               <div>
-                <h3>{selectedEmployee.name}</h3>
+
+                <h3>
+                  {selectedEmployee.name}
+                </h3>
+
                 <p>
-                  {selectedEmployee.designation} •{" "}
+                  {selectedEmployee.designation}
+                  {" • "}
                   {selectedEmployee.id}
                 </p>
+
                 <span>
-                  <FaCalendarAlt /> 11 Sep 2026 • 06:12 PM
+                  <FaCalendarAlt />
+                  11 Sep 2026 • 06:12 PM
                 </span>
+
               </div>
 
               <b className="submitted-badge">
@@ -568,32 +707,44 @@ const AdminDailyUpdates = () => {
 
             </div>
 
-            {/* TABS */}
+            {/* DETAIL TABS */}
 
             <div className="adu-detail-tabs">
 
-              <button className="active">Update</button>
-              <button>Tasks (3)</button>
-              <button>Attachments (2)</button>
-              <button>History</button>
+              <button className="active">
+                Update
+              </button>
+
+              <button>
+                Tasks (3)
+              </button>
+
+              <button>
+                Attachments (2)
+              </button>
+
+              <button>
+                History
+              </button>
 
             </div>
 
-            {/* WORK */}
+            {/* TODAY WORK */}
 
             <div className="adu-detail-section">
 
               <h3>Today's Work</h3>
 
               <p>
-                Completed responsive dashboard UI and fixed mobile layout
-                issues. Worked on improving performance and resolved minor
-                UI bugs.
+                Completed responsive dashboard UI and
+                fixed mobile layout issues. Worked on
+                improving performance and resolved
+                minor UI bugs.
               </p>
 
             </div>
 
-            {/* COMPLETED */}
+            {/* COMPLETED TASKS */}
 
             <div className="adu-detail-section">
 
@@ -601,17 +752,23 @@ const AdminDailyUpdates = () => {
 
               <div className="check-item">
                 <FaCheckCircle />
-                <span>Dashboard UI development</span>
+                <span>
+                  Dashboard UI development
+                </span>
               </div>
 
               <div className="check-item">
                 <FaCheckCircle />
-                <span>Mobile responsive fixes</span>
+                <span>
+                  Mobile responsive fixes
+                </span>
               </div>
 
               <div className="check-item">
                 <FaCheckCircle />
-                <span>Header alignment issue</span>
+                <span>
+                  Header alignment issue
+                </span>
               </div>
 
             </div>
@@ -623,8 +780,13 @@ const AdminDailyUpdates = () => {
               <h3>Pending Work</h3>
 
               <div className="bullet-item">
+
                 <FaCircle />
-                <span>Final QA testing and deployment</span>
+
+                <span>
+                  Final QA testing and deployment
+                </span>
+
               </div>
 
             </div>
@@ -635,7 +797,9 @@ const AdminDailyUpdates = () => {
 
               <h3>Blockers</h3>
 
-              <p className="none-text">None</p>
+              <p className="none-text">
+                None
+              </p>
 
             </div>
 
@@ -648,51 +812,85 @@ const AdminDailyUpdates = () => {
               </div>
 
               <div>
-                <strong>Reviewed by Rajat Verma</strong>
-                <span>11 Sep 2026 • 06:30 PM</span>
+                <strong>
+                  Reviewed by Rajat Verma
+                </strong>
+
+                <span>
+                  11 Sep 2026 • 06:30 PM
+                </span>
               </div>
 
             </div>
 
-            {/* RECENT */}
+            {/* RECENT ACTIVITY */}
 
             <div className="adu-recent">
 
               <div className="adu-recent-header">
+
                 <h3>Recent Activity</h3>
-                <button>View All</button>
+
+                <button>
+                  View All
+                </button>
+
               </div>
 
               <div>
+
                 <FaCheckCircle className="green" />
+
                 <p>
                   Aman Sharma submitted daily update
                 </p>
-                <span>2 hours ago</span>
+
+                <span>
+                  2 hours ago
+                </span>
+
               </div>
 
               <div>
+
                 <FaCommentAlt className="purple" />
+
                 <p>
                   Priya Singh update reviewed by Neha Sharma
                 </p>
-                <span>3 hours ago</span>
+
+                <span>
+                  3 hours ago
+                </span>
+
               </div>
 
               <div>
+
                 <FaExclamationTriangle className="orange" />
+
                 <p>
                   Vikram Joshi submitted daily update
                 </p>
-                <span>4 hours ago</span>
+
+                <span>
+                  4 hours ago
+                </span>
+
               </div>
 
               <div>
+
                 <FaTimesCircle className="red" />
+
                 <p>
                   Rahul Verma marked as missing
                 </p>
-                <span>5 hours ago</span>
+
+                <span>
+                  5 hours ago
+                </span>
+
               </div>
 
             </div>
@@ -702,7 +900,9 @@ const AdminDailyUpdates = () => {
 
       </div>
 
-      {/* ================= BOTTOM ================= */}
+      {/* ===================================================
+          BOTTOM CARDS
+      =================================================== */}
 
       <div className="adu-bottom-grid">
 
@@ -711,8 +911,15 @@ const AdminDailyUpdates = () => {
         <section className="adu-bottom-card">
 
           <div className="adu-bottom-title">
-            <h2>Department Compliance</h2>
-            <button>View All</button>
+
+            <h2>
+              Department Compliance
+            </h2>
+
+            <button>
+              View All
+            </button>
+
           </div>
 
           <table>
@@ -731,18 +938,39 @@ const AdminDailyUpdates = () => {
 
               {departmentData.map((row) => (
                 <tr key={row[0]}>
+
                   <td>{row[0]}</td>
+
                   <td>{row[1]}</td>
-                  <td className="green-text">{row[2]}</td>
-                  <td className="red-text">{row[3]}</td>
-                  <td>
-                    <div className="compliance-cell">
-                      <span>{row[4]}</span>
-                      <div>
-                        <i style={{ width: row[4] }}></i>
-                      </div>
-                    </div>
+
+                  <td className="green-text">
+                    {row[2]}
                   </td>
+
+                  <td className="red-text">
+                    {row[3]}
+                  </td>
+
+                  <td>
+
+                    <div className="compliance-cell">
+
+                      <span>
+                        {row[4]}
+                      </span>
+
+                      <div>
+                        <i
+                          style={{
+                            width: row[4],
+                          }}
+                        ></i>
+                      </div>
+
+                    </div>
+
+                  </td>
+
                 </tr>
               ))}
 
@@ -757,22 +985,28 @@ const AdminDailyUpdates = () => {
         <section className="adu-bottom-card submission-card">
 
           <div className="adu-bottom-title">
-            <h2>Submission Trend</h2>
+
+            <h2>
+              Submission Trend
+            </h2>
 
             <select>
               <option>This Week</option>
               <option>This Month</option>
             </select>
+
           </div>
 
           <div className="adu-chart">
 
             <div className="adu-chart-y">
+
               <span>100%</span>
               <span>80%</span>
               <span>60%</span>
               <span>40%</span>
               <span>20%</span>
+
             </div>
 
             <div className="adu-chart-area">
@@ -783,7 +1017,10 @@ const AdminDailyUpdates = () => {
               <div className="adu-chart-line"></div>
               <div className="adu-chart-line"></div>
 
-              <svg viewBox="0 0 450 150" preserveAspectRatio="none">
+              <svg
+                viewBox="0 0 450 150"
+                preserveAspectRatio="none"
+              >
 
                 <polygon
                   points="20,95 90,65 155,60 220,52 285,55 350,45 420,55 420,150 20,150"
@@ -797,20 +1034,13 @@ const AdminDailyUpdates = () => {
                   strokeWidth="3"
                 />
 
-                {[20, 90, 155, 220, 285, 350, 420].map(
-                  (x, index) => {
-                    const points = [95, 65, 60, 52, 55, 45, 55];
-
-                    return (
-                      <circle
-                        key={x}
-                        cx={x}
-                        cy={points[index]}
-                        r="3.5"
-                      />
-                    );
-                  }
-                )}
+                <circle cx="20" cy="95" r="3.5" />
+                <circle cx="90" cy="65" r="3.5" />
+                <circle cx="155" cy="60" r="3.5" />
+                <circle cx="220" cy="52" r="3.5" />
+                <circle cx="285" cy="55" r="3.5" />
+                <circle cx="350" cy="45" r="3.5" />
+                <circle cx="420" cy="55" r="3.5" />
 
               </svg>
 
@@ -819,6 +1049,7 @@ const AdminDailyUpdates = () => {
           </div>
 
           <div className="adu-chart-days">
+
             <span>Mon</span>
             <span>Tue</span>
             <span>Wed</span>
@@ -826,6 +1057,7 @@ const AdminDailyUpdates = () => {
             <span>Fri</span>
             <span>Sat</span>
             <span>Sun</span>
+
           </div>
 
           <div className="adu-trend-stats">
@@ -849,12 +1081,16 @@ const AdminDailyUpdates = () => {
 
         </section>
 
-        {/* WORK DISTRIBUTION */}
+        {/* DISTRIBUTION */}
 
         <section className="adu-bottom-card distribution-card">
 
           <div className="adu-bottom-title">
-            <h2>Today's Work Distribution</h2>
+
+            <h2>
+              Today's Work Distribution
+            </h2>
+
           </div>
 
           <div className="distribution-content">
@@ -914,20 +1150,32 @@ const AdminDailyUpdates = () => {
 
       </div>
 
-      {/* ================= LAST ROW ================= */}
+      {/* ===================================================
+          LAST ROW
+      =================================================== */}
 
       <div className="adu-last-grid">
+
+        {/* MANAGER REVIEW */}
 
         <section className="adu-last-card">
 
           <div className="adu-bottom-title">
-            <h2>Manager Review Performance</h2>
-            <button>View All</button>
+
+            <h2>
+              Manager Review Performance
+            </h2>
+
+            <button>
+              View All
+            </button>
+
           </div>
 
           <table>
 
             <thead>
+
               <tr>
                 <th>MANAGER</th>
                 <th>TEAM SIZE</th>
@@ -935,6 +1183,7 @@ const AdminDailyUpdates = () => {
                 <th>REVIEWED</th>
                 <th>REVIEW RATE</th>
               </tr>
+
             </thead>
 
             <tbody>
@@ -977,79 +1226,153 @@ const AdminDailyUpdates = () => {
 
         </section>
 
+        {/* MISSING UPDATES */}
+
         <section className="adu-last-card">
 
           <div className="adu-bottom-title">
-            <h2>Missing Updates</h2>
-            <button>View All</button>
+
+            <h2>
+              Missing Updates
+            </h2>
+
+            <button>
+              View All
+            </button>
+
           </div>
 
           <div className="missing-row">
+
             <FaExclamationTriangle />
+
             <div>
               <strong>Rahul Verma</strong>
-              <small>Last update: Yesterday</small>
+              <small>
+                Last update: Yesterday
+              </small>
             </div>
-            <button>Send Reminder</button>
+
+            <button>
+              Send Reminder
+            </button>
+
           </div>
 
           <div className="missing-row">
+
             <FaExclamationTriangle />
+
             <div>
               <strong>Amit Kumar</strong>
-              <small>Last update: 2 days ago</small>
+              <small>
+                Last update: 2 days ago
+              </small>
             </div>
-            <button>Send Reminder</button>
+
+            <button>
+              Send Reminder
+            </button>
+
           </div>
 
           <div className="missing-row">
+
             <FaExclamationCircle />
+
             <div>
               <strong>Neha Patel</strong>
-              <small>No update submitted</small>
+              <small>
+                No update submitted
+              </small>
             </div>
-            <button>Send Reminder</button>
+
+            <button>
+              Send Reminder
+            </button>
+
           </div>
 
         </section>
 
+        {/* TEAM BLOCKERS */}
+
         <section className="adu-last-card">
 
           <div className="adu-bottom-title">
-            <h2>Team Blockers</h2>
-            <button>View All</button>
+
+            <h2>
+              Team Blockers
+            </h2>
+
+            <button>
+              View All
+            </button>
+
           </div>
 
           <div className="blocker-row">
+
             <FaExclamationTriangle className="red" />
+
             <div>
-              <strong>API dependency</strong>
-              <small>3 employees</small>
+              <strong>
+                API dependency
+              </strong>
+
+              <small>
+                3 employees
+              </small>
             </div>
+
           </div>
 
           <div className="blocker-row">
+
             <FaExclamationTriangle className="orange" />
+
             <div>
-              <strong>Design approval pending</strong>
-              <small>2 employees</small>
+              <strong>
+                Design approval pending
+              </strong>
+
+              <small>
+                2 employees
+              </small>
             </div>
+
           </div>
 
           <div className="blocker-row">
+
             <FaExclamationTriangle className="orange" />
+
             <div>
-              <strong>Testing environment issue</strong>
-              <small>1 employee</small>
+              <strong>
+                Testing environment issue
+              </strong>
+
+              <small>
+                1 employee
+              </small>
             </div>
+
           </div>
 
           <div className="blocker-row">
+
             <FaExclamationCircle className="blue-icon" />
+
             <div>
-              <strong>Resource allocation</strong>
-              <small>1 employee</small>
+              <strong>
+                Resource allocation
+              </strong>
+
+              <small>
+                1 employee
+              </small>
             </div>
+
           </div>
 
         </section>
