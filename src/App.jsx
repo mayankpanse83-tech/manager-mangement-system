@@ -534,13 +534,9 @@ function AdminLayout() {
 
           {/* LEAVE */}
           <Route
-            path="/admin/leave"
-            element={
-              <div className="wf-admin-placeholder">
-                <h1>Leave Management</h1>
-              </div>
-            }
-          />
+  path="/admin/leave"
+  element={<AdminLeaveManagement />}
+/>
 
           {/* PAYROLL */}
           <Route
