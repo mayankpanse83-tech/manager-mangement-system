@@ -2007,3 +2007,35 @@
     grid-template-columns: 1fr !important;
   }
 }
+/* =========================================================
+   FIX BLACK AREA AT BOTTOM
+   ========================================================= */
+
+html,
+body,
+#root {
+  background: #f7f9fc !important;
+  min-height: 100% !important;
+}
+
+body {
+  margin: 0 !important;
+}
+
+.admin-tasks-page {
+  min-height: 100vh !important;
+  background: #f7f9fc !important;
+}
+
+.wf-admin-main {
+  min-height: 100vh !important;
+  background: #f7f9fc !important;
+}
+
+.admin-tasks-page::after {
+  content: "";
+  display: block;
+  width: 100%;
+  min-height: 50px;
+  background: #f7f9fc;
+}
