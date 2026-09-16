@@ -1337,3 +1337,45 @@
     flex-direction: column;
   }
 }
+/* =========================================================
+   UPPER DAILY UPDATES TABLE CARD - HEIGHT INCREASE
+   ========================================================= */
+
+/* Main left table area ko thoda taller karo */
+.adu-table-card {
+  min-height: 420px !important;
+}
+
+/* Table rows ko thoda taller karo */
+.adu-table-card tbody td {
+  height: 47px !important;
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+}
+
+/* Table footer ko bhi thoda space do */
+.adu-table-footer {
+  min-height: 50px !important;
+}
+
+/* Right Daily Update Details ko same flow mein rakho */
+.adu-details {
+  min-height: 420px !important;
+}
+
+/* =========================================================
+   EXTRA SPACE KO CLEAN RAKHO
+   ========================================================= */
+
+.adu-main {
+  align-items: start !important;
+}
+
+.adu-left {
+  min-height: 420px !important;
+}
+
+/* Bottom cards table ke neeche naturally aayenge */
+.adu-bottom-grid {
+  margin-top: 10px !important;
+}
