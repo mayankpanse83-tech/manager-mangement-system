@@ -1838,20 +1838,20 @@
    ========================================================= */
 
 .task-analytics {
-  margin-top: -8px !important;
+  margin-top: -5px !important;
   transform: translateY(-18px) !important;
 }
 
 @media (max-width: 1250px) {
   .task-analytics {
-    margin-top: 5px !important;
+    margin-top: 2px !important;
     transform: translateY(-12px) !important;
   }
 }
 
 @media (max-width: 800px) {
   .task-analytics {
-    margin-top: 8px !important;
+    margin-top: 5px !important;
     transform: none !important;
   }
 }
