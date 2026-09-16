@@ -2039,3 +2039,205 @@ body {
   min-height: 50px;
   background: #f7f9fc;
 }
+/* =========================================================
+   3 ANALYTICS CARDS - BIG + EQUAL SIZE
+   ========================================================= */
+
+.task-analytics {
+  width: 100% !important;
+  display: grid !important;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+
+  gap: 12px !important;
+
+  align-items: stretch !important;
+
+  margin-top: 10px !important;
+  transform: none !important;
+}
+
+/* All 3 cards equal size */
+.task-analytics > .analytics-card {
+  width: 100% !important;
+  min-width: 0 !important;
+
+  min-height: 300px !important;
+  height: 300px !important;
+
+  padding: 14px !important;
+
+  box-sizing: border-box !important;
+
+  border: 1px solid #e0e6ee !important;
+  border-radius: 8px !important;
+
+  background: #fff !important;
+
+  overflow: hidden !important;
+}
+
+/* =========================================================
+   CARD TITLE
+   ========================================================= */
+
+.task-analytics .analytics-header {
+  min-height: 30px !important;
+}
+
+.task-analytics .analytics-header h2 {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: #263247 !important;
+}
+
+/* =========================================================
+   PERFORMANCE TABLE
+   ========================================================= */
+
+.task-analytics .analytics-card table {
+  width: 100% !important;
+  height: auto !important;
+  table-layout: fixed !important;
+}
+
+.task-analytics .analytics-card th {
+  height: 30px !important;
+  font-size: 6px !important;
+}
+
+.task-analytics .analytics-card td {
+  height: 34px !important;
+  padding: 5px !important;
+  font-size: 7px !important;
+}
+
+/* =========================================================
+   COMPLETION TREND CARD
+   ========================================================= */
+
+.task-analytics .completion-chart {
+  width: 100% !important;
+  height: 145px !important;
+  margin-top: 10px !important;
+}
+
+.task-analytics .chart-area {
+  height: 125px !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+.task-analytics .chart-area svg {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.task-analytics .chart-weeks {
+  margin-top: 3px !important;
+}
+
+.task-analytics .chart-summary {
+  margin-top: 10px !important;
+}
+
+.task-analytics .chart-summary div {
+  min-height: 65px !important;
+  padding: 8px !important;
+}
+
+/* =========================================================
+   PRIORITY DISTRIBUTION
+   ========================================================= */
+
+.task-analytics .priority-content {
+  width: 100% !important;
+  min-height: 230px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  gap: 18px !important;
+}
+
+.task-analytics .priority-donut {
+  width: 140px !important;
+  height: 140px !important;
+  flex: 0 0 140px !important;
+}
+
+.task-analytics .priority-donut > div {
+  width: 88px !important;
+  height: 88px !important;
+}
+
+.task-analytics .priority-donut strong {
+  font-size: 20px !important;
+}
+
+.task-analytics .priority-donut span {
+  font-size: 7px !important;
+}
+
+.task-analytics .priority-list {
+  width: 100% !important;
+  max-width: 150px !important;
+}
+
+.task-analytics .priority-list div {
+  min-height: 26px !important;
+}
+
+.task-analytics .priority-list span {
+  font-size: 8px !important;
+}
+
+.task-analytics .priority-list b {
+  font-size: 7px !important;
+}
+
+/* =========================================================
+   REMOVE EXTRA HEIGHT / SPACING
+   ========================================================= */
+
+.task-analytics .analytics-card > * {
+  max-width: 100% !important;
+}
+
+.task-analytics .analytics-card table {
+  overflow: hidden !important;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .task-analytics {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .task-analytics > .analytics-card {
+    height: 300px !important;
+  }
+
+  .task-analytics .priority-card {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .task-analytics {
+    grid-template-columns: 1fr !important;
+  }
+
+  .task-analytics .priority-card {
+    grid-column: auto !important;
+  }
+
+  .task-analytics > .analytics-card {
+    height: auto !important;
+    min-height: 300px !important;
+  }
+}
